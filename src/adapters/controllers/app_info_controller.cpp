@@ -153,9 +153,6 @@ bool AppInfoController::switchToLanguage(const QString& language)
         return false;
     }
 
-
-    emit languageChanged();
-
     // Use "English" for all kinds of English variants like American English
     if(QLocale(language).language() == QLocale::Language::English)
         m_language = "English";
@@ -170,6 +167,7 @@ bool AppInfoController::switchToLanguage(const QString& language)
     settings.setValue("language", language);
 
     m_engine->retranslate();
+    emit languageChanged();
     return true;
 }
 

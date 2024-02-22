@@ -75,6 +75,7 @@ Item {
             Label {
                 Layout.fillWidth: true
                 text: AppInfoController.newestVersion
+                horizontalAlignment: Text.AlignLeft
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
                 font.pointSize: Fonts.size14

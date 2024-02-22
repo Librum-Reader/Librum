@@ -124,6 +124,9 @@ Page {
                 cellHeight: internal.bookHeight + internal.verticalBookSpacing
                 // Negative margin removes the extra spacing at the right of the grid
                 rightMargin: -internal.horizontalBookSpacing
+                layoutDirection: Qt.LeftToRight
+                LayoutMirroring.enabled: false
+                LayoutMirroring.childrenInherit: true
                 interactive: true
                 boundsBehavior: Flickable.StopAtBounds
                 flickDeceleration: 19500

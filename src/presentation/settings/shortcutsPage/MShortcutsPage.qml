@@ -89,6 +89,10 @@ Page {
                 anchors.fill: parent
                 spacing: 0
 
+                // Prevent right-alignment
+                LayoutMirroring.enabled: false
+                LayoutMirroring.childrenInherit: true
+
 
                 /*
                   The shortcuts header labeling the different columns

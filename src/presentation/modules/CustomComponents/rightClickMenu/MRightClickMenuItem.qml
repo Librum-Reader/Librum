@@ -15,6 +15,9 @@ Item {
     implicitHeight: 32
     implicitWidth: 100
 
+    LayoutMirroring.enabled: baseRoot.rightAlign
+    LayoutMirroring.childrenInherit: true
+
     onVisibleChanged: selected = false
 
     Pane {
