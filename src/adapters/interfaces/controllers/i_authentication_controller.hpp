@@ -24,8 +24,7 @@ public:
                                        bool rememberUser) = 0;
     Q_INVOKABLE virtual void tryAutomaticLogin() = 0;
     Q_INVOKABLE virtual void logoutUser() = 0;
-    Q_INVOKABLE virtual void registerUser(const QString& firstName,
-                                          const QString& lastName,
+    Q_INVOKABLE virtual void registerUser(const QString& name,
                                           const QString& email,
                                           QString password,
                                           bool keepUpdated) = 0;

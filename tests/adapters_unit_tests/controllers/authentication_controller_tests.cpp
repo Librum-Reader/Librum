@@ -60,8 +60,7 @@ TEST_F(AnAuthenticationController, SucceedsLogingAUserIn)
 TEST_F(AnAuthenticationController, SucceedsRegisteringAUser)
 {
     // Arrange
-    QString firstName = "Kai";
-    QString lastName = "Doe";
+    QString name = "Kai Doe";
     QString email = "SomeEmail@librum.com";
     QString password = "SomePassword12345";
     bool keepUpdated = true;
@@ -71,8 +70,7 @@ TEST_F(AnAuthenticationController, SucceedsRegisteringAUser)
     EXPECT_CALL(authServiceMock, registerUser(_)).Times(1);
 
     // Act
-    authController->registerUser(firstName, lastName, email, password,
-                                 keepUpdated);
+    authController->registerUser(name, email, password, keepUpdated);
 }
 
 TEST_F(AnAuthenticationController, SucceedsLogingOutAUser)

@@ -45,8 +45,7 @@ void AuthenticationGateway::authenticateUser(const LoginModel& loginModel)
 void AuthenticationGateway::registerUser(const RegisterModel& registerModel)
 {
     dtos::RegisterDto registerDto {
-        .firstName = registerModel.getFirstName(),
-        .lastName = registerModel.getLastName(),
+        .name = registerModel.getName(),
         .email = registerModel.getEmail(),
         .password = registerModel.getPassword(),
     };

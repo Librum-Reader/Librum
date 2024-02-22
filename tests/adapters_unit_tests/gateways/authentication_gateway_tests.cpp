@@ -51,7 +51,7 @@ TEST_F(AnAuthenticationGateway, SucceedsRegisteringAUser)
 {
     // Arrange
     value_objects::RegisterModel registerModel(
-        "John", "Doe", "someEmail@librum.com", "SomePassword123", false);
+        "John Doe", "someEmail@librum.com", "SomePassword123", false);
 
 
     // Expect

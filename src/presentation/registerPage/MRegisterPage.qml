@@ -13,10 +13,10 @@ MFlickWrapper {
     id: root
     contentHeight: Window.height < layout.implicitHeight ? layout.implicitHeight : Window.height
 
-    // Passing the focus to firstNameInput on Component.onCompleted() causes it
+    // Passing the focus to nameInput on Component.onCompleted() causes it
     // to pass controll back to root for some reason, this fixes the focus problem
     onActiveFocusChanged: if (activeFocus)
-                              firstNameInput.giveFocus()
+                              nameInput.giveFocus()
 
     Page {
         id: page
@@ -109,36 +109,16 @@ MFlickWrapper {
                             width: parent.width
                             spacing: 0
 
-                            RowLayout {
-                                id: nameInputLayout
-                                Layout.preferredWidth: parent.width
-                                spacing: 28
+                            MLabeledInputBox {
+                                id: nameInput
+                                Layout.fillWidth: true
+                                headerText: qsTr("Name")
+                                placeholderContent: "Kai Doe"
+                                placeholderColor: Style.colorPlaceholderText
 
-                                MLabeledInputBox {
-                                    id: firstNameInput
-                                    Layout.fillWidth: true
-                                    headerText: qsTr("First name")
-                                    placeholderContent: "Kai"
-                                    placeholderColor: Style.colorPlaceholderText
-
-                                    onEdited: internal.clearLoginError()
-                                    Keys.onPressed: event => internal.moveFocusToNextInput(
-                                                        event, null,
-                                                        lastNameInput)
-                                }
-
-                                MLabeledInputBox {
-                                    id: lastNameInput
-                                    Layout.fillWidth: true
-                                    headerText: qsTr("Last name")
-                                    placeholderContent: "Doe"
-                                    placeholderColor: Style.colorPlaceholderText
-
-                                    onEdited: internal.clearLoginError()
-                                    Keys.onPressed: event => internal.moveFocusToNextInput(
-                                                        event, firstNameInput,
-                                                        emailInput)
-                                }
+                                onEdited: internal.clearLoginError()
+                                Keys.onPressed: event => internal.moveFocusToNextInput(
+                                                    event, null, emailInput)
                             }
 
                             MLabeledInputBox {
@@ -151,7 +131,7 @@ MFlickWrapper {
 
                                 onEdited: internal.clearLoginError()
                                 Keys.onPressed: event => internal.moveFocusToNextInput(
-                                                    event, lastNameInput,
+                                                    event, nameInput,
                                                     passwordInput)
                             }
 
@@ -167,21 +147,6 @@ MFlickWrapper {
                                 onEdited: internal.clearLoginError()
                                 Keys.onPressed: event => internal.moveFocusToNextInput(
                                                     event, emailInput,
-                                                    passwordConfirmationInput)
-                            }
-
-                            MLabeledInputBox {
-                                id: passwordConfirmationInput
-                                Layout.fillWidth: true
-                                Layout.topMargin: 16
-                                headerText: qsTr("Confirmation password")
-                                placeholderColor: Style.colorPlaceholderText
-                                image: Icons.eyeOn
-                                toggledImage: Icons.eyeOff
-
-                                onEdited: internal.clearLoginError()
-                                Keys.onPressed: event => internal.moveFocusToNextInput(
-                                                    event, passwordInput,
                                                     acceptPolicy)
                             }
 
@@ -197,7 +162,7 @@ MFlickWrapper {
                                 Layout.fillWidth: true
                                 Layout.topMargin: 24
 
-                                onKeyUp: passwordConfirmationInput.giveFocus()
+                                onKeyUp: passwordInput.giveFocus()
                                 onKeyDown: registerButton.giveFocus()
                             }
 
@@ -249,7 +214,7 @@ MFlickWrapper {
             }
         }
 
-        Component.onCompleted: firstNameInput.giveFocus()
+        Component.onCompleted: nameInput.giveFocus()
     }
 
     MWarningPopup {
@@ -281,22 +246,12 @@ MFlickWrapper {
         id: internal
 
         function registerUser() {
-            if (!passwordIsValid() || !policyIsAccepted())
+            if (!policyIsAccepted())
                 return
 
-            AuthController.registerUser(firstNameInput.text,
-                                        lastNameInput.text, emailInput.text,
+            AuthController.registerUser(nameInput.text, emailInput.text,
                                         passwordInput.text,
                                         acceptPolicy.checked)
-        }
-
-        function passwordIsValid() {
-            if (passwordInput.text === passwordConfirmationInput.text)
-                return true
-
-            passwordConfirmationInput.errorText = qsTr("Passwords don't match")
-            passwordConfirmationInput.setError()
-            return false
         }
 
         function policyIsAccepted() {
@@ -326,18 +281,6 @@ MFlickWrapper {
 
         function setRegistrationErrors(errorCode, message) {
             switch (errorCode) {
-            case ErrorCode.FirstNameTooLong:
-                // Fall through
-            case ErrorCode.FirstNameTooShort:
-                firstNameInput.errorText = message
-                firstNameInput.setError()
-                break
-            case ErrorCode.LastNameTooLong:
-                // Fall through
-            case ErrorCode.LastNameTooShort:
-                lastNameInput.errorText = message
-                lastNameInput.setError()
-                break
             case ErrorCode.UserWithEmailAlreadyExists:
                 // Fall through
             case ErrorCode.InvalidEmailAddressFormat:
@@ -355,6 +298,14 @@ MFlickWrapper {
                 passwordInput.errorText = message
                 passwordInput.setError()
                 break
+            case ErrorCode.NameTooShort:
+                nameInput.errorText = message
+                nameInput.setError()
+                break
+            case ErrorCode.NameTooLong:
+                nameInput.errorText = message
+                nameInput.setError()
+                break
             default:
                 generalErrorText.text = message
                 generalErrorText.visible = true
@@ -362,11 +313,9 @@ MFlickWrapper {
         }
 
         function clearLoginError() {
-            firstNameInput.clearError()
-            lastNameInput.clearError()
+            nameInput.clearError()
             emailInput.clearError()
             passwordInput.clearError()
-            passwordConfirmationInput.clearError()
 
             generalErrorText.visible = false
             generalErrorText.text = ""

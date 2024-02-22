@@ -19,10 +19,7 @@ public:
     MOCK_METHOD(void, deleteUser, (const QString&), (override));
     MOCK_METHOD(void, forgotPassword, (const QString&), (override));
     MOCK_METHOD(void, getProfilePicture, (const QString&), (override));
-    MOCK_METHOD(void, changeFirstName, (const QString&, const QString&),
-                (override));
-    MOCK_METHOD(void, changeLastName, (const QString&, const QString&),
-                (override));
+    MOCK_METHOD(void, changeName, (const QString&, const QString&), (override));
     MOCK_METHOD(void, changeEmail, (const QString&, const QString&),
                 (override));
     MOCK_METHOD(void, changePassword, (const QString&, const QString&),
@@ -60,22 +57,13 @@ TEST_F(AUserStorageGateway, SucceedsGettingAUser)
     userStorageGateway->getUser("secureToken");
 }
 
-TEST_F(AUserStorageGateway, SucceedsChangingTheFirstName)
+TEST_F(AUserStorageGateway, SucceedsChangingTheName)
 {
     // Expect
-    EXPECT_CALL(userStorageAccessMock, changeFirstName(_, _)).Times(1);
+    EXPECT_CALL(userStorageAccessMock, changeName(_, _)).Times(1);
 
     // Act
-    userStorageGateway->changeFirstName("secureToken", "SomeFirstName");
-}
-
-TEST_F(AUserStorageGateway, SucceedsChangingTheLastName)
-{
-    // Expect
-    EXPECT_CALL(userStorageAccessMock, changeLastName(_, _)).Times(1);
-
-    // Act
-    userStorageGateway->changeLastName("secureToken", "SomeLastName");
+    userStorageGateway->changeName("secureToken", "SomeName");
 }
 
 TEST_F(AUserStorageGateway, SucceedsChangingTheEmail)

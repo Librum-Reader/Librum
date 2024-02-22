@@ -42,13 +42,12 @@ struct AnAuthenticationService : public ::testing::Test
 TEST_F(AnAuthenticationService, SucceedsRegisteringUser)
 {
     // Arrange
-    QString firstName = "John";
-    QString lastName = "Doe";
+    QString name = "John Doe";
     QString email = "someEmail@librum.com";
     QString password = "SomePassword123";
     bool keepUpdated = true;
-    value_objects::RegisterModel registerModel(firstName, lastName, email,
-                                               password, keepUpdated);
+    value_objects::RegisterModel registerModel(name, email, password,
+                                               keepUpdated);
 
 
     // Expect

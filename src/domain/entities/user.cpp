@@ -4,12 +4,10 @@
 namespace domain::entities
 {
 
-User::User(const QString& firstName, const QString& lastName,
-           const QString& email, const QString& role, qint64 usedBookStorage,
-           qint64 bookStorageLimit, const QDateTime& profilePictureLastUpdated,
-           bool hasProfilePicture) :
-    m_firstName(firstName),
-    m_lastName(lastName),
+User::User(const QString& name, const QString& email, const QString& role,
+           qint64 usedBookStorage, qint64 bookStorageLimit,
+           const QDateTime& profilePictureLastUpdated, bool hasProfilePicture) :
+    m_name(name),
     m_email(email),
     m_role(role),
     m_usedBookStorage(usedBookStorage),
@@ -19,24 +17,14 @@ User::User(const QString& firstName, const QString& lastName,
 {
 }
 
-const QString& User::getFirstName() const
+const QString& User::getName() const
 {
-    return m_firstName;
+    return m_name;
 }
 
-void User::setFirstName(const QString& newFirstName)
+void User::setName(const QString& newName)
 {
-    m_firstName = newFirstName;
-}
-
-const QString& User::getLastName() const
-{
-    return m_lastName;
-}
-
-void User::setLastName(const QString& newLastName)
-{
-    m_lastName = newLastName;
+    m_name = newName;
 }
 
 const QString& User::getEmail() const
@@ -189,8 +177,7 @@ bool User::renameTag(const QUuid& uuid, const QString& newName)
 
 void User::clearData()
 {
-    m_firstName = "x";
-    m_lastName = "y";
+    m_name = "x";
     m_email = "y";
     m_profilePicturePath = "";
     m_hasProfilePicture = false;

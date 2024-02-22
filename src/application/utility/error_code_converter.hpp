@@ -49,6 +49,16 @@ QString getMessageForErrorCode(ErrorCode code)
         return "Your account is not confirmed";
     case ErrorCode::TooManyRequests:
         return "Too many requests, please try again later";
+    case ErrorCode::AiExplanationLimitReached:
+        return "AI explanation limit reached";
+    case ErrorCode::AiRequestTooLong:
+        return "AI request too long";
+    case ErrorCode::UserHasNoRootFolder:
+        return "User has no root folder";
+    case ErrorCode::NameTooShort:
+        return "Name is too short";
+    case ErrorCode::NameTooLong:
+        return "Name is too long";
     case ErrorCode::NoError:
         [[fallthrough]];
     default:

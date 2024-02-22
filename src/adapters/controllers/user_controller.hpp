@@ -26,11 +26,8 @@ public:
     bool deleteTag(const QString& uuid) override;
     bool renameTag(const QString& uuid, const QString& newName) override;
 
-    QString getFirstName() const override;
-    void setFirstName(const QString& newFirstName) override;
-
-    QString getLastName() const override;
-    void setLastName(const QString& newLastName) override;
+    QString getName() const override;
+    void setName(const QString& newName) override;
 
     QString getEmail() const override;
     void setEmail(const QString& newEmail) override;

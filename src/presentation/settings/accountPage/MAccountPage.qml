@@ -66,7 +66,7 @@ MFlickWrapper {
                 MTitle {
                     id: pageTitle
                     titleText: qsTr("Account")
-                    descriptionText: UserController.firstName + " " + UserController.lastName
+                    descriptionText: UserController.name
                     titleSize: Fonts.size25
                     descriptionSize: Fonts.size13dot25
                 }
@@ -131,27 +131,12 @@ MFlickWrapper {
                         }
 
                         MLabeledInputBox {
-                            id: firstNameInput
+                            id: nameInput
                             Layout.fillWidth: true
                             Layout.topMargin: 26
                             boxHeight: 40
-                            headerText: qsTr("First name")
-                            text: internal.unsavedChanges ? text : UserController.firstName
-                            headerToBoxSpacing: 3
-                            inputFontSize: Fonts.size13
-                            borderWidth: 1
-                            borderRadius: 4
-
-                            onEdited: internal.unsavedChanges = true
-                        }
-
-                        MLabeledInputBox {
-                            id: lastNameInput
-                            Layout.fillWidth: true
-                            Layout.topMargin: 18
-                            boxHeight: 40
-                            headerText: qsTr("Last name")
-                            text: internal.unsavedChanges ? text : UserController.lastName
+                            headerText: qsTr("Name")
+                            text: internal.unsavedChanges ? text : UserController.name
                             headerToBoxSpacing: 3
                             inputFontSize: Fonts.size13
                             borderWidth: 1
@@ -167,6 +152,22 @@ MFlickWrapper {
                             boxHeight: 40
                             headerText: qsTr("Email")
                             text: internal.unsavedChanges ? text : UserController.email
+                            headerToBoxSpacing: 3
+                            inputFontSize: Fonts.size13
+                            borderWidth: 1
+                            borderRadius: 4
+                            readOnly: true
+
+                            onEdited: internal.unsavedChanges = true
+                        }
+
+                        MLabeledInputBox {
+                            id: tier
+                            Layout.fillWidth: true
+                            Layout.topMargin: 18
+                            boxHeight: 40
+                            headerText: qsTr("Tier")
+                            text: internal.unsavedChanges ? text : UserController.role
                             headerToBoxSpacing: 3
                             inputFontSize: Fonts.size13
                             borderWidth: 1
@@ -510,8 +511,7 @@ MFlickWrapper {
     }
 
     function saveAccountSettings() {
-        UserController.firstName = firstNameInput.text
-        UserController.lastName = lastNameInput.text
+        UserController.name = nameInput.text
 
         if (passwordInput.text !== "")
             internal.changePassword()

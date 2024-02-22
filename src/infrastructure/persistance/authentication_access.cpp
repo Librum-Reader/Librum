@@ -74,8 +74,7 @@ void AuthenticationAccess::registerUser(const RegisterDto& registerDto)
     auto request = createRequest(domain + data::registrationEndpoint);
 
     QJsonObject jsonObject;
-    jsonObject["firstName"] = registerDto.firstName;
-    jsonObject["lastName"] = registerDto.lastName;
+    jsonObject["name"] = registerDto.name;
     jsonObject["email"] = registerDto.email;
     jsonObject["password"] = registerDto.password;
 

@@ -45,8 +45,7 @@ Item {
                     id: initials
                     anchors.centerIn: parent
                     visible: UserController.profilePicture.length === 0
-                    text: UserController.firstName[0].toUpperCase(
-                              ) + UserController.lastName[0].toUpperCase()
+                    text: UserController.name[0].toUpperCase()
                     font.pointSize: Fonts.size12
                     font.bold: true
                     color: Style.colorFocusedButtonText

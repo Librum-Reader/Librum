@@ -13,17 +13,13 @@ class DOMAIN_EXPORT User : public QObject
     Q_OBJECT
 
 public:
-    User(const QString& firstName, const QString& lastName,
-         const QString& email, const QString& role, qint64 usedBookStorage,
-         qint64 bookStorageLimit,
+    User(const QString& name, const QString& email, const QString& role,
+         qint64 usedBookStorage, qint64 bookStorageLimit,
          const QDateTime& profilePictureLastUpdated = QDateTime(),
          bool hasProfilePicture = false);
 
-    const QString& getFirstName() const;
-    void setFirstName(const QString& newFirstName);
-
-    const QString& getLastName() const;
-    void setLastName(const QString& newLastName);
+    const QString& getName() const;
+    void setName(const QString& newName);
 
     const QString& getEmail() const;
     void setEmail(const QString& newEmail);
@@ -65,8 +61,7 @@ signals:
 private:
     int getTagIndex(const QUuid& uuid) const;
 
-    QString m_firstName;
-    QString m_lastName;
+    QString m_name;
     QString m_email;
     QString m_role;
     qint64 m_usedBookStorage;

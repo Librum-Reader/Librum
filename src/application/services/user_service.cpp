@@ -14,7 +14,7 @@ namespace application::services
 
 UserService::UserService(IUserStorageGateway* userStorageGateway) :
     m_userStorageGateway(userStorageGateway),
-    m_user("x", "y", "z", "s", 0, 0)
+    m_user("x", "z", "s", 0, 0)
 {
     connect(m_userStorageGateway, &IUserStorageGateway::authTokenExpired, this,
             &UserService::logoutUser);
@@ -93,28 +93,15 @@ void UserService::downloadUser()
     m_userStorageGateway->getUser(m_authenticationToken);
 }
 
-QString UserService::getFirstName() const
+QString UserService::getName() const
 {
-    return m_user.getFirstName();
+    return m_user.getName();
 }
 
-void UserService::setFirstName(const QString& newFirstName)
+void UserService::setName(const QString& newName)
 {
-    m_user.setFirstName(newFirstName);
-    m_userStorageGateway->changeFirstName(m_authenticationToken,
-                                          m_user.getFirstName());
-}
-
-QString UserService::getLastName() const
-{
-    return m_user.getLastName();
-}
-
-void UserService::setLastName(const QString& newLastName)
-{
-    m_user.setLastName(newLastName);
-    m_userStorageGateway->changeLastName(m_authenticationToken,
-                                         m_user.getLastName());
+    m_user.setName(newName);
+    m_userStorageGateway->changeName(m_authenticationToken, m_user.getName());
 }
 
 QString UserService::getEmail() const
@@ -378,8 +365,7 @@ void UserService::proccessUserInformation(const domain::entities::User& user,
 
 void UserService::setUserData(const User& user)
 {
-    m_user.setFirstName(user.getFirstName());
-    m_user.setLastName(user.getLastName());
+    m_user.setName(user.getName());
     m_user.setEmail(user.getEmail());
     m_user.setRole(user.getRole());
     m_user.setUsedBookStorage(user.getUsedBookStorage());
@@ -428,9 +414,8 @@ bool UserService::tryLoadingUserFromFile()
     if(result.has_value())
     {
         utility::UserData userData = result.value();
-        User user(userData.firstName, userData.lastName, userData.email,
-                  userData.role, userData.usedBookStorage,
-                  userData.bookStorageLimit);
+        User user(userData.name, userData.email, userData.role,
+                  userData.usedBookStorage, userData.bookStorageLimit);
         user.setProfilePictureLastUpdated(userData.profilePictureLastUpdated);
         for(auto& tag : userData.tags)
             user.addTag(tag);
@@ -453,8 +438,7 @@ bool UserService::tryLoadingUserFromFile()
 void UserService::saveUserToFile(const domain::entities::User& user)
 {
     utility::UserData userData {
-        user.getFirstName(),
-        user.getLastName(),
+        user.getName(),
         user.getEmail(),
         user.getRole(),
         user.getUsedBookStorage(),

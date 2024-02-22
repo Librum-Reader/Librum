@@ -25,11 +25,8 @@ public:
     virtual void deleteUser() = 0;
     virtual void downloadUser() = 0;
 
-    virtual QString getFirstName() const = 0;
-    virtual void setFirstName(const QString& newFirstName) = 0;
-
-    virtual QString getLastName() const = 0;
-    virtual void setLastName(const QString& newLastName) = 0;
+    virtual QString getName() const = 0;
+    virtual void setName(const QString& newName) = 0;
 
     virtual QString getEmail() const = 0;
     virtual void setEmail(const QString& newEmail) = 0;

@@ -8,18 +8,16 @@ namespace domain::value_objects
 class DOMAIN_EXPORT RegisterModel
 {
 public:
-    RegisterModel(QString firstName, QString lastName, QString email,
-                  QString password, bool keepUpdated);
+    RegisterModel(QString name, QString email, QString password,
+                  bool keepUpdated);
 
-    QString getFirstName() const;
-    QString getLastName() const;
+    QString getName() const;
     QString getEmail() const;
     QString getPassword() const;
     bool getKeepUpdated() const;
 
 private:
-    QString m_firstName;
-    QString m_lastName;
+    QString m_name;
     QString m_email;
     QString m_password;
     const bool m_keepUpdated;

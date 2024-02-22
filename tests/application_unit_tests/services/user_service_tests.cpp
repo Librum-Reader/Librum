@@ -21,10 +21,7 @@ public:
     MOCK_METHOD(void, deleteUser, (const QString&), (override));
     MOCK_METHOD(void, forgotPassword, (const QString&), (override));
     MOCK_METHOD(void, getProfilePicture, (const QString&), (override));
-    MOCK_METHOD(void, changeFirstName, (const QString&, const QString&),
-                (override));
-    MOCK_METHOD(void, changeLastName, (const QString&, const QString&),
-                (override));
+    MOCK_METHOD(void, changeName, (const QString&, const QString&), (override));
     MOCK_METHOD(void, changeEmail, (const QString&, const QString&),
                 (override));
     MOCK_METHOD(void, changePassword, (const QString&, const QString&),
@@ -58,62 +55,17 @@ TEST_F(AUserService, SucceedsLoadingTheUser)
     userService->loadUser(false);
 }
 
-TEST_F(AUserService, SucceedsSettingFirstName)
+TEST_F(AUserService, SucceedsSettingName)
 {
     // Arrange
-    QString firstName = "SomeName";
+    QString name = "Name";
 
 
     // Expect
-    EXPECT_CALL(userStorageGatewayMock, changeFirstName(_, _)).Times(1);
+    EXPECT_CALL(userStorageGatewayMock, changeName(_, _)).Times(1);
 
     // Act
-    userService->setFirstName(firstName);
-}
-
-TEST_F(AUserService, SucceedsGettingFirstName)
-{
-    // Arrange
-    QString firstName = "SomeName";
-    userService->setFirstName(firstName);
-
-    QString expectedResult = firstName;
-
-
-    // Act
-    auto result = userService->getFirstName();
-
-    // Assert
-    EXPECT_EQ(expectedResult, result);
-}
-
-TEST_F(AUserService, SucceedsSettingLastName)
-{
-    // Arrange
-    QString lastName = "SomeLastName";
-
-
-    // Expect
-    EXPECT_CALL(userStorageGatewayMock, changeLastName(_, _)).Times(1);
-
-    // Act
-    userService->setLastName(lastName);
-}
-
-TEST_F(AUserService, SucceedsGettingLastName)
-{
-    // Arrange
-    QString lastName = "SomeLastName";
-    userService->setLastName(lastName);
-
-    QString expectedResult = lastName;
-
-
-    // Act
-    auto result = userService->getLastName();
-
-    // Assert
-    EXPECT_EQ(expectedResult, result);
+    userService->setName(name);
 }
 
 TEST_F(AUserService, SucceedsSettingEmail)

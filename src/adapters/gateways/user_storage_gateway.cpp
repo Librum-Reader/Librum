@@ -47,16 +47,10 @@ void UserStorageGateway::getProfilePicture(const QString& authToken)
     m_userStorageAccess->getProfilePicture(authToken);
 }
 
-void UserStorageGateway::changeFirstName(const QString& authToken,
-                                         const QString& newFirstName)
+void UserStorageGateway::changeName(const QString& authToken,
+                                    const QString& newName)
 {
-    m_userStorageAccess->changeFirstName(authToken, newFirstName);
-}
-
-void UserStorageGateway::changeLastName(const QString& authToken,
-                                        const QString& newLastName)
-{
-    m_userStorageAccess->changeLastName(authToken, newLastName);
+    m_userStorageAccess->changeName(authToken, newName);
 }
 
 void UserStorageGateway::changeEmail(const QString& authToken,
@@ -115,7 +109,7 @@ void UserStorageGateway::renameTag(const QString& authToken, const QUuid& uuid,
 
 void UserStorageGateway::proccessUserData(const QByteArray& data)
 {
-    User user("x", "y", "z", "s", 0, 0);
+    User user("x", "z", "s", 0, 0);
 
     assignValuesToUser(user, data);
 
@@ -124,7 +118,7 @@ void UserStorageGateway::proccessUserData(const QByteArray& data)
 
 void UserStorageGateway::reportFailureGettingUser()
 {
-    User emptyUser("invalid", "invalid", "invalid@email.x", "Some", 0, 0);
+    User emptyUser("invalid", "invalid@email.x", "Some", 0, 0);
     emit finishedGettingUser(emptyUser, false);
 }
 
@@ -134,8 +128,17 @@ void UserStorageGateway::assignValuesToUser(User& user,
     auto jsonDoc = QJsonDocument::fromJson(values);
     auto jsonObj = jsonDoc.object();
 
-    user.setFirstName(jsonObj["firstName"].toString());
-    user.setLastName(jsonObj["lastName"].toString());
+    // Previously, we used first and last names instead of simply one name.
+    // Non-updated clients might still have saved data in the old format. In
+    // this case we should use the first and last name to create a full name.
+    user.setName(jsonObj["name"].toString());
+    if(user.getName().isEmpty())
+    {
+        auto firstName = jsonObj["firstName"].toString();
+        auto lastName = jsonObj["lastName"].toString();
+        user.setName(firstName + " " + lastName);
+    }
+
     user.setRole(jsonObj["role"].toString());
     user.setUsedBookStorage(
         static_cast<qint64>(jsonObj["usedBookStorage"].toDouble()));
