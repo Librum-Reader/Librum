@@ -74,7 +74,7 @@
         <translation>Questa Applicazione</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="283"/>
+        <location filename="../settings/MAboutPage.qml" line="282"/>
         <source>Librum is here for everyone who just wants to enjoy a good book.
 We hope you have a great time using it! Feel free to leave us a rating and some feedback.</source>
         <translatorcomment>About last phrase: the correct term for feedback is &quot;riscontro&quot;, but it isn&apos;t very used, feedback is quite understandable.</translatorcomment>
@@ -115,7 +115,7 @@ Speriamo che vi piaccia usarlo! Se volete, lasciate una valutazione ed un feedba
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="85"/>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="464"/>
+        <location filename="../settings/accountPage/MAccountPage.qml" line="465"/>
         <source>Save</source>
         <translation>Salva</translation>
     </message>
@@ -125,95 +125,103 @@ Speriamo che vi piaccia usarlo! Se volete, lasciate una valutazione ed un feedba
         <translation>Profilo</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="138"/>
         <source>First name</source>
-        <translation>Nome</translation>
+        <translation type="vanished">Nome</translation>
+    </message>
+    <message>
+        <source>Last name</source>
+        <translation type="vanished">Cognome</translation>
+    </message>
+    <message>
+        <location filename="../settings/accountPage/MAccountPage.qml" line="138"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="153"/>
-        <source>Last name</source>
-        <translation>Cognome</translation>
-    </message>
-    <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="168"/>
         <source>Email</source>
         <translation>Email</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="231"/>
+        <location filename="../settings/accountPage/MAccountPage.qml" line="169"/>
+        <source>Tier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/accountPage/MAccountPage.qml" line="232"/>
         <source>Change password</source>
         <translation>Cambia password</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="247"/>
+        <location filename="../settings/accountPage/MAccountPage.qml" line="248"/>
         <source>Password</source>
         <translation>Password</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="268"/>
+        <location filename="../settings/accountPage/MAccountPage.qml" line="269"/>
         <source>Password confirmation</source>
         <translation>Conferma della password</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="309"/>
+        <location filename="../settings/accountPage/MAccountPage.qml" line="310"/>
         <source>Your data</source>
         <translation>I tuoi dati</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="320"/>
+        <location filename="../settings/accountPage/MAccountPage.qml" line="321"/>
         <source>Analyse your reading to make better recommendations</source>
         <translation type="unfinished">Analizza le tue letture per fornirti migliori suggerimenti</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="334"/>
+        <location filename="../settings/accountPage/MAccountPage.qml" line="335"/>
         <source>Anonymously share information about the books you read to help us improve Librum</source>
         <translation>Condividi anonimamente le informazioni sulle tue letture per migliorare Librum</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="348"/>
+        <location filename="../settings/accountPage/MAccountPage.qml" line="349"/>
         <source>Collect data on crashes so that we can prevent it from happening again</source>
         <translation>Raccogli i dati sulle chiusure inaspettate per evitare che si ripetano</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="361"/>
+        <location filename="../settings/accountPage/MAccountPage.qml" line="362"/>
         <source>Collect data to display in your statistics</source>
         <translation>Condividi i dati per visualizzarli nelle statistiche</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="392"/>
+        <location filename="../settings/accountPage/MAccountPage.qml" line="393"/>
         <source>Your Account</source>
         <translation>Il tuo Account</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="407"/>
+        <location filename="../settings/accountPage/MAccountPage.qml" line="408"/>
         <source>Logout</source>
         <translatorcomment>You could also use &quot;Esci&quot;, but since I kept &quot;Login&quot;, for consistency I preferred &quot;logout&quot;</translatorcomment>
         <translation>Logout</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="427"/>
+        <location filename="../settings/accountPage/MAccountPage.qml" line="428"/>
         <source>Delete Your Account</source>
         <translation>Cancella il tuo Account</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="462"/>
+        <location filename="../settings/accountPage/MAccountPage.qml" line="463"/>
         <source>Whoops</source>
         <translatorcomment>As an onomatopoeic, in italian it&apos;s better with the esclamation mark</translatorcomment>
         <translation type="unfinished">Oops!</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="463"/>
+        <location filename="../settings/accountPage/MAccountPage.qml" line="464"/>
         <source>It looks like you forgot to save your changes, are you sure that you dont want to save them?</source>
         <translation>Sembra che ti sia dimenticato di salvare le modifiche, vuoi farlo ora?</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="465"/>
+        <location filename="../settings/accountPage/MAccountPage.qml" line="466"/>
         <source>Don&apos;t save</source>
         <translation>Non salvare</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="502"/>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="505"/>
+        <location filename="../settings/accountPage/MAccountPage.qml" line="503"/>
+        <location filename="../settings/accountPage/MAccountPage.qml" line="506"/>
         <source>Passwords don&apos;t match!</source>
         <translation>Le passwords non corrispondono!</translation>
     </message>
@@ -555,7 +563,7 @@ Either you are offline, or your storage is full.</source>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="189"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="394"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="398"/>
         <source>Delete</source>
         <translatorcomment>See &quot;cancel&quot;. Literaly is cancella, so as not to cause confusion I used &quot;Elimina&quot; as &quot;eliminate&quot;</translatorcomment>
         <translation>Elimina</translation>
@@ -566,83 +574,83 @@ Either you are offline, or your storage is full.</source>
         <translation>Titolo</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="238"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="271"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="426"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="237"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="272"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="430"/>
         <source>Unknown</source>
         <translation>Sconosciuto</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="255"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="256"/>
         <source>Authors</source>
         <translation>Autori</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="261"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="262"/>
         <source>Pages</source>
         <translation>Pagina</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="270"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="271"/>
         <source>Language</source>
         <translation>Lingua</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="284"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="286"/>
         <source>Document creator</source>
         <translatorcomment>creator is really not used in Italian for documents; we always refer as Author</translatorcomment>
         <translation>Autore documento</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="290"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="293"/>
         <source>Creation date</source>
         <translation>Data di creazione</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="297"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="301"/>
         <source>Format</source>
         <translation>Formato</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="304"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="308"/>
         <source>Document size</source>
         <translation>Dimensione documento</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="312"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="316"/>
         <source>Added</source>
         <translation>Aggiunto</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="318"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="322"/>
         <source>Last opened</source>
         <translation>Ultimo aperto</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="344"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="348"/>
         <source>Apply</source>
         <translation>Applica</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="369"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="373"/>
         <source>Cancel</source>
         <translatorcomment>Literaly translation is &quot;cancella&quot; but usually is used as &quot;delete&quot;.  &quot;Annulla&quot; is best suite for &quot;go back&quot; as I interpretate it</translatorcomment>
         <translation>Annulla</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="413"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="417"/>
         <source>Select</source>
         <translation>Selezionare</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="416"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="420"/>
         <source>All files</source>
         <translation>Tutti i files</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="417"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="418"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="419"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="421"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="422"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="423"/>
         <source>files</source>
         <translatorcomment>Are you sure about the absence of capital?</translatorcomment>
         <translation>files</translation>
@@ -790,33 +798,33 @@ Either you are offline, or your storage is full.</source>
         <translation>Conferma l&apos;eliminazione dell&apos;account</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="78"/>
+        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="79"/>
         <source>Deleting your account is an irreversible action.&lt;br&gt;Once you delete your account, there is &lt;b&gt;no&lt;/b&gt; going back. Please be certain.</source>
         <translatorcomment>Please be certain in italian is &quot;per favore sii certo&quot;. Too formal, unused. I used &quot;are you sure?&quot; instead.</translatorcomment>
         <translation>L&apos;eliminazione dell&apos;account è irreversibile.&lt;br&gt;Una volta eliminato &lt;b&gt;non&lt;/b&gt; è possibile ripristinarlo. Sei sicuro?</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="90"/>
+        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="91"/>
         <source>Your Email</source>
         <translation>La tua email</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="92"/>
+        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="93"/>
         <source>Confirm the deletion by entering your Account&apos;s email.</source>
         <translation>Conferma l&apos;eliminazione inserendo la tua email.</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="111"/>
+        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="112"/>
         <source>Cancel</source>
         <translation>Annulla</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="127"/>
+        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="128"/>
         <source>Delete</source>
         <translation>Elimina</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="137"/>
+        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="138"/>
         <source>Your email is wrong</source>
         <translation>La tua mail è errata</translation>
     </message>
@@ -1151,22 +1159,22 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MFolderSidebarItemRigthclickPopup</name>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="71"/>
+        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="73"/>
         <source>Create subfolder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="82"/>
+        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="85"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="94"/>
+        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="98"/>
         <source>Move to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="115"/>
+        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="120"/>
         <source>Delete</source>
         <translation type="unfinished">Elimina</translation>
     </message>
@@ -1234,174 +1242,174 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MHomePage</name>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="120"/>
+        <location filename="../homePage/MHomePage.qml" line="122"/>
         <source>A new version is available!</source>
         <translation>Una nuova versione è disponibile!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="122"/>
+        <location filename="../homePage/MHomePage.qml" line="124"/>
         <source>Update Now</source>
         <translation>Aggiorna Adesso</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="170"/>
+        <location filename="../homePage/MHomePage.qml" line="172"/>
         <source>Home</source>
         <extracomment>As in &apos;Home Page&apos;, might be closer to &apos;Start&apos; in other languages</extracomment>
         <translatorcomment>&quot;home&quot; has entered commaon parlance,any translation (such as &quot;Inizio&quot; o &quot;Casa&quot;) would sound unnatural.</translatorcomment>
         <translation>Home</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="171"/>
+        <location filename="../homePage/MHomePage.qml" line="173"/>
         <source>You have %1 books</source>
         <translation>Hai %1 libri</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="187"/>
+        <location filename="../homePage/MHomePage.qml" line="189"/>
         <source>Add books</source>
         <translation>Aggiungi libri</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="464"/>
+        <location filename="../homePage/MHomePage.qml" line="469"/>
         <source>Remove Book?</source>
         <translation>Rimuovere libro?</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="465"/>
+        <location filename="../homePage/MHomePage.qml" line="470"/>
         <source>Deleting a book is a permanent action, no one will be
  able to restore it afterwards!</source>
         <translation>Eliminare un libro è irreversibile, nessuno potrà recuperarlo dopo!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="466"/>
-        <location filename="../homePage/MHomePage.qml" line="497"/>
+        <location filename="../homePage/MHomePage.qml" line="471"/>
+        <location filename="../homePage/MHomePage.qml" line="502"/>
         <source>Remove from Device</source>
         <translation>Rimuovi dal Device</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="467"/>
-        <location filename="../homePage/MHomePage.qml" line="498"/>
+        <location filename="../homePage/MHomePage.qml" line="472"/>
+        <location filename="../homePage/MHomePage.qml" line="503"/>
         <source>Delete Everywhere</source>
         <translation>Elimina ovunque</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="495"/>
+        <location filename="../homePage/MHomePage.qml" line="500"/>
         <source>Remove Books?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="496"/>
+        <location filename="../homePage/MHomePage.qml" line="501"/>
         <source>Deleting books is a permanent action, no one will be
  able to restore it afterwards!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="541"/>
-        <location filename="../homePage/MHomePage.qml" line="571"/>
+        <location filename="../homePage/MHomePage.qml" line="546"/>
+        <location filename="../homePage/MHomePage.qml" line="576"/>
         <source>Remove from Folder?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="542"/>
+        <location filename="../homePage/MHomePage.qml" line="547"/>
         <source>This action will not delete the original book.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="543"/>
-        <location filename="../homePage/MHomePage.qml" line="573"/>
+        <location filename="../homePage/MHomePage.qml" line="548"/>
+        <location filename="../homePage/MHomePage.qml" line="578"/>
+        <location filename="../homePage/MHomePage.qml" line="645"/>
         <source>Cancel</source>
         <translation type="unfinished">Annulla</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="544"/>
-        <location filename="../homePage/MHomePage.qml" line="574"/>
+        <location filename="../homePage/MHomePage.qml" line="549"/>
+        <location filename="../homePage/MHomePage.qml" line="579"/>
         <source>Remove</source>
         <translation type="unfinished">Rimuovi</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="572"/>
+        <location filename="../homePage/MHomePage.qml" line="577"/>
         <source>This action will not delete the original books.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="622"/>
+        <location filename="../homePage/MHomePage.qml" line="627"/>
         <source>Save</source>
         <translation>Salva</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="637"/>
+        <location filename="../homePage/MHomePage.qml" line="642"/>
         <source>Limit Reached</source>
         <translation>Limite raggiunto</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="638"/>
+        <location filename="../homePage/MHomePage.qml" line="643"/>
         <source>You have reached your upload limit.
 Delete unused books to free up space or upgrade.</source>
         <translation>Hai raggiunto il tuo limite di upload.
 Cancella libri non usati per liberare spazio o fai l&apos;upgrade.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="639"/>
-        <location filename="../homePage/MHomePage.qml" line="686"/>
+        <location filename="../homePage/MHomePage.qml" line="694"/>
         <source>Ok</source>
         <translatorcomment>https://tse1.mm.bing.net/th?id=OIP.KrXzDPL8HNfFvCweAt1giwHaFj&amp;pid=Api</translatorcomment>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="640"/>
+        <location filename="../homePage/MHomePage.qml" line="644"/>
         <source>Upgrade</source>
         <translation>Upgrade</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="655"/>
+        <location filename="../homePage/MHomePage.qml" line="663"/>
         <source>Book already exists</source>
         <translation>Il libro è già presente</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="656"/>
+        <location filename="../homePage/MHomePage.qml" line="664"/>
         <source>It looks like this book already exists in your library:</source>
         <translation>Sembra che il libro sia già presente nella tua libreria:</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="659"/>
+        <location filename="../homePage/MHomePage.qml" line="667"/>
         <source>Are you sure you that want to add it again?
 </source>
         <translation>Sei sicuro di volerlo aggiungere di nuovo?
 </translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="662"/>
+        <location filename="../homePage/MHomePage.qml" line="670"/>
         <source>Add</source>
         <translation>Aggiungi</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="663"/>
+        <location filename="../homePage/MHomePage.qml" line="671"/>
         <source>Don&apos;t add</source>
         <translation>Non aggiungere</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="684"/>
+        <location filename="../homePage/MHomePage.qml" line="692"/>
         <source>Unsupported File</source>
         <translation>Non supportato</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="685"/>
+        <location filename="../homePage/MHomePage.qml" line="693"/>
         <source>Oops! This file is not supported by Librum.</source>
         <translation>Oops! Questo file non è supportato da Librum.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="701"/>
+        <location filename="../homePage/MHomePage.qml" line="709"/>
         <source>Import</source>
         <translation>Importa</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="704"/>
+        <location filename="../homePage/MHomePage.qml" line="712"/>
         <source>All files</source>
         <translation>Tutti i files</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="705"/>
-        <location filename="../homePage/MHomePage.qml" line="706"/>
-        <location filename="../homePage/MHomePage.qml" line="707"/>
+        <location filename="../homePage/MHomePage.qml" line="713"/>
+        <location filename="../homePage/MHomePage.qml" line="714"/>
+        <location filename="../homePage/MHomePage.qml" line="715"/>
         <source>files</source>
         <translation>files</translation>
     </message>
@@ -1662,61 +1670,62 @@ Cancella libri non usati per liberare spazio o fai l&apos;upgrade.</translation>
         <translation>Le tue credenziali sono usate solo per autenticarti. Tutto verrà archiviato in un database sicuro.</translation>
     </message>
     <message>
-        <location filename="../registerPage/MRegisterPage.qml" line="120"/>
         <source>First name</source>
-        <translation>Nome</translation>
+        <translation type="vanished">Nome</translation>
     </message>
     <message>
-        <location filename="../registerPage/MRegisterPage.qml" line="133"/>
         <source>Last name</source>
-        <translation>Cognome</translation>
+        <translation type="vanished">Cognome</translation>
     </message>
     <message>
-        <location filename="../registerPage/MRegisterPage.qml" line="148"/>
+        <location filename="../registerPage/MRegisterPage.qml" line="128"/>
         <source>Email</source>
         <translation>Email</translation>
     </message>
     <message>
-        <location filename="../registerPage/MRegisterPage.qml" line="162"/>
+        <location filename="../registerPage/MRegisterPage.qml" line="142"/>
         <source>Password</source>
         <translation>Password</translation>
     </message>
     <message>
-        <location filename="../registerPage/MRegisterPage.qml" line="177"/>
         <source>Confirmation password</source>
-        <translation>Conferma la password</translation>
+        <translation type="vanished">Conferma la password</translation>
     </message>
     <message>
-        <location filename="../registerPage/MRegisterPage.qml" line="215"/>
+        <location filename="../registerPage/MRegisterPage.qml" line="115"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../registerPage/MRegisterPage.qml" line="180"/>
         <source>Let&apos;s start</source>
         <translation>Iniziamo</translation>
     </message>
     <message>
-        <location filename="../registerPage/MRegisterPage.qml" line="237"/>
+        <location filename="../registerPage/MRegisterPage.qml" line="202"/>
         <source>Already have an account? Login</source>
         <translation>Hai già un account? Login</translation>
     </message>
     <message>
-        <location filename="../registerPage/MRegisterPage.qml" line="264"/>
+        <location filename="../registerPage/MRegisterPage.qml" line="229"/>
         <source>Confirm Your Email</source>
         <translation>Conferma la tua email</translation>
     </message>
     <message>
-        <location filename="../registerPage/MRegisterPage.qml" line="265"/>
+        <location filename="../registerPage/MRegisterPage.qml" line="230"/>
         <source>You&apos;re are almost ready to go!
 Confirm your email by clicking the link we sent you.</source>
         <translation>Ci sei quasi!
 Conferma la tua email cliccando il link che ti abbiamo inviato.</translation>
     </message>
     <message>
-        <location filename="../registerPage/MRegisterPage.qml" line="266"/>
+        <location filename="../registerPage/MRegisterPage.qml" line="231"/>
         <source>Resend</source>
         <translation>Reinvia</translation>
     </message>
     <message>
-        <location filename="../registerPage/MRegisterPage.qml" line="297"/>
         <source>Passwords don&apos;t match</source>
-        <translation>Le passwords non corrispondono</translation>
+        <translation type="vanished">Le passwords non corrispondono</translation>
     </message>
 </context>
 <context>
@@ -1882,19 +1891,19 @@ Conferma la tua email cliccando il link che ti abbiamo inviato.</translation>
         <translation>Modifica scorciatoia</translation>
     </message>
     <message>
-        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="106"/>
+        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="110"/>
         <source>ACTION</source>
         <extracomment>Keep it capitalized</extracomment>
         <translation>AZIONE</translation>
     </message>
     <message>
-        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="120"/>
+        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="124"/>
         <source>SHORTCUTS</source>
         <extracomment>Keep it capitalized</extracomment>
         <translation>SCORCIATOIE</translation>
     </message>
     <message>
-        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="135"/>
+        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="139"/>
         <source>Search for shortcuts</source>
         <translation>Cerca per scorciatoie</translation>
     </message>
@@ -1991,7 +2000,6 @@ Conferma la tua email cliccando il link che ti abbiamo inviato.</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="59"/>
-        <location filename="../settings/MStoragePage.qml" line="152"/>
         <source>Upgrade</source>
         <translation>Upgrade</translation>
     </message>
@@ -2007,34 +2015,38 @@ Conferma la tua email cliccando il link che ti abbiamo inviato.</translation>
         <translation type="vanished">BASE</translation>
     </message>
     <message>
-        <location filename="../settings/MStoragePage.qml" line="169"/>
         <source>See why we offer multiple tiers</source>
-        <translation>Perché offriamo diversi livelli?</translation>
+        <translation type="vanished">Perché offriamo diversi livelli?</translation>
     </message>
     <message>
-        <location filename="../settings/MStoragePage.qml" line="202"/>
+        <location filename="../settings/MStoragePage.qml" line="147"/>
+        <source>Upgrade Now</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/MStoragePage.qml" line="179"/>
         <source>USED STORAGE</source>
         <extracomment>Keep capitalized</extracomment>
         <translation>SPAZIO USATO</translation>
     </message>
     <message>
-        <location filename="../settings/MStoragePage.qml" line="235"/>
+        <location filename="../settings/MStoragePage.qml" line="212"/>
         <source>Used Storage</source>
         <translation>Spazio Usato</translation>
     </message>
     <message>
-        <location filename="../settings/MStoragePage.qml" line="262"/>
+        <location filename="../settings/MStoragePage.qml" line="239"/>
         <source>Remaining Storage</source>
         <translation>Spazio Rimanente</translation>
     </message>
     <message>
-        <location filename="../settings/MStoragePage.qml" line="318"/>
+        <location filename="../settings/MStoragePage.qml" line="295"/>
         <source>YOUR BOOKS</source>
         <extracomment>Keep capitalized</extracomment>
         <translation>I TUOI LIBRI</translation>
     </message>
     <message>
-        <location filename="../settings/MStoragePage.qml" line="337"/>
+        <location filename="../settings/MStoragePage.qml" line="314"/>
         <source>Books in your Library</source>
         <translation>Libri nella tua Libreria</translation>
     </message>
@@ -2185,7 +2197,7 @@ Amiamo lavorare su progetti divertenti, supportare la comunità e cercare di ren
         <translation>La tua versione corrente è:</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpToDate.qml" line="84"/>
+        <location filename="../settings/updatesPage/MUpToDate.qml" line="85"/>
         <source>See our latest changes at:</source>
         <translation>Vedi le ultime modifiche :</translation>
     </message>
@@ -2208,50 +2220,50 @@ Amiamo lavorare su progetti divertenti, supportare la comunità e cercare di ren
         <translation>La nuova versione è:</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="94"/>
+        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="95"/>
         <source>Update</source>
         <translation>Aggiorna</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="113"/>
+        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="114"/>
         <source>See the exact changes on our website at:</source>
         <translation>Vedi le esatte modifiche sul nostro sito:</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="154"/>
+        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="155"/>
         <source>Updating on Linux</source>
         <translation>Aggiornare su Linux</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="155"/>
+        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="156"/>
         <source>Please use your package manager to update Librum or download the newest version from our</source>
         <translation>Per favore usa il tuo package manager per aggiornare Librum o scarica la nuova versione dal</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="157"/>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="181"/>
+        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="158"/>
+        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="182"/>
         <source>website</source>
         <translation>sito web</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="159"/>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="183"/>
+        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="160"/>
+        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="184"/>
         <source>Close</source>
         <translation>Chiudi</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="160"/>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="184"/>
+        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="161"/>
+        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="185"/>
         <source>Email Us</source>
         <translation>Scrivici</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="178"/>
+        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="179"/>
         <source>The Update Failed</source>
         <translation>Aggiornamento non riuscito</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="179"/>
+        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="180"/>
         <source>Please try again later or download the newest version from our</source>
         <translation>Prego riprova più tardi o scarical&apos;ultima versione da</translation>
     </message>
@@ -2308,7 +2320,7 @@ Amiamo lavorare su progetti divertenti, supportare la comunità e cercare di ren
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.qml" line="31"/>
+        <location filename="../main.qml" line="32"/>
         <source>Librum - Your ebook reader</source>
         <translation>Librum - Il tuo lettore ebook</translation>
     </message>
