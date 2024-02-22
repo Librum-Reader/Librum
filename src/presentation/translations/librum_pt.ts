@@ -654,7 +654,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
         <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="44"/>
         <source>Move to Folder</source>
         <extracomment>If this is too long, use &quot;To Folder&quot; instead</extracomment>
-        <translation>Mover para pasta</translation>
+        <translation>Mover p/ pasta</translation>
     </message>
     <message>
         <source>Uninstall books</source>
@@ -696,7 +696,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
         <location filename="../homePage/MBookRightClickPopup.qml" line="102"/>
         <source>Move to Folder</source>
         <extracomment>If this is too long, use &quot;To Folder&quot; instead</extracomment>
-        <translation>Mover para pasta</translation>
+        <translation>Mover p/ pasta</translation>
     </message>
     <message>
         <source>Mark as read</source>
