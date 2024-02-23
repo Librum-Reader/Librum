@@ -1,5 +1,5 @@
 import QtQuick
-import QtQuick.Controls.Material
+import QtQuick.Controls
 import QtQuick.Layouts
 import Librum.style
 import Librum.fonts
