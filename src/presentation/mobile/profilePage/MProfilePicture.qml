@@ -7,8 +7,8 @@ import Librum.controllers
 
 Rectangle {
     id: root
-    implicitWidth: 36
-    implicitHeight: 36
+    implicitWidth: 44
+    implicitHeight: 44
     radius: width
     clip: true
     antialiasing: true
@@ -19,9 +19,8 @@ Rectangle {
         id: initials
         anchors.centerIn: parent
         visible: UserController.profilePicture.length === 0
-        text: UserController.firstName[0].toUpperCase(
-                  ) + UserController.lastName[0].toUpperCase()
-        font.pointSize: Fonts.size12
+        text: UserController.name[0].toUpperCase()
+        font.pointSize: Fonts.size21
         font.bold: true
         color: Style.colorFocusedButtonText
     }
@@ -37,10 +36,7 @@ Rectangle {
         cache: false
     }
 
-    MouseArea {
-        anchors.fill: parent
-        cursorShape: Qt.PointingHandCursor
-
-        onClicked: root.clicked()
+    TapHandler {
+        onTapped: root.clicked()
     }
 }

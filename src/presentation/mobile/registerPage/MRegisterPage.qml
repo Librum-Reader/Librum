@@ -34,7 +34,7 @@ Page {
         Label {
             id: welcomeText
             Layout.alignment: Qt.AlignHCenter
-            Layout.topMargin: 40
+            Layout.topMargin: 52
             text: qsTr("Welcome!")
             color: Style.colorTitle
             font.weight: Font.Bold
@@ -50,24 +50,12 @@ Page {
             font.pointSize: Fonts.size13dot25
         }
 
-        RowLayout {
+        MLabeledInputBox {
+            id: nameInput
             Layout.fillWidth: true
+            Layout.preferredHeight: 54
             Layout.topMargin: 20
-            spacing: 8
-
-            MLabeledInputBox {
-                id: firstnameInput
-                Layout.fillWidth: true
-                Layout.preferredHeight: 54
-                placeHolderText: qsTr("First name")
-            }
-
-            MLabeledInputBox {
-                id: lastnameInput
-                Layout.fillWidth: true
-                Layout.preferredHeight: 54
-                placeHolderText: qsTr("Last name")
-            }
+            placeHolderText: qsTr("Name")
         }
 
         MLabeledInputBox {

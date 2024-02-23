@@ -14,5 +14,9 @@
         <file>explorePage/MExplorePage.qml</file>
         <file>profilePage/MProfilePage.qml</file>
         <file>libraryPage/MLibraryPage.qml</file>
+        <file>profilePage/MProfileCard.qml</file>
+        <file>profilePage/MProfilePicture.qml</file>
+        <file>profilePage/MProfileItem.qml</file>
+        <file>modules/CustomComponents/MFlickWrapper.qml</file>
     </qresource>
 </RCC>

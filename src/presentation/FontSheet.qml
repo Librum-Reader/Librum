@@ -35,8 +35,11 @@ Item {
     property real size16: systemSize + 7
     property real size16dot5: systemSize + 7.5
     property real size17: systemSize + 8
+    property real size18: systemSize + 9
     property real size19: systemSize + 10
+    property real size19dot5: systemSize + 10.5
     property real size20: systemSize + 11
+    property real size21: systemSize + 12
     property real size22: systemSize + 13
     property real size23: systemSize + 14
     property real size24: systemSize + 15

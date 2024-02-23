@@ -143,6 +143,12 @@ Item {
     property string mobileExplore: "/resources/images/mobile/explore.svg"
     property string mobileProfile: "/resources/images/mobile/profile.svg"
     property string mobileFolder: "/resources/images/mobile/folder.svg"
+    property string mobileBrush: "/resources/images/mobile/brush.svg"
+    property string mobileDiamond: "/resources/images/mobile/diamond.svg"
+    property string mobileRefresh: "/resources/images/mobile/refresh.svg"
+    property string mobileServer: "/resources/images/mobile/server.svg"
+    property string mobileGear: "/resources/images/mobile/gear.svg"
+    property string mobileSignOut: "/resources/images/mobile/sign_out.svg"
 
     state: "Light"
     states: [
