@@ -9,7 +9,6 @@
 #include <QObject>
 #include <QSettings>
 #include <QVariantMap>
-#include <memory>
 #include "i_user_storage_access.hpp"
 
 namespace infrastructure::persistence
@@ -26,10 +25,7 @@ public:
     void deleteUser(const QString& authToken) override;
     void forgotPassword(const QString& email) override;
     void getProfilePicture(const QString& authToken) override;
-    void changeFirstName(const QString& authToken,
-                         const QString& newFirstName) override;
-    void changeLastName(const QString& authToken,
-                        const QString& newLastName) override;
+    void changeName(const QString& authToken, const QString& newName) override;
     void changeEmail(const QString& authToken,
                      const QString& newEmail) override;
     void changePassword(const QString& authToken,

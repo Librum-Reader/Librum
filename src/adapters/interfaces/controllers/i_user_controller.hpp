@@ -15,10 +15,7 @@ namespace adapters
 class ADAPTERS_EXPORT IUserController : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString firstName READ getFirstName WRITE setFirstName NOTIFY
-                   firstNameChanged)
-    Q_PROPERTY(QString lastName READ getLastName WRITE setLastName NOTIFY
-                   lastNameChanged)
+    Q_PROPERTY(QString name READ getName WRITE setName NOTIFY nameChanged)
     Q_PROPERTY(QString email READ getEmail WRITE setEmail NOTIFY emailChanged)
     Q_PROPERTY(QString role READ getRole NOTIFY roleChanged)
     Q_PROPERTY(qint64 usedBookStorage READ getUsedBookStorage NOTIFY
@@ -46,11 +43,8 @@ public:
     Q_INVOKABLE virtual bool renameTag(const QString& uuid,
                                        const QString& newName) = 0;
 
-    virtual QString getFirstName() const = 0;
-    virtual void setFirstName(const QString& newFirstName) = 0;
-
-    virtual QString getLastName() const = 0;
-    virtual void setLastName(const QString& newLastName) = 0;
+    virtual QString getName() const = 0;
+    virtual void setName(const QString& newName) = 0;
 
     virtual QString getEmail() const = 0;
     virtual void setEmail(const QString& newEmail) = 0;
@@ -67,8 +61,7 @@ public:
 
 signals:
     void finishedLoadingUser(bool success);
-    void firstNameChanged();
-    void lastNameChanged();
+    void nameChanged();
     void emailChanged();
     void roleChanged();
     void usedBookStorageChanged();

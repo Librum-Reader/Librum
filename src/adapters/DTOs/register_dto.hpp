@@ -7,8 +7,7 @@ namespace adapters::dtos
 
 struct ADAPTERS_EXPORT RegisterDto
 {
-    QString firstName;
-    QString lastName;
+    QString name;
     QString email;
     QString password;
 };

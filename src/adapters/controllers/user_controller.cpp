@@ -103,32 +103,18 @@ bool UserController::renameTag(const QString& uuid, const QString& newName)
     return result;
 }
 
-QString UserController::getFirstName() const
+QString UserController::getName() const
 {
-    return m_userService->getFirstName();
+    return m_userService->getName();
 }
 
-void UserController::setFirstName(const QString& newFirstName)
+void UserController::setName(const QString& newName)
 {
-    if(newFirstName == m_userService->getFirstName())
+    if(newName == m_userService->getName())
         return;
 
-    m_userService->setFirstName(newFirstName);
-    emit firstNameChanged();
-}
-
-QString UserController::getLastName() const
-{
-    return m_userService->getLastName();
-}
-
-void UserController::setLastName(const QString& newLastName)
-{
-    if(newLastName == m_userService->getLastName())
-        return;
-
-    m_userService->setLastName(newLastName);
-    emit lastNameChanged();
+    m_userService->setName(newName);
+    emit nameChanged();
 }
 
 QString UserController::getEmail() const
@@ -201,8 +187,7 @@ data_models::UserTagsModel* UserController::getUserTagsModel()
 
 void UserController::proccessUserLoadingResult(bool success)
 {
-    emit firstNameChanged();
-    emit lastNameChanged();
+    emit nameChanged();
     emit emailChanged();
     emit usedBookStorageChanged();
     emit bookStorageLimitChanged();

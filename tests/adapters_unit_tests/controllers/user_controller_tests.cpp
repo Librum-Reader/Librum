@@ -23,11 +23,8 @@ public:
     MOCK_METHOD(void, deleteUser, (), (override));
     MOCK_METHOD(void, downloadUser, (), (override));
 
-    MOCK_METHOD(QString, getFirstName, (), (const, override));
-    MOCK_METHOD(void, setFirstName, (const QString&), (override));
-
-    MOCK_METHOD(QString, getLastName, (), (const, override));
-    MOCK_METHOD(void, setLastName, (const QString&), (override));
+    MOCK_METHOD(QString, getName, (), (const, override));
+    MOCK_METHOD(void, setName, (const QString&), (override));
 
     MOCK_METHOD(QString, getEmail, (), (const, override));
     MOCK_METHOD(void, setEmail, (const QString&), (override));
@@ -82,102 +79,62 @@ TEST_F(AUserController, SucceedsLoadingABook)
     userController->loadUser(false);
 }
 
-TEST_F(AUserController, SucceedsGettingFirstName)
+TEST_F(AUserController, SucceedsGettingName)
 {
     // Arrange
     QString expectedResult = "SomeName";
 
 
     // Expect
-    EXPECT_CALL(userServiceMock, getFirstName())
+    EXPECT_CALL(userServiceMock, getName())
         .Times(1)
         .WillOnce(Return(expectedResult));
 
     // Act
-    auto result = userController->getFirstName();
+    auto result = userController->getName();
 
     // Assert
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(AUserController, SucceedsSettingFirstName)
+TEST_F(AUserController, SucceedsSettingName)
 {
     // Arrange
-    QSignalSpy spy(userController.get(), &UserController::firstNameChanged);
+    QSignalSpy spy(userController.get(), &UserController::nameChanged);
 
 
     // Expect
-    EXPECT_CALL(userServiceMock, getFirstName())
+    EXPECT_CALL(userServiceMock, getName())
         .Times(1)
         .WillOnce(Return("SomeOldName"));
 
-    EXPECT_CALL(userServiceMock, setFirstName(_)).Times(1);
+    EXPECT_CALL(userServiceMock, setName(_)).Times(1);
 
     // Act
-    userController->setFirstName("SomeName");
+    userController->setName("SomeName");
 
     // Assert
     EXPECT_EQ(1, spy.count());
 }
 
-TEST_F(AUserController, FailsSettingFirstNameIfItsTheSameAsCurrent)
+TEST_F(AUserController, FailsSettingNameIfItsTheSameAsCurrent)
 {
     // Arrange
-    QSignalSpy spy(userController.get(), &UserController::firstNameChanged);
+    QSignalSpy spy(userController.get(), &UserController::nameChanged);
 
-    QString firstName = "SomeName";
+    QString Name = "SomeName";
 
 
     // Expect
-    EXPECT_CALL(userServiceMock, getFirstName())
-        .Times(1)
-        .WillOnce(Return(firstName));
+    EXPECT_CALL(userServiceMock, getName()).Times(1).WillOnce(Return(Name));
 
-    EXPECT_CALL(userServiceMock, setFirstName(_)).Times(0);
+    EXPECT_CALL(userServiceMock, setName(_)).Times(0);
 
     // Act
-    userController->setFirstName(firstName);
+    userController->setName(Name);
 
     // Assert
     EXPECT_EQ(0, spy.count());
-}
-
-TEST_F(AUserController, SucceedsGettingLastName)
-{
-    // Arrange
-    QString expectedResult = "SomeLastName";
-
-
-    // Expect
-    EXPECT_CALL(userServiceMock, getLastName())
-        .Times(1)
-        .WillOnce(Return(expectedResult));
-
-    // Act
-    auto result = userController->getLastName();
-
-    // Assert
-    EXPECT_EQ(expectedResult, result);
-}
-
-TEST_F(AUserController, SucceedsSettingLastName)
-{
-    // Arrange
-    QSignalSpy spy(userController.get(), &UserController::lastNameChanged);
-
-
-    // Expect
-    EXPECT_CALL(userServiceMock, getLastName())
-        .Times(1)
-        .WillOnce(Return("SomeOldLastName"));
-
-    EXPECT_CALL(userServiceMock, setLastName(_)).Times(1);
-
-    // Act
-    userController->setLastName("SomeLastName");
-
-    // Assert
-    EXPECT_EQ(1, spy.count());
 }
 
 TEST_F(AUserController, SucceedsAddingATag)
@@ -284,28 +241,6 @@ TEST_F(AUserController, FailsRenamingATagIfTagDoesNotExist)
 
     // Assert
     EXPECT_FALSE(result);
-}
-
-TEST_F(AUserController, FailsSettingLastNameIfItsTheSameAsCurrent)
-{
-    // Arrange
-    QSignalSpy spy(userController.get(), &UserController::lastNameChanged);
-
-    QString lastName = "SomeName";
-
-
-    // Expect
-    EXPECT_CALL(userServiceMock, getLastName())
-        .Times(1)
-        .WillOnce(Return(lastName));
-
-    EXPECT_CALL(userServiceMock, setLastName(_)).Times(0);
-
-    // Act
-    userController->setLastName(lastName);
-
-    // Assert
-    EXPECT_EQ(0, spy.count());
 }
 
 TEST_F(AUserController, SucceedsGettingEmail)

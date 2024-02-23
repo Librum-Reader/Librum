@@ -105,14 +105,14 @@ void UserStorageAccess::getProfilePicture(const QString& authToken)
             });
 }
 
-void UserStorageAccess::changeFirstName(const QString& authToken,
-                                        const QString& newFirstName)
+void UserStorageAccess::changeName(const QString& authToken,
+                                   const QString& newName)
 {
     auto request = createRequest(domain + data::userPatchEndpoint, authToken);
 
     const QString quote = "\"";
-    auto jsonData = R"([{ "op": "replace", "path": "firstName", "value": )" +
-                    quote + newFirstName + quote + "}]";
+    auto jsonData = R"([{ "op": "replace", "path": "name", "value": )" + quote +
+                    newName + quote + "}]";
 
     auto reply = m_networkAccessManager.sendCustomRequest(request, "PATCH",
                                                           jsonData.toUtf8());
@@ -124,35 +124,7 @@ void UserStorageAccess::changeFirstName(const QString& authToken,
             {
                 if(api_error_helper::apiRequestFailed(reply, 200))
                 {
-                    api_error_helper::logErrorMessage(reply,
-                                                      "Changing firstname");
-                }
-
-                reply->deleteLater();
-            });
-}
-
-void UserStorageAccess::changeLastName(const QString& authToken,
-                                       const QString& newLastName)
-{
-    auto request = createRequest(domain + data::userPatchEndpoint, authToken);
-
-    const QString quote = "\"";
-    auto jsonData = R"([{ "op": "replace", "path": "lastName", "value": )" +
-                    quote + newLastName + quote + "}]";
-
-    auto reply = m_networkAccessManager.sendCustomRequest(request, "PATCH",
-                                                          jsonData.toUtf8());
-
-
-    // Make sure to release the reply's memory
-    connect(reply, &QNetworkReply::finished, this,
-            [reply]()
-            {
-                if(api_error_helper::apiRequestFailed(reply, 200))
-                {
-                    api_error_helper::logErrorMessage(reply,
-                                                      "Changing lastname");
+                    api_error_helper::logErrorMessage(reply, "Changing name");
                 }
 
                 reply->deleteLater();

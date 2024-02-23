@@ -15,8 +15,7 @@ namespace application::utility
 
 struct UserData
 {
-    QString firstName;
-    QString lastName;
+    QString name;
     QString email;
     QString role;
     qint64 usedBookStorage;
@@ -84,8 +83,7 @@ std::optional<QJsonObject> getAutomaticLoginFileData()
 
 void appendUserDataToJsonObject(QJsonObject& jsonObject, UserData userData)
 {
-    jsonObject.insert("firstName", userData.firstName);
-    jsonObject.insert("lastName", userData.lastName);
+    jsonObject.insert("name", userData.name);
     jsonObject.insert("email", userData.email);
     jsonObject.insert("role", userData.role);
     jsonObject.insert("usedBookStorage",
@@ -139,17 +137,16 @@ inline std::optional<AuthenticationData> tryAutomaticAuthentication()
 inline std::optional<UserData> tryAutomaticUserLoading()
 {
     auto jsonData = getAutomaticLoginFileData();
-    // Check if the data contains the "firstName" property since it should be
+    // Check if the data contains the "email" property since it should be
     // set if the user was already saved. We can't check for no-saved-data,
     // since the authentication data is saved before the user data, thus there
     // is already some data in the file, even though the user was not saved.
-    if(!jsonData.has_value() || !jsonData.value().contains("firstName"))
+    if(!jsonData.has_value() || !jsonData.value().contains("email"))
         return std::nullopt;
 
     QJsonObject automaticLoginData = jsonData.value();
     UserData user {
-        automaticLoginData["firstName"].toString(),
-        automaticLoginData["lastName"].toString(),
+        automaticLoginData["name"].toString(),
         automaticLoginData["email"].toString(),
         automaticLoginData["role"].toString(),
         static_cast<qint64>(automaticLoginData["usedBookStorage"].toDouble()),
@@ -158,6 +155,16 @@ inline std::optional<UserData> tryAutomaticUserLoading()
             automaticLoginData["profilePictureLastUpdated"].toString()),
         std::vector<Tag>(),
     };
+
+    // Previously, we used first and last names instead of simply one name. Some
+    // older clients might still have saved data in the old format. In this case
+    // we should use the first and last name to create a full name.
+    if(user.name.isEmpty())
+    {
+        auto firstName = automaticLoginData["firstName"].toString();
+        auto lastName = automaticLoginData["lastName"].toString();
+        user.name = firstName + " " + lastName;
+    }
 
     // Add tags
     for(const auto& jsonTag : automaticLoginData["tags"].toArray())

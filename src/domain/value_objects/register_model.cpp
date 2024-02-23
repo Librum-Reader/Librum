@@ -3,24 +3,18 @@
 namespace domain::value_objects
 {
 
-RegisterModel::RegisterModel(QString firstName, QString lastName, QString email,
-                             QString password, bool keepUpdated) :
-    m_firstName(firstName),
-    m_lastName(lastName),
+RegisterModel::RegisterModel(QString name, QString email, QString password,
+                             bool keepUpdated) :
+    m_name(name),
     m_email(email),
     m_password(password),
     m_keepUpdated(keepUpdated)
 {
 }
 
-QString RegisterModel::getFirstName() const
+QString RegisterModel::getName() const
 {
-    return m_firstName;
-}
-
-QString RegisterModel::getLastName() const
-{
-    return m_lastName;
+    return m_name;
 }
 
 QString RegisterModel::getEmail() const

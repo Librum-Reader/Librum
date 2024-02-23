@@ -54,15 +54,13 @@ void AuthenticationController::logoutUser()
     m_authenticationService->logoutUser();
 }
 
-void AuthenticationController::registerUser(const QString& firstName,
-                                            const QString& lastName,
+void AuthenticationController::registerUser(const QString& name,
                                             const QString& email,
                                             QString password, bool keepUpdated)
 {
     // Make sure that the email is always lower-case
     auto fixedEmail = email.toLower();
-    RegisterModel registerModel(firstName, lastName, fixedEmail, password,
-                                keepUpdated);
+    RegisterModel registerModel(name, fixedEmail, password, keepUpdated);
 
     m_authenticationService->registerUser(registerModel);
 }
