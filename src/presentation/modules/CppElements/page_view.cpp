@@ -15,7 +15,7 @@
 #include "highlight.hpp"
 #include "page_controller.hpp"
 
-using adapters::controllers::BookController;
+using adapters::IBookController;
 using adapters::controllers::PageController;
 using domain::entities::Highlight;
 using namespace application::core;
@@ -33,7 +33,7 @@ cpp_elements::PageView::PageView()
     m_tripleClickTimer.setSingleShot(true);
 }
 
-void PageView::setBookController(BookController* newBookController)
+void PageView::setBookController(IBookController* newBookController)
 {
     m_bookController = newBookController;
 
@@ -43,10 +43,10 @@ void PageView::setBookController(BookController* newBookController)
     m_pageController->setZoom(m_bookController->getZoom());
 
     // Setup connections to the BookController
-    connect(m_bookController, &BookController::zoomChanged, this,
+    connect(m_bookController, &IBookController::zoomChanged, this,
             &PageView::updateZoom);
 
-    connect(m_bookController, &BookController::selectText, this,
+    connect(m_bookController, &IBookController::selectText, this,
             [this](int pageNumber, QPointF left, QPointF right)
             {
                 if(pageNumber != m_pageNumber)

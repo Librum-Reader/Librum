@@ -5,17 +5,21 @@
 #include "fz_utils.hpp"
 #include "highlight.hpp"
 #include "i_book_service.hpp"
+#include "library_book_getter.hpp"
 #include "search_options.hpp"
 
 using namespace application::core;
+using application::utility::LibraryBookGetter;
 using domain::entities::Bookmark;
 using domain::entities::Highlight;
 
 namespace adapters::controllers
 {
 
-BookController::BookController(application::IBookService* bookService) :
-    m_bookService(bookService)
+BookController::BookController(application::IBookService* bookService,
+                               application::ILibraryService* libraryService) :
+    m_bookService(bookService),
+    m_libraryService(libraryService)
 {
     connect(m_bookService, &application::IBookService::goToPosition, this,
             &BookController::goToPosition);
@@ -36,7 +40,8 @@ BookController::BookController(application::IBookService* bookService) :
 
 void BookController::setUp(QString uuid)
 {
-    m_bookService->setUp(QUuid(uuid));
+    m_bookService->setUp(
+        std::make_unique<LibraryBookGetter>(m_libraryService, QUuid(uuid)));
 
     m_bookmarksModel = std::make_unique<data_models::BookmarksModel>(
         QUuid(uuid), m_bookService);

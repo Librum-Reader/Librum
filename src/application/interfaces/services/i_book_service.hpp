@@ -4,9 +4,11 @@
 #include <QObject>
 #include <QString>
 #include <QUuid>
+#include <memory>
 #include "application_export.hpp"
 #include "bookmark.hpp"
 #include "highlight.hpp"
+#include "i_book_getter.hpp"
 #include "mupdf/classes.h"
 #include "search_options.hpp"
 #include "toc/filtered_toc_model.hpp"
@@ -25,7 +27,7 @@ class APPLICATION_EXPORT IBookService : public QObject
 public:
     virtual ~IBookService() noexcept = default;
 
-    virtual void setUp(QUuid uuid) = 0;
+    virtual void setUp(std::unique_ptr<IBookGetter> bookGetter) = 0;
     virtual mupdf::FzDocument* getFzDocument() = 0;
 
     virtual void search(const QString& text,

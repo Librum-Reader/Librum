@@ -23,7 +23,7 @@ set(application_SRC
     interfaces/managers/i_library_storage_manager.hpp
     interfaces/utility/i_metadata_extractor.hpp
     interfaces/utility/i_local_library_tracker.hpp
-    
+
     services/authentication_service.cpp
     services/authentication_service.hpp
     services/free_books_service.cpp
@@ -44,7 +44,7 @@ set(application_SRC
     services/ai_explanation_service.hpp
     services/folder_service.hpp
     services/folder_service.cpp
-    
+
     managers/library_storage_manager.cpp
     managers/library_storage_manager.hpp
     
@@ -66,6 +66,10 @@ set(application_SRC
     utility/error_code_converter.hpp
     utility/book_utils.hpp
     utility/save_book_helper.hpp
+    utility/library_book_getter.hpp
+    utility/library_book_getter.cpp
+    utility/external_book_getter.hpp
+    utility/external_book_getter.cpp
     
     core/page_generator.hpp
     core/page_generator.cpp
@@ -161,6 +165,7 @@ endif()
 add_library(application
                 SHARED
                     ${application_SRC}
+                    interfaces/utility/i_book_getter.hpp
 )
 
 add_dependencies(application mupdf) # Ensure the mupdf target is built before the application target

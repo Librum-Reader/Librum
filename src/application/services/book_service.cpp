@@ -14,18 +14,13 @@ using domain::entities::Highlight;
 namespace application::services
 {
 
-BookService::BookService(ILibraryService* libraryService) :
-    m_libraryService(libraryService)
-{
-}
-
-void BookService::setUp(QUuid uuid)
+void BookService::setUp(std::unique_ptr<IBookGetter> bookGetter)
 {
     // Clean up previous book data first
     m_TOCModel = nullptr;
 
-    m_uuid = uuid;
-    auto book = getBook();
+    m_bookGetter = std::move(bookGetter);
+    auto book = m_bookGetter->getBook();
     auto stdFilePath = book->getFilePath().toStdString();
     m_fzDocument = std::make_unique<mupdf::FzDocument>(stdFilePath.c_str());
 
@@ -81,13 +76,13 @@ void BookService::goToPreviousSearchHit()
 
 const QList<domain::entities::Highlight>& BookService::getHighlights() const
 {
-    auto book = getBook();
+    auto book = m_bookGetter->getBook();
     return book->getHighlights();
 }
 
 void BookService::addHighlight(const domain::entities::Highlight& highlight)
 {
-    auto book = getBook();
+    auto book = m_bookGetter->getBook();
     book->addHighlight(highlight);
 
     updateBook();
@@ -95,7 +90,7 @@ void BookService::addHighlight(const domain::entities::Highlight& highlight)
 
 void BookService::removeHighlight(const QUuid& uuid)
 {
-    auto book = getBook();
+    auto book = m_bookGetter->getBook();
     book->removeHighlight(uuid);
 
     updateBook();
@@ -103,7 +98,7 @@ void BookService::removeHighlight(const QUuid& uuid)
 
 void BookService::changeHighlightColor(const QUuid& uuid, const QColor& color)
 {
-    auto book = getBook();
+    auto book = m_bookGetter->getBook();
     book->changeHighlightColor(uuid, color);
 
     updateBook();
@@ -111,15 +106,15 @@ void BookService::changeHighlightColor(const QUuid& uuid, const QColor& color)
 
 void BookService::updateBook()
 {
-    auto book = getBook();
+    auto book = m_bookGetter->getBook();
     book->updateLastModified();
-    m_libraryService->updateBook(*book);
+    m_bookGetter->updateBook(book);
 }
 
 const Highlight* BookService::getHighlightAtPoint(const QPointF& point,
                                                   int page) const
 {
-    auto book = getBook();
+    auto book = m_bookGetter->getBook();
     for(auto& highlight : book->getHighlights())
     {
         if(highlight.getPageNumber() != page)
@@ -137,13 +132,13 @@ const Highlight* BookService::getHighlightAtPoint(const QPointF& point,
 
 const QList<domain::entities::Bookmark>& BookService::getBookmarks() const
 {
-    auto book = getBook();
+    auto book = m_bookGetter->getBook();
     return book->getBookmarks();
 }
 
 void BookService::addBookmark(const domain::entities::Bookmark& bookmark)
 {
-    auto book = getBook();
+    auto book = m_bookGetter->getBook();
 
     emit bookmarkInsertionStarted(book->getBookmarks().count());
     book->addBookmark(bookmark);
@@ -154,7 +149,7 @@ void BookService::addBookmark(const domain::entities::Bookmark& bookmark)
 
 void BookService::renameBookmark(const QUuid& uuid, const QString& newName)
 {
-    auto book = getBook();
+    auto book = m_bookGetter->getBook();
 
     book->renameBookmark(uuid, newName);
     emit bookmarkNameChanged(getIndexOfBookmark(uuid));
@@ -164,7 +159,7 @@ void BookService::renameBookmark(const QUuid& uuid, const QString& newName)
 
 void BookService::removeBookmark(const QUuid& uuid)
 {
-    auto book = getBook();
+    auto book = m_bookGetter->getBook();
 
     emit bookmarkDeletionStarted(getIndexOfBookmark(uuid));
     book->removeBookmark(uuid);
@@ -191,25 +186,25 @@ void BookService::followLink(const char* uri)
 
 QString BookService::getFilePath() const
 {
-    auto book = getBook();
+    auto book = m_bookGetter->getBook();
     return book->getFilePath();
 }
 
 int BookService::getPageCount() const
 {
-    auto book = getBook();
+    auto book = m_bookGetter->getBook();
     return book->getPageCount();
 }
 
 int BookService::getCurrentPage() const
 {
-    auto book = getBook();
+    auto book = m_bookGetter->getBook();
     return book->getCurrentPage();
 }
 
 void BookService::setCurrentPage(int newCurrentPage)
 {
-    auto book = getBook();
+    auto book = m_bookGetter->getBook();
     book->setCurrentPage(newCurrentPage);
 }
 
@@ -225,13 +220,13 @@ void BookService::setZoom(float newZoom)
 
 QString BookService::getColorTheme()
 {
-    auto book = getBook();
+    auto book = m_bookGetter->getBook();
     return book->getColorTheme();
 }
 
 void BookService::setColorTheme(const QString& colorTheme)
 {
-    auto book = getBook();
+    auto book = m_bookGetter->getBook();
     book->setColorTheme(colorTheme);
     updateBook();
 }
@@ -250,32 +245,9 @@ core::FilteredTOCModel* BookService::getTableOfContents()
     return m_filteredTOCModel.get();
 }
 
-/**
- * Everytime that we want to access data on the book we need to get the book
- * directly from the library service. We can't store it because the library
- * container can be resized at any time and thus invalidate the pointer.
- */
-domain::entities::Book* BookService::getBook()
-{
-    auto* book = m_libraryService->getBook(m_uuid);
-    if(book == nullptr)
-        qWarning() << "Failed opening book with uuid: " << m_uuid;
-
-    return book;
-}
-
-const domain::entities::Book* BookService::getBook() const
-{
-    auto* book = m_libraryService->getBook(m_uuid);
-    if(book == nullptr)
-        qWarning() << "Failed opening book with uuid: " << m_uuid;
-
-    return book;
-}
-
 int BookService::getIndexOfBookmark(const QUuid& uuid) const
 {
-    auto book = getBook();
+    auto book = m_bookGetter->getBook();
 
     auto bookmarks = book->getBookmarks();
     for(int i = 0; i < bookmarks.length(); ++i)

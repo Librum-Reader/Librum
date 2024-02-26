@@ -2,10 +2,11 @@
 Type=Application
 Name=Librum
 GenericName=E-Book Reader
+MimeType=application/pdf
 Comment=A modern ebook reader and library manager
 Comment[fr]=Un lecteur de livres et un gestionnaire de bibliothèque moderne
 Comment[de]=Ein moderner E-Book-Reader und Bibliotheksmanager
-Exec=librum
+Exec=librum %f
 Icon=librum
 Terminal=false
 Categories=Education;Viewer;Printing;Literature;Qt;

@@ -6,22 +6,26 @@
 #include "bookmarks_model.hpp"
 #include "i_book_controller.hpp"
 #include "i_book_service.hpp"
-#include "i_library_service.hpp"
 #include "search_options.hpp"
 #include "toc/filtered_toc_model.hpp"
 
 namespace adapters::controllers
 {
 
-class ADAPTERS_EXPORT BookController : public IBookController
+/***
+ * This class implements the IBookController interface to provide access to a
+ * book that is not managed by the application, a so called 'external book'.
+ *
+ * This usecase occurs when e.g. using 'Open with Librum' from a file manager.
+ */
+class ADAPTERS_EXPORT ExternalBookController : public IBookController
 {
     Q_OBJECT
 
 public:
-    BookController(application::IBookService* bookService,
-                   application::ILibraryService* libraryService);
+    ExternalBookController(application::IBookService* externalBookService);
 
-    void setUp(QString uuid) override;
+    void setUp(QString filePath) override;
     mupdf::FzDocument* getFzDocument() override;
 
     void search(const QString& text) override;
@@ -70,12 +74,8 @@ public:
     data_models::BookmarksProxyModel* getBookmarksModel() override;
 
 private:
-    application::IBookService* m_bookService;
-    application::ILibraryService* m_libraryService;
+    application::IBookService* m_externalBookService;
     application::core::utils::SearchOptions m_searchOptions;
-
-    std::unique_ptr<data_models::BookmarksModel> m_bookmarksModel;
-    data_models::BookmarksProxyModel m_bookmarksProxyModel;
 };
 
 }  // namespace adapters::controllers

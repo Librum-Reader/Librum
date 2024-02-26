@@ -3,7 +3,7 @@
 #include <QString>
 #include <QTimer>
 #include <memory>
-#include "book_controller.hpp"
+#include "i_book_controller.hpp"
 #include "page_controller.hpp"
 #include "presentation_export.hpp"
 
@@ -19,8 +19,8 @@ namespace cpp_elements
 class PRESENTATION_EXPORT PageView : public QQuickItem
 {
     Q_OBJECT
-    Q_PROPERTY(adapters::controllers::BookController* bookController WRITE
-                   setBookController CONSTANT)
+    Q_PROPERTY(adapters::IBookController* bookController WRITE setBookController
+                   CONSTANT)
     Q_PROPERTY(
         int implicitWidth READ getImplicitWidth NOTIFY implicitWidthChanged)
     Q_PROPERTY(
@@ -48,8 +48,7 @@ public:
 
     void setIncludeNewLinesInCopiedText(bool newIncludeNewLinesInCopiedText);
 
-    void setBookController(
-        adapters::controllers::BookController* newBookController);
+    void setBookController(adapters::IBookController* newBookController);
 
     Q_INVOKABLE void copySelectedText();
     Q_INVOKABLE void copyHighlightedText(const QString& uuid);
@@ -103,7 +102,7 @@ private:
     QPair<float, float> getCenterXAndTopYFromRects(const QList<QRectF>& rects);
 
     std::unique_ptr<adapters::controllers::PageController> m_pageController;
-    adapters::controllers::BookController* m_bookController = nullptr;
+    adapters::IBookController* m_bookController = nullptr;
     int m_pageNumber = 0;
     bool m_firstTimeColorInverted = true;
     bool m_startedMousePressOnLink = false;

@@ -1,8 +1,7 @@
 #pragma once
 #include <memory>
-#include "book.hpp"
+#include "i_book_getter.hpp"
 #include "i_book_service.hpp"
-#include "i_library_service.hpp"
 #include "mupdf/classes.h"
 #include "toc/filtered_toc_model.hpp"
 #include "toc/toc_model.hpp"
@@ -14,9 +13,7 @@ namespace application::services
 class BookService : public IBookService
 {
 public:
-    BookService(ILibraryService* libraryService);
-
-    void setUp(QUuid uuid) override;
+    void setUp(std::unique_ptr<IBookGetter> bookGetter) override;
     mupdf::FzDocument* getFzDocument() override;
 
     void search(const QString& text,
@@ -29,7 +26,6 @@ public:
     void addHighlight(const domain::entities::Highlight& highlight) override;
     void removeHighlight(const QUuid& uuid) override;
     void changeHighlightColor(const QUuid& uuid, const QColor& color) override;
-    void updateBook() override;
     const domain::entities::Highlight* getHighlightAtPoint(
         const QPointF& point, int page) const override;
 
@@ -52,17 +48,15 @@ public:
 
     core::FilteredTOCModel* getTableOfContents() override;
 
-    domain::entities::Book* getBook();
-    const domain::entities::Book* getBook() const;
+    void updateBook() override;
 
 private:
     int getIndexOfBookmark(const QUuid& uuid) const;
 
-    ILibraryService* m_libraryService;
+    std::unique_ptr<IBookGetter> m_bookGetter;
     std::unique_ptr<mupdf::FzDocument> m_fzDocument = nullptr;
     std::unique_ptr<core::utils::BookSearcher> m_bookSearcher = nullptr;
     float m_zoom = 1;
-    QUuid m_uuid;
 
     std::unique_ptr<core::TOCModel> m_TOCModel;
     std::unique_ptr<core::FilteredTOCModel> m_filteredTOCModel;

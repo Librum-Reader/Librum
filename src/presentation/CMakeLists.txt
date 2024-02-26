@@ -50,6 +50,7 @@ target_include_directories(presentation
                 PUBLIC
                     ${CMAKE_CURRENT_SOURCE_DIR}/modules/CppElements
                     ${APPLICATION_INCLUDES}
+                    ${ADAPTERS_INCLUDES}
 )
 
 target_compile_options(presentation PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS};-Wall;-O0;-g>")

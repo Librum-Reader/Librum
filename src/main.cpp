@@ -50,7 +50,7 @@ int main(int argc, char* argv[])
 {
     // clang-format off
     // App
-    QApplication app(argc, argv);
+    QGuiApplication app(argc, argv);
     QGuiApplication::setOrganizationName("Librum-Reader");
     QGuiApplication::setOrganizationDomain("librumreader.com");
     QGuiApplication::setApplicationName("Librum");
@@ -132,8 +132,8 @@ int main(int argc, char* argv[])
                                  libraryController.get());
 
     // Book Stack
-    auto bookService = std::make_unique<application::services::BookService>(libraryService);
-    auto bookController = std::make_unique<BookController>(bookService.get());
+    auto bookService = std::make_unique<application::services::BookService>();
+    auto bookController = std::make_unique<BookController>(bookService.get(), libraryService);
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "BookController",
                                  bookController.get());
 
@@ -242,6 +242,9 @@ int main(int argc, char* argv[])
         appInfoController->switchToLanguage(storedLanguage);
     }
 
+    if(!app.arguments().empty()) {
+        qDebug() << "Arguments: " << app.arguments();
+    }
 
     const QUrl url("qrc:/main.qml");
     QObject::connect(

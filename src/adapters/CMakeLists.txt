@@ -45,6 +45,8 @@ add_library(adapters
                     controllers/ai_explanation_controller.hpp
                     controllers/folder_controller.hpp
                     controllers/folder_controller.cpp
+                    controllers/external_book_controller.hpp
+                    controllers/external_book_controller.cpp
 
                     gateways/user_storage_gateway.cpp
                     gateways/user_storage_gateway.hpp
