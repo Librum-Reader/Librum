@@ -118,6 +118,7 @@ set(CXX_COMMAND "${CMAKE_CXX_COMPILER}")
 if(ANDROID)
     string(APPEND CC_COMMAND " --target=aarch64-none-linux-android23 --sysroot=/home/creapermann/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot")
     string(APPEND CXX_COMMAND " --target=aarch64-none-linux-android23 --sysroot=/home/creapermann/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot")
+    set(ANDROID_COMPILERS "CC=${CC_COMMAND}" "CXX=${CXX_COMMAND}")
 endif()
 
 
@@ -132,8 +133,7 @@ endif()
 
 add_custom_target(mupdf
    COMMAND ${CMAKE_COMMAND} -E env
-        "CC=${CC_COMMAND}"
-        "CXX=${CXX_COMMAND}"
+        ${ANDROID_COMPILERS}
         "USE_SYSTEM_LIBJPEG=${USE_SYSTEM_LIBJPEG_VALUE}"
         "USE_SONAME=no"
         ${MUPDF_BUILD_COMMAND}
