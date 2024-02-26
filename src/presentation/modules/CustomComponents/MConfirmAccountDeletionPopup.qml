@@ -71,7 +71,8 @@ Popup {
             Label {
                 id: infoText
                 Layout.topMargin: 20
-                Layout.leftMargin: 52
+                Layout.leftMargin: baseRoot.rightAlign ? 0 : 52
+                Layout.rightMargin: baseRoot.rightAlign ? 52 : 0
                 Layout.fillWidth: true
                 wrapMode: Text.WordWrap
                 textFormat: Text.RichText

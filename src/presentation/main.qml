@@ -23,6 +23,7 @@ ApplicationWindow {
     property int sidebarOpenedMinWidth: 810
     property int readingPageMinWidth: 550
     property bool notifyAboutUpdates: true
+    property bool rightAlign: AppInfoController.language === "العربية"
 
     minimumHeight: 400
     minimumWidth: 650
@@ -39,6 +40,8 @@ ApplicationWindow {
         id: mainlayout
         anchors.fill: parent
         spacing: 0
+        LayoutMirroring.enabled: baseRoot.rightAlign
+        LayoutMirroring.childrenInherit: true
 
         MSidebar {
             id: sidebar

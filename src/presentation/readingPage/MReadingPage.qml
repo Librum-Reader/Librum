@@ -17,6 +17,10 @@ Page {
         color: Style.colorPageBackground
     }
 
+    // Prevent right-alignment
+    LayoutMirroring.enabled: false
+    LayoutMirroring.childrenInherit: true
+
     Component.onCompleted: root.forceActiveFocus()
     Component.onDestruction: internal.saveCurrentPage()
 

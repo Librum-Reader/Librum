@@ -267,7 +267,7 @@ MFlickWrapper {
                         id: heartRow
                         Layout.fillWidth: true
                         Layout.topMargin: 40
-                        spacing: 0
+                        spacing: 22
 
                         Image {
                             id: heartImage
@@ -278,8 +278,7 @@ MFlickWrapper {
 
                         Label {
                             id: thisAppText
-                            Layout.fillWidth: true
-                            Layout.leftMargin: 22
+                            Layout.alignment: baseRoot.rightAlign ? Qt.AlignRight : Qt.AlignLeft
                             text: qsTr("Librum is here for everyone who just wants to enjoy a good book.\n" + "We hope you have a great time using it! Feel free to leave us a rating and some feedback.")
                             wrapMode: Text.WordWrap
                             color: Style.colorText

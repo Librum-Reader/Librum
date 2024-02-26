@@ -34,7 +34,10 @@ Item {
 
     RowLayout {
         id: layout
+        width: parent.width
         spacing: root.spacing
+        LayoutMirroring.enabled: baseRoot.rightAlign
+        LayoutMirroring.childrenInherit: true
 
         MCheckBox {
             id: checkBox

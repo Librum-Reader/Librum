@@ -30,6 +30,9 @@ Item {
     property bool centerContentVertically: true
     property bool centerContentHorizontally: true
 
+    LayoutMirroring.enabled: baseRoot.rightAlign
+    LayoutMirroring.childrenInherit: true
+
     implicitHeight: 30
     implicitWidth: layout.implicitWidth + 2 * horizontalMargins
 
