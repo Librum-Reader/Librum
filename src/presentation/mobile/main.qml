@@ -9,6 +9,7 @@ import "navbar"
 import "libraryPage"
 import "explorePage"
 import "profilePage"
+import "myAccountPage"
 
 ApplicationWindow {
     id: baseRoot
@@ -69,6 +70,10 @@ ApplicationWindow {
     Component {
         id: profilePage
         MProfilePage {}
+    }
+    Component {
+        id: myAccountPage
+        MMyAccountPage {}
     }
 
 

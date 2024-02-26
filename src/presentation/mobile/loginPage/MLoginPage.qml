@@ -98,7 +98,6 @@ Page {
             fontSize: Fonts.size16
             opacityOnPressed: 0.85
             textColor: Style.colorFocusedButtonText
-            fontWeight: Font.Bold
             text: qsTr("Sign in")
 
             onClicked: internal.login()

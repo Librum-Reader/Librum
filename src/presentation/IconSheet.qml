@@ -149,6 +149,7 @@ Item {
     property string mobileServer: "/resources/images/mobile/server.svg"
     property string mobileGear: "/resources/images/mobile/gear.svg"
     property string mobileSignOut: "/resources/images/mobile/sign_out.svg"
+    property string mobileArrowLeft: "/resources/images/mobile/arrow_left.svg"
 
     state: "Light"
     states: [

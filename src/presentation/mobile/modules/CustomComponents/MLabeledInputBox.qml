@@ -14,12 +14,25 @@ Item {
     property bool textHidden: false
     property int inputFontSize: Fonts.size13
     property string placeHolderText: "Input"
-    property color placeholderColor: Style.colorPlaceholderText
+    property color placeHolderColor: Style.colorPlaceholderText
     property int fontWeight: Font.Normal
     property bool isPassword: false
 
     implicitWidth: 200
     implicitHeight: 56
+
+    // If there is some preconfigured text, we want to move the placeholder
+    // to the header position
+    Component.onCompleted: {
+        if (text.length == 0)
+            return
+
+        moveablePlaceholder.y = internal.yHeaderDest
+        moveablePlaceholder.font.pointSize = internal.headerPlaceholderSize
+        textOverlay.width = internal.widthHeaderDest
+        textOverlay.x = textOverlay.expandedPosition
+        internal.inHeaderMode = true
+    }
 
     Rectangle {
         id: background
@@ -69,21 +82,23 @@ Item {
             }
 
             onActiveFocusChanged: {
-                if (activeFocus && input.text.length === 0) {
+                if (activeFocus && !internal.inHeaderMode
+                        && input.text.length === 0) {
                     moveToHeaderAnim.start()
-                } else if (!activeFocus && input.text.length === 0) {
+                } else if (!activeFocus && internal.inHeaderMode
+                           && input.text.length === 0) {
                     moveBackAnim.start()
                 }
             }
 
             Label {
                 id: moveablePlaceholder
-                property int centeredPosition: 0
+                property int centeredPosition
 
                 x: input.leftPadding
                 font.pointSize: root.inputFontSize
                 y: centeredPosition
-                color: root.placeholderColor
+                color: root.placeHolderColor
                 text: root.placeHolderText
 
                 // We want to compute this only once at the start
@@ -148,8 +163,7 @@ Item {
         NumberAnimation {
             target: moveablePlaceholder
             property: "y"
-            to: moveToHeaderAnim.zeroRelativeToLabel - moveToHeaderAnim.halfLabelHeight
-                - movedPlaceholderReference.centeredPosition + 1
+            to: internal.yHeaderDest
             duration: 340
             easing.type: Easing.InOutQuad
         }
@@ -165,7 +179,7 @@ Item {
         NumberAnimation {
             target: textOverlay
             property: "width"
-            to: movedPlaceholderReference.implicitWidth + textOverlay.sidePadding
+            to: internal.widthHeaderDest
             duration: 340
             easing.type: Easing.InOutQuad
         }
@@ -177,6 +191,8 @@ Item {
             duration: 340
             easing.type: Easing.InOutQuad
         }
+
+        onFinished: internal.inHeaderMode = true
     }
 
     ParallelAnimation {
@@ -213,11 +229,20 @@ Item {
             duration: 340
             easing.type: Easing.InOutQuad
         }
+
+        onFinished: internal.inHeaderMode = false
     }
 
     QtObject {
         id: internal
-        property int headerPlaceholderSize: 11
+        property bool inHeaderMode: false
+        property int yHeaderDest: moveToHeaderAnim.zeroRelativeToLabel
+                                  - moveToHeaderAnim.halfLabelHeight
+                                  - movedPlaceholderReference.centeredPosition - 1
+        property int widthHeaderDest: movedPlaceholderReference.implicitWidth
+                                      + textOverlay.sidePadding
+
+        property int headerPlaceholderSize: Fonts.size12dot5
         property bool textHiden: root.isPassword
     }
 }

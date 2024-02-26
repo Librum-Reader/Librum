@@ -7,6 +7,9 @@ import Librum.controllers
 
 Rectangle {
     id: root
+    signal clicked
+    property int fontSize: Fonts.size21
+
     implicitWidth: 44
     implicitHeight: 44
     radius: width
@@ -20,7 +23,7 @@ Rectangle {
         anchors.centerIn: parent
         visible: UserController.profilePicture.length === 0
         text: UserController.name[0].toUpperCase()
-        font.pointSize: Fonts.size21
+        font.pointSize: root.fontSize
         font.bold: true
         color: Style.colorFocusedButtonText
     }

@@ -407,5 +407,6 @@
         <file>resources/images/mobile/refresh.svg</file>
         <file>resources/images/mobile/diamond.svg</file>
         <file>resources/images/mobile/gear.svg</file>
+        <file>resources/images/mobile/arrow_left.svg</file>
     </qresource>
 </RCC>

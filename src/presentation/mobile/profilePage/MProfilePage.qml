@@ -38,18 +38,18 @@ Page {
                 id: contentLayout
                 width: parent.width
 
-                MProfileCard {
-                    Layout.topMargin: 20
-                    Layout.fillWidth: true
-                }
-
                 Pane {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 72
-                    Layout.topMargin: 24
+                    Layout.topMargin: 12
                     background: Rectangle {
                         color: Style.colorContainerBackground
                         radius: 10
+                    }
+
+                    MProfileCard {
+                        width: parent.width
+                        anchors.verticalCenter: parent.verticalCenter
                     }
                 }
 
@@ -85,7 +85,7 @@ Page {
                             icon: Icons.mobileProfile
                             iconWidth: 18
 
-                            onClicked: ;
+                            onClicked: loadPage(myAccountPage)
                         }
 
                         MProfileItem {
@@ -164,7 +164,7 @@ Page {
                     Layout.fillWidth: true
                     Layout.preferredHeight: settingsLayout2.implicitHeight + 2 * verticalPadding
                     Layout.topMargin: 3
-                    Layout.bottomMargin: 12
+                    Layout.bottomMargin: 14
                     verticalPadding: 10
                     horizontalPadding: 6
                     background: Rectangle {
