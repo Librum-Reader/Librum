@@ -2,7 +2,7 @@
 Type=Application
 Name=Librum
 GenericName=E-Book Reader
-MimeType=application/pdf
+MimeType=application/pdf;application/x-cbz;application/epub+zip;image/jpeg;image/svg+xml;text/plain;image/tiff;application/x-mobipocket-ebook;application/x-cbz;text/markdown
 Comment=A modern ebook reader and library manager
 Comment[fr]=Un lecteur de livres et un gestionnaire de bibliothèque moderne
 Comment[de]=Ein moderner E-Book-Reader und Bibliotheksmanager
