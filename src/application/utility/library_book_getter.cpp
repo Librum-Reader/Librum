@@ -32,4 +32,9 @@ void LibraryBookGetter::updateBook(Book* book)
     m_libraryService->updateBook(*book);
 }
 
+bool LibraryBookGetter::bookIsValid()
+{
+    return true;
+}
+
 }  // namespace application::utility

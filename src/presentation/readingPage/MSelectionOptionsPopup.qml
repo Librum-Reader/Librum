@@ -25,7 +25,8 @@ Popup {
         border.color: Style.colorContainerBorder
     }
 
-    onOpened: selectionOptionsListView.model = firstActionsPage
+    onOpened: selectionOptionsListView.model
+              = (baseRoot.externalBookMode ? externalBookActionPage : firstActionsPage)
     onClosed: root.highlight = ""
 
     Shortcut {
@@ -62,7 +63,7 @@ Popup {
         height: parent.height
         orientation: ListView.Horizontal
         spacing: 2
-        model: firstActionsPage
+        model: baseRoot.externalBookMode ? externalBookActionPage : firstActionsPage
         boundsBehavior: Flickable.StopAtBounds
 
         onModelChanged: {
@@ -139,6 +140,7 @@ Popup {
         SelectionOptionsPopupItem {
             id: highlightAction
             text: qsTr("Highlight")
+            visible: !baseRoot.externalBookMode
             clickedFunction: function () {
                 // We do not want to create a new highlight when clicking on
                 // one and selecting the "Highlight" option to edit it.
@@ -265,6 +267,61 @@ Popup {
 
             clickedFunction: function () {
                 activeFocusItem.removeHighlight(root.highlight)
+            }
+        }
+    }
+
+    ObjectModel {
+        id: externalBookActionPage
+
+        SelectionOptionsPopupItem {
+            text: qsTr("Copy")
+            clickedFunction: function () {
+                if (root.highlight == "")
+                    activeFocusItem.copySelectedText()
+                else
+                    activeFocusItem.copyHighlightedText(root.highlight)
+            }
+        }
+
+        Separator {}
+
+        SelectionOptionsPopupItem {
+            text: qsTr("Look Up")
+            clickedFunction: function () {
+                let text = ""
+                if (root.highlight == "")
+                    text = activeFocusItem.getSelectedText()
+                else
+                    text = activeFocusItem.getHighlightedText(root.highlight)
+
+                // Removing any . or , from the start and the end of the word
+                text = text.replace(/^[,.]+|[,.]+$/g, '')
+
+                // Make the first letter lower case. When the word is at the start of a sentence,
+                // the first letter will be upper case, which in turn causes the dictionary to fail.
+                const firstLetter = text.charAt(0).toLowerCase()
+                const restOfString = text.slice(1)
+                // Get the rest of the string
+                text = firstLetter + restOfString
+
+                DictionaryController.getDefinitionForWord(text)
+                root.dictionaryOptionSelected(text)
+            }
+        }
+
+        Separator {}
+
+        SelectionOptionsPopupItem {
+            text: qsTr("Explain")
+            clickedFunction: function () {
+                let text = ""
+                if (root.highlight == "")
+                    text = activeFocusItem.getSelectedText()
+                else
+                    text = activeFocusItem.getHighlightedText(root.highlight)
+
+                root.explanationOptionSelected(text)
             }
         }
     }

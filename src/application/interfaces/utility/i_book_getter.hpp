@@ -17,6 +17,7 @@ public:
     virtual domain::entities::Book* getBook() = 0;
     virtual void setUuid(const QUuid& uuid) = 0;
     virtual void updateBook(domain::entities::Book* book) = 0;
+    virtual bool bookIsValid() = 0;
 };
 
 }  // namespace application

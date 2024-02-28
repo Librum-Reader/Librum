@@ -10,8 +10,8 @@ namespace application::utility
 ExternalBookGetter::ExternalBookGetter(const QString& filePath)
 {
     core::MetadataExtractor metadataExtractor;
-    auto success = metadataExtractor.setup(filePath);
-    if(!success)
+    m_isValid = metadataExtractor.setup(filePath);
+    if(!m_isValid)
     {
         qWarning() << QString("Failed setting up external book with path: %1 ")
                           .arg(filePath);
@@ -36,6 +36,11 @@ void ExternalBookGetter::updateBook(Book* book)
 {
     // This is an external book, we can't update it.
     Q_UNUSED(book);
+}
+
+bool ExternalBookGetter::bookIsValid()
+{
+    return m_isValid;
 }
 
 

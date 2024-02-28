@@ -17,6 +17,7 @@ public:
     domain::entities::Book* getBook() override;
     void setUuid(const QUuid& uuid) override;
     void updateBook(domain::entities::Book* book) override;
+    bool bookIsValid() override;
 
 private:
     ILibraryService* m_libraryService;

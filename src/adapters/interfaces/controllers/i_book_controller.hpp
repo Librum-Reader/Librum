@@ -40,7 +40,7 @@ class ADAPTERS_EXPORT IBookController : public QObject
 public:
     virtual ~IBookController() noexcept = default;
 
-    Q_INVOKABLE virtual void setUp(QString filePath) = 0;
+    Q_INVOKABLE virtual bool setUp(QString filePath) = 0;
     virtual mupdf::FzDocument* getFzDocument() = 0;
 
     Q_INVOKABLE virtual void search(const QString& text) = 0;

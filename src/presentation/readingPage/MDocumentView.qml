@@ -16,6 +16,7 @@ Pane {
     property var lastSelectedPage
     signal clicked
     signal zoomFactorChanged(real factor)
+    property var bookController
 
     padding: 0
     background: Rectangle {
@@ -26,16 +27,12 @@ Pane {
                            event.accepted = true
                        }
 
-    Component.onCompleted: {
-        BookController.zoom = SettingsController.appearanceSettings.DefaultZoom / 100
-    }
-
-    Component.onDestruction: {
-        BookController.zoom = 1
-    }
+    Component.onCompleted: root.bookController.zoom
+                           = SettingsController.appearanceSettings.DefaultZoom / 100
+    Component.onDestruction: root.bookController.zoom = 1
 
     Connections {
-        target: BookController
+        target: root.bookController
 
         function onGoToPosition(pageNumber, y) {
             root.setPage(pageNumber, y - pageView.currentItem.yOffset)
@@ -57,9 +54,9 @@ Pane {
 
         function onZoomChanged(newZoom) {
             let normMaxWidth = pageView.widestItem / pageView.prevZoom
-            pageView.widestItem = normMaxWidth * BookController.zoom
+            pageView.widestItem = normMaxWidth * root.bookController.zoom
 
-            pageView.prevZoom = BookController.zoom
+            pageView.prevZoom = root.bookController.zoom
         }
     }
 
@@ -117,7 +114,7 @@ Pane {
             id: pageView
             readonly property int scrollSpeed: 5500
             property int pageSpacing: pageView.getPageSpacing(
-                                          BookController.zoom)
+                                          root.bookController.zoom)
             property int widestItem: 0
             property real prevZoom: 1
 
@@ -133,15 +130,15 @@ Pane {
             maximumFlickVelocity: scrollSpeed
             boundsMovement: Flickable.StopAtBounds
             boundsBehavior: Flickable.StopAtBounds
-            model: BookController.pageCount
+            model: root.bookController.pageCount
             spacing: pageSpacing
             delegate: PageView {
                 id: page
                 pageNumber: modelData
-                bookController: BookController
+                bookController: root.bookController
                 height: implicitHeight
                 width: implicitWidth
-                colorInverted: BookController.colorTheme === "Inverted"
+                colorInverted: root.bookController.colorTheme === "Inverted"
                 includeNewLinesInCopiedText: SettingsController.behaviorSettings.IncludeNewLinesInCopiedText === "ON"
                 anchors.horizontalCenter: if (parent != null)
                                               parent.horizontalCenter
@@ -166,8 +163,7 @@ Pane {
                 colorSelectionPopup.close()
             }
 
-            Component.onCompleted: root.setPage(
-                                       Globals.selectedBook.currentPage)
+            Component.onCompleted: root.setPage(root.bookController.currentPage)
 
             function getPageSpacing(zoom) {
                 return Math.round(
@@ -284,7 +280,7 @@ Pane {
     }
 
     function changeZoomBy(factor) {
-        let newZoomFactor = BookController.zoom * factor
+        let newZoomFactor = root.bookController.zoom * factor
         NavigationLogic.zoom(newZoomFactor)
     }
 
@@ -295,28 +291,28 @@ Pane {
 
     function nextPage() {
         // Prevent trying to go over the end
-        let newPage = BookController.currentPage + 1
-        if (newPage > BookController.pageCount - 1)
+        let newPage = root.bookController.currentPage + 1
+        if (newPage > root.bookController.pageCount - 1)
             return
 
-        NavigationLogic.setPage(BookController.currentPage + 1)
+        NavigationLogic.setPage(root.bookController.currentPage + 1)
     }
 
     function previousPage() {
-        NavigationLogic.setPage(BookController.currentPage - 1)
+        NavigationLogic.setPage(root.bookController.currentPage - 1)
     }
 
     function setPage(pageNumber, yOffset = 0) {
         NavigationLogic.setPage(pageNumber)
 
-        pageView.contentY += yOffset * root.BookController.zoom
+        pageView.contentY += yOffset * root.bookController.zoom
     }
 
     function getYOffset() {
         let currentPageHeight = pageView.currentItem.height + pageView.getPageSpacing(
-                BookController.zoom)
+                root.bookController.zoom)
         let currentPos = pageView.contentY - pageView.originY
-        return currentPos - (currentPageHeight * BookController.currentPage)
+        return currentPos - (currentPageHeight * root.bookController.currentPage)
     }
 
     QtObject {

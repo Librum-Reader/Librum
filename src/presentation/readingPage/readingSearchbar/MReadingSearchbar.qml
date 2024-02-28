@@ -9,6 +9,7 @@ import Librum.fonts
 
 Item {
     id: root
+    property var bookController
     signal searchQueried(string query)
     signal clearQuery
     signal nextButtonClicked
@@ -39,7 +40,7 @@ Item {
                     }
 
     Connections {
-        target: BookController
+        target: root.bookController
         function onNoSearchHitsFound() {
             internal.setSearchError()
         }

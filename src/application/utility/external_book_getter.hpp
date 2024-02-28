@@ -18,9 +18,11 @@ public:
     domain::entities::Book* getBook() override;
     void setUuid(const QUuid& uuid) override;
     void updateBook(domain::entities::Book* book) override;
+    bool bookIsValid() override;
 
 private:
     std::unique_ptr<domain::entities::Book> m_externalBook;
+    bool m_isValid;
 };
 
 }  // namespace application::utility

@@ -39,10 +39,14 @@ ExternalBookController::ExternalBookController(
             &IBookController::noSearchHitsFound);
 }
 
-void ExternalBookController::setUp(QString filePath)
+bool ExternalBookController::setUp(QString filePath)
 {
-    m_externalBookService->setUp(
-        std::make_unique<ExternalBookGetter>(filePath));
+    auto bookGetter = std::make_unique<ExternalBookGetter>(filePath);
+    if(!bookGetter->bookIsValid())
+        return false;
+
+    m_externalBookService->setUp(std::move(bookGetter));
+    return true;
 }
 
 mupdf::FzDocument* ExternalBookController::getFzDocument()
@@ -72,6 +76,7 @@ void ExternalBookController::goToPreviousSearchHit()
 
 const QList<Highlight>& ExternalBookController::getHighlights() const
 {
+    return m_emptyHighlights;
 }
 
 void ExternalBookController::addHighlight(const Highlight& highlight)
@@ -102,6 +107,7 @@ const Highlight* ExternalBookController::getHighlightAtPoint(
 
 const QList<Bookmark>& ExternalBookController::getBookmark() const
 {
+    return m_emptyBookmarks;
 }
 
 QString ExternalBookController::addBookmark(const QString& name, int pageNumber,

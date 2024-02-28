@@ -15,12 +15,14 @@
 #include <QString>
 #include <QTextStream>
 #include <QTranslator>
+#include <iostream>
 #include <memory>
 #include "app_info_controller.hpp"
 #include "book_dto.hpp"
 #include "book_operation_status.hpp"
 #include "book_service.hpp"
 #include "dependency_injection.hpp"
+#include "external_book_controller.hpp"
 #include "folder_dto.hpp"
 #include "free_books_model.hpp"
 #include "i_free_books_service.hpp"
@@ -137,6 +139,12 @@ int main(int argc, char* argv[])
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "BookController",
                                  bookController.get());
 
+    // External Book Stack
+    auto externalBookService = std::make_unique<application::services::BookService>();
+    auto externalBookController = std::make_unique<ExternalBookController>(externalBookService.get());
+    qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "ExternalBookController",
+                                 externalBookController.get());
+
     // Free books stack
     auto* freeBooksService = config::diConfig().create<application::IFreeBooksService*>();
     auto freeBooksController = std::make_unique<FreeBooksController>(freeBooksService);
@@ -242,8 +250,26 @@ int main(int argc, char* argv[])
         appInfoController->switchToLanguage(storedLanguage);
     }
 
-    if(!app.arguments().empty()) {
-        qDebug() << "Arguments: " << app.arguments();
+    if(app.arguments().size() == 2)
+    {
+        QString filePath = app.arguments().at(1);
+        QFileInfo fileInfo(filePath);
+        if(!fileInfo.isFile())
+        {
+            std::cerr << "Book at: " << filePath.toStdString() << " does not exist.\n";
+            return -1;
+        }
+
+        auto setupSuccess = externalBookController->setUp(filePath);
+        if(!setupSuccess)
+        {
+            std::cerr << "The file type of: " << filePath.toStdString() << " is not supported.\n";
+            return -1;
+        }
+        engine.rootContext()->setContextProperty("externalBook", true);
+    }
+    else {
+        engine.rootContext()->setContextProperty("externalBook", false);
     }
 
     const QUrl url("qrc:/main.qml");

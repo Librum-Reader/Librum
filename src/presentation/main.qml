@@ -24,6 +24,10 @@ ApplicationWindow {
     property int readingPageMinWidth: 550
     property bool notifyAboutUpdates: true
     property bool rightAlign: AppInfoController.language === "العربية"
+    property bool externalBookMode: false
+
+    // Only initalize once at the start
+    Component.onCompleted: externalBookMode = externalBook
 
     minimumHeight: 400
     minimumWidth: 650
@@ -106,6 +110,10 @@ ApplicationWindow {
     Component {
         id: readingPage
         MReadingPage {}
+    }
+    Component {
+        id: externalReadingPage
+        MExternalReadingPage {}
     }
 
 

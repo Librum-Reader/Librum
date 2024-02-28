@@ -45,7 +45,10 @@ void AuthenticationService::tryAutomaticLogin()
 {
     auto result = utility::AutomaticLoginHelper::tryAutomaticAuthentication();
     if(!result.has_value())
+    {
+        emit loginFinished(ErrorCode::AutomaticLoginFailed);
         return;
+    }
 
     utility::AuthenticationData authData = result.value();
     m_tempEmail = authData.email;

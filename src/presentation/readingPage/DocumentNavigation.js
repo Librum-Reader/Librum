@@ -7,7 +7,7 @@ function handleWheel(wheel) {
     let factorY = wheel.angleDelta.y > 0 ? 1.13 : 0.88
 
     if (wheel.modifiers & Qt.ControlModifier) {
-        zoom(BookController.zoom * factorY)
+        zoom(root.bookController.zoom * factorY)
     } // angleDelta.x is the "horizontal scroll" mode some mouses support by
     // e.g. pushing the scroll button to the left/right.
     else if (wheel.angleDelta.x !== 0) {
@@ -30,8 +30,8 @@ function updateCurrentPageCounter() {
     let currentPos = pageView.contentY - pageView.originY + pageView.height / 2
     let pageNumber = Math.floor(currentPos / pageHeight)
 
-    if (pageNumber !== BookController.currentPage)
-        BookController.currentPage = pageNumber
+    if (pageNumber !== root.bookController.currentPage)
+        root.bookController.currentPage = pageNumber
 }
 
 
@@ -57,20 +57,21 @@ function setMoveDirection(direction) {
 function zoom(newZoomFactor) {
     // Clamp to max / min zoom factors
     newZoomFactor = Math.max(0.15, Math.min(newZoomFactor, 10))
-    if (newZoomFactor === BookController.zoom)
+    if (newZoomFactor === root.bookController.zoom)
         return
 
     let defaultPageHeight = Math.round(
-            pageView.currentItem.height / BookController.zoom)
+            pageView.currentItem.height / root.bookController.zoom)
     let newPageHeight = Math.round(
             defaultPageHeight * newZoomFactor) + pageView.getPageSpacing(
             newZoomFactor)
 
     let pageOffset = getYOffset()
 
-    BookController.zoom = newZoomFactor
+    root.bookController.zoom = newZoomFactor
     pageView.forceLayout()
-    pageView.contentY = newPageHeight * BookController.currentPage + pageOffset + pageView.originY
+    pageView.contentY = newPageHeight * root.bookController.currentPage
+            + pageOffset + pageView.originY
 }
 
 function flick(x, y) {
@@ -78,15 +79,15 @@ function flick(x, y) {
 }
 
 function setPage(newPageNumber) {
-    if (newPageNumber < 0 || newPageNumber > BookController.pageCount)
+    if (newPageNumber < 0 || newPageNumber > root.bookController.pageCount)
         return
 
     pageView.currentIndex = newPageNumber
     pageView.positionViewAtIndex(newPageNumber, ListView.Beginning)
-    BookController.currentPage = newPageNumber
+    root.bookController.currentPage = newPageNumber
 
-    if (newPageNumber > BookController.currentPage)
+    if (newPageNumber > root.bookController.currentPage)
         setMoveDirection("up")
-    else if (newPageNumber < BookController.currentPage)
+    else if (newPageNumber < root.bookController.currentPage)
         setMoveDirection("down")
 }

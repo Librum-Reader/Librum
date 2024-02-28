@@ -21,7 +21,7 @@ public:
     BookController(application::IBookService* bookService,
                    application::ILibraryService* libraryService);
 
-    void setUp(QString uuid) override;
+    bool setUp(QString uuid) override;
     mupdf::FzDocument* getFzDocument() override;
 
     void search(const QString& text) override;

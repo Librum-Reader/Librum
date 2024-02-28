@@ -7,7 +7,7 @@ import Librum.style
 import Librum.elements
 import Librum.controllers
 import Librum.globals
-import "readingToolbar"
+import "externalReadingToolbar"
 import "readingSearchbar"
 
 Page {
@@ -21,22 +21,9 @@ Page {
     LayoutMirroring.enabled: false
     LayoutMirroring.childrenInherit: true
 
-    Component.onCompleted: root.forceActiveFocus()
-    Component.onDestruction: internal.saveCurrentPage()
-
-    // Save the current page every 5s automatically
-    Timer {
-        id: currentPageSaver
-        interval: 5000
-        repeat: true
-        running: true
-
-        onTriggered: internal.saveCurrentPage()
-    }
-
     Shortcut {
         id: zoomIn
-        sequences: [SettingsController.shortcuts.ZoomIn]
+        // sequences: root.loggedIn ? [SettingsController.shortcuts.ZoomIn] :
         onActivated: documentView.changeZoomBy(1.13)
     }
 
@@ -89,20 +76,6 @@ Page {
         onActivated: internal.goToEnd()
     }
 
-    Shortcut {
-        id: createBookmark
-        sequences: [SettingsController.shortcuts.CreateBookmarkHere]
-        onActivated: {
-            if (chapterSidebar.active)
-                chapterSidebar.close()
-
-            if (!bookmarksSidebar.active)
-                bookmarksSidebar.open()
-
-            bookmarksSidebar.createNewBookmark()
-        }
-    }
-
 
     /*
       An invisible component at the top of the screen, when hovering over it
@@ -121,21 +94,22 @@ Page {
                                   internal.stopFullScreenMode()
         }
     }
-
     ColumnLayout {
         id: layout
         anchors.fill: parent
         spacing: 0
 
-        MReadingToolBar {
+        MExternalReadingToolBar {
             id: toolbar
             Layout.fillWidth: true
-            currentPage: BookController.currentPage
-            pageCount: BookController.pageCount
-            bookTitle: Globals.selectedBook.title
+            currentPage: ExternalBookController.currentPage
+            pageCount: ExternalBookController.pageCount
+            bookTitle: "Some"
 
             onBackButtonClicked: {
                 loadPage(homePage, sidebar.homeItem, false)
+
+                baseRoot.externalBookMode = false
             }
 
             onChapterButtonClicked: {
@@ -144,22 +118,7 @@ Page {
                     return
                 }
 
-                if (bookmarksSidebar.active)
-                    bookmarksSidebar.close()
-
                 chapterSidebar.open()
-            }
-
-            onBookMarkButtonClicked: {
-                if (bookmarksSidebar.active) {
-                    bookmarksSidebar.close()
-                    return
-                }
-
-                if (chapterSidebar.active)
-                    chapterSidebar.close()
-
-                bookmarksSidebar.open()
             }
 
             onFullScreenButtonClicked: {
@@ -222,11 +181,10 @@ Page {
               */
             Item {
                 id: sidebarItem
-                visible: chapterSidebar.active || bookmarksSidebar.active
+                visible: chapterSidebar.active
                 // Load in the last width of the correct sidebar
-                SplitView.preferredWidth: chapterSidebar.visible ? chapterSidebar.lastWidth : bookmarksSidebar.visible ? bookmarksSidebar.lastWidth : 0
-                SplitView.minimumWidth: chapterSidebar.visible
-                                        || bookmarksSidebar.visible ? 140 : 0
+                SplitView.preferredWidth: chapterSidebar.visible ? chapterSidebar.lastWidth : 0
+                SplitView.minimumWidth: chapterSidebar.visible ? 140 : 0
                 SplitView.maximumWidth: 480
 
                 MChapterSidebar {
@@ -235,7 +193,7 @@ Page {
                     property bool active: false
                     anchors.fill: parent
                     visible: false
-                    model: BookController.tableOfContents
+                    model: ExternalBookController.tableOfContents
 
                     // Save the last width to restore it if re-enabled
                     onVisibleChanged: if (!visible)
@@ -264,41 +222,7 @@ Page {
                         documentView.forceActiveFocus()
                     }
                 }
-
-                MBookmarksSidebar {
-                    id: bookmarksSidebar
-                    property int lastWidth: 370
-                    property bool active: false
-
-                    anchors.fill: parent
-                    visible: false
-
-                    // Save the last width to restore it if re-enabled
-                    onVisibleChanged: if (!visible)
-                                          lastWidth = width
-
-                    Rectangle {
-                        id: rightBookmarksBorder
-                        width: 1
-                        height: parent.height
-                        color: Style.colorDarkSeparator
-                        anchors.right: parent.right
-                    }
-
-                    function open() {
-                        bookmarksSidebar.active = true
-                        bookmarksSidebar.visible = true
-                        toolbar.bookmarksButton.active = true
-                    }
-
-                    function close() {
-                        bookmarksSidebar.active = false
-                        bookmarksSidebar.visible = false
-                        toolbar.bookmarksButton.active = false
-                    }
-                }
             }
-
             RowLayout {
                 id: documentLayout
                 SplitView.fillWidth: true
@@ -310,7 +234,7 @@ Page {
                     id: documentView
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    bookController: BookController
+                    bookController: ExternalBookController
                 }
             }
         }
@@ -318,21 +242,21 @@ Page {
         MReadingSearchbar {
             id: searchbar
             visible: false
-            bookController: BookController
             Layout.fillWidth: true
+            bookController: ExternalBookController
 
-            onVisibleChanged: toolbar.searchButton.active = visible
+            // onVisibleChanged: toolbar.searchButton.active = visible
             onSearchQueried: if (query.length)
-                                 BookController.search(query)
-            onClearQuery: BookController.clearSearch()
-            onNextButtonClicked: BookController.goToNextSearchHit()
-            onPreviousButtonClicked: BookController.goToPreviousSearchHit()
+                                 ExternalBookController.search(query)
+            onClearQuery: ExternalBookController.clearSearch()
+            onNextButtonClicked: ExternalBookController.goToNextSearchHit()
+            onPreviousButtonClicked: ExternalBookController.goToPreviousSearchHit()
         }
     }
 
     function getYOffset() {
         let yOffset = documentView.getYOffset()
-        let restoredYOffset = yOffset / BookController.zoom
+        let restoredYOffset = yOffset / ExternalBookController.zoom
 
         return restoredYOffset
     }
@@ -340,10 +264,6 @@ Page {
     QtObject {
         id: internal
         property bool fullScreen: false
-        property int prevCurrentPage: -1
-
-        // Just assign it once (no binding)
-        Component.onCompleted: prevCurrentPage = BookController.currentPage
 
         function startFullScreenMode() {
             if (internal.fullScreen)
@@ -366,19 +286,7 @@ Page {
         }
 
         function goToEnd() {
-            documentView.setPage(BookController.pageCount - 1)
-        }
-
-        function saveCurrentPage() {
-            let currentPage = BookController.currentPage
-            if (currentPage === internal.prevCurrentPage)
-                return
-
-            var operationsMap = {}
-            operationsMap[LibraryController.MetaProperty.CurrentPage] = currentPage
-            LibraryController.updateBook(Globals.selectedBook.uuid,
-                                         operationsMap)
-            internal.prevCurrentPage = currentPage
+            documentView.setPage(ExternalBookController.pageCount - 1)
         }
     }
 }

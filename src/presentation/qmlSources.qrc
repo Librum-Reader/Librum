@@ -111,5 +111,8 @@
         <file>homePage/folderSidebar/MSelectColorPopup.qml</file>
         <file>homePage/folderSidebar/MDescriptionPopup.qml</file>
         <file>homePage/folderSidebar/MSelectIconPopup.qml</file>
+        <file>readingPage/MExternalReadingPage.qml</file>
+        <file>readingPage/externalReadingToolbar/MExternalReadingOptionsPopup.qml</file>
+        <file>readingPage/externalReadingToolbar/MExternalReadingToolBar.qml</file>
     </qresource>
 </RCC>

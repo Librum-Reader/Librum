@@ -3,7 +3,7 @@
 #include <QRectF>
 #include <QString>
 #include "adapters_export.hpp"
-#include "bookmarks_model.hpp"
+#include "highlight.hpp"
 #include "i_book_controller.hpp"
 #include "i_book_service.hpp"
 #include "search_options.hpp"
@@ -25,7 +25,7 @@ class ADAPTERS_EXPORT ExternalBookController : public IBookController
 public:
     ExternalBookController(application::IBookService* externalBookService);
 
-    void setUp(QString filePath) override;
+    bool setUp(QString filePath) override;
     mupdf::FzDocument* getFzDocument() override;
 
     void search(const QString& text) override;
@@ -76,6 +76,9 @@ public:
 private:
     application::IBookService* m_externalBookService;
     application::core::utils::SearchOptions m_searchOptions;
+
+    const QList<domain::entities::Highlight> m_emptyHighlights;
+    const QList<domain::entities::Bookmark> m_emptyBookmarks;
 };
 
 }  // namespace adapters::controllers

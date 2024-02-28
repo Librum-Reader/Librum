@@ -38,7 +38,7 @@ BookController::BookController(application::IBookService* bookService,
             &IBookController::noSearchHitsFound);
 }
 
-void BookController::setUp(QString uuid)
+bool BookController::setUp(QString uuid)
 {
     m_bookService->setUp(
         std::make_unique<LibraryBookGetter>(m_libraryService, QUuid(uuid)));
@@ -68,6 +68,8 @@ void BookController::setUp(QString uuid)
     connect(m_bookService, &application::IBookService::bookmarkNameChanged,
             m_bookmarksModel.get(),
             &data_models::BookmarksModel::bookmarkNameChanged);
+
+    return true;
 }
 
 mupdf::FzDocument* BookController::getFzDocument()

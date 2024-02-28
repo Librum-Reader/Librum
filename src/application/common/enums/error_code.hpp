@@ -41,6 +41,7 @@ enum class APPLICATION_EXPORT ErrorCode
     UserHasNoRootFolder,  // 22
     NameTooShort,  // 23
     NameTooLong,  // 24
+    AutomaticLoginFailed,  // 25
 };
 
 Q_ENUM_NS(ErrorCode)
