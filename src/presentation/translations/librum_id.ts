@@ -130,7 +130,7 @@ Kami berharap kamu menikmatinya! Silakan beri kami penilaian dan beberapa masuka
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="138"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="153"/>
@@ -140,7 +140,7 @@ Kami berharap kamu menikmatinya! Silakan beri kami penilaian dan beberapa masuka
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="169"/>
         <source>Tier</source>
-        <translation type="unfinished"></translation>
+        <translation>Tingkat</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="232"/>
@@ -222,42 +222,42 @@ Kami berharap kamu menikmatinya! Silakan beri kami penilaian dan beberapa masuka
 <context>
     <name>MAddFolderPopup</name>
     <message>
-        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="73"/>
+        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="76"/>
         <source>Edit Folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="73"/>
+        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="76"/>
         <source>Create Folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="100"/>
+        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="103"/>
         <source>Folder Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="195"/>
+        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="198"/>
         <source>Icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="236"/>
+        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="239"/>
         <source>Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="275"/>
+        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="278"/>
         <source>Description</source>
         <translation type="unfinished">Deskripsi</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="321"/>
+        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="324"/>
         <source>Update</source>
         <translation type="unfinished">Perbarui</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="321"/>
+        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="324"/>
         <source>Create</source>
         <translation type="unfinished"></translation>
     </message>
@@ -815,22 +815,22 @@ Mungkin karena kamu offline, atau penyimpananmu penuh.</translation>
 <context>
     <name>MDeleteFolderPopup</name>
     <message>
-        <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="47"/>
+        <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="50"/>
         <source>Delete %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="77"/>
+        <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="80"/>
         <source>Books inside the folder will not be deleted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="96"/>
+        <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="99"/>
         <source>Cancel</source>
         <translation type="unfinished">Batal</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="111"/>
+        <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="114"/>
         <source>Delete</source>
         <translation type="unfinished">Hapus</translation>
     </message>
@@ -838,17 +838,17 @@ Mungkin karena kamu offline, atau penyimpananmu penuh.</translation>
 <context>
     <name>MDescriptionPopup</name>
     <message>
-        <location filename="../homePage/folderSidebar/MDescriptionPopup.qml" line="45"/>
+        <location filename="../homePage/folderSidebar/MDescriptionPopup.qml" line="48"/>
         <source>Describe this folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MDescriptionPopup.qml" line="99"/>
+        <location filename="../homePage/folderSidebar/MDescriptionPopup.qml" line="102"/>
         <source>This folder is about...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MDescriptionPopup.qml" line="135"/>
+        <location filename="../homePage/folderSidebar/MDescriptionPopup.qml" line="138"/>
         <source>Done</source>
         <translation type="unfinished">Selesai</translation>
     </message>
@@ -1025,6 +1025,43 @@ Mungkin karena kamu offline, atau penyimpananmu penuh.</translation>
     </message>
 </context>
 <context>
+    <name>MExternalReadingOptionsPopup</name>
+    <message>
+        <location filename="../readingPage/externalReadingToolbar/MExternalReadingOptionsPopup.qml" line="118"/>
+        <source>Invert colors</source>
+        <translation type="unfinished">Balik warna</translation>
+    </message>
+    <message>
+        <location filename="../readingPage/externalReadingToolbar/MExternalReadingOptionsPopup.qml" line="147"/>
+        <source>Sync book</source>
+        <translation type="unfinished">Sinkronisasi buku</translation>
+    </message>
+    <message>
+        <location filename="../readingPage/externalReadingToolbar/MExternalReadingOptionsPopup.qml" line="165"/>
+        <source>More options</source>
+        <translation type="unfinished">Opsi lainnya</translation>
+    </message>
+    <message>
+        <location filename="../readingPage/externalReadingToolbar/MExternalReadingOptionsPopup.qml" line="186"/>
+        <source>Save</source>
+        <translation type="unfinished">Simpan</translation>
+    </message>
+</context>
+<context>
+    <name>MExternalReadingToolBar</name>
+    <message>
+        <location filename="../readingPage/externalReadingToolbar/MExternalReadingToolBar.qml" line="14"/>
+        <source>Unknown name</source>
+        <translation type="unfinished">Nama tidak diketahui</translation>
+    </message>
+    <message>
+        <location filename="../readingPage/externalReadingToolbar/MExternalReadingToolBar.qml" line="168"/>
+        <source>of</source>
+        <extracomment>As in 21 &quot;of&quot; 400</extracomment>
+        <translation type="unfinished">dari</translation>
+    </message>
+</context>
+<context>
     <name>MFilterByButton</name>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByButton.qml" line="46"/>
@@ -1117,22 +1154,22 @@ Mungkin karena kamu offline, atau penyimpananmu penuh.</translation>
 <context>
     <name>MFolderSidebar</name>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="83"/>
+        <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="86"/>
         <source>Organize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="103"/>
+        <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="106"/>
         <source>All Books</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="114"/>
+        <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="117"/>
         <source>Unsorted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="140"/>
+        <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="143"/>
         <source>Folders</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1140,22 +1177,22 @@ Mungkin karena kamu offline, atau penyimpananmu penuh.</translation>
 <context>
     <name>MFolderSidebarItemRigthclickPopup</name>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="73"/>
+        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="76"/>
         <source>Create subfolder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="85"/>
+        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="88"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="98"/>
+        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="101"/>
         <source>Move to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="120"/>
+        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="123"/>
         <source>Delete</source>
         <translation type="unfinished">Hapus</translation>
     </message>
@@ -1222,173 +1259,173 @@ Mungkin karena kamu offline, atau penyimpananmu penuh.</translation>
 <context>
     <name>MHomePage</name>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="122"/>
+        <location filename="../homePage/MHomePage.qml" line="120"/>
         <source>A new version is available!</source>
         <translation>Versi terbaru telah tersedia!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="124"/>
+        <location filename="../homePage/MHomePage.qml" line="122"/>
         <source>Update Now</source>
         <translation>Perbarui Sekarang</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="172"/>
+        <location filename="../homePage/MHomePage.qml" line="170"/>
         <source>Home</source>
         <extracomment>As in &apos;Home Page&apos;, might be closer to &apos;Start&apos; in other languages</extracomment>
         <translation>Beranda</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="173"/>
+        <location filename="../homePage/MHomePage.qml" line="171"/>
         <source>You have %1 books</source>
         <translation>Kamu punya %1 buku</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="189"/>
+        <location filename="../homePage/MHomePage.qml" line="187"/>
         <source>Add books</source>
         <translation>Tambah buku</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="469"/>
+        <location filename="../homePage/MHomePage.qml" line="467"/>
         <source>Remove Book?</source>
         <translation>Hapus buku?</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="470"/>
+        <location filename="../homePage/MHomePage.qml" line="468"/>
         <source>Deleting a book is a permanent action, no one will be
  able to restore it afterwards!</source>
         <translation>Menghapus buku adalah aksi permanen, tidak ada
  yang bisa mengembalikannya setelahnya!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="471"/>
-        <location filename="../homePage/MHomePage.qml" line="502"/>
+        <location filename="../homePage/MHomePage.qml" line="469"/>
+        <location filename="../homePage/MHomePage.qml" line="500"/>
         <source>Remove from Device</source>
         <translation>Hapus dari Perangkat</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="472"/>
-        <location filename="../homePage/MHomePage.qml" line="503"/>
+        <location filename="../homePage/MHomePage.qml" line="470"/>
+        <location filename="../homePage/MHomePage.qml" line="501"/>
         <source>Delete Everywhere</source>
         <translation>Hapus Dimanapun</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="500"/>
+        <location filename="../homePage/MHomePage.qml" line="498"/>
         <source>Remove Books?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="501"/>
+        <location filename="../homePage/MHomePage.qml" line="499"/>
         <source>Deleting books is a permanent action, no one will be
  able to restore it afterwards!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="546"/>
-        <location filename="../homePage/MHomePage.qml" line="576"/>
+        <location filename="../homePage/MHomePage.qml" line="544"/>
+        <location filename="../homePage/MHomePage.qml" line="574"/>
         <source>Remove from Folder?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="547"/>
+        <location filename="../homePage/MHomePage.qml" line="545"/>
         <source>This action will not delete the original book.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="548"/>
-        <location filename="../homePage/MHomePage.qml" line="578"/>
-        <location filename="../homePage/MHomePage.qml" line="645"/>
+        <location filename="../homePage/MHomePage.qml" line="546"/>
+        <location filename="../homePage/MHomePage.qml" line="576"/>
+        <location filename="../homePage/MHomePage.qml" line="643"/>
         <source>Cancel</source>
         <translation type="unfinished">Batal</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="549"/>
-        <location filename="../homePage/MHomePage.qml" line="579"/>
+        <location filename="../homePage/MHomePage.qml" line="547"/>
+        <location filename="../homePage/MHomePage.qml" line="577"/>
         <source>Remove</source>
         <translation type="unfinished">Hapus</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="577"/>
+        <location filename="../homePage/MHomePage.qml" line="575"/>
         <source>This action will not delete the original books.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="627"/>
+        <location filename="../homePage/MHomePage.qml" line="625"/>
         <source>Save</source>
         <translation>Simpan</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="642"/>
+        <location filename="../homePage/MHomePage.qml" line="640"/>
         <source>Limit Reached</source>
         <translation>Limit Tercapai</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="643"/>
+        <location filename="../homePage/MHomePage.qml" line="641"/>
         <source>You have reached your upload limit.
 Delete unused books to free up space or upgrade.</source>
         <translation>Kamu mencapai batas unggahan.
 Hapus buku tak terpakai untuk membersihkan penyimpanan atau upgrade.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="694"/>
+        <location filename="../homePage/MHomePage.qml" line="692"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="644"/>
+        <location filename="../homePage/MHomePage.qml" line="642"/>
         <source>Upgrade</source>
         <translation>Upgrade</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="663"/>
+        <location filename="../homePage/MHomePage.qml" line="661"/>
         <source>Book already exists</source>
         <translation>Buku sudah ada</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="664"/>
+        <location filename="../homePage/MHomePage.qml" line="662"/>
         <source>It looks like this book already exists in your library:</source>
         <translation>Sepertinya bukunya sudah ada di perpustakaanmu:</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="667"/>
+        <location filename="../homePage/MHomePage.qml" line="665"/>
         <source>Are you sure you that want to add it again?
 </source>
         <translation>Apakah kamu yakin ingin menambahkannya lagi?
 </translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="670"/>
+        <location filename="../homePage/MHomePage.qml" line="668"/>
         <source>Add</source>
         <translation>Tambah</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="671"/>
+        <location filename="../homePage/MHomePage.qml" line="669"/>
         <source>Don&apos;t add</source>
         <translation>Jangan tambah</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="692"/>
+        <location filename="../homePage/MHomePage.qml" line="690"/>
         <source>Unsupported File</source>
         <translation>Berkas tidak didukung</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="693"/>
+        <location filename="../homePage/MHomePage.qml" line="691"/>
         <source>Oops! This file is not supported by Librum.</source>
         <translation>Upss! Berkas tidak didukung oleh Librum.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="709"/>
+        <location filename="../homePage/MHomePage.qml" line="707"/>
         <source>Import</source>
         <translation>Impor</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="712"/>
+        <location filename="../homePage/MHomePage.qml" line="710"/>
         <source>All files</source>
         <translation>Semua berkas</translation>
     </message>
     <message>
+        <location filename="../homePage/MHomePage.qml" line="711"/>
+        <location filename="../homePage/MHomePage.qml" line="712"/>
         <location filename="../homePage/MHomePage.qml" line="713"/>
-        <location filename="../homePage/MHomePage.qml" line="714"/>
-        <location filename="../homePage/MHomePage.qml" line="715"/>
         <source>files</source>
         <translation>berkas-berkas</translation>
     </message>
@@ -1396,62 +1433,62 @@ Hapus buku tak terpakai untuk membersihkan penyimpanan atau upgrade.</translatio
 <context>
     <name>MLoginPage</name>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="138"/>
+        <location filename="../loginPage/MLoginPage.qml" line="141"/>
         <source>Welcome back!</source>
         <translation>Selamat datang kembali!</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="148"/>
+        <location filename="../loginPage/MLoginPage.qml" line="151"/>
         <source>Log into your account</source>
         <translation>Masuk ke akunmu</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="159"/>
+        <location filename="../loginPage/MLoginPage.qml" line="162"/>
         <source>Email</source>
         <translation>Email</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="174"/>
+        <location filename="../loginPage/MLoginPage.qml" line="177"/>
         <source>Password</source>
         <translation>Kata sandi</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="220"/>
+        <location filename="../loginPage/MLoginPage.qml" line="223"/>
         <source>Remember me</source>
         <translation>Ingat aku</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="241"/>
+        <location filename="../loginPage/MLoginPage.qml" line="244"/>
         <source>Forgot password?</source>
         <translation>Lupa kata sandi?</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="269"/>
+        <location filename="../loginPage/MLoginPage.qml" line="272"/>
         <source>Login</source>
         <translation>Masuk</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="294"/>
+        <location filename="../loginPage/MLoginPage.qml" line="297"/>
         <source>Don&apos;t have an account? Register</source>
         <translation>Tidak mempunyai akun? Daftar</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="315"/>
+        <location filename="../loginPage/MLoginPage.qml" line="318"/>
         <source>We&apos;re Sorry</source>
         <translation>Mohon Maaf</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="316"/>
+        <location filename="../loginPage/MLoginPage.qml" line="319"/>
         <source>Logging you in failed, please try again later.</source>
         <translation>Proses masuk gagal, coba lagi nanti.</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="317"/>
+        <location filename="../loginPage/MLoginPage.qml" line="320"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="318"/>
+        <location filename="../loginPage/MLoginPage.qml" line="321"/>
         <source>Report</source>
         <translation>Laporkan</translation>
     </message>
@@ -1477,17 +1514,17 @@ Hapus buku tak terpakai untuk membersihkan penyimpanan atau upgrade.</translatio
 <context>
     <name>MMoveToFolderPopup</name>
     <message>
-        <location filename="../homePage/folderSidebar/MMoveToFolderPopup.qml" line="60"/>
+        <location filename="../homePage/folderSidebar/MMoveToFolderPopup.qml" line="63"/>
         <source>Move to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MMoveToFolderPopup.qml" line="325"/>
+        <location filename="../homePage/folderSidebar/MMoveToFolderPopup.qml" line="328"/>
         <source>Cancel</source>
         <translation type="unfinished">Batal</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MMoveToFolderPopup.qml" line="344"/>
+        <location filename="../homePage/folderSidebar/MMoveToFolderPopup.qml" line="347"/>
         <source>Select</source>
         <translation type="unfinished">Pilih</translation>
     </message>
@@ -1521,17 +1558,17 @@ Hapus buku tak terpakai untuk membersihkan penyimpanan atau upgrade.</translatio
 <context>
     <name>MProfilePopup</name>
     <message>
-        <location filename="../sidebar/MProfilePopup.qml" line="48"/>
+        <location filename="../sidebar/MProfilePopup.qml" line="44"/>
         <source>Sync</source>
         <translation>Sinkronisasi</translation>
     </message>
     <message>
-        <location filename="../sidebar/MProfilePopup.qml" line="68"/>
+        <location filename="../sidebar/MProfilePopup.qml" line="61"/>
         <source>Manage Profile</source>
         <translation>Atur Profil</translation>
     </message>
     <message>
-        <location filename="../sidebar/MProfilePopup.qml" line="87"/>
+        <location filename="../sidebar/MProfilePopup.qml" line="77"/>
         <source>Logout</source>
         <translation>Keluar</translation>
     </message>
@@ -1562,22 +1599,22 @@ Hapus buku tak terpakai untuk membersihkan penyimpanan atau upgrade.</translatio
 <context>
     <name>MReadingSearchbar</name>
     <message>
-        <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="92"/>
+        <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="93"/>
         <source>Options</source>
         <translation>Opsi</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="141"/>
+        <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="142"/>
         <source>Find</source>
         <translation>Temukan</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="168"/>
+        <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="169"/>
         <source>Next</source>
         <translation>Berikutnya</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="187"/>
+        <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="188"/>
         <source>Previous</source>
         <translation>Sebelumnya</translation>
     </message>
@@ -1711,7 +1748,7 @@ Konfirmasi emailmu lewat link yang kami kirimkan.</translation>
 <context>
     <name>MSelectColorPopup</name>
     <message>
-        <location filename="../homePage/folderSidebar/MSelectColorPopup.qml" line="39"/>
+        <location filename="../homePage/folderSidebar/MSelectColorPopup.qml" line="42"/>
         <source>Pick a color</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1724,7 +1761,7 @@ Konfirmasi emailmu lewat link yang kami kirimkan.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MSelectIconPopup.qml" line="98"/>
+        <location filename="../homePage/folderSidebar/MSelectIconPopup.qml" line="101"/>
         <source>Search</source>
         <translation type="unfinished">Cari</translation>
     </message>
@@ -1751,27 +1788,30 @@ Konfirmasi emailmu lewat link yang kami kirimkan.</translation>
 <context>
     <name>MSelectionOptionsPopup</name>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="128"/>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="129"/>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="278"/>
         <source>Copy</source>
         <translation>Salin</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="141"/>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="142"/>
         <source>Highlight</source>
         <translation>Soroti</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="158"/>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="160"/>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="290"/>
         <source>Look Up</source>
         <translation>Cari</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="242"/>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="244"/>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="316"/>
         <source>Explain</source>
         <translation>Jelaskan</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="262"/>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="264"/>
         <source>Remove</source>
         <translation>Hapus</translation>
     </message>
@@ -2290,7 +2330,7 @@ bekerja dalam proyek menyenangkan, mendukung komunitas kami dan mencoba membuat 
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.qml" line="32"/>
+        <location filename="../main.qml" line="36"/>
         <source>Librum - Your ebook reader</source>
         <translation>Librum - Pembaca ebookmu</translation>
     </message>

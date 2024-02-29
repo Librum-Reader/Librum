@@ -130,7 +130,7 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="138"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>名字</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="153"/>
@@ -140,7 +140,7 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="169"/>
         <source>Tier</source>
-        <translation type="unfinished"></translation>
+        <translation>等级</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="232"/>
@@ -222,42 +222,42 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
 <context>
     <name>MAddFolderPopup</name>
     <message>
-        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="73"/>
+        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="76"/>
         <source>Edit Folder</source>
         <translation>编辑文件夹</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="73"/>
+        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="76"/>
         <source>Create Folder</source>
         <translation>创建文件夹</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="100"/>
+        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="103"/>
         <source>Folder Name</source>
         <translation>文件夹名</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="195"/>
+        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="198"/>
         <source>Icon</source>
         <translation>图标</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="236"/>
+        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="239"/>
         <source>Color</source>
         <translation>颜色</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="275"/>
+        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="278"/>
         <source>Description</source>
         <translation>描述</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="321"/>
+        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="324"/>
         <source>Update</source>
         <translation>更新</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="321"/>
+        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="324"/>
         <source>Create</source>
         <translation>创建</translation>
     </message>
@@ -300,7 +300,7 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
     <message>
         <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="170"/>
         <source>is already used for</source>
-        <translation>已被此动作使用：</translation>
+        <translation>已被此动作使用</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="189"/>
@@ -826,22 +826,22 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MDeleteFolderPopup</name>
     <message>
-        <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="47"/>
+        <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="50"/>
         <source>Delete %1</source>
         <translation>删除 %1</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="77"/>
+        <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="80"/>
         <source>Books inside the folder will not be deleted.</source>
         <translation>文件夹中的图书不会被删除。</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="96"/>
+        <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="99"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="111"/>
+        <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="114"/>
         <source>Delete</source>
         <translation>删除</translation>
     </message>
@@ -849,17 +849,17 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MDescriptionPopup</name>
     <message>
-        <location filename="../homePage/folderSidebar/MDescriptionPopup.qml" line="45"/>
+        <location filename="../homePage/folderSidebar/MDescriptionPopup.qml" line="48"/>
         <source>Describe this folder</source>
         <translation>描述此文件夹</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MDescriptionPopup.qml" line="99"/>
+        <location filename="../homePage/folderSidebar/MDescriptionPopup.qml" line="102"/>
         <source>This folder is about...</source>
         <translation>这个文件夹是用来...</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MDescriptionPopup.qml" line="135"/>
+        <location filename="../homePage/folderSidebar/MDescriptionPopup.qml" line="138"/>
         <source>Done</source>
         <translation>完成</translation>
     </message>
@@ -1036,6 +1036,43 @@ Either you are offline, or your storage is full.</source>
     </message>
 </context>
 <context>
+    <name>MExternalReadingOptionsPopup</name>
+    <message>
+        <location filename="../readingPage/externalReadingToolbar/MExternalReadingOptionsPopup.qml" line="118"/>
+        <source>Invert colors</source>
+        <translation>反转颜色</translation>
+    </message>
+    <message>
+        <location filename="../readingPage/externalReadingToolbar/MExternalReadingOptionsPopup.qml" line="147"/>
+        <source>Sync book</source>
+        <translation>同步图书</translation>
+    </message>
+    <message>
+        <location filename="../readingPage/externalReadingToolbar/MExternalReadingOptionsPopup.qml" line="165"/>
+        <source>More options</source>
+        <translation>更多选项</translation>
+    </message>
+    <message>
+        <location filename="../readingPage/externalReadingToolbar/MExternalReadingOptionsPopup.qml" line="186"/>
+        <source>Save</source>
+        <translation>保存</translation>
+    </message>
+</context>
+<context>
+    <name>MExternalReadingToolBar</name>
+    <message>
+        <location filename="../readingPage/externalReadingToolbar/MExternalReadingToolBar.qml" line="14"/>
+        <source>Unknown name</source>
+        <translation>未知名称</translation>
+    </message>
+    <message>
+        <location filename="../readingPage/externalReadingToolbar/MExternalReadingToolBar.qml" line="168"/>
+        <source>of</source>
+        <extracomment>As in 21 &quot;of&quot; 400</extracomment>
+        <translation>/</translation>
+    </message>
+</context>
+<context>
     <name>MFilterByButton</name>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByButton.qml" line="46"/>
@@ -1128,22 +1165,22 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MFolderSidebar</name>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="83"/>
+        <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="86"/>
         <source>Organize</source>
         <translation>组织</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="103"/>
+        <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="106"/>
         <source>All Books</source>
         <translation>全部图书</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="114"/>
+        <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="117"/>
         <source>Unsorted</source>
         <translation>未排序</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="140"/>
+        <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="143"/>
         <source>Folders</source>
         <translation>文件夹</translation>
     </message>
@@ -1151,22 +1188,22 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MFolderSidebarItemRigthclickPopup</name>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="73"/>
+        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="76"/>
         <source>Create subfolder</source>
         <translation>创建子文件夹</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="85"/>
+        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="88"/>
         <source>Edit</source>
         <translation>编辑</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="98"/>
+        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="101"/>
         <source>Move to</source>
         <translation>移动至</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="120"/>
+        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="123"/>
         <source>Delete</source>
         <translation>删除</translation>
     </message>
@@ -1233,170 +1270,171 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MHomePage</name>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="122"/>
+        <location filename="../homePage/MHomePage.qml" line="120"/>
         <source>A new version is available!</source>
         <translation>有新版本可用！</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="124"/>
+        <location filename="../homePage/MHomePage.qml" line="122"/>
         <source>Update Now</source>
         <translation>立即更新</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="172"/>
+        <location filename="../homePage/MHomePage.qml" line="170"/>
         <source>Home</source>
         <extracomment>As in &apos;Home Page&apos;, might be closer to &apos;Start&apos; in other languages</extracomment>
         <translation>主页</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="173"/>
+        <location filename="../homePage/MHomePage.qml" line="171"/>
         <source>You have %1 books</source>
         <translation>您有 %1 本书</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="189"/>
+        <location filename="../homePage/MHomePage.qml" line="187"/>
         <source>Add books</source>
         <translation>添加图书</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="469"/>
+        <location filename="../homePage/MHomePage.qml" line="467"/>
         <source>Remove Book?</source>
         <translation>移除此书？</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="470"/>
+        <location filename="../homePage/MHomePage.qml" line="468"/>
         <source>Deleting a book is a permanent action, no one will be
  able to restore it afterwards!</source>
         <translation>删除图书是永久性操作，删除后将无法恢复！</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="471"/>
-        <location filename="../homePage/MHomePage.qml" line="502"/>
+        <location filename="../homePage/MHomePage.qml" line="469"/>
+        <location filename="../homePage/MHomePage.qml" line="500"/>
         <source>Remove from Device</source>
         <translation>从设备上移除</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="472"/>
-        <location filename="../homePage/MHomePage.qml" line="503"/>
+        <location filename="../homePage/MHomePage.qml" line="470"/>
+        <location filename="../homePage/MHomePage.qml" line="501"/>
         <source>Delete Everywhere</source>
         <translation>从所有地方删除</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="500"/>
+        <location filename="../homePage/MHomePage.qml" line="498"/>
         <source>Remove Books?</source>
         <translation>移除这些图书？</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="501"/>
+        <location filename="../homePage/MHomePage.qml" line="499"/>
         <source>Deleting books is a permanent action, no one will be
  able to restore it afterwards!</source>
         <translation>删除图书是永久性操作，删除后将无法恢复！</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="546"/>
-        <location filename="../homePage/MHomePage.qml" line="576"/>
+        <location filename="../homePage/MHomePage.qml" line="544"/>
+        <location filename="../homePage/MHomePage.qml" line="574"/>
         <source>Remove from Folder?</source>
         <translation>从文件夹中移除？</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="547"/>
+        <location filename="../homePage/MHomePage.qml" line="545"/>
         <source>This action will not delete the original book.</source>
         <translation>这个动作不会删除原始图书。</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="548"/>
-        <location filename="../homePage/MHomePage.qml" line="578"/>
-        <location filename="../homePage/MHomePage.qml" line="645"/>
+        <location filename="../homePage/MHomePage.qml" line="546"/>
+        <location filename="../homePage/MHomePage.qml" line="576"/>
+        <location filename="../homePage/MHomePage.qml" line="643"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="549"/>
-        <location filename="../homePage/MHomePage.qml" line="579"/>
+        <location filename="../homePage/MHomePage.qml" line="547"/>
+        <location filename="../homePage/MHomePage.qml" line="577"/>
         <source>Remove</source>
         <translation>移除</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="577"/>
+        <location filename="../homePage/MHomePage.qml" line="575"/>
         <source>This action will not delete the original books.</source>
         <translation>这个动作不会删除原始图书。</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="627"/>
+        <location filename="../homePage/MHomePage.qml" line="625"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="642"/>
+        <location filename="../homePage/MHomePage.qml" line="640"/>
         <source>Limit Reached</source>
         <translation>到达限制</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="643"/>
+        <location filename="../homePage/MHomePage.qml" line="641"/>
         <source>You have reached your upload limit.
 Delete unused books to free up space or upgrade.</source>
         <translation>您已达到您的上传上限。删除未使用的图书以释放空间或更新。</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="694"/>
+        <location filename="../homePage/MHomePage.qml" line="692"/>
         <source>Ok</source>
         <translation>好</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="644"/>
+        <location filename="../homePage/MHomePage.qml" line="642"/>
         <source>Upgrade</source>
         <translation>更新</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="663"/>
+        <location filename="../homePage/MHomePage.qml" line="661"/>
         <source>Book already exists</source>
         <translation>图书已存在</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="664"/>
+        <location filename="../homePage/MHomePage.qml" line="662"/>
         <source>It looks like this book already exists in your library:</source>
         <translation>看起来这本书已经在您的书库中:</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="667"/>
+        <location filename="../homePage/MHomePage.qml" line="665"/>
         <source>Are you sure you that want to add it again?
 </source>
-        <translation>您确定想再次添加这本图书吗？</translation>
+        <translation>您确定想再次添加这本图书吗？
+</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="670"/>
+        <location filename="../homePage/MHomePage.qml" line="668"/>
         <source>Add</source>
         <translation>添加</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="671"/>
+        <location filename="../homePage/MHomePage.qml" line="669"/>
         <source>Don&apos;t add</source>
         <translation>不添加</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="692"/>
+        <location filename="../homePage/MHomePage.qml" line="690"/>
         <source>Unsupported File</source>
         <translation>不支持的文件</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="693"/>
+        <location filename="../homePage/MHomePage.qml" line="691"/>
         <source>Oops! This file is not supported by Librum.</source>
-        <translation>哎呀！Librum 不支持这个文件</translation>
+        <translation>哎呀！Librum 不支持这个文件.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="709"/>
+        <location filename="../homePage/MHomePage.qml" line="707"/>
         <source>Import</source>
         <translation>导入</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="712"/>
+        <location filename="../homePage/MHomePage.qml" line="710"/>
         <source>All files</source>
         <translation>所有文件</translation>
     </message>
     <message>
+        <location filename="../homePage/MHomePage.qml" line="711"/>
+        <location filename="../homePage/MHomePage.qml" line="712"/>
         <location filename="../homePage/MHomePage.qml" line="713"/>
-        <location filename="../homePage/MHomePage.qml" line="714"/>
-        <location filename="../homePage/MHomePage.qml" line="715"/>
         <source>files</source>
         <translation>文件</translation>
     </message>
@@ -1404,62 +1442,62 @@ Delete unused books to free up space or upgrade.</source>
 <context>
     <name>MLoginPage</name>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="138"/>
+        <location filename="../loginPage/MLoginPage.qml" line="141"/>
         <source>Welcome back!</source>
         <translation>欢迎回来！</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="148"/>
+        <location filename="../loginPage/MLoginPage.qml" line="151"/>
         <source>Log into your account</source>
         <translation>登录您的账户</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="159"/>
+        <location filename="../loginPage/MLoginPage.qml" line="162"/>
         <source>Email</source>
         <translation>电子邮箱</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="174"/>
+        <location filename="../loginPage/MLoginPage.qml" line="177"/>
         <source>Password</source>
         <translation>密码</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="220"/>
+        <location filename="../loginPage/MLoginPage.qml" line="223"/>
         <source>Remember me</source>
         <translation>记住我</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="241"/>
+        <location filename="../loginPage/MLoginPage.qml" line="244"/>
         <source>Forgot password?</source>
         <translation>忘记密码？</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="269"/>
+        <location filename="../loginPage/MLoginPage.qml" line="272"/>
         <source>Login</source>
         <translation>登录</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="294"/>
+        <location filename="../loginPage/MLoginPage.qml" line="297"/>
         <source>Don&apos;t have an account? Register</source>
         <translation>还没有账户？注册</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="315"/>
+        <location filename="../loginPage/MLoginPage.qml" line="318"/>
         <source>We&apos;re Sorry</source>
         <translation>未尝抱歉</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="316"/>
+        <location filename="../loginPage/MLoginPage.qml" line="319"/>
         <source>Logging you in failed, please try again later.</source>
         <translation>登录失败，请稍候重试。</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="317"/>
+        <location filename="../loginPage/MLoginPage.qml" line="320"/>
         <source>Ok</source>
         <translation>好</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="318"/>
+        <location filename="../loginPage/MLoginPage.qml" line="321"/>
         <source>Report</source>
         <translation>报告</translation>
     </message>
@@ -1485,17 +1523,17 @@ Delete unused books to free up space or upgrade.</source>
 <context>
     <name>MMoveToFolderPopup</name>
     <message>
-        <location filename="../homePage/folderSidebar/MMoveToFolderPopup.qml" line="60"/>
+        <location filename="../homePage/folderSidebar/MMoveToFolderPopup.qml" line="63"/>
         <source>Move to</source>
         <translation>移动至</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MMoveToFolderPopup.qml" line="325"/>
+        <location filename="../homePage/folderSidebar/MMoveToFolderPopup.qml" line="328"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MMoveToFolderPopup.qml" line="344"/>
+        <location filename="../homePage/folderSidebar/MMoveToFolderPopup.qml" line="347"/>
         <source>Select</source>
         <translation>选择</translation>
     </message>
@@ -1529,17 +1567,17 @@ Delete unused books to free up space or upgrade.</source>
 <context>
     <name>MProfilePopup</name>
     <message>
-        <location filename="../sidebar/MProfilePopup.qml" line="48"/>
+        <location filename="../sidebar/MProfilePopup.qml" line="44"/>
         <source>Sync</source>
         <translation>同步</translation>
     </message>
     <message>
-        <location filename="../sidebar/MProfilePopup.qml" line="68"/>
+        <location filename="../sidebar/MProfilePopup.qml" line="61"/>
         <source>Manage Profile</source>
         <translation>管理个人资料</translation>
     </message>
     <message>
-        <location filename="../sidebar/MProfilePopup.qml" line="87"/>
+        <location filename="../sidebar/MProfilePopup.qml" line="77"/>
         <source>Logout</source>
         <translation>登出</translation>
     </message>
@@ -1570,22 +1608,22 @@ Delete unused books to free up space or upgrade.</source>
 <context>
     <name>MReadingSearchbar</name>
     <message>
-        <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="92"/>
+        <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="93"/>
         <source>Options</source>
         <translation>选项</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="141"/>
+        <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="142"/>
         <source>Find</source>
         <translation>查找</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="168"/>
+        <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="169"/>
         <source>Next</source>
         <translation>下一个</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="187"/>
+        <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="188"/>
         <source>Previous</source>
         <translation>上一个</translation>
     </message>
@@ -1674,7 +1712,7 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="115"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>名字</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="180"/>
@@ -1718,7 +1756,7 @@ Confirm your email by clicking the link we sent you.</source>
 <context>
     <name>MSelectColorPopup</name>
     <message>
-        <location filename="../homePage/folderSidebar/MSelectColorPopup.qml" line="39"/>
+        <location filename="../homePage/folderSidebar/MSelectColorPopup.qml" line="42"/>
         <source>Pick a color</source>
         <translation>选择一个颜色</translation>
     </message>
@@ -1731,7 +1769,7 @@ Confirm your email by clicking the link we sent you.</source>
         <translation>选择一个图标</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MSelectIconPopup.qml" line="98"/>
+        <location filename="../homePage/folderSidebar/MSelectIconPopup.qml" line="101"/>
         <source>Search</source>
         <translation>搜索</translation>
     </message>
@@ -1758,27 +1796,30 @@ Confirm your email by clicking the link we sent you.</source>
 <context>
     <name>MSelectionOptionsPopup</name>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="128"/>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="129"/>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="278"/>
         <source>Copy</source>
         <translation>复制</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="141"/>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="142"/>
         <source>Highlight</source>
         <translation>高亮</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="158"/>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="160"/>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="290"/>
         <source>Look Up</source>
         <translation>查找</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="242"/>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="244"/>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="316"/>
         <source>Explain</source>
         <translation>解释</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="262"/>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="264"/>
         <source>Remove</source>
         <translation>移除</translation>
     </message>
@@ -1998,7 +2039,7 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../settings/MStoragePage.qml" line="147"/>
         <source>Upgrade Now</source>
-        <translation type="unfinished"></translation>
+        <translation>更新</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="179"/>
@@ -2075,7 +2116,7 @@ working on fun projects, supporting our community and trying to make the world a
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="109"/>
         <source>You can support us in many other ways as well, if you are a developer or a designer, feel free to</source>
-        <translation>如果您是开发者或设计师，您也可以通过其他的方式支持我们。</translation>
+        <translation>如果您是开发者或设计师，您也可以通过其他的方式支持我们</translation>
     </message>
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="111"/>
@@ -2165,7 +2206,7 @@ working on fun projects, supporting our community and trying to make the world a
     <message>
         <location filename="../settings/updatesPage/MUpToDate.qml" line="47"/>
         <source>Make sure to check for updates regularly, so you dont miss out on any great features.</source>
-        <translation>请定期检查更新，这样您就不会错过任何好用的功能</translation>
+        <translation>请定期检查更新，这样您就不会错过任何好用的功能。</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpToDate.qml" line="56"/>
@@ -2188,7 +2229,7 @@ working on fun projects, supporting our community and trying to make the world a
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="60"/>
         <source>Download the new version to get great new improvements.</source>
-        <translation>下载最新版本以获得重大改进</translation>
+        <translation>下载最新版本以获得重大改进。</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="69"/>
@@ -2296,7 +2337,7 @@ working on fun projects, supporting our community and trying to make the world a
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.qml" line="32"/>
+        <location filename="../main.qml" line="36"/>
         <source>Librum - Your ebook reader</source>
         <translation>Librum - 电子书阅读器</translation>
     </message>
