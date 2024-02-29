@@ -116,6 +116,8 @@ QString ExternalBookController::addBookmark(const QString& name, int pageNumber,
     Q_UNUSED(name);
     Q_UNUSED(pageNumber);
     Q_UNUSED(yOffset);
+
+    return {};
 }
 
 void ExternalBookController::renameBookmark(const QString& uuid,
