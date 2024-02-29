@@ -37,6 +37,9 @@ Popup {
             property int implWidth: menuItemLabel.implicitWidth + 2 * horizontalPadding
             signal clicked
 
+            LayoutMirroring.enabled: baseRoot.rightAlign
+            LayoutMirroring.childrenInherit: true
+
             Layout.fillWidth: true
             Layout.preferredHeight: 32
             horizontalPadding: 8

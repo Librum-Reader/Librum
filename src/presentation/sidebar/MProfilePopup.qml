@@ -6,40 +6,36 @@ import Librum.icons
 import Librum.controllers
 import Librum.style
 
-
-Popup
-{
+Popup {
     id: root
     implicitWidth: 170
     implicitHeight: 130
     padding: 0
-    background: Rectangle
-    {
+    background: Rectangle {
         anchors.fill: parent
         color: Style.colorContainerBackground
         radius: 5
         border.color: Style.colorContainerBorder
         antialiasing: true
     }
-    
-    
-    MouseArea
-    {
+
+    MouseArea {
         id: closeManagement
         anchors.fill: parent
         hoverEnabled: true
-        
-        onContainsMouseChanged: if(!containsMouse) root.close();
+
+        onContainsMouseChanged: if (!containsMouse)
+                                    root.close()
     }
-    
-    ColumnLayout
-    {
+
+    ColumnLayout {
         id: layout
         width: parent.width
-        
-        
-        MProfilePopupItem
-        {
+
+        LayoutMirroring.enabled: baseRoot.rightAlign
+        LayoutMirroring.childrenInherit: true
+
+        MProfilePopupItem {
             id: syncItem
             Layout.fillWidth: true
             Layout.topMargin: 15
@@ -48,18 +44,15 @@ Popup
             text: qsTr("Sync")
             imageWidth: 16
             textSpacing: 12
-            
-            onClicked: 
-            {
-                LibraryController.syncWithServer();
-                UserController.syncWithServer();
-                root.close();
+
+            onClicked: {
+                LibraryController.syncWithServer()
+                UserController.syncWithServer()
+                root.close()
             }
         }
-        
-        
-        MProfilePopupItem
-        {
+
+        MProfilePopupItem {
             id: manageProfileItem
             Layout.fillWidth: true
             Layout.topMargin: 15
@@ -68,17 +61,14 @@ Popup
             text: qsTr("Manage Profile")
             imageWidth: 19
             textSpacing: 11
-            
-            onClicked:
-            {
-                loadSettingsAccountPage();
-                root.close();
+
+            onClicked: {
+                loadSettingsAccountPage()
+                root.close()
             }
         }
-        
-        
-        MProfilePopupItem
-        {
+
+        MProfilePopupItem {
             id: logoutItem
             Layout.fillWidth: true
             Layout.topMargin: 15
@@ -87,16 +77,15 @@ Popup
             text: qsTr("Logout")
             imageWidth: 20
             textSpacing: 11
-            
+
             onClicked: root.logout()
         }
     }
-    
-    function logout()
-    {
-        AuthController.logoutUser();
-        loadPage(loginPage);
-        root.close();
-        resetSidebar();
+
+    function logout() {
+        AuthController.logoutUser()
+        loadPage(loginPage)
+        root.close()
+        resetSidebar()
     }
 }

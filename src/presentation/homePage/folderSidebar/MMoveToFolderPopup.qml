@@ -49,6 +49,9 @@ Popup {
         anchors.right: parent.right
         spacing: 0
 
+        LayoutMirroring.enabled: baseRoot.rightAlign
+        LayoutMirroring.childrenInherit: true
+
         RowLayout {
             id: headerRow
             Layout.preferredWidth: parent.width

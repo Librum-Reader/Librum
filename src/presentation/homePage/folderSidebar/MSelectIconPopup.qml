@@ -78,6 +78,9 @@ Popup {
                 radius: 4
             }
 
+            LayoutMirroring.enabled: baseRoot.rightAlign
+            LayoutMirroring.childrenInherit: true
+
             RowLayout {
                 anchors.fill: parent
                 spacing: 1

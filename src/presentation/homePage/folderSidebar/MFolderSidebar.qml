@@ -23,6 +23,9 @@ Item {
         closeAnim.start()
     }
 
+    LayoutMirroring.enabled: baseRoot.rightAlign
+    LayoutMirroring.childrenInherit: true
+
     Rectangle {
         id: background
         anchors.fill: parent

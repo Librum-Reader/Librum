@@ -249,7 +249,7 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="275"/>
         <source>Description</source>
-        <translation>الوصفوصف</translation>
+        <translation>الوصف</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="321"/>

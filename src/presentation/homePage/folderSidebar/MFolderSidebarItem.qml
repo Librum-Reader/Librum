@@ -25,7 +25,11 @@ Item {
 
     RowLayout {
         height: parent.height
+        width: parent.width
         spacing: 8
+
+        LayoutMirroring.enabled: baseRoot.rightAlign
+        LayoutMirroring.childrenInherit: true
 
         Image {
             Layout.leftMargin: 15
@@ -42,6 +46,10 @@ Item {
             color: Style.colorText
             font.pointSize: Fonts.size10dot25
             font.weight: Font.Medium
+        }
+
+        Item {
+            Layout.fillWidth: true
         }
     }
 

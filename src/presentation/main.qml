@@ -44,8 +44,7 @@ ApplicationWindow {
         id: mainlayout
         anchors.fill: parent
         spacing: 0
-        LayoutMirroring.enabled: baseRoot.rightAlign
-        LayoutMirroring.childrenInherit: true
+        LayoutMirroring.enabled: false
 
         MSidebar {
             id: sidebar

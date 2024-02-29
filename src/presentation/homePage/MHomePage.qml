@@ -18,8 +18,6 @@ Page {
     id: root
     rightPadding: 70
     bottomPadding: 20
-    LayoutMirroring.enabled: baseRoot.rightAlign
-    LayoutMirroring.childrenInherit: true
     background: Rectangle {
         anchors.fill: parent
         color: Style.colorPageBackground
