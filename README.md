@@ -142,11 +142,13 @@ including:
 - PDF
 - EPUB
 - CBZ (Comic books)
+- FB2
+- TIFF
+- Mobi
 - XPS
-- PS
-- All plain text formats
 - Images
 
+And many more!
 
 <br>
 
