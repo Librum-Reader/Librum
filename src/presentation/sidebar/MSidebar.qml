@@ -14,7 +14,7 @@ Item {
     property alias freeBooksItem: freeBooksItem
     property alias homeItem: homeItem
     property alias statisticsItem: statisticsItem
-    property alias addOnsItem: addOnsItem
+    property alias toolsItem: toolsItem
     property alias settingsItem: settingsItem
     property MSidebarItem currentItem: internal.defaultItem
 
@@ -39,7 +39,7 @@ Item {
     }
     Shortcut {
         sequence: "Ctrl+4"
-        onActivated: loadPage(addOnsPage, root.addOnsItem)
+        onActivated: loadPage(toolsPage, root.toolsItem)
     }
     Shortcut {
         sequence: "Ctrl+5"
@@ -161,14 +161,14 @@ Item {
                 }
 
                 MSidebarItem {
-                    id: addOnsItem
+                    id: toolsItem
                     Layout.topMargin: 13
                     Layout.leftMargin: 10
                     imageWidth: 30
-                    image: Icons.sidebarAddOns
-                    text: qsTr("Add-ons")
+                    image: Icons.sidebarTools
+                    text: qsTr("Tools")
 
-                    onClicked: loadPage(addOnsPage, root.addOnsItem)
+                    onClicked: loadPage(toolsPage, root.toolsItem)
                 }
 
                 MSidebarItem {

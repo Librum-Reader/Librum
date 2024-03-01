@@ -70,7 +70,6 @@
         <file>resources/images/light_mode/settings_sidebar/account_icon.svg</file>
         <file>resources/images/light_mode/settings_sidebar/about_selected_icon.svg</file>
         <file>resources/images/light_mode/settings_sidebar/about_icon.svg</file>
-        <file>resources/images/light_mode/sidebar/settings_icon.svg</file>
         <file>resources/images/light_mode/sidebar/puzzle_icon.svg</file>
         <file>resources/images/light_mode/sidebar/pieChart_icon.svg</file>
         <file>resources/images/light_mode/sidebar/home_icon.svg</file>
@@ -168,7 +167,6 @@
         <file>resources/images/dark_mode/settings_sidebar/about_selected_icon.svg</file>
         <file>resources/images/dark_mode/settings_sidebar/about_icon.svg</file>
         <file>resources/images/dark_mode/sidebar/settings_icon.svg</file>
-        <file>resources/images/dark_mode/sidebar/puzzle_icon.svg</file>
         <file>resources/images/dark_mode/sidebar/pieChart_icon.svg</file>
         <file>resources/images/dark_mode/sidebar/home_icon.svg</file>
         <file>resources/images/dark_mode/sidebar/empty_profile_icon.svg</file>
@@ -396,5 +394,7 @@
         <file>resources/images/folder_icons/fingerprint.svg</file>
         <file>resources/images/light_mode/book_popup/folder_icon.svg</file>
         <file>resources/images/dark_mode/book_popup/folder_icon.svg</file>
+        <file>resources/images/light_mode/sidebar/wrench_icon.svg</file>
+        <file>resources/images/dark_mode/sidebar/wrench_icon.svg</file>
     </qresource>
 </RCC>

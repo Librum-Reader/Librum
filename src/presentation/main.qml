@@ -13,7 +13,7 @@ import "registerPage"
 import "freeBooksPage"
 import "settings"
 import "statisticsPage"
-import "addOnsPage"
+import "toolsPage"
 import "forgotPasswordPage"
 import "readingPage"
 
@@ -99,8 +99,8 @@ ApplicationWindow {
         MSettings {}
     }
     Component {
-        id: addOnsPage
-        MAddOnsPage {}
+        id: toolsPage
+        MToolsPage {}
     }
     Component {
         id: statisticsPage

@@ -47,6 +47,8 @@ add_library(adapters
                     controllers/folder_controller.cpp
                     controllers/external_book_controller.hpp
                     controllers/external_book_controller.cpp
+                    controllers/tools_controller.hpp
+                    controllers/tools_controller.cpp
 
                     gateways/user_storage_gateway.cpp
                     gateways/user_storage_gateway.hpp
@@ -100,6 +102,7 @@ add_library(adapters
                     DTOs/rectf_dto.hpp
                     DTOs/word_definition_dto.hpp
                     DTOs/folder_dto.hpp
+                    interfaces/controllers/i_tools_controller.hpp
 )
 
 target_compile_definitions(adapters PRIVATE ADAPTERS_LIBRARY)

@@ -36,6 +36,7 @@
 #include "setting_keys.hpp"
 #include "shortcuts_proxy_model.hpp"
 #include "tag_dto.hpp"
+#include "tools_controller.hpp"
 #include "user_controller.hpp"
 #include "word_definition_dto.hpp"
 
@@ -156,6 +157,12 @@ int main(int argc, char* argv[])
     auto settingsController = std::make_unique<SettingsController>(settingsService);
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "SettingsController",
                                  settingsController.get());
+
+    // Tools Stack
+    auto* toolsService = config::diConfig().create<application::IToolsService*>();
+    auto toolsController = std::make_unique<ToolsController>(toolsService);
+    qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "ToolsController",
+                                 toolsController.get());
 
     // Enums
     qmlRegisterUncreatableMetaObject(application::book_operation_status::staticMetaObject, "Librum.controllers",
