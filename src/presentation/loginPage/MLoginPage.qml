@@ -39,7 +39,7 @@ MFlickWrapper {
     }
 
     Shortcut {
-        sequence: "Ctrl+Return"
+        sequence: "Return"
         onActivated: internal.login()
     }
 
