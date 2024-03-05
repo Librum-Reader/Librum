@@ -117,7 +117,7 @@ Please make sure to run clang format, keep to the conventions used throughout th
 
 # Self-hosting
 To self-host Librum you need to run [Librum-Server](https://github.com/Librum-Reader/Librum-Server) locally (instructions can be found [here](https://github.com/Librum-Reader/Librum-Server#self-hosting)) and tell the client to use your self-hosted server by:
-- (Linux) Editing ~/.config/Librum-Reader/Librum.conf and setting `selfHosted=true` and `serverHost` to your server's url (e.g. `serverHost=https://127.0.0.1:5001`)
+- (Linux) Editing ~/.config/Librum-Reader/Librum.conf and setting `selfHosted=true` and `serverHost` to your server's url (e.g. `serverHost=https://127.0.0.1:5000`)
 - (Windows) Opening the registry editor (Press `Win + R` and search for `regedit`), navigating to `HKEY_CURRENT_USER\Software\Librum-Reader\Librum` and setting `selfHosted=true` and `serverHost` to your server's url
 
 Make sure to run the application before following the steps above, to generate the required files.
