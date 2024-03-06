@@ -9,8 +9,6 @@ import Librum.fonts
 
 Popup {
     id: root
-    implicitWidth: 400
-    implicitHeight: 300
     padding: 32
     bottomPadding: 42
     topPadding: 42
@@ -28,7 +26,8 @@ Popup {
         contentHeight: layout.height
 
         ColumnLayout {
-            spacing: 0
+            width: parent.width
+            spacing: 80
 
             RowLayout {
                 id: layout
@@ -66,42 +65,8 @@ Popup {
                 }
             }
 
-            RowLayout {
-                id: inputLayout
-                spacing: 24
-                Layout.topMargin: 240
-
-                MLabeledInputBox {
-                    id: firstInput
-                    Layout.preferredWidth: 200
-                    placeholderContent: "Some Book"
-                    placeholderColor: Style.colorPlaceholderText
-                    headerText: qsTr("First")
-                }
-
-                MLabeledInputBox {
-                    id: secondInput
-                    Layout.preferredWidth: 200
-                    placeholderContent: "Another Book"
-                    placeholderColor: Style.colorPlaceholderText
-                    headerText: qsTr("Second")
-                }
-
-                MButton {
-                    id: loginButton
-                    Layout.preferredWidth: 200
-                    Layout.preferredHeight: 40
-                    borderWidth: 0
-                    backgroundColor: Style.colorBasePurple
-                    fontSize: Fonts.size12
-                    opacityOnPressed: 0.85
-                    textColor: Style.colorFocusedButtonText
-                    fontWeight: Font.Bold
-                    text: qsTr("Merge")
-
-                    onClicked: ToolsController.mergePdfs(firstInput.text,
-                                                         secondInput.text)
-                }
+            MBookSelector {
+                Layout.alignment: Qt.AlignHCenter
             }
         }
     }

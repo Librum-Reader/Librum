@@ -13,63 +13,120 @@ Page {
 
     ColumnLayout {
         id: layout
-        anchors.fill: parent
+        anchors.right: parent.right
+        anchors.left: parent.left
         anchors.leftMargin: 64
         anchors.rightMargin: 70
         spacing: 0
 
         MTitle {
             id: pageTitle
-            Layout.topMargin: 20
+            Layout.topMargin: 44
             titleText: qsTr("Tools")
             descriptionText: qsTr("Powerful tools to modify your books")
         }
 
-        GridLayout {
-            id: grid
+        Pane {
+            id: contentBlock
             Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.topMargin: 30
-
-            columns: 2
-
-            component ToolItem: Pane {
-                id: itemRoot
-                property string text: ""
-                signal clicked
-
-                Layout.preferredWidth: 400
-                Layout.preferredHeight: 200
-                background: Rectangle {
-                    color: Style.colorControlBackground
-                    radius: 6
-                }
-
-                Label {
-                    anchors.centerIn: parent
-                    text: itemRoot.text
-                    color: Style.colorText
-                    font.bold: true
-                    font.pointSize: Fonts.size23
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: itemRoot.clicked()
-                }
+            Layout.topMargin: 45
+            verticalPadding: 24
+            horizontalPadding: 40
+            background: Rectangle {
+                color: Style.colorContainerBackground
+                border.color: Style.colorContainerBorder
+                radius: 4
+                antialiasing: true
             }
 
-            ToolItem {
-                text: qsTr("Merge PDFs")
-                onClicked: mergePdfPopup.open()
+            Flow {
+                id: grid
+                width: parent.width
+                spacing: 16
+
+                component ToolItem: Pane {
+                    id: itemRoot
+                    property string text: ""
+                    property string description: ""
+                    signal clicked
+
+                    implicitWidth: 380
+                    implicitHeight: 220
+                    opacity: area.pressed ? 0.6 : 1
+                    background: Rectangle {
+                        color: "#343534"
+                        radius: 6
+                    }
+
+                    ColumnLayout {
+                        spacing: 6
+                        anchors.centerIn: parent
+
+                        Label {
+                            id: title
+                            Layout.alignment: Qt.AlignHCenter
+                            text: itemRoot.text
+                            color: Style.colorTitle
+                            font.bold: true
+                            font.pointSize: Fonts.size20
+                        }
+
+                        Label {
+                            id: description
+                            Layout.alignment: Qt.AlignHCenter
+                            text: itemRoot.description
+                            color: Style.colorText
+                            font.pointSize: Fonts.size13
+                        }
+                    }
+
+                    MouseArea {
+                        id: area
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+
+                        onClicked: itemRoot.clicked()
+                    }
+                }
+
+                ToolItem {
+                    text: qsTr("Merge PDFs")
+                    description: "Merge multiple PDFs into one"
+                    onClicked: mergePdfPopup.open()
+                }
+
+                ToolItem {
+                    text: qsTr("Sign PDF")
+                    onClicked: mergePdfPopup.open()
+                }
+
+                ToolItem {
+                    text: qsTr("Sign PDF")
+                    onClicked: mergePdfPopup.open()
+                }
+
+                ToolItem {
+                    text: qsTr("Sign PDF")
+                    onClicked: mergePdfPopup.open()
+                }
+
+                ToolItem {
+                    text: qsTr("Sign PDF")
+                    onClicked: mergePdfPopup.open()
+                }
+
+                ToolItem {
+                    text: qsTr("Sign PDF")
+                    onClicked: mergePdfPopup.open()
+                }
             }
         }
     }
 
     MMergePdfToolPopup {
         id: mergePdfPopup
-        width: parent.width * 0.8
-        height: parent.height * 0.8
+        width: parent.width * 0.6
+        height: parent.height * 0.6
         y: (parent.height - height) / 2
         x: (parent.width - width) / 2
     }
