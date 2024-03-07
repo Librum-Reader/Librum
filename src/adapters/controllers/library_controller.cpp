@@ -19,7 +19,8 @@ using namespace dtos;
 LibraryController::LibraryController(
     application::ILibraryService* bookService) :
     m_libraryService(bookService),
-    m_libraryModel(m_libraryService->getBooks())
+    m_libraryModel(m_libraryService->getBooks()),
+    m_bookTitleModel(m_libraryService->getBooks())
 {
     // book insertion
     connect(m_libraryService,
@@ -31,6 +32,13 @@ LibraryController::LibraryController(
 
     connect(m_libraryService, &application::ILibraryService::bookInsertionEnded,
             this, &LibraryController::bookCountChanged);
+
+    connect(m_libraryService,
+            &application::ILibraryService::bookInsertionStarted,
+            &m_bookTitleModel, &data_models::BookTitleModel::startInsertingRow);
+
+    connect(m_libraryService, &application::ILibraryService::bookInsertionEnded,
+            &m_bookTitleModel, &data_models::BookTitleModel::endInsertingRow);
 
     // Library syncing
     connect(m_libraryService,
@@ -61,6 +69,13 @@ LibraryController::LibraryController(
     connect(m_libraryService, &application::ILibraryService::bookDeletionEnded,
             this, &LibraryController::bookCountChanged);
 
+    connect(m_libraryService,
+            &application::ILibraryService::bookDeletionStarted,
+            &m_bookTitleModel, &data_models::BookTitleModel::startDeletingBook);
+
+    connect(m_libraryService, &application::ILibraryService::bookDeletionEnded,
+            &m_bookTitleModel, &data_models::BookTitleModel::endDeletingBook);
+
 
     // book clearing
     connect(m_libraryService,
@@ -86,6 +101,9 @@ LibraryController::LibraryController(
     connect(m_libraryService, &application::ILibraryService::dataChanged,
             &m_libraryModel, &data_models::LibraryModel::refreshBook);
 
+    connect(m_libraryService, &application::ILibraryService::dataChanged,
+            &m_bookTitleModel, &data_models::BookTitleModel::refreshBook);
+
     // download book media progress changed
     connect(m_libraryService,
             &application::ILibraryService::downloadingBookMediaProgressChanged,
@@ -98,6 +116,7 @@ LibraryController::LibraryController(
             this, &LibraryController::downloadedProjectGutenbergIdsReady);
 
     m_libraryProxyModel.setSourceModel(&m_libraryModel);
+    m_bookTitleProxyModel.setSourceModel(&m_bookTitleModel);
 }
 
 void LibraryController::syncWithServer()
@@ -316,6 +335,11 @@ void LibraryController::removeAllBooksFromFolderWithId(const QString& folderId)
 data_models::LibraryProxyModel* LibraryController::getLibraryModel()
 {
     return &m_libraryProxyModel;
+}
+
+data_models::BookTitleProxyModel* LibraryController::getBookTitleModel()
+{
+    return &m_bookTitleProxyModel;
 }
 
 int LibraryController::saveBookToFile(const QString& uuid, const QUrl& path)

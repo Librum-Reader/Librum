@@ -74,6 +74,7 @@ int main(int argc, char* argv[])
     qmlRegisterSingletonType(QUrl("qrc:/TranslationsModel.qml"), "Librum.models", 1, 0, "TranslationsModel");
     qmlRegisterSingletonType(QUrl("qrc:/modules/CustomComponents/MLanguageModel.qml"), "Librum.models", 1, 0, "MLanguageModel");
     qmlRegisterType<adapters::data_models::LibraryProxyModel>("Librum.models", 1, 0, "LibraryProxyModel");
+    qmlRegisterType<adapters::data_models::BookTitleProxyModel>("Librum.models", 1, 0, "BookTitleModel");
     qmlRegisterType<adapters::data_models::FreeBooksModel>("Librum.models", 1, 0, "FreeBooksModel");
     qmlRegisterType<adapters::data_models::ShortcutsProxyModel>("Librum.models", 1, 0, "ShortcutsProxyModel");
     qmlRegisterType<cpp_elements::KeySequenceRecorder>("Librum.elements", 1, 0, "KeySequenceRecorder");

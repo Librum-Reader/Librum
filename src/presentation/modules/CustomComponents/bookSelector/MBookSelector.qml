@@ -4,9 +4,13 @@ import QtQuick.Layouts
 import Librum.style
 import Librum.fonts
 import Librum.icons
+import Librum.controllers
 
 Pane {
     id: root
+    property alias selectedItems: popup.selectedItems
+    signal countChanged
+
     implicitWidth: 520
     implicitHeight: 46
     padding: 0
@@ -45,10 +49,15 @@ Pane {
                 color: "transparent"
             }
 
-            onTextEdited: {
-                if (!popup.opened)
+            onActiveFocusChanged: {
+                if (activeFocus && !popup.opened) {
                     popup.open()
+                } else if (!activeFocus) {
+                    popup.close()
+                }
             }
+
+            onTextEdited: LibraryController.bookTitleModel.sortString = text
         }
     }
 
@@ -57,6 +66,20 @@ Pane {
         width: root.width
         y: root.height + 8
         x: -root.horizontalPadding
+
+        onItemsChanged: root.countChanged()
+    }
+
+    function moveBookUp(uuid) {
+        popup.moveBookUp(uuid)
+    }
+
+    function moveBookDown(uuid) {
+        popup.moveBookDown(uuid)
+    }
+
+    function removeBookFromSelection(uuid) {
+        popup.removeBookFromSelection(uuid)
     }
 
     function giveFocus() {
