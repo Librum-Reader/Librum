@@ -59,7 +59,7 @@ Page {
                     }
 
                     ColumnLayout {
-                        spacing: 6
+                        spacing: 5
                         anchors.centerIn: parent
 
                         Label {

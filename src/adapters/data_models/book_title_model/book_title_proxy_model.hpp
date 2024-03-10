@@ -1,5 +1,6 @@
 #pragma once
 #include <QSortFilterProxyModel>
+#include <memory>
 #include <rapidfuzz/fuzz.hpp>
 #include "adapters_export.hpp"
 

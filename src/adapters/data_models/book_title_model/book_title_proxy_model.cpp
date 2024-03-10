@@ -97,6 +97,13 @@ void BookTitleProxyModel::setSortString(const QString& newSortString)
         return;
 
     m_sortString = newSortString;
+    if(!newSortString.isEmpty())
+    {
+        m_filterScorer =
+            std::make_unique<rapidfuzz::fuzz::CachedRatio<unsigned int>>(
+                newSortString.toUtf8());
+    }
+
     emit sortStringUpdated();
     invalidate();
 }
