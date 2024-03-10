@@ -396,5 +396,7 @@
         <file>resources/images/dark_mode/book_popup/folder_icon.svg</file>
         <file>resources/images/light_mode/sidebar/wrench_icon.svg</file>
         <file>resources/images/dark_mode/sidebar/wrench_icon.svg</file>
+        <file>resources/images/light_mode/decision/x_icon.svg</file>
+        <file>resources/images/dark_mode/decision/x_icon.svg</file>
     </qresource>
 </RCC>

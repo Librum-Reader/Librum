@@ -21,6 +21,7 @@ Item {
     property string closePopupWhite: "/resources/images/light_mode/decision/close_popup_white_icon.svg"
     property string cancelPurple
     property string addFirstBookPlus
+    property string xIcon
     property string addWhite
     property string plusSquare
     property string checkCircle
@@ -192,6 +193,10 @@ Item {
             PropertyChanges {
                 target: iconSheet
                 checkCircle: "/resources/images/light_mode/decision/check_circle_icon.svg"
+            }
+            PropertyChanges {
+                target: iconSheet
+                xIcon: "/resources/images/light_mode/decision/x_icon.svg"
             }
 
             // Tags
@@ -635,6 +640,10 @@ Item {
             PropertyChanges {
                 target: iconSheet
                 checkCircle: "/resources/images/dark_mode/decision/check_circle_icon.svg"
+            }
+            PropertyChanges {
+                target: iconSheet
+                xIcon: "/resources/images/dark_mode/decision/x_icon.svg"
             }
 
             // Tags

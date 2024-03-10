@@ -11,6 +11,7 @@ Pane {
     property alias selectedItems: popup.selectedItems
     property alias list: popup.list
     signal countChanged
+    signal escPressed
 
     implicitWidth: 520
     implicitHeight: 46
@@ -20,7 +21,7 @@ Pane {
         color: Style.colorControlBackground
         border.color: Style.colorContainerBorder
         radius: 5
-        border.width: 2
+        border.width: 1
     }
 
     RowLayout {
@@ -53,14 +54,8 @@ Pane {
             Keys.onEscapePressed: {
                 if (popup.opened)
                     popup.close()
-            }
-
-            onActiveFocusChanged: {
-                if (activeFocus && !popup.opened) {
-                    popup.open()
-                } else if (!activeFocus) {
-                    popup.close()
-                }
+                else
+                    root.escPressed()
             }
 
             onPressed: {
@@ -73,6 +68,7 @@ Pane {
                     popup.open()
 
                 LibraryController.bookTitleModel.sortString = text
+                popup.goToTopOfList()
             }
         }
     }

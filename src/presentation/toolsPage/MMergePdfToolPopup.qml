@@ -33,167 +33,187 @@ Popup {
         LibraryController.bookTitleModel.format = ""
     }
 
-    MFlickWrapper {
-        id: flickWrapper
+    ColumnLayout {
         anchors.fill: parent
-        contentHeight: layout.height
+        spacing: 0
 
-        ColumnLayout {
+        RowLayout {
+            id: layout
             width: parent.width
             spacing: 0
 
-            RowLayout {
-                id: layout
-                width: parent.width
-                spacing: 0
-
-                Label {
-                    id: popupTitle
-                    Layout.leftMargin: 36
-                    text: qsTr("Merge PDFs")
-                    font.weight: Font.Bold
-                    font.pointSize: Fonts.size20
-                    color: Style.colorTitle
-                }
-
-                Item {
-                    Layout.fillWidth: true
-                }
-
-                MButton {
-                    id: closeButton
-                    Layout.preferredHeight: 36
-                    Layout.preferredWidth: 36
-                    Layout.rightMargin: 18
-                    Layout.alignment: Qt.AlignRight
-                    backgroundColor: "transparent"
-                    opacityOnPressed: 0.7
-                    borderColor: "transparent"
-                    radius: 6
-                    borderColorOnPressed: Style.colorButtonBorder
-                    imagePath: Icons.closePopup
-                    imageSize: 16
-
-                    onClicked: root.close()
-                }
+            Label {
+                id: popupTitle
+                Layout.leftMargin: 36
+                text: qsTr("Merge PDFs")
+                font.weight: Font.Bold
+                font.pointSize: Fonts.size20
+                color: Style.colorTitle
             }
 
-            MBookSelector {
-                id: bookSelector
-                Layout.alignment: Qt.AlignHCenter
-                Layout.topMargin: 80
-
-                onCountChanged: internal.refreshModel()
-            }
-
-            ListView {
-                id: listView
+            Item {
                 Layout.fillWidth: true
-                Layout.preferredHeight: contentHeight
-                Layout.maximumHeight: 400
-                Layout.alignment: Qt.AlignHCenter
-                Layout.topMargin: 16
-                Layout.bottomMargin: 20
-                model: 0
-                delegate: Rectangle {
-                    id: delRoot
-                    property string title: bookSelector.selectedItems[modelData].title
-                    property string uuid: bookSelector.selectedItems[modelData].uuid
-
-                    radius: 4
-                    color: "#222222"
-                    border.width: 1
-                    border.color: "#1E1E1E"
-                    height: 36
-                    width: parent.width
-
-                    RowLayout {
-                        anchors.fill: parent
-
-                        Label {
-                            Layout.topMargin: 4
-                            Layout.fillWidth: true
-                            Layout.leftMargin: 8
-                            Layout.alignment: Qt.AlignVCenter
-                            text: delRoot.title
-                            color: Style.colorText
-                            font.pointSize: Fonts.size14
-                        }
-
-                        MButton {
-                            Layout.preferredHeight: 34
-                            Layout.preferredWidth: 28
-                            Layout.rightMargin: 8
-                            backgroundColor: Style.colorContainerBackground
-                            opacityOnPressed: 0.7
-                            borderColor: "transparent"
-                            radius: 6
-                            borderColorOnPressed: Style.colorButtonBorder
-                            imagePath: Icons.arrowheadNextIcon
-                            imageRotation: -90
-                            imageSize: 18
-
-                            onClicked: internal.moveBookUp(delRoot.uuid)
-                        }
-
-                        MButton {
-                            Layout.preferredHeight: 34
-                            Layout.preferredWidth: 28
-                            Layout.rightMargin: 4
-                            backgroundColor: Style.colorContainerBackground
-                            opacityOnPressed: 0.7
-                            borderColor: "transparent"
-                            radius: 6
-                            borderColorOnPressed: Style.colorButtonBorder
-                            imagePath: Icons.arrowheadNextIcon
-                            imageRotation: 90
-                            imageSize: 18
-
-                            onClicked: internal.moveBookDown(delRoot.uuid)
-                        }
-
-                        MButton {
-                            Layout.preferredHeight: 34
-                            Layout.preferredWidth: 28
-                            Layout.rightMargin: 4
-                            backgroundColor: Style.colorRed
-                            opacityOnPressed: 0.7
-                            borderColor: "transparent"
-                            radius: 6
-                            borderColorOnPressed: Style.colorButtonBorder
-                            imagePath: Icons.closePopupWhite
-                            imageSize: 14
-
-                            onClicked: internal.removeBookFromSelection(
-                                           delRoot.uuid)
-                        }
-                    }
-                }
             }
 
             MButton {
-                id: mergeButton
-                Layout.preferredWidth: 240
-                Layout.preferredHeight: 40
-                Layout.topMargin: 42
-                borderWidth: 0
-                backgroundColor: Style.colorBasePurple
-                fontSize: Fonts.size12
-                opacityOnPressed: 0.85
-                textColor: Style.colorFocusedButtonText
-                fontWeight: Font.Bold
-                text: qsTr("Merge")
+                id: closeButton
+                Layout.preferredHeight: 36
+                Layout.preferredWidth: 36
+                Layout.rightMargin: 18
+                Layout.alignment: Qt.AlignRight
+                backgroundColor: "transparent"
+                opacityOnPressed: 0.7
+                borderColor: "transparent"
+                radius: 6
+                borderColorOnPressed: Style.colorButtonBorder
+                imagePath: Icons.closePopup
+                imageSize: 16
 
-                onClicked: {
-                    if (bookSelector.selectedItems.length <= 1) {
-                        print("Select at least 2 books to merge.")
-                        return
+                onClicked: root.close()
+            }
+        }
+
+        MBookSelector {
+            id: bookSelector
+            Layout.alignment: Qt.AlignHCenter
+            Layout.topMargin: 72
+            Layout.preferredWidth: parent.width * 0.6
+
+            onCountChanged: internal.refreshModel()
+            onEscPressed: root.close()
+        }
+
+        ListView {
+            id: listView
+            property int scrollbarExtraWidth: 16
+
+            Layout.fillHeight: true
+            Layout.maximumHeight: contentHeight
+            Layout.topMargin: 24
+            Layout.preferredWidth: bookSelector.width + scrollbarExtraWidth
+            Layout.leftMargin: scrollbarExtraWidth
+            Layout.alignment: Qt.AlignHCenter
+            model: 0
+            spacing: 2
+            clip: true
+            boundsBehavior: Flickable.StopAtBounds
+            boundsMovement: Flickable.StopAtBounds
+            ScrollBar.vertical: ScrollBar {
+                anchors.top: parent.top
+                anchors.left: parent.right
+                anchors.bottom: parent.bottom
+                anchors.leftMargin: -width
+            }
+
+            delegate: Rectangle {
+                id: delRoot
+                property string title: bookSelector.selectedItems[modelData].title
+                property string uuid: bookSelector.selectedItems[modelData].uuid
+
+                height: 52
+                radius: 4
+                color: "#222222"
+                border.width: 1
+                border.color: "#1E1E1E"
+                width: listView.width - listView.scrollbarExtraWidth
+
+                RowLayout {
+                    anchors.fill: parent
+
+                    Label {
+                        Layout.fillWidth: true
+                        Layout.leftMargin: 14
+                        Layout.alignment: Qt.AlignVCenter
+                        text: delRoot.title
+                        color: Style.colorText
+                        font.pointSize: Fonts.size12
+                        elide: Text.ElideRight
                     }
 
-                    ToolsController.mergePdfs(bookSelector.selectedItems.map(
-                                                  x => x.filePath))
+                    MButton {
+                        Layout.preferredHeight: 38
+                        Layout.preferredWidth: 34
+                        Layout.rightMargin: 2
+                        backgroundColor: Style.colorContainerBackground
+                        opacityOnPressed: 0.7
+                        borderColor: "transparent"
+                        radius: 6
+                        borderColorOnPressed: Style.colorButtonBorder
+                        imagePath: Icons.arrowheadNextIcon
+                        imageRotation: -90
+                        imageSize: 22
+
+                        onClicked: internal.moveBookUp(delRoot.uuid)
+                    }
+
+                    MButton {
+                        Layout.preferredHeight: 38
+                        Layout.preferredWidth: 34
+                        Layout.rightMargin: 2
+                        backgroundColor: Style.colorContainerBackground
+                        opacityOnPressed: 0.7
+                        borderColor: "transparent"
+                        radius: 6
+                        borderColorOnPressed: Style.colorButtonBorder
+                        imagePath: Icons.arrowheadNextIcon
+                        imageRotation: 90
+                        imageSize: 22
+
+                        onClicked: internal.moveBookDown(delRoot.uuid)
+                    }
+
+                    MButton {
+                        Layout.preferredHeight: 38
+                        Layout.preferredWidth: 34
+                        Layout.rightMargin: 12
+                        backgroundColor: Style.colorRed
+                        opacityOnPressed: 0.7
+                        borderColor: "transparent"
+                        radius: 6
+                        borderColorOnPressed: Style.colorButtonBorder
+                        imagePath: Icons.xIcon
+                        imageSize: 16
+
+                        onClicked: internal.removeBookFromSelection(
+                                       delRoot.uuid)
+                    }
                 }
             }
+        }
+
+        Item {
+            Layout.fillHeight: true
+            Layout.maximumHeight: 24
+            Layout.minimumHeight: 4
+        }
+
+        MButton {
+            id: mergeButton
+            Layout.preferredWidth: parent.width * 0.4
+            Layout.preferredHeight: 44
+            Layout.alignment: Qt.AlignHCenter
+            opacity: 0.5
+            borderWidth: 0
+            backgroundColor: Style.colorBasePurple
+            fontSize: Fonts.size12
+            opacityOnPressed: 0.85
+            textColor: Style.colorFocusedButtonText
+            fontWeight: Font.Bold
+            text: qsTr("Merge")
+
+            onClicked: {
+                if (bookSelector.selectedItems.length <= 1) {
+                    print("Select at least 2 books to merge.")
+                    return
+                }
+
+                ToolsController.mergePdfs(bookSelector.selectedItems.map(
+                                              x => x.filePath))
+            }
+        }
+
+        Item {
+            Layout.fillHeight: true
         }
     }
 
@@ -203,6 +223,8 @@ Popup {
         function refreshModel() {
             listView.model = 0
             listView.model = bookSelector.selectedItems.length
+
+            mergeButton.opacity = bookSelector.selectedItems.length >= 2 ? 1 : 0.5
         }
 
         function clearSelectedItems() {

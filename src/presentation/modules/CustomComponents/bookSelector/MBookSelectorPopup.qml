@@ -15,12 +15,12 @@ Popup {
     signal itemsChanged
 
     implicitWidth: 200
-    implicitHeight: 360
+    implicitHeight: listView.height + padding * 2
     background: Rectangle {
         color: Style.colorControlBackground
         border.color: Style.colorContainerBorder
         radius: 5
-        border.width: 2
+        border.width: 1
     }
 
     ColumnLayout {
@@ -33,7 +33,7 @@ Popup {
 
             Layout.fillWidth: true
             Layout.preferredHeight: contentHeight
-            Layout.maximumHeight: root.height - root.verticalPadding - 12
+            Layout.maximumHeight: 320
             maximumFlickVelocity: 550
             keyNavigationEnabled: true
             currentIndex: 0
@@ -91,5 +91,9 @@ Popup {
             // root.selectItem(listView.currentIndex,
             // true)
         }
+    }
+
+    function goToTopOfList() {
+        listView.contentY = listView.originY
     }
 }

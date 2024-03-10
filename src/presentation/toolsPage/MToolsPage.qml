@@ -126,7 +126,7 @@ Page {
     MMergePdfToolPopup {
         id: mergePdfPopup
         width: parent.width * 0.6
-        height: parent.height * 0.6
+        height: parent.height * 0.65
         y: (parent.height - height) / 2
         x: (parent.width - width) / 2
     }
