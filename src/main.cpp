@@ -17,6 +17,7 @@
 #include <QTranslator>
 #include <iostream>
 #include <memory>
+#include <tools_service.hpp>
 #include "app_info_controller.hpp"
 #include "book_dto.hpp"
 #include "book_operation_status.hpp"
@@ -160,8 +161,8 @@ int main(int argc, char* argv[])
                                  settingsController.get());
 
     // Tools Stack
-    auto* toolsService = config::diConfig().create<application::IToolsService*>();
-    auto toolsController = std::make_unique<ToolsController>(toolsService);
+    auto toolsService = std::make_unique<application::services::ToolsService>(libraryService);
+    auto toolsController = std::make_unique<ToolsController>(toolsService.get());
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "ToolsController",
                                  toolsController.get());
 

@@ -84,12 +84,6 @@ Popup {
                     return model["title"]
                 }
             }
-
-            // Keys.onReturnPressed: if (listView.currentIndex !== -1)
-            // root.selectItem(listView.currentIndex)
-            // Component.onCompleted: if (root.defaultIndex != -1)
-            // root.selectItem(listView.currentIndex,
-            // true)
         }
     }
 

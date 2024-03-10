@@ -18,7 +18,11 @@ class ADAPTERS_EXPORT IToolsController : public QObject
 public:
     virtual ~IToolsController() noexcept = default;
 
-    Q_INVOKABLE virtual void mergePdfs(const QList<QString>& filePaths) = 0;
+    Q_INVOKABLE virtual void mergePdfs(const QString& destName,
+                                       const QList<QString>& filePaths) = 0;
+
+signals:
+    void mergingPdfsFinished(bool sucess);
 };
 
 }  // namespace adapters

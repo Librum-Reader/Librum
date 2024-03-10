@@ -91,6 +91,7 @@ set(application_SRC
     core/utils/text_selector.hpp
     core/utils/text_selector.cpp
     core/utils/search_options.hpp
+    core/utils/mutool_utils.hpp
 )
 
 

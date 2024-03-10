@@ -33,6 +33,21 @@ Popup {
         LibraryController.bookTitleModel.format = ""
     }
 
+    Connections {
+        target: ToolsController
+
+        function onMergingPdfsFinished(success) {
+            if (success) {
+                print("Success")
+            } else {
+                print("Fail")
+            }
+
+            internal.clearSelectedItems(true)
+            internal.refreshModel()
+        }
+    }
+
     ColumnLayout {
         anchors.fill: parent
         spacing: 0
@@ -207,9 +222,20 @@ Popup {
                     return
                 }
 
-                ToolsController.mergePdfs(bookSelector.selectedItems.map(
+                var name = "Merged: " + bookSelector.selectedItems[0].title
+                ToolsController.mergePdfs(name, bookSelector.selectedItems.map(
                                               x => x.filePath))
             }
+        }
+
+        Label {
+            Layout.alignment: Qt.AlignHCenter
+            Layout.topMargin: 5
+            visible: mergeButton.opacity !== 1
+            text: qsTr("Select two or more PDFs to merge.")
+            color: Style.colorText
+            font.pointSize: Fonts.size10dot25
+            elide: Text.ElideRight
         }
 
         Item {
@@ -227,8 +253,8 @@ Popup {
             mergeButton.opacity = bookSelector.selectedItems.length >= 2 ? 1 : 0.5
         }
 
-        function clearSelectedItems() {
-            for (var i = 0; i < bookSelector.list.count; i++) {
+        function clearSelectedItems(afterAdding = false) {
+            for (var i = 0; i < bookSelector.list.count - (afterAdding ? 1 : 0); i++) {
                 bookSelector.list.itemAtIndex(i).selected = false
             }
 

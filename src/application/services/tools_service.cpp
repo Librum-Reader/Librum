@@ -2,26 +2,44 @@
 #include <QProcess>
 #include <QStandardPaths>
 #include <QStringList>
+#include "mutool_utils.hpp"
 
 namespace application::services
 {
 
-void ToolsService::mergePdfs(const QList<QString>& filePaths)
-{
-    auto mergeProcess = new QProcess;
-    connect(mergeProcess, &QProcess::finished, mergeProcess,
-            &QProcess::deleteLater);
+using namespace core;
 
-    QString tool = "mutool";
-    QString subCommand = "merge";
+ToolsService::ToolsService(ILibraryService* libraryService) :
+    m_libraryService(libraryService)
+{
+}
+
+void ToolsService::mergePdfs(const QString& destName,
+                             const QList<QString>& filePaths)
+{
     QString destFolder =
-        QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation)
-            .first();
-    QString destName = "merged.pdf";
+        QStandardPaths::standardLocations(QStandardPaths::TempLocation).at(0);
     auto dest = destFolder + "/" + destName;
 
-    QStringList args { subCommand, "-o", dest };
-    mergeProcess->start(tool, args << filePaths);
+    auto process = new QProcess;
+    QProcess::connect(process, &QProcess::finished, process,
+                      &QProcess::deleteLater);
+
+    // Add the book to the library if the merge was successful
+    QProcess::connect(process, &QProcess::finished, this,
+                      [this, dest](int exitCode, QProcess::ExitStatus status)
+                      {
+                          if(status == QProcess::NormalExit && exitCode == 0)
+                          {
+                              m_libraryService->addBook(dest, true, 0);
+                              emit mergingPdfsFinished(true);
+                              return;
+                          }
+
+                          emit mergingPdfsFinished(false);
+                      });
+
+    utils::tools::mergePdfs(process, dest, filePaths);
 }
 
 }  // namespace application::services
