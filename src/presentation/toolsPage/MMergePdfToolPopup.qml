@@ -20,18 +20,17 @@ Popup {
         border.color: Style.colorContainerBorder
     }
 
-    Component.onCompleted: {
+    onOpened: {
         LibraryController.bookTitleModel.showOnlyDownloaded = true
         LibraryController.bookTitleModel.format = "pdf"
-
-        bookSelector.giveFocus()
     }
 
-    Component.onDestruction: {
+    onClosed: {
+        internal.clearSelectedItems()
+        internal.refreshModel()
+
         LibraryController.bookTitleModel.showOnlyDownloaded = false
         LibraryController.bookTitleModel.format = ""
-
-        bookSelector.selectedItems = []
     }
 
     MFlickWrapper {
@@ -185,8 +184,15 @@ Popup {
                 fontWeight: Font.Bold
                 text: qsTr("Merge")
 
-                onClicked: ToolsController.mergePdfs(
-                               bookSelector.selectedItems.map(x => x.filePath))
+                onClicked: {
+                    if (bookSelector.selectedItems.length <= 1) {
+                        print("Select at least 2 books to merge.")
+                        return
+                    }
+
+                    ToolsController.mergePdfs(bookSelector.selectedItems.map(
+                                                  x => x.filePath))
+                }
             }
         }
     }
@@ -197,6 +203,14 @@ Popup {
         function refreshModel() {
             listView.model = 0
             listView.model = bookSelector.selectedItems.length
+        }
+
+        function clearSelectedItems() {
+            for (var i = 0; i < bookSelector.list.count; i++) {
+                bookSelector.list.itemAtIndex(i).selected = false
+            }
+
+            bookSelector.selectedItems = []
         }
 
         function moveBookUp(uuid) {
@@ -230,15 +244,22 @@ Popup {
         }
 
         function removeBookFromSelection(uuid) {
+            // Remove from selectedItems
             var indexInParent = bookSelector.selectedItems.findIndex(
                         x => x.uuid === uuid)
             if (indexInParent === -1)
                 return
-
-            bookSelector.list.currentIndex = indexInParent
-            bookSelector.list.currentItem.selected = false
-
             bookSelector.selectedItems.splice(indexInParent, 1)
+
+            // Deselect it in the bookSelector's dropdown list
+            for (var i = 0; i < bookSelector.list.count; i++) {
+                var item = bookSelector.list.itemAtIndex(i)
+                if (item.getItemProperty("uuid") === uuid) {
+                    item.selected = false
+                    break
+                }
+            }
+
             internal.refreshModel()
         }
     }
