@@ -14,8 +14,7 @@ class ADAPTERS_EXPORT ToolsController : public IToolsController
 public:
     ToolsController(application::IToolsService* toolsService);
 
-    void mergePdfs(const QString& firstPath,
-                   const QString& secondPath) override;
+    void mergePdfs(const QList<QString>& filePaths) override;
 
 private:
     application::IToolsService* m_toolsService;

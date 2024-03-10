@@ -1,4 +1,5 @@
 #pragma once
+#include <QList>
 #include <QObject>
 #include <QString>
 #include "adapters_export.hpp"
@@ -17,8 +18,7 @@ class ADAPTERS_EXPORT IToolsController : public QObject
 public:
     virtual ~IToolsController() noexcept = default;
 
-    Q_INVOKABLE virtual void mergePdfs(const QString& firstPath,
-                                       const QString& secondPath) = 0;
+    Q_INVOKABLE virtual void mergePdfs(const QList<QString>& filePaths) = 0;
 };
 
 }  // namespace adapters

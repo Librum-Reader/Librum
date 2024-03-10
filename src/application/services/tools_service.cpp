@@ -6,8 +6,7 @@
 namespace application::services
 {
 
-void ToolsService::mergePdfs(const QString& firstPath,
-                             const QString& secondPath)
+void ToolsService::mergePdfs(const QList<QString>& filePaths)
 {
     auto mergeProcess = new QProcess;
     connect(mergeProcess, &QProcess::finished, mergeProcess,
@@ -21,8 +20,8 @@ void ToolsService::mergePdfs(const QString& firstPath,
     QString destName = "merged.pdf";
     auto dest = destFolder + "/" + destName;
 
-    mergeProcess->start(
-        tool, QStringList { subCommand, "-o", dest, firstPath, secondPath });
+    QStringList args { subCommand, "-o", dest };
+    mergeProcess->start(tool, args << filePaths);
 }
 
 }  // namespace application::services

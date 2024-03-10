@@ -9,8 +9,7 @@ class APPLICATION_EXPORT ToolsService : public IToolsService
     Q_OBJECT
 
 public:
-    void mergePdfs(const QString& firstPath,
-                   const QString& secondPath) override;
+    void mergePdfs(const QList<QString>& filePaths) override;
 };
 
 }  // namespace application::services

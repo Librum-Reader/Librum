@@ -11,6 +11,7 @@ Popup {
     id: root
     property bool checkBoxStyle: true
     property var selectedItems: []
+    property alias list: listView
     signal itemsChanged
 
     implicitWidth: 200
@@ -90,45 +91,5 @@ Popup {
             // root.selectItem(listView.currentIndex,
             // true)
         }
-    }
-
-    function moveBookUp(uuid) {
-        var indexInParent = root.selectedItems.findIndex(x => x.uuid === uuid)
-        if (indexInParent === -1)
-            return
-
-        if (indexInParent === 0)
-            return
-
-        var temp = root.selectedItems[indexInParent]
-        root.selectedItems.splice(indexInParent, 1)
-        root.selectedItems.splice(indexInParent - 1, 0, temp)
-        root.itemsChanged()
-    }
-
-    function moveBookDown(uuid) {
-        var indexInParent = root.selectedItems.findIndex(x => x.uuid === uuid)
-        if (indexInParent === -1)
-            return
-
-        if (indexInParent >= root.selectedItems.length - 1)
-            return
-
-        var temp = root.selectedItems[indexInParent]
-        root.selectedItems.splice(indexInParent, 1)
-        root.selectedItems.splice(indexInParent + 1, 0, temp)
-        root.itemsChanged()
-    }
-
-    function removeBookFromSelection(uuid) {
-        var indexInParent = root.selectedItems.findIndex(x => x.uuid === uuid)
-        if (indexInParent === -1)
-            return
-
-        listView.currentIndex = indexInParent
-        listView.currentItem.selected = false
-
-        root.selectedItems.splice(indexInParent, 1)
-        root.itemsChanged()
     }
 }

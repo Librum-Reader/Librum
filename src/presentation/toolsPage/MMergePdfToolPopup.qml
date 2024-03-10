@@ -23,6 +23,8 @@ Popup {
     Component.onCompleted: {
         LibraryController.bookTitleModel.showOnlyDownloaded = true
         LibraryController.bookTitleModel.format = "pdf"
+
+        bookSelector.giveFocus()
     }
 
     Component.onDestruction: {
@@ -82,10 +84,7 @@ Popup {
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 80
 
-                onCountChanged: {
-                    listView.model = 0
-                    listView.model = bookSelector.selectedItems.length
-                }
+                onCountChanged: internal.refreshModel()
             }
 
             ListView {
@@ -135,7 +134,7 @@ Popup {
                             imageRotation: -90
                             imageSize: 18
 
-                            onClicked: bookSelector.moveBookUp(delRoot.uuid)
+                            onClicked: internal.moveBookUp(delRoot.uuid)
                         }
 
                         MButton {
@@ -151,7 +150,7 @@ Popup {
                             imageRotation: 90
                             imageSize: 18
 
-                            onClicked: bookSelector.moveBookDown(delRoot.uuid)
+                            onClicked: internal.moveBookDown(delRoot.uuid)
                         }
 
                         MButton {
@@ -166,12 +165,81 @@ Popup {
                             imagePath: Icons.closePopupWhite
                             imageSize: 14
 
-                            onClicked: bookSelector.removeBookFromSelection(
+                            onClicked: internal.removeBookFromSelection(
                                            delRoot.uuid)
                         }
                     }
                 }
             }
+
+            MButton {
+                id: mergeButton
+                Layout.preferredWidth: 240
+                Layout.preferredHeight: 40
+                Layout.topMargin: 42
+                borderWidth: 0
+                backgroundColor: Style.colorBasePurple
+                fontSize: Fonts.size12
+                opacityOnPressed: 0.85
+                textColor: Style.colorFocusedButtonText
+                fontWeight: Font.Bold
+                text: qsTr("Merge")
+
+                onClicked: ToolsController.mergePdfs(
+                               bookSelector.selectedItems.map(x => x.filePath))
+            }
+        }
+    }
+
+    QtObject {
+        id: internal
+
+        function refreshModel() {
+            listView.model = 0
+            listView.model = bookSelector.selectedItems.length
+        }
+
+        function moveBookUp(uuid) {
+            var indexInParent = bookSelector.selectedItems.findIndex(
+                        x => x.uuid === uuid)
+            if (indexInParent === -1)
+                return
+
+            if (indexInParent === 0)
+                return
+
+            var temp = bookSelector.selectedItems[indexInParent]
+            bookSelector.selectedItems.splice(indexInParent, 1)
+            bookSelector.selectedItems.splice(indexInParent - 1, 0, temp)
+            internal.refreshModel()
+        }
+
+        function moveBookDown(uuid) {
+            var indexInParent = bookSelector.selectedItems.findIndex(
+                        x => x.uuid === uuid)
+            if (indexInParent === -1)
+                return
+
+            if (indexInParent >= bookSelector.selectedItems.length - 1)
+                return
+
+            var temp = bookSelector.selectedItems[indexInParent]
+            bookSelector.selectedItems.splice(indexInParent, 1)
+            bookSelector.selectedItems.splice(indexInParent + 1, 0, temp)
+            internal.refreshModel()
+        }
+
+        function removeBookFromSelection(uuid) {
+            var indexInParent = bookSelector.selectedItems.findIndex(
+                        x => x.uuid === uuid)
+            if (indexInParent === -1)
+                return
+
+            bookSelector.list.currentIndex = indexInParent
+            bookSelector.list.currentItem.selected = false
+
+            bookSelector.selectedItems.splice(indexInParent, 1)
+            internal.refreshModel()
         }
     }
 }

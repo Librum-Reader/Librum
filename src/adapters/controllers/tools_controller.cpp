@@ -8,10 +8,9 @@ ToolsController::ToolsController(application::IToolsService* toolsService) :
 {
 }
 
-void ToolsController::mergePdfs(const QString& firstPath,
-                                const QString& secondPath)
+void ToolsController::mergePdfs(const QList<QString>& filePaths)
 {
-    m_toolsService->mergePdfs(firstPath, secondPath);
+    m_toolsService->mergePdfs(filePaths);
 }
 
 }  // namespace adapters::controllers

@@ -9,6 +9,7 @@ import Librum.controllers
 Pane {
     id: root
     property alias selectedItems: popup.selectedItems
+    property alias list: popup.list
     signal countChanged
 
     implicitWidth: 520
@@ -49,6 +50,11 @@ Pane {
                 color: "transparent"
             }
 
+            Keys.onEscapePressed: {
+                if (popup.opened)
+                    popup.close()
+            }
+
             onActiveFocusChanged: {
                 if (activeFocus && !popup.opened) {
                     popup.open()
@@ -57,7 +63,17 @@ Pane {
                 }
             }
 
-            onTextEdited: LibraryController.bookTitleModel.sortString = text
+            onPressed: {
+                if (!popup.opened)
+                    popup.open()
+            }
+
+            onTextEdited: {
+                if (!popup.opened)
+                    popup.open()
+
+                LibraryController.bookTitleModel.sortString = text
+            }
         }
     }
 
@@ -68,18 +84,6 @@ Pane {
         x: -root.horizontalPadding
 
         onItemsChanged: root.countChanged()
-    }
-
-    function moveBookUp(uuid) {
-        popup.moveBookUp(uuid)
-    }
-
-    function moveBookDown(uuid) {
-        popup.moveBookDown(uuid)
-    }
-
-    function removeBookFromSelection(uuid) {
-        popup.removeBookFromSelection(uuid)
     }
 
     function giveFocus() {
