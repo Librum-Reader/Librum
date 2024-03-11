@@ -219,7 +219,6 @@ Popup {
 
             onClicked: {
                 if (bookSelector.selectedItems.length <= 1) {
-                    print("Select at least 2 books to merge.")
                     return
                 }
 

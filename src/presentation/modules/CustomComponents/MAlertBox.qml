@@ -51,7 +51,7 @@ Pane {
                 Layout.alignment: Qt.AlignVCenter
                 font.weight: Font.Bold
                 font.pointSize: Fonts.size12
-                color: "#32324D"
+                color: Style.colorText
             }
 
             Label {
@@ -62,7 +62,7 @@ Pane {
                 text: root.message
                 Layout.alignment: Qt.AlignVCenter
                 font.pointSize: Fonts.size12
-                color: "#32324D"
+                color: Style.colorText
             }
 
             Item {
@@ -75,7 +75,7 @@ Pane {
                 Layout.alignment: Qt.AlignVCenter
                 sourceSize.width: 22
                 opacity: closeArea.pressed ? 0.6 : 1
-                color: "#4A4A6A"
+                color: Style.colorAlertClose
                 fillMode: Image.PreserveAspectFit
 
                 MouseArea {
@@ -105,7 +105,7 @@ Pane {
 
     Timer {
         id: selfDestructionTimer
-        interval: 3000
+        interval: 2500
 
         onTriggered: root.destroyAlert(root.index)
     }

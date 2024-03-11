@@ -82,6 +82,7 @@ Item {
     property color colorAlertSuccessBorder
     property color colorAlertErrorBorder
     property color colorAlertInfoBorder
+    property color colorAlertClose
 
     // Other
     property color colorDropArea
@@ -339,6 +340,10 @@ Item {
                 target: styleSheet
                 colorAlertInfoBorder: "#D9D8FF"
             }
+            PropertyChanges {
+                target: styleSheet
+                colorAlertClose: "#434344"
+            }
 
             // Other
             PropertyChanges {
@@ -594,27 +599,31 @@ Item {
             // Alerts
             PropertyChanges {
                 target: styleSheet
-                colorAlertSuccessBackground: "#C3E1BE"
+                colorAlertSuccessBackground: "#2F452B"
             }
             PropertyChanges {
                 target: styleSheet
-                colorAlertErrorBackground: "#F0CECA"
+                colorAlertErrorBackground: "#442B29"
             }
             PropertyChanges {
                 target: styleSheet
-                colorAlertInfoBackground: "#CDCDED"
+                colorAlertInfoBackground: "#393956"
             }
             PropertyChanges {
                 target: styleSheet
-                colorAlertSuccessBorder: "#7FB27B"
+                colorAlertSuccessBorder: "#395837"
             }
             PropertyChanges {
                 target: styleSheet
-                colorAlertErrorBorder: "#B9837B"
+                colorAlertErrorBorder: "#50342F"
             }
             PropertyChanges {
                 target: styleSheet
-                colorAlertInfoBorder: "#8684C7"
+                colorAlertInfoBorder: "#474666"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorAlertClose: "#D5D5D5"
             }
 
             // Other
