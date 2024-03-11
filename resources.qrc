@@ -398,5 +398,8 @@
         <file>resources/images/dark_mode/sidebar/wrench_icon.svg</file>
         <file>resources/images/light_mode/decision/x_icon.svg</file>
         <file>resources/images/dark_mode/decision/x_icon.svg</file>
+        <file>resources/images/error_circle_icon.svg</file>
+        <file>resources/images/check_circle_green_icon.svg</file>
+        <file>resources/images/info_circle_icon.svg</file>
     </qresource>
 </RCC>

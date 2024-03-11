@@ -49,6 +49,9 @@ Item {
     property string popupDroplet
     property string patreon
     property string warningCircle
+    property string checkCircleGreen: "/resources/images/check_circle_green_icon.svg"
+    property string infoCircle: "/resources/images/info_circle_icon.svg"
+    property string errorCircle: "/resources/images/error_circle_icon.svg"
 
     // Illustrations
     property string addImage

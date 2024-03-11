@@ -75,6 +75,14 @@ Item {
     property color colorContainerBorder
     property color colorErrorBorder
 
+    // Alerts
+    property color colorAlertSuccessBackground: "#EAFBE7"
+    property color colorAlertErrorBackground: "#FCECEA"
+    property color colorAlertInfoBackground: "#F0F0FF"
+    property color colorAlertSuccessBorder
+    property color colorAlertErrorBorder
+    property color colorAlertInfoBorder
+
     // Other
     property color colorDropArea
     property color colorPopupDim
@@ -304,6 +312,32 @@ Item {
             PropertyChanges {
                 target: styleSheet
                 colorErrorBorder: "#E87964"
+            }
+
+            // Alerts
+            PropertyChanges {
+                target: styleSheet
+                colorAlertSuccessBackground: "#EAFBE7"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorAlertErrorBackground: "#FCECEA"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorAlertInfoBackground: "#F0F0FF"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorAlertSuccessBorder: "#C6F0C2"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorAlertErrorBorder: "#F5C0B8"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorAlertInfoBorder: "#D9D8FF"
             }
 
             // Other
@@ -555,6 +589,32 @@ Item {
             PropertyChanges {
                 target: styleSheet
                 colorErrorBorder: "#CB4C34"
+            }
+
+            // Alerts
+            PropertyChanges {
+                target: styleSheet
+                colorAlertSuccessBackground: "#C3E1BE"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorAlertErrorBackground: "#F0CECA"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorAlertInfoBackground: "#CDCDED"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorAlertSuccessBorder: "#7FB27B"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorAlertErrorBorder: "#B9837B"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorAlertInfoBorder: "#8684C7"
             }
 
             // Other

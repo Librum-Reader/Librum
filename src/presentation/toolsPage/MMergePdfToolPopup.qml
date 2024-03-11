@@ -38,7 +38,8 @@ Popup {
 
         function onMergingPdfsFinished(success) {
             if (success) {
-                print("Success")
+                showAlert("success", qsTr("Merge succeeded"),
+                          qsTr("The merged book was added to your library."))
             } else {
                 print("Fail")
             }
