@@ -1,5 +1,6 @@
 #include "tools_service.hpp"
 #include <QProcess>
+#include <QRegularExpression>
 #include <QStandardPaths>
 #include <QStringList>
 #include "mutool_utils.hpp"
@@ -17,15 +18,12 @@ ToolsService::ToolsService(ILibraryService* libraryService) :
 void ToolsService::merge(const QString& destName,
                          const QList<QString>& filePaths)
 {
-    QString destFolder =
-        QStandardPaths::standardLocations(QStandardPaths::TempLocation).at(0);
-    auto dest = destFolder + "/" + destName;
-
     auto process = new QProcess;
     QProcess::connect(process, &QProcess::finished, process,
                       &QProcess::deleteLater);
 
     // Add the book to the library if the merge was successful
+    auto dest = getTempFilePath(destName);
     QProcess::connect(process, &QProcess::finished, this,
                       [this, dest](int exitCode, QProcess::ExitStatus status)
                       {
@@ -46,15 +44,18 @@ void ToolsService::extractPages(const QString& destName,
                                 const QString& filePath,
                                 const QString& separator)
 {
-    QString destFolder =
-        QStandardPaths::standardLocations(QStandardPaths::TempLocation).at(0);
-    auto dest = destFolder + "/" + destName;
+    if(!extractionSeparationStringIsValid(separator))
+    {
+        emit extractingPagesFinished(false);
+        return;
+    }
 
     auto process = new QProcess;
     QProcess::connect(process, &QProcess::finished, process,
                       &QProcess::deleteLater);
 
     // Add the book to the library if the extract was successful
+    auto dest = getTempFilePath(destName);
     QProcess::connect(process, &QProcess::finished, this,
                       [this, dest](int exitCode, QProcess::ExitStatus status)
                       {
@@ -69,6 +70,20 @@ void ToolsService::extractPages(const QString& destName,
                       });
 
     utils::tools::extract(process, dest, filePath, separator);
+}
+
+bool ToolsService::extractionSeparationStringIsValid(
+    const QString& separator) const
+{
+    static QRegularExpression regex("^[0-9,-]+$");
+    return !separator.isEmpty() && regex.match(separator).hasMatch();
+}
+
+QString ToolsService::getTempFilePath(const QString& fileName) const
+{
+    QString destFolder =
+        QStandardPaths::standardLocations(QStandardPaths::TempLocation).at(0);
+    return destFolder + "/" + fileName;
 }
 
 }  // namespace application::services

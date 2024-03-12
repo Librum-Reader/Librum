@@ -18,6 +18,9 @@ public:
                       const QString& separator) override;
 
 private:
+    bool extractionSeparationStringIsValid(const QString& separator) const;
+    QString getTempFilePath(const QString& fileName) const;
+
     ILibraryService* m_libraryService;
 };
 

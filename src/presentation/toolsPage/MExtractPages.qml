@@ -20,8 +20,17 @@ Popup {
         border.color: Style.colorContainerBorder
     }
 
-    onOpened: LibraryController.bookTitleModel.showOnlyDownloaded = true
-    onClosed: LibraryController.bookTitleModel.showOnlyDownloaded = false
+    onOpened: {
+        LibraryController.bookTitleModel.showOnlyDownloaded = true
+        LibraryController.bookTitleModel.format = "pdf"
+    }
+
+    onClosed: {
+        LibraryController.bookTitleModel.showOnlyDownloaded = false
+        LibraryController.bookTitleModel.format = ""
+
+        internal.resetState()
+    }
 
     Connections {
         target: ToolsController
@@ -35,7 +44,7 @@ Popup {
                           qsTr("The extraction failed. Please try again."))
             }
 
-            extractButton.loading = false
+            internal.resetState()
         }
     }
 
@@ -96,7 +105,6 @@ Popup {
                     splitStringInput.giveFocus()
                 } else {
                     bookSelector.searchText = internal.originalSearchText
-
                     extractButton.opacity = 0.6
                 }
             }
@@ -170,5 +178,24 @@ Popup {
         property string originalSearchText
 
         Component.onCompleted: originalSearchText = bookSelector.searchText
+
+        function resetState() {
+            extractButton.loading = false
+            internal.clearSelectedItems()
+            bookSelector.searchText = internal.originalSearchText
+            splitStringInput.clearText()
+            extractButton.opacity = 0.6
+        }
+
+        function clearSelectedItems() {
+            for (var i = 0; i < bookSelector.list.count; i++) {
+                if (bookSelector.list.itemAtIndex(i) === null)
+                    continue
+
+                bookSelector.list.itemAtIndex(i).selected = false
+            }
+
+            bookSelector.selectedItems = []
+        }
     }
 }

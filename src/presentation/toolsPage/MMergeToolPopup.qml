@@ -47,7 +47,7 @@ Popup {
 
             mergeButton.loading = false
 
-            internal.clearSelectedItems(true)
+            internal.clearSelectedItems()
             internal.refreshModel()
         }
     }
@@ -126,8 +126,10 @@ Popup {
 
             delegate: Rectangle {
                 id: delRoot
-                property string title: bookSelector.selectedItems[modelData].title
-                property string uuid: bookSelector.selectedItems[modelData].uuid
+                property string title: bookSelector.selectedItems[modelData]
+                                       === undefined ? "" : bookSelector.selectedItems[modelData].title
+                property string uuid: bookSelector.selectedItems[modelData]
+                                      === undefined ? "" : bookSelector.selectedItems[modelData].uuid
 
                 height: 52
                 radius: 4
@@ -258,8 +260,11 @@ Popup {
             mergeButton.opacity = bookSelector.selectedItems.length >= 2 ? 1 : 0.6
         }
 
-        function clearSelectedItems(afterAdding = false) {
-            for (var i = 0; i < bookSelector.list.count - (afterAdding ? 1 : 0); i++) {
+        function clearSelectedItems() {
+            for (var i = 0; i < bookSelector.list.count; i++) {
+                if (bookSelector.list.itemAtIndex(i) === null)
+                    continue
+
                 bookSelector.list.itemAtIndex(i).selected = false
             }
 
