@@ -10,6 +10,9 @@ Pane {
     id: root
     property alias selectedItems: popup.selectedItems
     property alias list: popup.list
+    property alias multiSelect: popup.multiSelect
+    property string searchText: qsTr("Search Books...")
+    property alias input: inputField.text
     signal countChanged
     signal escPressed
 
@@ -42,7 +45,7 @@ Pane {
             selectByMouse: true
             color: Style.colorBaseInputText
             font.pointSize: Fonts.size12dot5
-            placeholderText: "Search Books..."
+            placeholderText: root.searchText
             placeholderTextColor: Style.colorPlaceholderText
             selectionColor: Style.colorTextSelection
             background: Rectangle {
@@ -84,5 +87,9 @@ Pane {
 
     function giveFocus() {
         inputField.forceActiveFocus()
+    }
+
+    function closePopup() {
+        popup.close()
     }
 }

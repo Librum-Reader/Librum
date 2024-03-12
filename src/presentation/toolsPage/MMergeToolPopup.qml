@@ -36,7 +36,7 @@ Popup {
     Connections {
         target: ToolsController
 
-        function onMergingPdfsFinished(success) {
+        function onMergingFinished(success) {
             if (success) {
                 showAlert("success", qsTr("Merge succeeded"),
                           qsTr("The merged book was added to your library."))
@@ -64,7 +64,7 @@ Popup {
             Label {
                 id: popupTitle
                 Layout.leftMargin: 36
-                text: qsTr("Merge PDFs")
+                text: qsTr("Merge")
                 font.weight: Font.Bold
                 font.pointSize: Fonts.size20
                 color: Style.colorTitle
@@ -228,8 +228,8 @@ Popup {
                 mergeButton.loading = true
 
                 var name = "Merged: " + bookSelector.selectedItems[0].title
-                ToolsController.mergePdfs(name, bookSelector.selectedItems.map(
-                                              x => x.filePath))
+                ToolsController.merge(name, bookSelector.selectedItems.map(
+                                          x => x.filePath))
             }
         }
 
@@ -237,7 +237,7 @@ Popup {
             Layout.alignment: Qt.AlignHCenter
             Layout.topMargin: 6
             visible: mergeButton.opacity !== 1
-            text: qsTr("Select two or more PDFs to merge.")
+            text: qsTr("Select two or more books to merge.")
             color: Style.colorText
             font.pointSize: Fonts.size10dot25
             elide: Text.ElideRight

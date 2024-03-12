@@ -15,11 +15,14 @@ class APPLICATION_EXPORT IToolsService : public QObject
 public:
     virtual ~IToolsService() noexcept = default;
 
-    virtual void mergePdfs(const QString& destName,
-                           const QList<QString>& filePaths) = 0;
+    virtual void merge(const QString& destName,
+                       const QList<QString>& filePaths) = 0;
+    virtual void extractPages(const QString& destName, const QString& filePath,
+                              const QString& separator) = 0;
 
 signals:
-    void mergingPdfsFinished(bool success);
+    void mergingFinished(bool success);
+    void extractingPagesFinished(bool success);
 };
 
 }  // namespace application

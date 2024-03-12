@@ -22,8 +22,8 @@ Page {
         MTitle {
             id: pageTitle
             Layout.topMargin: 44
-            titleText: qsTr("Tools")
-            descriptionText: qsTr("Powerful tools to modify your books")
+            titleText: qsTr("PDF Tools")
+            descriptionText: qsTr("Powerful tools to modify your PDF files")
         }
 
         Pane {
@@ -90,41 +90,30 @@ Page {
                 }
 
                 ToolItem {
-                    text: qsTr("Merge PDFs")
-                    description: "Merge multiple PDFs into one"
-                    onClicked: mergePdfPopup.open()
+                    text: qsTr("Merge")
+                    description: qsTr("Merge multiple books into one")
+                    onClicked: mergePopup.open()
                 }
 
                 ToolItem {
-                    text: qsTr("Sign PDF")
-                    onClicked: mergePdfPopup.open()
-                }
-
-                ToolItem {
-                    text: qsTr("Sign PDF")
-                    onClicked: mergePdfPopup.open()
-                }
-
-                ToolItem {
-                    text: qsTr("Sign PDF")
-                    onClicked: mergePdfPopup.open()
-                }
-
-                ToolItem {
-                    text: qsTr("Sign PDF")
-                    onClicked: mergePdfPopup.open()
-                }
-
-                ToolItem {
-                    text: qsTr("Sign PDF")
-                    onClicked: mergePdfPopup.open()
+                    text: qsTr("Extract Page(s)")
+                    description: qsTr("Extract selected pages from a book")
+                    onClicked: extractPagesPopup.open()
                 }
             }
         }
     }
 
-    MMergePdfToolPopup {
-        id: mergePdfPopup
+    MMergeToolPopup {
+        id: mergePopup
+        width: parent.width * 0.6
+        height: parent.height * 0.65
+        y: (parent.height - height) / 2
+        x: (parent.width - width) / 2
+    }
+
+    MExtractPages {
+        id: extractPagesPopup
         width: parent.width * 0.6
         height: parent.height * 0.65
         y: (parent.height - height) / 2

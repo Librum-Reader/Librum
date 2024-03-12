@@ -114,11 +114,12 @@
         <file>readingPage/externalReadingToolbar/MExternalReadingOptionsPopup.qml</file>
         <file>readingPage/externalReadingToolbar/MExternalReadingToolBar.qml</file>
         <file>toolsPage/MToolsPage.qml</file>
-        <file>toolsPage/MMergePdfToolPopup.qml</file>
+        <file>toolsPage/MMergeToolPopup.qml</file>
         <file>modules/CustomComponents/bookSelector/MBookSelector.qml</file>
         <file>modules/CustomComponents/bookSelector/MBookSelectorPopup.qml</file>
         <file>modules/CustomComponents/MAlertBox.qml</file>
         <file>modules/CustomComponents/MProgressArc.qml</file>
         <file>modules/CustomComponents/MSpinner.qml</file>
+        <file>toolsPage/MExtractPages.qml</file>
     </qresource>
 </RCC>

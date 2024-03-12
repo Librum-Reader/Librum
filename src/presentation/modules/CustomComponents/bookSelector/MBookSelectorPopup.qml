@@ -10,6 +10,7 @@ import Librum.controllers
 Popup {
     id: root
     property bool checkBoxStyle: true
+    property bool multiSelect: true
     property var selectedItems: []
     property alias list: listView
     signal itemsChanged
@@ -67,6 +68,10 @@ Popup {
                                    root.selectedItems.splice(indexInParent, 1)
                                    listView.currentItem.selected = false
                                } else {
+                                   if (!root.multiSelect) {
+                                       internal.clearSelectedItems()
+                                   }
+
                                    root.selectedItems.push({
                                                                "uuid": uuid,
                                                                "title": listView.currentItem.getItemProperty(
@@ -89,5 +94,17 @@ Popup {
 
     function goToTopOfList() {
         listView.contentY = listView.originY
+    }
+
+    QtObject {
+        id: internal
+
+        function clearSelectedItems() {
+            for (var i = 0; i < listView.count; i++) {
+                listView.itemAtIndex(i).selected = false
+            }
+
+            root.selectedItems = []
+        }
     }
 }

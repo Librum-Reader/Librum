@@ -14,8 +14,8 @@ ToolsService::ToolsService(ILibraryService* libraryService) :
 {
 }
 
-void ToolsService::mergePdfs(const QString& destName,
-                             const QList<QString>& filePaths)
+void ToolsService::merge(const QString& destName,
+                         const QList<QString>& filePaths)
 {
     QString destFolder =
         QStandardPaths::standardLocations(QStandardPaths::TempLocation).at(0);
@@ -32,14 +32,43 @@ void ToolsService::mergePdfs(const QString& destName,
                           if(status == QProcess::NormalExit && exitCode == 0)
                           {
                               m_libraryService->addBook(dest, true, 0);
-                              emit mergingPdfsFinished(true);
+                              emit mergingFinished(true);
                               return;
                           }
 
-                          emit mergingPdfsFinished(false);
+                          emit mergingFinished(false);
                       });
 
-    utils::tools::mergePdfs(process, dest, filePaths);
+    utils::tools::merge(process, dest, filePaths);
+}
+
+void ToolsService::extractPages(const QString& destName,
+                                const QString& filePath,
+                                const QString& separator)
+{
+    QString destFolder =
+        QStandardPaths::standardLocations(QStandardPaths::TempLocation).at(0);
+    auto dest = destFolder + "/" + destName;
+
+    auto process = new QProcess;
+    QProcess::connect(process, &QProcess::finished, process,
+                      &QProcess::deleteLater);
+
+    // Add the book to the library if the extract was successful
+    QProcess::connect(process, &QProcess::finished, this,
+                      [this, dest](int exitCode, QProcess::ExitStatus status)
+                      {
+                          if(status == QProcess::NormalExit && exitCode == 0)
+                          {
+                              m_libraryService->addBook(dest, true, 0);
+                              emit extractingPagesFinished(true);
+                              return;
+                          }
+
+                          emit extractingPagesFinished(false);
+                      });
+
+    utils::tools::extract(process, dest, filePath, separator);
 }
 
 }  // namespace application::services

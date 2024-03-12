@@ -12,8 +12,10 @@ class APPLICATION_EXPORT ToolsService : public IToolsService
 public:
     ToolsService(ILibraryService* libraryService);
 
-    void mergePdfs(const QString& destName,
-                   const QList<QString>& filePaths) override;
+    void merge(const QString& destName,
+               const QList<QString>& filePaths) override;
+    void extractPages(const QString& destName, const QString& filePath,
+                      const QString& separator) override;
 
 private:
     ILibraryService* m_libraryService;
