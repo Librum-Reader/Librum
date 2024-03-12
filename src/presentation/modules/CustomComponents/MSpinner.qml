@@ -2,7 +2,7 @@ import QtQuick
 
 MProgressArc {
     id: root
-    property int animDuration: 540
+    property int animDuration: 560
 
     implicitWidth: width
     implicitHeight: height
