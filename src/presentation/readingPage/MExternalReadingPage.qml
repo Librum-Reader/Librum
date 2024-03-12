@@ -104,7 +104,7 @@ Page {
             Layout.fillWidth: true
             currentPage: ExternalBookController.currentPage
             pageCount: ExternalBookController.pageCount
-            bookTitle: "Some"
+            bookTitle: ""
 
             onBackButtonClicked: {
                 loadPage(homePage, sidebar.homeItem, false)
