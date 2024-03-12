@@ -63,6 +63,8 @@ MFlickWrapper {
             } else {
                 loginFailedPopup.open()
             }
+
+            loginButton.loading = false
         }
     }
 
@@ -331,6 +333,7 @@ MFlickWrapper {
         property color previousBorderColor: emailInput.borderColor
 
         function login() {
+            loginButton.loading = true
             AuthController.loginUser(emailInput.text, passwordInput.text,
                                      rememberMeCheckBox.checked)
         }
@@ -340,6 +343,7 @@ MFlickWrapper {
                 UserController.loadUser(rememberMeCheckBox.checked)
             } else if (errorCode !== ErrorCode.AutomaticLoginFailed) {
                 internal.setLoginError(errorCode, message)
+                loginButton.loading = false
             }
         }
 

@@ -41,8 +41,11 @@ Popup {
                 showAlert("success", qsTr("Merge succeeded"),
                           qsTr("The merged book was added to your library."))
             } else {
-                print("Fail")
+                showAlert("error", qsTr("Merge failed"),
+                          qsTr("The merged failed. Please try again."))
             }
+
+            mergeButton.loading = false
 
             internal.clearSelectedItems(true)
             internal.refreshModel()
@@ -221,6 +224,8 @@ Popup {
                 if (bookSelector.selectedItems.length <= 1) {
                     return
                 }
+
+                mergeButton.loading = true
 
                 var name = "Merged: " + bookSelector.selectedItems[0].title
                 ToolsController.mergePdfs(name, bookSelector.selectedItems.map(
