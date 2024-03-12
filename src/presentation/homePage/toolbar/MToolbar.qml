@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import CustomComponents
 import Librum.controllers
 import Librum.models
+import Librum.style
 import Librum.icons
 import Librum.globals
 import "filterByButton"
@@ -89,28 +90,18 @@ Item {
         }
 
         Item {
-            width: 36
-            height: 36
+            Layout.preferredWidth: 36
+            Layout.preferredHeight: 36
             clip: true
-            Layout.leftMargin: 2
 
-            AnimatedImage {
+            MSpinner {
                 id: loadingAnimation
+                arcColor: Style.colorBasePurple
                 anchors.centerIn: parent
-                width: 60
-                height: 60
+                width: 24
+                height: 24
+                arcWidth: 3
                 visible: AppInfoController.online && LibraryController.isSyncing
-                playing: AppInfoController.online && LibraryController.isSyncing
-                source: Icons.loadingAnimation
-                fillMode: Image.PreserveAspectFit
-
-                MouseArea {
-                    id: loadingAnimationArea
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onContainsMouseChanged: containsMouse ? librarySyncingToolTip.open(
-                                                                ) : librarySyncingToolTip.close()
-                }
             }
 
             Image {

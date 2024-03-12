@@ -5,9 +5,6 @@ import QtQuick
 Item {
     id: iconSheet
 
-    // Animations
-    property string loadingAnimation: "/resources/animations/loading_animation.gif"
-
     // Arrows-icons
     property string arrowheadBackIcon
     property string arrowheadNextIcon
