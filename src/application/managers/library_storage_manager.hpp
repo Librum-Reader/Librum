@@ -39,7 +39,8 @@ private slots:
                                             bool isLastChunk, const QUuid& uuid,
                                             const QString& format);
     void saveDownloadedCoverToFile(const QByteArray& data, const QUuid& uuid);
-    void processBookMetadata(std::vector<domain::entities::Book>& books);
+    void processBookMetadata(std::vector<domain::entities::Book>& books,
+                             bool success);
 
 private:
     bool userLoggedIn();

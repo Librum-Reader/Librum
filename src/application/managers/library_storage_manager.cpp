@@ -93,12 +93,13 @@ void LibraryStorageManager::saveDownloadedCoverToFile(const QByteArray& data,
     emit finishedDownloadingBookCover(uuid, destination);
 }
 
-void LibraryStorageManager::processBookMetadata(std::vector<Book>& books)
+void LibraryStorageManager::processBookMetadata(std::vector<Book>& books,
+                                                bool success)
 {
     // Avoid storing books for logged out users by verifying login
     // status before adding books, else books might get loaded into
     // memory, even though the user is logged out.
-    if(!userLoggedIn())
+    if(!userLoggedIn() || !success)
         return;
 
 

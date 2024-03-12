@@ -292,7 +292,7 @@ void LibraryStorageAccess::processGettingBooksMetaDataResult(
         api_error_helper::logErrorMessage(reply, "Getting books");
 
         std::vector<QJsonObject> empty;
-        emit gettingBooksMetaDataFinished(empty);
+        emit gettingBooksMetaDataFinished(empty, false);
         reply->deleteLater();
         return;
     }
@@ -307,7 +307,7 @@ void LibraryStorageAccess::processGettingBooksMetaDataResult(
         books.emplace_back(jsonBook.toObject());
     }
 
-    emit gettingBooksMetaDataFinished(books);
+    emit gettingBooksMetaDataFinished(books, true);
     reply->deleteLater();
 }
 

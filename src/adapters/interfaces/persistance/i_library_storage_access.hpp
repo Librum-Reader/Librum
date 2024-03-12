@@ -44,7 +44,8 @@ signals:
     void downloadingBookMediaProgressChanged(const QUuid& uuid,
                                              qint64 bytesReceived,
                                              qint64 bytesTotal);
-    void gettingBooksMetaDataFinished(std::vector<QJsonObject>& metaData);
+    void gettingBooksMetaDataFinished(std::vector<QJsonObject>& metaData,
+                                      bool success);
     void downloadingBookCoverFinished(const QByteArray& data,
                                       const QUuid& uuid);
     void uploadLimitReached();
