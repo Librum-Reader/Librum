@@ -242,6 +242,20 @@ Page {
                         id: bookDelegate
 
                         onLeftButtonClicked: {
+                            // If book selection mode is enabled we just want to select / deselect the clicked book
+                            if (Globals.bookSelectionModeEnabled) {
+                                var index = Globals.selectedBooks.indexOf(
+                                            model.uuid)
+                                if (index !== -1) {
+                                    bookDelegate.deselect()
+                                    Globals.selectedBooks.splice(index, 1)
+                                } else {
+                                    bookDelegate.select()
+                                    Globals.selectedBooks.push(model.uuid)
+                                }
+                                return
+                            }
+
                             if (model.downloaded) {
                                 Globals.selectedBook = LibraryController.getBook(
                                             model.uuid)
