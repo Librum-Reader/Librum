@@ -131,9 +131,9 @@ Popup {
 
                 height: 52
                 radius: 4
-                color: "#222222"
+                color: Style.colorToolListItemBackground
                 border.width: 1
-                border.color: "#1E1E1E"
+                border.color: Style.colorToolListItemBorder
                 width: listView.width - listView.scrollbarExtraWidth
 
                 RowLayout {
@@ -211,7 +211,7 @@ Popup {
             Layout.preferredWidth: parent.width * 0.4
             Layout.preferredHeight: 44
             Layout.alignment: Qt.AlignHCenter
-            opacity: 0.5
+            opacity: 0.6
             borderWidth: 0
             backgroundColor: Style.colorBasePurple
             fontSize: Fonts.size12
@@ -235,7 +235,7 @@ Popup {
 
         Label {
             Layout.alignment: Qt.AlignHCenter
-            Layout.topMargin: 5
+            Layout.topMargin: 6
             visible: mergeButton.opacity !== 1
             text: qsTr("Select two or more PDFs to merge.")
             color: Style.colorText
@@ -255,7 +255,7 @@ Popup {
             listView.model = 0
             listView.model = bookSelector.selectedItems.length
 
-            mergeButton.opacity = bookSelector.selectedItems.length >= 2 ? 1 : 0.5
+            mergeButton.opacity = bookSelector.selectedItems.length >= 2 ? 1 : 0.6
         }
 
         function clearSelectedItems(afterAdding = false) {

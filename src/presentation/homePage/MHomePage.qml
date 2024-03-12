@@ -190,9 +190,7 @@ Page {
                     fontSize: Fonts.size13
                     imagePath: Icons.addWhite
 
-                    // onClicked: importFilesDialog.open()
-                    onClicked: showAlert("success", "Something worked",
-                                         "Yay it worked just fine!")
+                    onClicked: importFilesDialog.open()
                 }
             }
 

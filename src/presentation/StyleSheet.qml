@@ -22,6 +22,7 @@ Item {
     property color colorText
     property color colorErrorText
     property color colorTitle
+    property color colorLightTitle
     property color colorMatteTitle
     property color colorBannerText
     property color colorLinkText
@@ -56,6 +57,8 @@ Item {
     property color colorBookImageBackground
     property color colorErrorBackground
     property color colorContainerBackground
+    property color colorToolBackground
+    property color colorToolListItemBackground
     property color colorPopupBackground
     property color colorBookBackground
     property color colorReadingViewBackground
@@ -74,6 +77,7 @@ Item {
     property color colorCheckboxBorder
     property color colorContainerBorder
     property color colorErrorBorder
+    property color colorToolListItemBorder
 
     // Alerts
     property color colorAlertSuccessBackground: "#EAFBE7"
@@ -147,6 +151,10 @@ Item {
             PropertyChanges {
                 target: styleSheet
                 colorTitle: "#32324D"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorLightTitle: "#7E7E89"
             }
             PropertyChanges {
                 target: styleSheet
@@ -250,6 +258,14 @@ Item {
             }
             PropertyChanges {
                 target: styleSheet
+                colorToolBackground: "#F6F6F9"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorToolListItemBackground: "#D2D2D2"
+            }
+            PropertyChanges {
+                target: styleSheet
                 colorPopupBackground: "#FFFFFF"
             }
             PropertyChanges {
@@ -313,6 +329,10 @@ Item {
             PropertyChanges {
                 target: styleSheet
                 colorErrorBorder: "#E87964"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorToolListItemBorder: "#C1C1C1"
             }
 
             // Alerts
@@ -431,6 +451,10 @@ Item {
             }
             PropertyChanges {
                 target: styleSheet
+                colorLightTitle: "#CBCBCB"
+            }
+            PropertyChanges {
+                target: styleSheet
                 colorMatteTitle: "#B6B6C8"
             }
             PropertyChanges {
@@ -531,6 +555,14 @@ Item {
             }
             PropertyChanges {
                 target: styleSheet
+                colorToolBackground: "#343534"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorToolListItemBackground: "#222222"
+            }
+            PropertyChanges {
+                target: styleSheet
                 colorPopupBackground: "#2C2C2C"
             }
             PropertyChanges {
@@ -594,6 +626,10 @@ Item {
             PropertyChanges {
                 target: styleSheet
                 colorErrorBorder: "#CB4C34"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorToolListItemBorder: "#1E1E1E"
             }
 
             // Alerts

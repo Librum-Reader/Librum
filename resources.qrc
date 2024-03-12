@@ -401,5 +401,6 @@
         <file>resources/images/error_circle_icon.svg</file>
         <file>resources/images/check_circle_green_icon.svg</file>
         <file>resources/images/info_circle_icon.svg</file>
+        <file>resources/images/light_mode/sidebar/settings_icon.svg</file>
     </qresource>
 </RCC>

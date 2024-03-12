@@ -52,9 +52,9 @@ Page {
 
                     implicitWidth: 380
                     implicitHeight: 220
-                    opacity: area.pressed ? 0.6 : 1
+                    opacity: area.pressed ? 0.75 : 1
                     background: Rectangle {
-                        color: "#343534"
+                        color: Style.colorToolBackground
                         radius: 6
                     }
 
@@ -66,7 +66,7 @@ Page {
                             id: title
                             Layout.alignment: Qt.AlignHCenter
                             text: itemRoot.text
-                            color: Style.colorTitle
+                            color: Style.colorLightTitle
                             font.bold: true
                             font.pointSize: Fonts.size20
                         }
@@ -75,7 +75,7 @@ Page {
                             id: description
                             Layout.alignment: Qt.AlignHCenter
                             text: itemRoot.description
-                            color: Style.colorText
+                            color: Style.colorLightText
                             font.pointSize: Fonts.size13
                         }
                     }
