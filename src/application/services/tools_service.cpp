@@ -72,6 +72,31 @@ void ToolsService::extractPages(const QString& destName,
     utils::tools::extract(process, dest, filePath, separator);
 }
 
+void ToolsService::convert(const QString& destName,
+                                const QString& filePath)
+{
+    auto process = new QProcess;
+    QProcess::connect(process, &QProcess::finished, process,
+                      &QProcess::deleteLater);
+
+    // Add the book to the library if the extract was successful
+    auto dest = getTempFilePath(destName);
+    QProcess::connect(process, &QProcess::finished, this,
+                      [this, dest](int exitCode, QProcess::ExitStatus status)
+                      {
+                          if(status == QProcess::NormalExit && exitCode == 0)
+                          {
+                              m_libraryService->addBook(dest, true, 0);
+                              emit convertingFinished(true);
+                              return;
+                          }
+
+                          emit convertingFinished(false);
+                      });
+
+    utils::tools::convert(process, dest, filePath);
+}
+
 bool ToolsService::extractionSeparationStringIsValid(
     const QString& separator) const
 {

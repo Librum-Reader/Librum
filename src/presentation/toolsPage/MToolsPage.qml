@@ -100,11 +100,17 @@ Page {
                     description: qsTr("Extract selected pages from a book")
                     onClicked: extractPagesPopup.open()
                 }
+
+                ToolItem {
+                    text: qsTr("Convert")
+                    description: qsTr("Convert books to a different format")
+                    onClicked: convertPopup.open()
+                }
             }
         }
     }
 
-    MMergeToolPopup {
+    MMergePopup {
         id: mergePopup
         width: parent.width * 0.6
         height: parent.height * 0.65
@@ -112,8 +118,16 @@ Page {
         x: (parent.width - width) / 2
     }
 
-    MExtractPages {
+    MExtractPagesPopup {
         id: extractPagesPopup
+        width: parent.width * 0.6
+        height: parent.height * 0.65
+        y: (parent.height - height) / 2
+        x: (parent.width - width) / 2
+    }
+
+    MConvertPopup {
+        id: convertPopup
         width: parent.width * 0.6
         height: parent.height * 0.65
         y: (parent.height - height) / 2

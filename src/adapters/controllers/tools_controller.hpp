@@ -18,6 +18,8 @@ public:
                const QList<QString>& filePaths) override;
     void extractPages(const QString& destName, const QString& filePath,
                       const QString& separatorString) override;
+    void convert(const QString& destName, const QString& destFormat,
+                 const QString& filePath) override;
 
 private:
     application::IToolsService* m_toolsService;

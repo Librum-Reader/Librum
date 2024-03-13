@@ -16,6 +16,8 @@ public:
                const QList<QString>& filePaths) override;
     void extractPages(const QString& destName, const QString& filePath,
                       const QString& separator) override;
+    void convert(const QString& destName,
+                      const QString& filePath) override;
 
 private:
     bool extractionSeparationStringIsValid(const QString& separator) const;

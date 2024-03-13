@@ -26,4 +26,13 @@ void extract(QProcess* process, const QString& dest, const QString& filePath,
     process->start(tool, args);
 }
 
+void convert(QProcess* process, const QString& dest, const QString& filePath)
+{
+    QString tool = "mutool";
+    QString subCommand = "convert";
+
+    auto args = QStringList { subCommand, "-o", dest, filePath };
+    process->start(tool, args);
+}
+
 }  // namespace application::core::utils::tools

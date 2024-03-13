@@ -8,9 +8,13 @@ ToolsController::ToolsController(application::IToolsService* toolsService) :
 {
     connect(m_toolsService, &application::IToolsService::mergingFinished, this,
             &ToolsController::mergingFinished);
+
     connect(m_toolsService,
             &application::IToolsService::extractingPagesFinished, this,
             &ToolsController::extractingPagesFinished);
+
+    connect(m_toolsService, &application::IToolsService::convertingFinished,
+            this, &ToolsController::convertingFinished);
 }
 
 void ToolsController::merge(const QString& destName,
@@ -24,6 +28,12 @@ void ToolsController::extractPages(const QString& destName,
                                    const QString& separatorString)
 {
     m_toolsService->extractPages(destName + ".pdf", filePath, separatorString);
+}
+
+void ToolsController::convert(const QString& destName, const QString& format,
+                              const QString& filePath)
+{
+    m_toolsService->convert(destName + format, filePath);
 }
 
 }  // namespace adapters::controllers
