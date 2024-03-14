@@ -544,7 +544,8 @@ BookOperationStatus LibraryService::saveBookToFile(const QUuid& uuid,
     }
 
     QString currentBookPath = book->getFilePath();
-    QString destinaton = pathToFolder + "/" + QUrl(currentBookPath).fileName();
+    QString destinaton =
+        pathToFolder + "/" + book->getTitle() + "." + book->getExtension();
 
     auto result = QFile::copy(book->getFilePath(), destinaton);
     if(!result)

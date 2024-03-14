@@ -6,7 +6,6 @@
 #include <QJsonDocument>
 #include <algorithm>
 #include <cmath>
-#include <ranges>
 
 using namespace domain::value_objects;
 
