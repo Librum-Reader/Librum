@@ -280,6 +280,16 @@ void Book::setFormat(const QString& newFormat)
     m_metaData.format = newFormat;
 }
 
+const QString& Book::getExtension() const
+{
+    return m_metaData.extension;
+}
+
+void Book::setExtension(const QString& newExtension)
+{
+    m_metaData.extension = newExtension;
+}
+
 const QString& Book::getLanguage() const
 {
     return m_metaData.language;
@@ -507,6 +517,8 @@ void Book::update(const Book& other)
         m_metaData.creationDate = other.getCreationDate();
     if(m_metaData.format != other.getFormat())
         m_metaData.format = other.getFormat();
+    if(m_metaData.extension != other.getExtension())
+        m_metaData.extension = other.getExtension();
     if(m_metaData.language != other.getLanguage())
         m_metaData.language = other.getLanguage();
     if(m_metaData.documentSize != other.getDocumentSize())
@@ -633,6 +645,7 @@ QByteArray Book::toJson() const
         { "currentPage", getCurrentPage() },
         { "creationDate", getCreationDate() },
         { "format", getFormat() },
+        { "extension", getExtension() },
         { "language", getLanguage() },
         { "documentSize", getDocumentSize() },
         { "pagesSize", getPagesSize() },
@@ -729,6 +742,7 @@ BookMetaData Book::getBookMetaDataFromJson(const QJsonObject& jsonBook)
         .creator = jsonBook["creator"].toString(),
         .creationDate = jsonBook["creationDate"].toString(),
         .format = jsonBook["format"].toString(),
+        .extension = jsonBook["extension"].toString(),
         .language = jsonBook["language"].toString(),
         .documentSize = jsonBook["documentSize"].toString(),
         .pagesSize = jsonBook["pagesSize"].toString(),

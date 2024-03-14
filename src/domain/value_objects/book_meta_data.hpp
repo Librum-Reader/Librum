@@ -14,6 +14,7 @@ struct DOMAIN_EXPORT BookMetaData
     QString creator;
     QString creationDate;
     QString format;
+    QString extension;
     QString language;
     QString documentSize;
     QString pagesSize;

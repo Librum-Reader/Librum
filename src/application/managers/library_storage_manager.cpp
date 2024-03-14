@@ -58,10 +58,10 @@ void LibraryStorageManager::clearUserData()
 
 void LibraryStorageManager::saveDownloadedBookMediaChunkToFile(
     const QByteArray& data, bool isLastChunk, const QUuid& uuid,
-    const QString& format)
+    const QString& extension)
 {
     auto destDir = m_downloadedBooksTracker->getLibraryDir();
-    QString fileName = uuid.toString(QUuid::WithoutBraces) + "." + format;
+    QString fileName = uuid.toString(QUuid::WithoutBraces) + "." + extension;
     auto destination = destDir.filePath(fileName);
 
     application::utility::saveDownloadedBookMediaChunkToFile(

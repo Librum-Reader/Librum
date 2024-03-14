@@ -51,6 +51,9 @@ public:
     const QString& getFormat() const;
     void setFormat(const QString& newFormat);
 
+    const QString& getExtension() const;
+    void setExtension(const QString& newExtension);
+
     const QString& getLanguage() const;
     void setLanguage(const QString& newLanguage);
 
