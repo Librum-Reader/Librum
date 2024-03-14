@@ -30,10 +30,10 @@ void ToolsController::extractPages(const QString& destName,
     m_toolsService->extractPages(destName + ".pdf", filePath, separatorString);
 }
 
-void ToolsController::convert(const QString& destName, const QString& format,
-                              const QString& filePath)
+void ToolsController::imageToPdf(const QString& destName,
+                                 const QString& filePath)
 {
-    m_toolsService->convert(destName + format, filePath);
+    m_toolsService->imageToPdf(destName + ".pdf", filePath);
 }
 
 }  // namespace adapters::controllers

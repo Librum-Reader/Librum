@@ -52,7 +52,7 @@ Page {
 
                     implicitWidth: 380
                     implicitHeight: 220
-                    horizontalPadding: 8
+                    horizontalPadding: 16
                     opacity: area.pressed ? 0.75 : 1
                     background: Rectangle {
                         color: Style.colorToolBackground

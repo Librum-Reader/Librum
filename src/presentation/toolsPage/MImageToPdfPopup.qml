@@ -155,11 +155,8 @@ Popup {
                 extractButton.loading = true
 
                 var name = nameInput.text === "" ? nameInput.placeholderContent : nameInput.text
-                ToolsController.convert(
-                            name, formatComboBox.listView.itemAtIndex(
-                                formatComboBox.listView.currentIndex).getItemProperty(
-                                "format"),
-                            bookSelector.selectedItems[0].filePath)
+                ToolsController.imageToPdf(
+                            name, bookSelector.selectedItems[0].filePath)
             }
         }
 

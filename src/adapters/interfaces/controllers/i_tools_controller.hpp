@@ -23,9 +23,8 @@ public:
     Q_INVOKABLE virtual void extractPages(const QString& destName,
                                           const QString& filePath,
                                           const QString& separatorString) = 0;
-    Q_INVOKABLE virtual void convert(const QString& destName,
-                                     const QString& destFormat,
-                                     const QString& filePath) = 0;
+    Q_INVOKABLE virtual void imageToPdf(const QString& destName,
+                                        const QString& filePath) = 0;
 
 signals:
     void mergingFinished(bool sucess);
