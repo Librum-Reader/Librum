@@ -102,9 +102,9 @@ Page {
                 }
 
                 ToolItem {
-                    text: qsTr("Convert")
-                    description: qsTr("Convert books to a different format")
-                    onClicked: convertPopup.open()
+                    text: qsTr("Image to PDF")
+                    description: qsTr("Convert an image (PNG, JPEG, SVG, GIF) to PDF")
+                    onClicked: imageToPdfPopup.open()
                 }
             }
         }
@@ -126,8 +126,8 @@ Page {
         x: (parent.width - width) / 2
     }
 
-    MConvertPopup {
-        id: convertPopup
+    MImageToPdfPopup {
+        id: imageToPdfPopup
         width: parent.width * 0.6
         height: parent.height * 0.65
         y: (parent.height - height) / 2

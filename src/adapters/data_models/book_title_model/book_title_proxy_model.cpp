@@ -68,7 +68,8 @@ bool BookTitleProxyModel::filterAcceptsFormat(const QModelIndex& index) const
     if(firstSpaceIndex != -1)
         format = format.left(firstSpaceIndex);
 
-    return format == m_format;
+
+    return m_format.split(",").contains(format);
 }
 
 bool BookTitleProxyModel::getShowOnlyDownloaded() const

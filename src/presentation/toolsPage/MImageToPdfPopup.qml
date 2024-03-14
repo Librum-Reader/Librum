@@ -20,9 +20,13 @@ Popup {
         border.color: Style.colorContainerBorder
     }
 
-    onOpened: LibraryController.bookTitleModel.showOnlyDownloaded = true
+    onOpened: {
+        LibraryController.bookTitleModel.showOnlyDownloaded = true
+        LibraryController.bookTitleModel.format = "png,jpeg,jpg,svg"
+    }
     onClosed: {
         LibraryController.bookTitleModel.showOnlyDownloaded = false
+        LibraryController.bookTitleModel.format = ""
 
         internal.resetState()
     }
@@ -174,12 +178,7 @@ Popup {
                         }
                     }
 
-                    onItemChanged: index => {
-                                       print(
-                                           formatComboBox.listView.itemAtIndex(
-                                               index).format)
-                                       formatComboBox.closePopup()
-                                   }
+                    onItemChanged: index => formatComboBox.closePopup()
                 }
             }
         }
@@ -221,8 +220,11 @@ Popup {
 
                 extractButton.loading = true
 
-                ToolsController.convert(nameInput.text, "epub",
-                                        bookSelector.selectedItems[0].filePath)
+                ToolsController.convert(
+                            nameInput.text, formatComboBox.listView.itemAtIndex(
+                                formatComboBox.listView.currentIndex).getItemProperty(
+                                "format"),
+                            bookSelector.selectedItems[0].filePath)
             }
         }
 

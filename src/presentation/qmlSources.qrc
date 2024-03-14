@@ -121,6 +121,6 @@
         <file>modules/CustomComponents/MProgressArc.qml</file>
         <file>modules/CustomComponents/MSpinner.qml</file>
         <file>toolsPage/MExtractPagesPopup.qml</file>
-        <file>toolsPage/MConvertPopup.qml</file>
+        <file>toolsPage/MImageToPdfPopup.qml</file>
     </qresource>
 </RCC>
