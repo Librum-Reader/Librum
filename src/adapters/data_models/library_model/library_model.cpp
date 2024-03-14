@@ -55,6 +55,9 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
     case FormatRole:
         return book.getFormat();
         break;
+    case ExtensionRole:
+        return book.getExtension();
+        break;
     case LanguageRole:
         return book.getLanguage();
         break;
@@ -121,6 +124,7 @@ QHash<int, QByteArray> LibraryModel::roleNames() const
         { CreatorRole, "creator" },
         { CreationDateRole, "creationDate" },
         { FormatRole, "format" },
+        { ExtensionRole, "extension" },
         { DocumentSizeRole, "documentSize" },
         { PagesSizeRole, "pagesSize" },
         { PageCountRole, "pageCount" },

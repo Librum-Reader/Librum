@@ -388,6 +388,7 @@ void LibraryController::addBookMetaDataToDto(const Book& book, BookDto& bookDto)
     bookDto.creator = book.getCreator();
     bookDto.creationDate = book.getCreationDate();
     bookDto.format = book.getFormat();
+    bookDto.extension = book.getExtension();
     bookDto.language = book.getLanguage();
     bookDto.documentSize = book.getDocumentSize();
     bookDto.pagesSize = book.getPagesSize();

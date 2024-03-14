@@ -153,7 +153,8 @@ Popup {
                                 visible: !bookCover.visible
                                 color: Style.colorNoImageLabel
                                 text: Globals.selectedBook
-                                      !== null ? "." + Globals.selectedBook.format : ""
+                                      !== null ? "." + Globals.selectedBook.extension.toUpperCase(
+                                                     ) : ""
                                 font.pointSize: Fonts.size20
                                 font.bold: true
                             }

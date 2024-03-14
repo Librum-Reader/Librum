@@ -30,6 +30,7 @@ public:
         CreatorRole,
         CreationDateRole,
         FormatRole,
+        ExtensionRole,
         LanguageRole,
         DocumentSizeRole,
         PagesSizeRole,

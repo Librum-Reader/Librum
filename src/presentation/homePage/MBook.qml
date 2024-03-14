@@ -125,7 +125,7 @@ Item {
                     id: noImageLabel
                     Layout.alignment: Qt.AlignCenter
                     visible: bookCover.source == ""
-                    text: "." + model.format
+                    text: "." + model.extension.toUpperCase()
                     color: Style.colorNoImageLabel
                     font.pointSize: Fonts.size20
                     font.bold: true
