@@ -22,11 +22,11 @@ Popup {
 
     onOpened: {
         LibraryController.bookTitleModel.showOnlyDownloaded = true
-        LibraryController.bookTitleModel.format = "png,jpeg,jpg,svg"
+        LibraryController.bookTitleModel.extension = "png,jpeg,jpg,svg"
     }
     onClosed: {
         LibraryController.bookTitleModel.showOnlyDownloaded = false
-        LibraryController.bookTitleModel.format = ""
+        LibraryController.bookTitleModel.extension = ""
 
         internal.resetState()
     }
@@ -101,102 +101,36 @@ Popup {
 
                     bookSelector.closePopup()
                     extractButton.opacity = 1
+                    nameInput.placeholderContent = "Converted: "
+                            + bookSelector.selectedItems[0].title
                     nameInput.giveFocus()
                 } else {
                     bookSelector.searchText = internal.originalSearchText
                     extractButton.opacity = 0.6
+
+                    nameInput.placeholderContent = "New Book"
                 }
             }
 
             onEscPressed: root.close()
         }
 
-        Item {
+        MLabeledInputBox {
+            id: nameInput
             Layout.preferredWidth: parent.width * 0.6
             Layout.alignment: Qt.AlignHCenter
             Layout.topMargin: 48
-            height: inputLayout.implicitHeight
-
-            RowLayout {
-                id: inputLayout
-                width: parent.width
-
-                MLabeledInputBox {
-                    id: nameInput
-                    Layout.fillWidth: true
-                    boxHeight: 46
-                    headerFontSize: Fonts.size11
-                    placeholderContent: "New Book"
-                    placeholderColor: Style.colorPlaceholderText
-                    headerText: "Output Name"
-                }
-
-                MComboBox {
-                    id: formatComboBox
-                    Layout.preferredWidth: 140
-                    Layout.preferredHeight: 65
-                    Layout.bottomMargin: -2
-                    Layout.alignment: Qt.AlignBottom
-                    headerText: qsTr("Format")
-                    emptyText: qsTr("Choose")
-                    boxBackgroundColor: "transparent"
-                    borderWidth: 2
-                    headerFontSize: Fonts.size10dot5
-                    headerFontColor: Style.colorTitle
-                    dropdownIconSize: 9
-
-                    checkBoxStyle: false
-                    maxHeight: 200
-                    model: ListModel {
-                        ListElement {
-                            text: "PDF"
-                            format: ".pdf"
-                        }
-                        ListElement {
-                            text: "Plain Text"
-                            format: ".txt"
-                        }
-                        ListElement {
-                            text: "CBZ"
-                            format: ".cbz"
-                        }
-                        ListElement {
-                            text: "HTML"
-                            format: ".html"
-                        }
-                        ListElement {
-                            text: "PostScript"
-                            format: ".ps"
-                        }
-                        ListElement {
-                            text: "PNG"
-                            format: ".png"
-                        }
-                        ListElement {
-                            text: "SVG"
-                            format: ".svg"
-                        }
-                    }
-
-                    onItemChanged: index => formatComboBox.closePopup()
-                }
-            }
-        }
-
-        Label {
-            id: explenation
-            Layout.leftMargin: nameInput.x + 1
-            Layout.topMargin: 6
-            text: qsTr("Select the name of new book")
-            color: Style.colorText
-            font.pointSize: Fonts.size11
-            elide: Text.ElideRight
+            boxHeight: 46
+            headerFontSize: Fonts.size11
+            placeholderContent: "New Book"
+            placeholderColor: Style.colorPlaceholderText
+            headerText: "Output Name"
         }
 
         Item {
             Layout.fillHeight: true
-            Layout.maximumHeight: 36
-            Layout.minimumHeight: 4
+            Layout.maximumHeight: 42
+            Layout.minimumHeight: 8
         }
 
         MButton {
@@ -220,8 +154,9 @@ Popup {
 
                 extractButton.loading = true
 
+                var name = nameInput.text === "" ? nameInput.placeholderContent : nameInput.text
                 ToolsController.convert(
-                            nameInput.text, formatComboBox.listView.itemAtIndex(
+                            name, formatComboBox.listView.itemAtIndex(
                                 formatComboBox.listView.currentIndex).getItemProperty(
                                 "format"),
                             bookSelector.selectedItems[0].filePath)

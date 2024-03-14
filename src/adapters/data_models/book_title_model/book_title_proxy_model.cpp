@@ -43,7 +43,7 @@ bool BookTitleProxyModel::filterAcceptsRow(
 {
     auto index = sourceModel()->index(source_row, 0, source_parent);
 
-    return filterAcceptsDownloaded(index) && filterAcceptsFormat(index);
+    return filterAcceptsDownloaded(index) && filterAcceptsExtension(index);
 }
 
 bool BookTitleProxyModel::filterAcceptsDownloaded(
@@ -55,21 +55,22 @@ bool BookTitleProxyModel::filterAcceptsDownloaded(
     return sourceModel()->data(index, BookTitleModel::DownloadedRole).toBool();
 }
 
-bool BookTitleProxyModel::filterAcceptsFormat(const QModelIndex& index) const
+bool BookTitleProxyModel::filterAcceptsExtension(const QModelIndex& index) const
 {
-    if(m_format.isEmpty())
+    if(m_extension.isEmpty())
         return true;
 
-    auto formatData = sourceModel()->data(index, BookTitleModel::FormatRole);
-    auto format = formatData.toString().toLower();
+    auto extensionData =
+        sourceModel()->data(index, BookTitleModel::ExtensionRole);
+    auto extension = extensionData.toString().toLower();
 
-    // Remove the version details from the format
-    int firstSpaceIndex = format.indexOf(' ');
+    // Remove the version details from the extension
+    int firstSpaceIndex = extension.indexOf(' ');
     if(firstSpaceIndex != -1)
-        format = format.left(firstSpaceIndex);
+        extension = extension.left(firstSpaceIndex);
 
 
-    return m_format.split(",").contains(format);
+    return m_extension.split(",").contains(extension);
 }
 
 bool BookTitleProxyModel::getShowOnlyDownloaded() const
@@ -109,18 +110,18 @@ void BookTitleProxyModel::setSortString(const QString& newSortString)
     invalidate();
 }
 
-QString BookTitleProxyModel::getFormat() const
+QString BookTitleProxyModel::getExtension() const
 {
-    return m_format;
+    return m_extension;
 }
 
-void BookTitleProxyModel::setFormat(const QString& newFormat)
+void BookTitleProxyModel::setExtension(const QString& newExtension)
 {
-    if(m_format == newFormat)
+    if(m_extension == newExtension)
         return;
 
-    m_format = newFormat;
-    emit formatUpdated();
+    m_extension = newExtension;
+    emit extensionUpdated();
     invalidateFilter();
 }
 

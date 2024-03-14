@@ -40,8 +40,8 @@ QVariant BookTitleModel::data(const QModelIndex& index, int role) const
     case FilePathRole:
         return book.getFilePath();
         break;
-    case FormatRole:
-        return book.getFormat();
+    case ExtensionRole:
+        return book.getExtension();
         break;
     default:
         return QVariant();
@@ -55,7 +55,7 @@ QHash<int, QByteArray> BookTitleModel::roleNames() const
         { TitleRole, "title" },
         { DownloadedRole, "downloaded" },
         { FilePathRole, "filePath" },
-        { FormatRole, "format" },
+        { ExtensionRole, "extension" },
     };
 
     return roles;

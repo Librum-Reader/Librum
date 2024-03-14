@@ -18,8 +18,8 @@ class ADAPTERS_EXPORT BookTitleProxyModel : public QSortFilterProxyModel
                    setShowOnlyDownloaded NOTIFY showOnlyDownloadedUpdated)
     Q_PROPERTY(QString sortString READ getSortString WRITE setSortString NOTIFY
                    sortStringUpdated)
-    Q_PROPERTY(
-        QString format READ getFormat WRITE setFormat NOTIFY formatUpdated)
+    Q_PROPERTY(QString extension READ getExtension WRITE setExtension NOTIFY
+                   extensionUpdated)
 
 public:
     explicit BookTitleProxyModel(QObject* parent = nullptr);
@@ -35,25 +35,25 @@ public:
     QString getSortString() const;
     void setSortString(const QString& newSortString);
 
-    QString getFormat() const;
-    void setFormat(const QString& newFormat);
+    QString getExtension() const;
+    void setExtension(const QString& newExtension);
 
 signals:
     void showOnlyDownloadedUpdated();
     void sortStringUpdated();
 
-    void formatUpdated();
+    void extensionUpdated();
 
 private:
     bool leftBookIsCloserToSortString(const QModelIndex& left,
                                       const QModelIndex& right) const;
     bool filterAcceptsDownloaded(const QModelIndex& index) const;
-    bool filterAcceptsFormat(const QModelIndex& index) const;
+    bool filterAcceptsExtension(const QModelIndex& index) const;
 
     QString m_sortString;
     std::unique_ptr<rapidfuzz::fuzz::CachedRatio<unsigned int>> m_filterScorer;
     bool m_showOnlyDownloaded = false;
-    QString m_format;
+    QString m_extension;
 };
 
 }  // namespace adapters::data_models

@@ -26,7 +26,7 @@ public:
         TitleRole,
         DownloadedRole,
         FilePathRole,
-        FormatRole,
+        ExtensionRole,
     };
 
     explicit BookTitleModel(const std::vector<domain::entities::Book>& data);

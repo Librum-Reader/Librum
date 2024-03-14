@@ -22,12 +22,12 @@ Popup {
 
     onOpened: {
         LibraryController.bookTitleModel.showOnlyDownloaded = true
-        LibraryController.bookTitleModel.format = "pdf"
+        LibraryController.bookTitleModel.extension = "pdf"
     }
 
     onClosed: {
         LibraryController.bookTitleModel.showOnlyDownloaded = false
-        LibraryController.bookTitleModel.format = ""
+        LibraryController.bookTitleModel.extension = ""
 
         internal.resetState()
     }

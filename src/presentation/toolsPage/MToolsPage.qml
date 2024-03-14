@@ -52,6 +52,7 @@ Page {
 
                     implicitWidth: 380
                     implicitHeight: 220
+                    horizontalPadding: 8
                     opacity: area.pressed ? 0.75 : 1
                     background: Rectangle {
                         color: Style.colorToolBackground
@@ -60,12 +61,16 @@ Page {
 
                     ColumnLayout {
                         spacing: 5
+                        width: parent.width
                         anchors.centerIn: parent
 
                         Label {
                             id: title
                             Layout.alignment: Qt.AlignHCenter
+                            Layout.fillWidth: true
                             text: itemRoot.text
+                            horizontalAlignment: Text.AlignHCenter
+                            wrapMode: Text.WordWrap
                             color: Style.colorLightTitle
                             font.bold: true
                             font.pointSize: Fonts.size20
@@ -74,7 +79,10 @@ Page {
                         Label {
                             id: description
                             Layout.alignment: Qt.AlignHCenter
+                            Layout.fillWidth: true
                             text: itemRoot.description
+                            wrapMode: Text.WordWrap
+                            horizontalAlignment: Text.AlignHCenter
                             color: Style.colorLightText
                             font.pointSize: Fonts.size13
                         }
