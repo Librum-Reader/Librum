@@ -26,10 +26,10 @@ function handleWheel(wheel) {
 // Calculate the current page and update the document.
 function updateCurrentPageCounter() {
     // A new page starts if it is over the middle of the screen (vertically).
-    let pageHeight = pageView.currentItem.height + pageView.pageSpacing
-    let currentPos = pageView.contentY - pageView.originY + pageView.height / 2
-    let pageNumber = Math.floor(currentPos / pageHeight)
+    let pageNumber = pageView.indexAt(pageView.currentItem.width / 2,
+                                      pageView.contentY + pageView.height / 2)
 
+    // let pageNumber = Math.floor(currentPos / pageHeight)
     if (pageNumber !== root.bookController.currentPage)
         root.bookController.currentPage = pageNumber
 }

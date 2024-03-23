@@ -122,5 +122,6 @@
         <file>modules/CustomComponents/MSpinner.qml</file>
         <file>toolsPage/MExtractPagesPopup.qml</file>
         <file>toolsPage/MImageToPdfPopup.qml</file>
+        <file>toolsPage/MPdfToImagePopup.qml</file>
     </qresource>
 </RCC>
