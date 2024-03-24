@@ -23,7 +23,7 @@ Page {
 
     Shortcut {
         id: zoomIn
-        // sequences: root.loggedIn ? [SettingsController.shortcuts.ZoomIn] :
+        sequences: [SettingsController.shortcuts.ZoomIn]
         onActivated: documentView.changeZoomBy(1.13)
     }
 
