@@ -266,14 +266,12 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
 <context>
     <name>MAddOnsPage</name>
     <message>
-        <location filename="../addOnsPage/MAddOnsPage.qml" line="22"/>
         <source>Add-ons Page</source>
-        <translation>광고 페이지</translation>
+        <translation type="vanished">광고 페이지</translation>
     </message>
     <message>
-        <location filename="../addOnsPage/MAddOnsPage.qml" line="33"/>
         <source>Currently in Development</source>
-        <translation>현재 개발중입니다</translation>
+        <translation type="vanished">현재 개발중입니다</translation>
     </message>
 </context>
 <context>
@@ -528,13 +526,13 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
 <context>
     <name>MBook</name>
     <message>
-        <location filename="../homePage/MBook.qml" line="175"/>
-        <location filename="../homePage/MBook.qml" line="190"/>
+        <location filename="../homePage/MBook.qml" line="186"/>
+        <location filename="../homePage/MBook.qml" line="201"/>
         <source>Unknown</source>
         <translation>알 수 없음</translation>
     </message>
     <message>
-        <location filename="../homePage/MBook.qml" line="327"/>
+        <location filename="../homePage/MBook.qml" line="332"/>
         <source>Your book has not been uploaded to the cloud.
 Either you are offline, or your storage is full.</source>
         <translation>당신의 책이 클라우드에 업로드되지 않았습니다.
@@ -719,6 +717,14 @@ Either you are offline, or your storage is full.</source>
     </message>
 </context>
 <context>
+    <name>MBookSelector</name>
+    <message>
+        <location filename="../modules/CustomComponents/bookSelector/MBookSelector.qml" line="14"/>
+        <source>Search Books...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MBookmarksSidebar</name>
     <message>
         <location filename="../readingPage/MBookmarksSidebar.qml" line="29"/>
@@ -861,17 +867,17 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MDictionaryPopup</name>
     <message>
-        <location filename="../readingPage/MDictionaryPopup.qml" line="104"/>
+        <location filename="../readingPage/MDictionaryPopup.qml" line="101"/>
         <source>Search</source>
         <translation>검색</translation>
     </message>
     <message>
-        <location filename="../readingPage/MDictionaryPopup.qml" line="356"/>
+        <location filename="../readingPage/MDictionaryPopup.qml" line="355"/>
         <source>No definitions found</source>
         <translation>정의를 찾을 수 없음</translation>
     </message>
     <message>
-        <location filename="../readingPage/MDictionaryPopup.qml" line="364"/>
+        <location filename="../readingPage/MDictionaryPopup.qml" line="363"/>
         <source>Search online</source>
         <translation>온라인으로 검색</translation>
     </message>
@@ -1068,6 +1074,44 @@ Either you are offline, or your storage is full.</source>
     </message>
 </context>
 <context>
+    <name>MExtractPagesPopup</name>
+    <message>
+        <location filename="../toolsPage/MExtractPagesPopup.qml" line="40"/>
+        <source>Extraction succeeded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MExtractPagesPopup.qml" line="41"/>
+        <source>The new book was added to your library.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MExtractPagesPopup.qml" line="43"/>
+        <source>Extraction failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MExtractPagesPopup.qml" line="44"/>
+        <source>The extraction failed. Please try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MExtractPagesPopup.qml" line="63"/>
+        <source>Extract Page(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MExtractPagesPopup.qml" line="131"/>
+        <source>Add a comma separated list of page numbers or ranges to extract.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MExtractPagesPopup.qml" line="155"/>
+        <source>Extract</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MFilterByButton</name>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByButton.qml" line="46"/>
@@ -1252,12 +1296,12 @@ Either you are offline, or your storage is full.</source>
         <translation>책을 불러오지 못함. 네트워크 상태를 확인하세요</translation>
     </message>
     <message>
-        <location filename="../freeBooksPage/MFreeBooksPage.qml" line="81"/>
+        <location filename="../freeBooksPage/MFreeBooksPage.qml" line="79"/>
         <source>Free books</source>
         <translation>무료 책들</translation>
     </message>
     <message>
-        <location filename="../freeBooksPage/MFreeBooksPage.qml" line="82"/>
+        <location filename="../freeBooksPage/MFreeBooksPage.qml" line="80"/>
         <source>Choose from over 70,000 books</source>
         <translation>70,000개 이상의 책을 탐색하세요</translation>
     </message>
@@ -1291,210 +1335,281 @@ Either you are offline, or your storage is full.</source>
         <translation>책 추가</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="467"/>
+        <location filename="../homePage/MHomePage.qml" line="481"/>
         <source>Remove Book?</source>
         <translation>책을 삭제하겠습니까?</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="468"/>
+        <location filename="../homePage/MHomePage.qml" line="482"/>
         <source>Deleting a book is a permanent action, no one will be
  able to restore it afterwards!</source>
         <translation>책을 삭제하는 것은 영구적인 작업입니다.
 복구할 수 없습니다!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="469"/>
-        <location filename="../homePage/MHomePage.qml" line="500"/>
+        <location filename="../homePage/MHomePage.qml" line="483"/>
+        <location filename="../homePage/MHomePage.qml" line="542"/>
         <source>Remove from Device</source>
         <translation>기기에서 삭제</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="470"/>
-        <location filename="../homePage/MHomePage.qml" line="501"/>
+        <location filename="../homePage/MHomePage.qml" line="484"/>
+        <location filename="../homePage/MHomePage.qml" line="543"/>
         <source>Delete Everywhere</source>
         <translation>모든 기기에서 삭제</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="498"/>
+        <location filename="../homePage/MHomePage.qml" line="495"/>
+        <location filename="../homePage/MHomePage.qml" line="506"/>
+        <source>Uninstalling failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../homePage/MHomePage.qml" line="495"/>
+        <source>Can&apos;t uninstall book since it is not downloaded.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../homePage/MHomePage.qml" line="503"/>
+        <source>Uninstalling succeeded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../homePage/MHomePage.qml" line="504"/>
+        <source>The book was deleted from your device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../homePage/MHomePage.qml" line="507"/>
+        <location filename="../homePage/MHomePage.qml" line="521"/>
+        <source>Something went wrong.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../homePage/MHomePage.qml" line="517"/>
+        <source>Deleting succeeded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../homePage/MHomePage.qml" line="518"/>
+        <source>The book was successfully deleted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../homePage/MHomePage.qml" line="520"/>
+        <source>Deleting failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../homePage/MHomePage.qml" line="540"/>
         <source>Remove Books?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="499"/>
+        <location filename="../homePage/MHomePage.qml" line="541"/>
         <source>Deleting books is a permanent action, no one will be
  able to restore it afterwards!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="544"/>
-        <location filename="../homePage/MHomePage.qml" line="574"/>
+        <location filename="../homePage/MHomePage.qml" line="590"/>
+        <location filename="../homePage/MHomePage.qml" line="620"/>
         <source>Remove from Folder?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="545"/>
+        <location filename="../homePage/MHomePage.qml" line="591"/>
         <source>This action will not delete the original book.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="546"/>
-        <location filename="../homePage/MHomePage.qml" line="576"/>
-        <location filename="../homePage/MHomePage.qml" line="643"/>
+        <location filename="../homePage/MHomePage.qml" line="592"/>
+        <location filename="../homePage/MHomePage.qml" line="622"/>
+        <location filename="../homePage/MHomePage.qml" line="689"/>
         <source>Cancel</source>
         <translation type="unfinished">취소</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="547"/>
-        <location filename="../homePage/MHomePage.qml" line="577"/>
+        <location filename="../homePage/MHomePage.qml" line="593"/>
+        <location filename="../homePage/MHomePage.qml" line="623"/>
         <source>Remove</source>
         <translation type="unfinished">삭제</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="575"/>
+        <location filename="../homePage/MHomePage.qml" line="621"/>
         <source>This action will not delete the original books.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="625"/>
+        <location filename="../homePage/MHomePage.qml" line="671"/>
         <source>Save</source>
         <translation>저장</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="640"/>
+        <location filename="../homePage/MHomePage.qml" line="686"/>
         <source>Limit Reached</source>
         <translation>한계 도달</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="641"/>
+        <location filename="../homePage/MHomePage.qml" line="687"/>
         <source>You have reached your upload limit.
 Delete unused books to free up space or upgrade.</source>
         <translation>업로드 제한에 도달했습니다.
 사용하지 않는 책을 삭제하여 공간을 확보하거나 업그레이드할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="692"/>
+        <location filename="../homePage/MHomePage.qml" line="738"/>
         <source>Ok</source>
         <translation>확인</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="642"/>
+        <location filename="../homePage/MHomePage.qml" line="688"/>
         <source>Upgrade</source>
         <translation>업그레이드</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="661"/>
+        <location filename="../homePage/MHomePage.qml" line="707"/>
         <source>Book already exists</source>
         <translation>책이 이미 존재함</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="662"/>
+        <location filename="../homePage/MHomePage.qml" line="708"/>
         <source>It looks like this book already exists in your library:</source>
         <translation>이 책은 이미 책장에 있는 것 같습니다:</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="665"/>
+        <location filename="../homePage/MHomePage.qml" line="711"/>
         <source>Are you sure you that want to add it again?
 </source>
         <translation>정말 이 책을 다시 추가 하시겠습니까?
 </translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="668"/>
+        <location filename="../homePage/MHomePage.qml" line="714"/>
         <source>Add</source>
         <translation>추가</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="669"/>
+        <location filename="../homePage/MHomePage.qml" line="715"/>
         <source>Don&apos;t add</source>
         <translation>추가하지 않음</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="690"/>
+        <location filename="../homePage/MHomePage.qml" line="736"/>
         <source>Unsupported File</source>
         <translation>지원하지 않는 파일</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="691"/>
+        <location filename="../homePage/MHomePage.qml" line="737"/>
         <source>Oops! This file is not supported by Librum.</source>
         <translation>이런! 이 파일은 Librum에서 지원하지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="707"/>
+        <location filename="../homePage/MHomePage.qml" line="753"/>
         <source>Import</source>
         <translation>가져오기</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="710"/>
+        <location filename="../homePage/MHomePage.qml" line="756"/>
         <source>All files</source>
         <translation>모든 파일</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="711"/>
-        <location filename="../homePage/MHomePage.qml" line="712"/>
-        <location filename="../homePage/MHomePage.qml" line="713"/>
+        <location filename="../homePage/MHomePage.qml" line="757"/>
+        <location filename="../homePage/MHomePage.qml" line="758"/>
+        <location filename="../homePage/MHomePage.qml" line="759"/>
         <source>files</source>
         <translation>파일</translation>
     </message>
 </context>
 <context>
+    <name>MImageToPdfPopup</name>
+    <message>
+        <location filename="../toolsPage/MImageToPdfPopup.qml" line="39"/>
+        <source>Convertion succeeded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MImageToPdfPopup.qml" line="40"/>
+        <source>The new book was added to your library.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MImageToPdfPopup.qml" line="42"/>
+        <source>Convertion failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MImageToPdfPopup.qml" line="43"/>
+        <source>The conversion failed. Please try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MImageToPdfPopup.qml" line="62"/>
+        <location filename="../toolsPage/MImageToPdfPopup.qml" line="148"/>
+        <source>Convert</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MLoginPage</name>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="141"/>
+        <location filename="../loginPage/MLoginPage.qml" line="143"/>
         <source>Welcome back!</source>
         <translation>돌아오신 것을 환영합니다!</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="151"/>
+        <location filename="../loginPage/MLoginPage.qml" line="153"/>
         <source>Log into your account</source>
         <translation>내 계정으로 로그인</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="162"/>
+        <location filename="../loginPage/MLoginPage.qml" line="164"/>
         <source>Email</source>
         <translation>이메일</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="177"/>
+        <location filename="../loginPage/MLoginPage.qml" line="179"/>
         <source>Password</source>
         <translation>비밀번호</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="223"/>
+        <location filename="../loginPage/MLoginPage.qml" line="225"/>
         <source>Remember me</source>
         <translation>정보 기억하기</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="244"/>
+        <location filename="../loginPage/MLoginPage.qml" line="246"/>
         <source>Forgot password?</source>
         <translation>비밀번호를 잊으셨나요?</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="272"/>
+        <location filename="../loginPage/MLoginPage.qml" line="274"/>
         <source>Login</source>
         <translation>로그인</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="297"/>
+        <location filename="../loginPage/MLoginPage.qml" line="299"/>
         <source>Don&apos;t have an account? Register</source>
         <translation>계정이 없나요? 회원가입</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="318"/>
+        <location filename="../loginPage/MLoginPage.qml" line="320"/>
         <source>We&apos;re Sorry</source>
         <translation>죄송합니다</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="319"/>
+        <location filename="../loginPage/MLoginPage.qml" line="321"/>
         <source>Logging you in failed, please try again later.</source>
         <translation>로그인이 실패했습니다. 나중에 다시 시도해 주세요.</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="320"/>
+        <location filename="../loginPage/MLoginPage.qml" line="322"/>
         <source>Ok</source>
         <translation>확인</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="321"/>
+        <location filename="../loginPage/MLoginPage.qml" line="323"/>
         <source>Report</source>
         <translation>보고하기</translation>
     </message>
@@ -1515,6 +1630,40 @@ Delete unused books to free up space or upgrade.</source>
         <location filename="../homePage/manageTagsPopup/MManageTagsPopup.qml" line="166"/>
         <source>Done</source>
         <translation>완료</translation>
+    </message>
+</context>
+<context>
+    <name>MMergePopup</name>
+    <message>
+        <location filename="../toolsPage/MMergePopup.qml" line="41"/>
+        <source>Merge succeeded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MMergePopup.qml" line="42"/>
+        <source>The merged book was added to your library.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MMergePopup.qml" line="44"/>
+        <source>Merge failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MMergePopup.qml" line="45"/>
+        <source>The merged failed. Please try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MMergePopup.qml" line="67"/>
+        <location filename="../toolsPage/MMergePopup.qml" line="223"/>
+        <source>Merge</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MMergePopup.qml" line="242"/>
+        <source>Select two or more books to merge.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1559,6 +1708,39 @@ Delete unused books to free up space or upgrade.</source>
         <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="25"/>
         <source>ON</source>
         <translation>켬</translation>
+    </message>
+</context>
+<context>
+    <name>MPdfToImagePopup</name>
+    <message>
+        <location filename="../toolsPage/MPdfToImagePopup.qml" line="39"/>
+        <source>Convertion succeeded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MPdfToImagePopup.qml" line="40"/>
+        <source>The new book was added to your library.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MPdfToImagePopup.qml" line="42"/>
+        <source>Convertion failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MPdfToImagePopup.qml" line="43"/>
+        <source>The conversion failed. Please try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MPdfToImagePopup.qml" line="62"/>
+        <source>Pdf to Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MPdfToImagePopup.qml" line="148"/>
+        <source>Convert</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1709,7 +1891,7 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="115"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">이름</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="180"/>
@@ -1944,8 +2126,12 @@ Confirm your email by clicking the link we sent you.</source>
     </message>
     <message>
         <location filename="../sidebar/MSidebar.qml" line="169"/>
+        <source>Tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Add-ons</source>
-        <translation>광고</translation>
+        <translation type="vanished">광고</translation>
     </message>
     <message>
         <location filename="../sidebar/MSidebar.qml" line="180"/>
@@ -2175,24 +2361,67 @@ working on fun projects, supporting our community and trying to make the world a
 <context>
     <name>MToolbar</name>
     <message>
-        <location filename="../homePage/toolbar/MToolbar.qml" line="73"/>
+        <location filename="../homePage/toolbar/MToolbar.qml" line="74"/>
         <source>Remove Filters</source>
         <translation>필터 제거</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/MToolbar.qml" line="86"/>
+        <location filename="../homePage/toolbar/MToolbar.qml" line="87"/>
         <source>Remove Tags</source>
         <translation>태그 삭제</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/MToolbar.qml" line="152"/>
+        <location filename="../homePage/toolbar/MToolbar.qml" line="143"/>
         <source>You are offline</source>
         <translation>현재 오프라인</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/MToolbar.qml" line="159"/>
+        <location filename="../homePage/toolbar/MToolbar.qml" line="150"/>
         <source>Your library is being synchronized with the cloud</source>
         <translation>책장을 클라우드와 동기화하는 중</translation>
+    </message>
+</context>
+<context>
+    <name>MToolsPage</name>
+    <message>
+        <location filename="../toolsPage/MToolsPage.qml" line="25"/>
+        <source>PDF Tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MToolsPage.qml" line="26"/>
+        <source>Powerful tools to modify your PDF files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MToolsPage.qml" line="101"/>
+        <source>Merge</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MToolsPage.qml" line="102"/>
+        <source>Merge multiple books into one</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MToolsPage.qml" line="107"/>
+        <source>Extract Page(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MToolsPage.qml" line="108"/>
+        <source>Extract selected pages from a book</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MToolsPage.qml" line="113"/>
+        <source>Image to PDF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../toolsPage/MToolsPage.qml" line="114"/>
+        <source>Convert an image (PNG, JPEG, SVG, GIF) to PDF</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2336,7 +2565,7 @@ working on fun projects, supporting our community and trying to make the world a
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.qml" line="36"/>
+        <location filename="../main.qml" line="37"/>
         <source>Librum - Your ebook reader</source>
         <translation>Librum - 당신의 ebook 리더</translation>
     </message>
