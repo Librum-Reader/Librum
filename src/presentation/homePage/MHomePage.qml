@@ -489,7 +489,18 @@ Page {
                              acceptDeletionPopup.giveFocus()
         onDecisionMade: close()
 
-        onLeftButtonClicked: internal.uninstallBook(Globals.selectedBook.uuid)
+        onLeftButtonClicked: {
+            // Only uninstall the book if it's downloaded
+            if (Globals.selectedBook.downloaded) {
+                LibraryController.uninstallBook(Globals.selectedBook.uuid)
+
+                showAlert("success", qsTr("Uninstalling succeeded"),
+                          qsTr("The book was deleted from your device."))
+            } else
+                showAlert("error", qsTr("Uninstalling failed"), qsTr(
+                              "Can't uninstall book since it is not downloaded."))
+        }
+
         onRightButtonClicked: internal.deleteBook(
                                   Globals.selectedBook.uuid,
                                   Globals.selectedBook.projectGutenbergId)
@@ -522,7 +533,7 @@ Page {
 
         onLeftButtonClicked: {
             for (var i = 0; i < selectedBooks.length; i++) {
-                internal.uninstallBook(selectedBooks[i])
+                LibraryController.uninstallBook(selectedBooks[i])
             }
 
             clearState()
@@ -813,10 +824,6 @@ Page {
         // after the error was dealt with to continue adding the rest of the books.
         function continueAddingBooks() {
             internal.addBooks(internal.booksCurrentlyAdding)
-        }
-
-        function uninstallBook(uuid) {
-            LibraryController.uninstallBook(uuid)
         }
 
         function deleteBook(uuid, gutenbergId) {
