@@ -95,12 +95,22 @@ Item {
             Image {
                 id: downloadBookIcon
                 anchors.centerIn: bookCoverDimmer
-                visible: !model.downloaded && !downloadProgressBar.visible
+                visible: !model.downloaded && !root.downloading
                 sourceSize.width: 52
                 fillMode: Image.PreserveAspectFit
                 source: Icons.downloadSelected
                 opacity: 1
                 z: 3
+            }
+
+            MSpinner {
+                id: loadingAnimation
+                visible: true
+                anchors.centerIn: bookCoverDimmer
+                arcColor: Style.colorBasePurple
+                width: 24
+                height: 24
+                arcWidth: 3
             }
 
             ColumnLayout {
