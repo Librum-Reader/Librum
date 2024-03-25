@@ -132,11 +132,11 @@ QString LibraryStorageManager::getBookCoverPath(const QUuid& uuid)
 }
 
 void LibraryStorageManager::deleteBookFile(const QUuid& uuid,
-                                           const QString& format)
+                                           const QString& extension)
 {
     auto dir = QDir(m_downloadedBooksTracker->getLibraryDir());
     auto fileName =
-        QString("%1.%2").arg(uuid.toString(QUuid::WithoutBraces), format);
+        QString("%1.%2").arg(uuid.toString(QUuid::WithoutBraces), extension);
 
     QFile bookFileToDelete(dir.filePath(fileName));
     bookFileToDelete.remove();
@@ -178,14 +178,14 @@ void LibraryStorageManager::deleteAllBooks()
 void LibraryStorageManager::deleteBookLocally(BookForDeletion bookToDelete)
 {
     m_downloadedBooksTracker->untrackBook(bookToDelete.uuid);
-    deleteBookFile(bookToDelete.uuid, bookToDelete.format);
+    deleteBookFile(bookToDelete.uuid, bookToDelete.extension);
     deleteBookCoverLocally(bookToDelete.uuid);
 }
 
 void LibraryStorageManager::uninstallBook(const Book& book)
 {
     m_downloadedBooksTracker->untrackBook(book.getUuid());
-    deleteBookFile(book.getUuid(), book.getFormat());
+    deleteBookFile(book.getUuid(), book.getExtension());
 }
 
 void LibraryStorageManager::downloadBookMedia(const QUuid& uuid)
