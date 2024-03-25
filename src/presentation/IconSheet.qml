@@ -5,9 +5,6 @@ import QtQuick
 Item {
     id: iconSheet
 
-    // Animations
-    property string loadingAnimation: "/resources/animations/loading_animation.gif"
-
     // Arrows-icons
     property string arrowheadBackIcon
     property string arrowheadNextIcon
@@ -21,6 +18,7 @@ Item {
     property string closePopupWhite: "/resources/images/light_mode/decision/close_popup_white_icon.svg"
     property string cancelPurple
     property string addFirstBookPlus
+    property string xIcon
     property string addWhite
     property string plusSquare
     property string checkCircle
@@ -48,6 +46,9 @@ Item {
     property string popupDroplet
     property string patreon
     property string warningCircle
+    property string checkCircleGreen: "/resources/images/check_circle_green_icon.svg"
+    property string infoCircle: "/resources/images/info_circle_icon.svg"
+    property string errorCircle: "/resources/images/error_circle_icon.svg"
 
     // Illustrations
     property string addImage
@@ -111,7 +112,7 @@ Item {
     property string sidebarHome
     property string sidebarPieChart
     property string sidebarSettings
-    property string sidebarAddOns
+    property string sidebarTools
     property string sidebarSync
     property string sidebarEmptyProfile
     property string sidebarLogout
@@ -192,6 +193,10 @@ Item {
             PropertyChanges {
                 target: iconSheet
                 checkCircle: "/resources/images/light_mode/decision/check_circle_icon.svg"
+            }
+            PropertyChanges {
+                target: iconSheet
+                xIcon: "/resources/images/light_mode/decision/x_icon.svg"
             }
 
             // Tags
@@ -493,7 +498,7 @@ Item {
             }
             PropertyChanges {
                 target: iconSheet
-                sidebarAddOns: "/resources/images/light_mode/sidebar/puzzle_icon.svg"
+                sidebarTools: "/resources/images/light_mode/sidebar/wrench_icon.svg"
             }
             PropertyChanges {
                 target: iconSheet
@@ -635,6 +640,10 @@ Item {
             PropertyChanges {
                 target: iconSheet
                 checkCircle: "/resources/images/dark_mode/decision/check_circle_icon.svg"
+            }
+            PropertyChanges {
+                target: iconSheet
+                xIcon: "/resources/images/dark_mode/decision/x_icon.svg"
             }
 
             // Tags
@@ -936,7 +945,7 @@ Item {
             }
             PropertyChanges {
                 target: iconSheet
-                sidebarAddOns: "/resources/images/dark_mode/sidebar/puzzle_icon.svg"
+                sidebarTools: "/resources/images/dark_mode/sidebar/wrench_icon.svg"
             }
             PropertyChanges {
                 target: iconSheet

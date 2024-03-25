@@ -113,6 +113,10 @@ Item {
         return model.text
     }
 
+    function getItemProperty(prop) {
+        return model[prop]
+    }
+
     function startRenaming() {
         content.readOnly = false
         content.forceActiveFocus()

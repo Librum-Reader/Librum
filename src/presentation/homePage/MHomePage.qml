@@ -242,6 +242,20 @@ Page {
                         id: bookDelegate
 
                         onLeftButtonClicked: {
+                            // If book selection mode is enabled we just want to select / deselect the clicked book
+                            if (Globals.bookSelectionModeEnabled) {
+                                var index = Globals.selectedBooks.indexOf(
+                                            model.uuid)
+                                if (index !== -1) {
+                                    bookDelegate.deselect()
+                                    Globals.selectedBooks.splice(index, 1)
+                                } else {
+                                    bookDelegate.select()
+                                    Globals.selectedBooks.push(model.uuid)
+                                }
+                                return
+                            }
+
                             if (model.downloaded) {
                                 Globals.selectedBook = LibraryController.getBook(
                                             model.uuid)
@@ -475,10 +489,38 @@ Page {
                              acceptDeletionPopup.giveFocus()
         onDecisionMade: close()
 
-        onLeftButtonClicked: internal.uninstallBook(Globals.selectedBook.uuid)
-        onRightButtonClicked: internal.deleteBook(
-                                  Globals.selectedBook.uuid,
-                                  Globals.selectedBook.projectGutenbergId)
+        onLeftButtonClicked: {
+            // Only uninstall the book if it's downloaded
+            if (!Globals.selectedBook.downloaded) {
+                showAlert("error", qsTr("Uninstalling failed"), qsTr(
+                              "Can't uninstall book since it is not downloaded."))
+                return
+            }
+
+            let success = LibraryController.uninstallBook(
+                    Globals.selectedBook.uuid)
+            if (success === BookOperationStatus.Success) {
+                showAlert("success", qsTr("Uninstalling succeeded"),
+                          qsTr("The book was deleted from your device."))
+            } else {
+                showAlert("error", qsTr("Uninstalling failed"),
+                          qsTr("Something went wrong."))
+            }
+        }
+
+        onRightButtonClicked: {
+            let success = internal.deleteBook(
+                    Globals.selectedBook.uuid,
+                    Globals.selectedBook.projectGutenbergId)
+
+            if (success) {
+                showAlert("success", qsTr("Deleting succeeded"),
+                          qsTr("The book was successfully deleted."))
+            } else {
+                showAlert("error", qsTr("Deleting failed"),
+                          qsTr("Something went wrong."))
+            }
+        }
     }
 
 
@@ -508,7 +550,11 @@ Page {
 
         onLeftButtonClicked: {
             for (var i = 0; i < selectedBooks.length; i++) {
-                internal.uninstallBook(selectedBooks[i])
+                if (!LibraryController.getBook(selectedBooks[i]).downloaded) {
+                    continue
+                }
+
+                LibraryController.uninstallBook(selectedBooks[i])
             }
 
             clearState()
@@ -801,15 +847,14 @@ Page {
             internal.addBooks(internal.booksCurrentlyAdding)
         }
 
-        function uninstallBook(uuid) {
-            LibraryController.uninstallBook(uuid)
-        }
-
         function deleteBook(uuid, gutenbergId) {
             let status = LibraryController.deleteBook(uuid)
-            if (status === BookOperationStatus.Success) {
+            let success = status === BookOperationStatus.Success
+            if (success) {
                 FreeBooksController.unmarkBookAsDownloaded(gutenbergId)
             }
+
+            return success
         }
 
         function removeBookFromItsFolder(uuid) {

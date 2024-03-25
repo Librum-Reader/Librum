@@ -58,10 +58,10 @@ void LibraryStorageManager::clearUserData()
 
 void LibraryStorageManager::saveDownloadedBookMediaChunkToFile(
     const QByteArray& data, bool isLastChunk, const QUuid& uuid,
-    const QString& format)
+    const QString& extension)
 {
     auto destDir = m_downloadedBooksTracker->getLibraryDir();
-    QString fileName = uuid.toString(QUuid::WithoutBraces) + "." + format;
+    QString fileName = uuid.toString(QUuid::WithoutBraces) + "." + extension;
     auto destination = destDir.filePath(fileName);
 
     application::utility::saveDownloadedBookMediaChunkToFile(
@@ -93,12 +93,13 @@ void LibraryStorageManager::saveDownloadedCoverToFile(const QByteArray& data,
     emit finishedDownloadingBookCover(uuid, destination);
 }
 
-void LibraryStorageManager::processBookMetadata(std::vector<Book>& books)
+void LibraryStorageManager::processBookMetadata(std::vector<Book>& books,
+                                                bool success)
 {
     // Avoid storing books for logged out users by verifying login
     // status before adding books, else books might get loaded into
     // memory, even though the user is logged out.
-    if(!userLoggedIn())
+    if(!userLoggedIn() || !success)
         return;
 
 
@@ -131,11 +132,11 @@ QString LibraryStorageManager::getBookCoverPath(const QUuid& uuid)
 }
 
 void LibraryStorageManager::deleteBookFile(const QUuid& uuid,
-                                           const QString& format)
+                                           const QString& extension)
 {
     auto dir = QDir(m_downloadedBooksTracker->getLibraryDir());
     auto fileName =
-        QString("%1.%2").arg(uuid.toString(QUuid::WithoutBraces), format);
+        QString("%1.%2").arg(uuid.toString(QUuid::WithoutBraces), extension);
 
     QFile bookFileToDelete(dir.filePath(fileName));
     bookFileToDelete.remove();
@@ -177,14 +178,14 @@ void LibraryStorageManager::deleteAllBooks()
 void LibraryStorageManager::deleteBookLocally(BookForDeletion bookToDelete)
 {
     m_downloadedBooksTracker->untrackBook(bookToDelete.uuid);
-    deleteBookFile(bookToDelete.uuid, bookToDelete.format);
+    deleteBookFile(bookToDelete.uuid, bookToDelete.extension);
     deleteBookCoverLocally(bookToDelete.uuid);
 }
 
 void LibraryStorageManager::uninstallBook(const Book& book)
 {
     m_downloadedBooksTracker->untrackBook(book.getUuid());
-    deleteBookFile(book.getUuid(), book.getFormat());
+    deleteBookFile(book.getUuid(), book.getExtension());
 }
 
 void LibraryStorageManager::downloadBookMedia(const QUuid& uuid)

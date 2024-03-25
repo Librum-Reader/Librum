@@ -40,11 +40,12 @@ signals:
     void downloadingBookMediaChunkReady(const QByteArray& data,
                                         const bool isChunkLast,
                                         const QUuid& uuid,
-                                        const QString& format);
+                                        const QString& extension);
     void downloadingBookMediaProgressChanged(const QUuid& uuid,
                                              qint64 bytesReceived,
                                              qint64 bytesTotal);
-    void gettingBooksMetaDataFinished(std::vector<QJsonObject>& metaData);
+    void gettingBooksMetaDataFinished(std::vector<QJsonObject>& metaData,
+                                      bool success);
     void downloadingBookCoverFinished(const QByteArray& data,
                                       const QUuid& uuid);
     void uploadLimitReached();

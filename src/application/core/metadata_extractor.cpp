@@ -42,6 +42,7 @@ domain::value_objects::BookMetaData MetadataExtractor::getBookMetaData()
         .creator = getDocumentInfo("info:Creator"),
         .creationDate = getDocumentInfo("info:CreationDate"),
         .format = getDocumentInfo("format"),
+        .extension = getBookExtension(),
         .language = "",
         .documentSize = documentSize,
         .pagesSize = "",
@@ -104,6 +105,16 @@ QString MetadataExtractor::getDocumentSize()
     }
 
     return result;
+}
+
+QString MetadataExtractor::getBookExtension()
+{
+    QFileInfo fileInfo(m_filePath);
+    auto suffix = fileInfo.suffix();
+    if(suffix.isEmpty())
+        return getDocumentInfo("format");
+
+    return suffix;
 }
 
 double MetadataExtractor::roundToPrecisionOf2(double raw)

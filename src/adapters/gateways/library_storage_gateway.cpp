@@ -103,9 +103,15 @@ void LibraryStorageGateway::downloadBookMedia(const QString& authToken,
 }
 
 void LibraryStorageGateway::proccessBooksMetadata(
-    std::vector<QJsonObject>& jsonBooks)
+    std::vector<QJsonObject>& jsonBooks, bool success)
 {
     std::vector<Book> books;
+    if(!success)
+    {
+        emit gettingBooksMetaDataFinished(books, false);
+        return;
+    }
+
     for(auto& jsonBook : jsonBooks)
     {
         // Api sends "uuid" by the name of "guid", so rename it back to "uuid"
@@ -141,7 +147,7 @@ void LibraryStorageGateway::proccessBooksMetadata(
         books.emplace_back(std::move(book));
     }
 
-    emit gettingBooksMetaDataFinished(books);
+    emit gettingBooksMetaDataFinished(books, true);
 }
 
 void LibraryStorageGateway::convertJsonBookToApiFormat(QJsonObject& jsonBook)

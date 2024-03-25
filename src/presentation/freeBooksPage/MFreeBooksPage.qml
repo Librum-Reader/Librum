@@ -30,12 +30,10 @@ Page {
                 errorMessageLabel.visible = true
             }
 
-            loadingAnimation.playing = false
             loadingAnimation.visible = false
         }
 
         function onStartedFetchingFistMetadataPage() {
-            loadingAnimation.playing = true
             loadingAnimation.visible = true
         }
     }
@@ -58,14 +56,14 @@ Page {
         FreeBooksController.fetchFirstBooksMetadataPage()
     }
 
-    AnimatedImage {
+    MSpinner {
         id: loadingAnimation
         anchors.centerIn: parent
-        playing: false
         visible: false
-        source: Icons.loadingAnimation
-        width: 120
-        fillMode: Image.PreserveAspectFit
+        arcColor: Style.colorBasePurple
+        width: 62
+        height: 62
+        arcWidth: 6
     }
 
     ColumnLayout {

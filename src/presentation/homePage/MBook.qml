@@ -95,7 +95,7 @@ Item {
             Image {
                 id: downloadBookIcon
                 anchors.centerIn: bookCoverDimmer
-                visible: !model.downloaded && !downloadProgressBar.visible
+                visible: !model.downloaded && !root.downloading
                 sourceSize.width: 52
                 fillMode: Image.PreserveAspectFit
                 source: Icons.downloadSelected
@@ -125,11 +125,22 @@ Item {
                     id: noImageLabel
                     Layout.alignment: Qt.AlignCenter
                     visible: bookCover.source == ""
-                    text: "." + model.format
+                    text: "." + model.extension.toUpperCase()
                     color: Style.colorNoImageLabel
                     font.pointSize: Fonts.size20
                     font.bold: true
                 }
+            }
+
+            MSpinner {
+                id: loadingAnimation
+                visible: root.downloading
+                z: 2
+                anchors.centerIn: bookCoverDimmer
+                arcColor: Style.colorBasePurple
+                width: 62
+                height: 62
+                arcWidth: 6
             }
 
             MProgressBar {
@@ -230,12 +241,6 @@ Item {
         // Delegate mouse clicks events to parent
         onClicked: mouse => {
                        if (mouse.button === Qt.LeftButton) {
-                           if (Globals.bookSelectionModeEnabled) {
-                               checkBox.checked = checkBox.checked ? false : true
-                               Globals.selectedBooks.push(model.uuid)
-                               return
-                           }
-
                            root.leftButtonClicked(root.index)
                        } else if (mouse.button === Qt.RightButton) {
                            root.rightButtonClicked(root.index, mouse)
@@ -325,6 +330,14 @@ Item {
         id: toolTip
         focusedItem: existsOnlyOnClientIndicator
         content: qsTr("Your book has not been uploaded to the cloud.\nEither you are offline, or your storage is full.")
+    }
+
+    function select() {
+        checkBox.checked = true
+    }
+
+    function deselect() {
+        checkBox.checked = false
     }
 
     function giveFocus() {

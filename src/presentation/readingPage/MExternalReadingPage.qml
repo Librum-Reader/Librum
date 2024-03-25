@@ -23,7 +23,7 @@ Page {
 
     Shortcut {
         id: zoomIn
-        // sequences: root.loggedIn ? [SettingsController.shortcuts.ZoomIn] :
+        sequences: [SettingsController.shortcuts.ZoomIn]
         onActivated: documentView.changeZoomBy(1.13)
     }
 
@@ -104,7 +104,7 @@ Page {
             Layout.fillWidth: true
             currentPage: ExternalBookController.currentPage
             pageCount: ExternalBookController.pageCount
-            bookTitle: "Some"
+            bookTitle: ""
 
             onBackButtonClicked: {
                 loadPage(homePage, sidebar.homeItem, false)

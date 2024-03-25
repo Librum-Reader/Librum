@@ -75,7 +75,7 @@ private:
     QString m_profilePictureFileName = "profilePicture";
     QString m_authenticationToken;
     QTimer m_fetchChangesTimer;
-    const int m_fetchChangesInverval = 15'000;
+    const int m_fetchChangesInverval = 60'000;
     bool m_rememberUser = false;
 };
 

@@ -179,7 +179,7 @@ BookOperationStatus LibraryService::deleteBook(const QUuid& uuid)
     utility::BookForDeletion bookToDelete {
         .uuid = book->getUuid(),
         .downloaded = book->isDownloaded(),
-        .format = book->getFormat(),
+        .extension = book->getExtension(),
     };
 
     auto bookPosition = getBookPosition(uuid);
@@ -544,7 +544,8 @@ BookOperationStatus LibraryService::saveBookToFile(const QUuid& uuid,
     }
 
     QString currentBookPath = book->getFilePath();
-    QString destinaton = pathToFolder + "/" + QUrl(currentBookPath).fileName();
+    QString destinaton =
+        pathToFolder + "/" + book->getTitle() + "." + book->getExtension();
 
     auto result = QFile::copy(book->getFilePath(), destinaton);
     if(!result)
@@ -576,6 +577,14 @@ void LibraryService::processDownloadedBook(const QUuid& uuid,
                                            const QString& filePath)
 {
     auto* book = getBook(uuid);
+
+    // Book was deleted while downloading
+    if(book == nullptr)
+    {
+        QFile file(filePath);
+        file.remove();
+        return;
+    }
 
     book->setFilePath(filePath);
     book->setDownloaded(true);
@@ -733,7 +742,7 @@ void LibraryService::deleteBookLocally(const domain::entities::Book& book)
     utility::BookForDeletion bookToDelete {
         .uuid = book.getUuid(),
         .downloaded = book.isDownloaded(),
-        .format = book.getFormat(),
+        .extension = book.getExtension(),
     };
 
     auto bookPosition = getBookPosition(book.getUuid());

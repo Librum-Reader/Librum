@@ -17,6 +17,7 @@
 #include <QTranslator>
 #include <iostream>
 #include <memory>
+#include <tools_service.hpp>
 #include "app_info_controller.hpp"
 #include "book_dto.hpp"
 #include "book_operation_status.hpp"
@@ -36,6 +37,7 @@
 #include "setting_keys.hpp"
 #include "shortcuts_proxy_model.hpp"
 #include "tag_dto.hpp"
+#include "tools_controller.hpp"
 #include "user_controller.hpp"
 #include "word_definition_dto.hpp"
 
@@ -73,6 +75,7 @@ int main(int argc, char* argv[])
     qmlRegisterSingletonType(QUrl("qrc:/TranslationsModel.qml"), "Librum.models", 1, 0, "TranslationsModel");
     qmlRegisterSingletonType(QUrl("qrc:/modules/CustomComponents/MLanguageModel.qml"), "Librum.models", 1, 0, "MLanguageModel");
     qmlRegisterType<adapters::data_models::LibraryProxyModel>("Librum.models", 1, 0, "LibraryProxyModel");
+    qmlRegisterType<adapters::data_models::BookTitleProxyModel>("Librum.models", 1, 0, "BookTitleModel");
     qmlRegisterType<adapters::data_models::FreeBooksModel>("Librum.models", 1, 0, "FreeBooksModel");
     qmlRegisterType<adapters::data_models::ShortcutsProxyModel>("Librum.models", 1, 0, "ShortcutsProxyModel");
     qmlRegisterType<cpp_elements::KeySequenceRecorder>("Librum.elements", 1, 0, "KeySequenceRecorder");
@@ -156,6 +159,12 @@ int main(int argc, char* argv[])
     auto settingsController = std::make_unique<SettingsController>(settingsService);
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "SettingsController",
                                  settingsController.get());
+
+    // Tools Stack
+    auto toolsService = std::make_unique<application::services::ToolsService>(libraryService);
+    auto toolsController = std::make_unique<ToolsController>(toolsService.get());
+    qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "ToolsController",
+                                 toolsController.get());
 
     // Enums
     qmlRegisterUncreatableMetaObject(application::book_operation_status::staticMetaObject, "Librum.controllers",

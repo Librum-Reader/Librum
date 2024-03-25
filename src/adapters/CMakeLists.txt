@@ -47,6 +47,8 @@ add_library(adapters
                     controllers/folder_controller.cpp
                     controllers/external_book_controller.hpp
                     controllers/external_book_controller.cpp
+                    controllers/tools_controller.hpp
+                    controllers/tools_controller.cpp
 
                     gateways/user_storage_gateway.cpp
                     gateways/user_storage_gateway.hpp
@@ -91,6 +93,10 @@ add_library(adapters
                     data_models/icon_model/icon_proxy_model.hpp
                     data_models/icon_model/icon_proxy_model.cpp
                     data_models/icon_model/icon_item.hpp
+                    data_models/book_title_model/book_title_model.hpp
+                    data_models/book_title_model/book_title_model.cpp
+                    data_models/book_title_model/book_title_proxy_model.hpp
+                    data_models/book_title_model/book_title_proxy_model.cpp
                     
                     DTOs/login_dto.hpp
                     DTOs/register_dto.hpp
@@ -100,6 +106,7 @@ add_library(adapters
                     DTOs/rectf_dto.hpp
                     DTOs/word_definition_dto.hpp
                     DTOs/folder_dto.hpp
+                    interfaces/controllers/i_tools_controller.hpp
 )
 
 target_compile_definitions(adapters PRIVATE ADAPTERS_LIBRARY)
@@ -119,6 +126,7 @@ target_include_directories(adapters
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models/bookmarks_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models/folders_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models/icon_model
+                    ${CMAKE_CURRENT_SOURCE_DIR}/data_models/book_title_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models
                 PRIVATE
                     ${DOMAIN_INCLUDES}

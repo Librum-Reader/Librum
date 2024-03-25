@@ -30,7 +30,8 @@ public:
                            const QUuid& uuid) override;
 
 private slots:
-    void proccessBooksMetadata(std::vector<QJsonObject>& jsonBooks);
+    void proccessBooksMetadata(std::vector<QJsonObject>& jsonBooks,
+                               bool success);
 
 private:
     enum class TagNamingStyle

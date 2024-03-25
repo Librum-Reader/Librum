@@ -36,7 +36,6 @@ Popup {
         target: DictionaryController
 
         function onStartedGettingDefinition() {
-            loadingAnimation.playing = true
             loadingAnimation.visible = true
             language.text = ""
 
@@ -45,14 +44,12 @@ Popup {
         }
 
         function onGettingDefinitionFailed() {
-            loadingAnimation.playing = false
             loadingAnimation.visible = false
 
             notFound.visible = true
         }
 
         function onGettingDefinitionSucceeded() {
-            loadingAnimation.playing = false
             loadingAnimation.visible = false
             language.text = DictionaryController.definition.wordTypes[0].language
 
@@ -150,12 +147,14 @@ Popup {
                 radius: 5
             }
 
-            AnimatedImage {
+            MSpinner {
                 id: loadingAnimation
                 anchors.centerIn: parent
-                source: Icons.loadingAnimation
-                width: 110
-                fillMode: Image.PreserveAspectFit
+                visible: false
+                arcColor: Style.colorBasePurple
+                width: 46
+                height: 46
+                arcWidth: 5
             }
 
             ListView {
@@ -361,7 +360,8 @@ Popup {
                         Layout.alignment: Qt.AlignHCenter
                         Layout.topMargin: 4
                         text: '<a href="update" style="color: ' + Style.colorBasePurple
-                              + '; text-decoration: underline;">' + qsTr('Search online') + '</a>'
+                              + '; text-decoration: underline;">' + qsTr(
+                                  'Search online') + '</a>'
                         textFormat: Text.StyledText
                         onLinkActivated: link => Qt.openUrlExternally(link)
                         font.pointSize: Fonts.size14
@@ -392,7 +392,8 @@ Popup {
         anchors.rightMargin: 2
         horizontalAlignment: Text.AlignRight
         // Context: The "source" of a translation. So like "Source: https://wiktionaty.org/..."
-        text: qsTr('Source') + ': <a href="https://wiktionary.org" style="text-decoration: none; color: '
+        text: qsTr('Source')
+              + ': <a href="https://wiktionary.org" style="text-decoration: none; color: '
               + Style.colorBasePurple + ';">Wiktionary</a>'
         textFormat: Text.StyledText
         font.pointSize: Fonts.size9
