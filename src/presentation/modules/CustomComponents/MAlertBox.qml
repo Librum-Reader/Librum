@@ -99,7 +99,7 @@ Pane {
             text: root.message
             Layout.alignment: Qt.AlignVCenter
             font.pointSize: Fonts.size12
-            color: "#32324D"
+            color: Style.colorText
         }
     }
 
