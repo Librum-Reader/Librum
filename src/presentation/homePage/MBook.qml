@@ -103,16 +103,6 @@ Item {
                 z: 3
             }
 
-            MSpinner {
-                id: loadingAnimation
-                visible: true
-                anchors.centerIn: bookCoverDimmer
-                arcColor: Style.colorBasePurple
-                width: 24
-                height: 24
-                arcWidth: 3
-            }
-
             ColumnLayout {
                 id: upperPartLayout
                 anchors.centerIn: parent
@@ -140,6 +130,17 @@ Item {
                     font.pointSize: Fonts.size20
                     font.bold: true
                 }
+            }
+
+            MSpinner {
+                id: loadingAnimation
+                visible: root.downloading
+                z: 2
+                anchors.centerIn: bookCoverDimmer
+                arcColor: Style.colorBasePurple
+                width: 62
+                height: 62
+                arcWidth: 6
             }
 
             MProgressBar {
