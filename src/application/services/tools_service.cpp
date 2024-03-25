@@ -72,8 +72,7 @@ void ToolsService::extractPages(const QString& destName,
     utils::tools::extract(process, dest, filePath, separator);
 }
 
-void ToolsService::imageToPdf(const QString& destName,
-                                const QString& filePath)
+void ToolsService::imageToPdf(const QString& destName, const QString& filePath)
 {
     auto process = new QProcess;
     QProcess::connect(process, &QProcess::finished, process,
