@@ -89,6 +89,11 @@ QString AppInfoController::getFeedbackLink() const
     return m_appInfoService->getInfo("feedbackLink");
 }
 
+QString AppInfoController::getDiscord() const
+{
+    return m_appInfoService->getInfo("discord");
+}
+
 QString AppInfoController::getCurrentQtVersion() const
 {
     return qVersion();

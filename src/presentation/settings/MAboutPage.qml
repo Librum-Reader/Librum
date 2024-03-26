@@ -149,22 +149,6 @@ MFlickWrapper {
                     Label {
                         Layout.topMargin: 18
                         //: Keep it capitalized
-                        text: qsTr("COMPANY NAME")
-                        color: Style.colorLightText
-                        font.pointSize: Fonts.size10dot25
-                        font.weight: Font.Bold
-                    }
-
-                    Label {
-                        Layout.topMargin: 1
-                        text: AppInfoController.companyName
-                        color: Style.colorBasePurple
-                        font.pointSize: Fonts.size13dot5
-                    }
-
-                    Label {
-                        Layout.topMargin: 12
-                        //: Keep it capitalized
                         text: qsTr("WEBSITE")
                         color: Style.colorLightText
                         font.pointSize: Fonts.size10dot25
@@ -210,6 +194,31 @@ MFlickWrapper {
 
                             onClicked: Qt.openUrlExternally(
                                            "mailto:" + AppInfoController.companyEmail)
+                        }
+                    }
+
+                    Label {
+                        Layout.topMargin: 12
+                        //: Keep it capitalized
+                        text: qsTr("DISCORD")
+                        color: Style.colorLightText
+                        font.pointSize: Fonts.size10dot25
+                        font.weight: Font.Bold
+                    }
+
+                    Label {
+                        Layout.topMargin: 1
+                        text: AppInfoController.discord
+                        color: Style.colorBasePurple
+                        font.pointSize: Fonts.size13dot5
+
+                        MouseArea {
+                            id: discordLinkArea
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+
+                            onClicked: Qt.openUrlExternally(
+                                           AppInfoController.discord)
                         }
                     }
 
