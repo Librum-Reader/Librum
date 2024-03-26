@@ -29,3 +29,4 @@ MBookSelector 1.0 bookSelector/MBookSelector.qml
 MAlertBox 1.0 MAlertBox.qml
 MProgressArc 1.0 MProgressArc.qml
 MSpinner 1.0 MSpinner.qml
+MFeedbackPopup 1.0 MFeedbackPopup.qml

@@ -4,6 +4,7 @@ import QtQuick
 import QtCore
 import Librum.controllers
 import Librum.icons
+import Librum.globalSettings
 
 Item {
     id: styleSheet
@@ -99,7 +100,7 @@ Item {
     property color colorFolderIconSelection
 
     state: (SettingsController.appearanceSettings.Theme
-            === undefined ? lastRunSettings.theme : SettingsController.appearanceSettings.Theme)
+            === undefined ? GlobalSettings.theme : SettingsController.appearanceSettings.Theme)
 
     states: [
         State {
@@ -700,14 +701,5 @@ Item {
 
     // Change icons
     onStateChanged: Icons.setState(state)
-
-    // Settings which capture the application theme the last time the application ran.
-    // This way the correct theme is also chosen before the user is authenticated.
-    Settings {
-        id: lastRunSettings
-        location: "last_run_settings"
-
-        property string theme: "Dark"
-    }
-    Component.onDestruction: lastRunSettings.theme = styleSheet.state
+    Component.onDestruction: GlobalSettings.theme = styleSheet.state
 }

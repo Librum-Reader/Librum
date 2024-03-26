@@ -10,9 +10,11 @@ import Librum.fonts
 import Librum.controllers
 import Librum.globals
 import Librum.models
+import Librum.globalSettings
 import "toolbar"
 import "manageTagsPopup"
 import "folderSidebar"
+import "../loginPage"
 
 Page {
     id: root
@@ -23,7 +25,25 @@ Page {
         color: Style.colorPageBackground
     }
 
-    Component.onCompleted: LibraryController.libraryModel.folder = "all"
+    Component.onCompleted: {
+        // We don't want to show the feedback popup when coming from the login page
+        // since that might be annoying to the user.
+        if (!(pageManager.prevPage instanceof MLoginPage)) {
+            feedbackTimer.start()
+        }
+
+        LibraryController.libraryModel.folder = "all"
+    }
+
+    // Add a slight delay to showing the feedback timer
+    Timer {
+        id: feedbackTimer
+        interval: 500
+        running: false
+        repeat: false
+
+        onTriggered: internal.showFeedbackPopupIfNeeded()
+    }
 
     Shortcut {
         sequence: SettingsController.shortcuts.AddBook
@@ -748,6 +768,15 @@ Page {
         }
     }
 
+    MFeedbackPopup {
+        id: feedbackPopup
+        x: Math.round(
+               root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
+        y: Math.round(
+               root.height / 2 - implicitHeight / 2 - root.topPadding - 50)
+        visible: false
+    }
+
     FileDialog {
         id: importFilesDialog
         acceptLabel: qsTr("Import")
@@ -862,6 +891,28 @@ Page {
             operationsMap[LibraryController.MetaProperty.ParentFolderId] = ""
 
             LibraryController.updateBook(uuid, operationsMap)
+        }
+
+        function showFeedbackPopupIfNeeded() {
+            var last = new Date(GlobalSettings.lastFeedbackQuery)
+            var now = new Date()
+
+            if (internal.addDays(last, 7) <= now) {
+                feedbackPopup.open()
+                feedbackPopup.giveFocus()
+                GlobalSettings.lastFeedbackQuery = now
+            }
+        }
+
+        function addDays(date, days) {
+            var result = new Date(date)
+            result.setDate(result.getDate() + days)
+            return result
+        }
+
+        function addSeconds(date, seconds) {
+            const milliseconds = seconds * 1000
+            return new Date(date.getTime() + milliseconds)
         }
     }
 }

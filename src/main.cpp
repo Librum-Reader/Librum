@@ -72,6 +72,7 @@ int main(int argc, char* argv[])
     qmlRegisterSingletonType(QUrl("qrc:/IconSheet.qml"), "Librum.icons", 1, 0, "Icons");
     qmlRegisterSingletonType(QUrl("qrc:/FontSheet.qml"), "Librum.fonts", 1, 0, "Fonts");
     qmlRegisterSingletonType(QUrl("qrc:/Globals.qml"), "Librum.globals", 1, 0, "Globals");
+    qmlRegisterSingletonType(QUrl("qrc:/GlobalSettings.qml"), "Librum.globalSettings", 1, 0, "GlobalSettings");
     qmlRegisterSingletonType(QUrl("qrc:/TranslationsModel.qml"), "Librum.models", 1, 0, "TranslationsModel");
     qmlRegisterSingletonType(QUrl("qrc:/modules/CustomComponents/MLanguageModel.qml"), "Librum.models", 1, 0, "MLanguageModel");
     qmlRegisterType<adapters::data_models::LibraryProxyModel>("Librum.models", 1, 0, "LibraryProxyModel");

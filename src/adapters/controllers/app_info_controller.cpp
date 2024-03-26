@@ -84,6 +84,11 @@ QString AppInfoController::getGithubLink() const
     return m_appInfoService->getInfo("githubLink");
 }
 
+QString AppInfoController::getFeedbackLink() const
+{
+    return m_appInfoService->getInfo("feedbackLink");
+}
+
 QString AppInfoController::getCurrentQtVersion() const
 {
     return qVersion();

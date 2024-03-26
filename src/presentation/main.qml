@@ -60,6 +60,7 @@ ApplicationWindow {
         StackView {
             id: pageManager
             property bool pageHasSidebar: false
+            property var prevPage: null
 
             Layout.fillWidth: true
             Layout.fillHeight: true

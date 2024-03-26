@@ -123,5 +123,7 @@
         <file>toolsPage/MExtractPagesPopup.qml</file>
         <file>toolsPage/MImageToPdfPopup.qml</file>
         <file>toolsPage/MPdfToImagePopup.qml</file>
+        <file>GlobalSettings.qml</file>
+        <file>modules/CustomComponents/MFeedbackPopup.qml</file>
     </qresource>
 </RCC>

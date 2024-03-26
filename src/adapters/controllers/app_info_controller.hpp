@@ -29,6 +29,7 @@ private:
     QString getNewsWebsite() const override;
     QString getCompanyEmail() const override;
     QString getGithubLink() const override;
+    QString getFeedbackLink() const override;
     QString getCurrentQtVersion() const override;
     QString getOperatingSystem() const override;
     void updateApplication() override;
