@@ -45,4 +45,8 @@ ListModel {
         text: "Bahasa Indonesia"
         code: "id"
     }
+    ListElement {
+        text: "বাংলা"
+        code: "bn"
+    }
 }
