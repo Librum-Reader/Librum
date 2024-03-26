@@ -43,6 +43,7 @@ target_link_libraries(presentation
                     domain
                     ${MUPDF_OUTPUT}
                     Qt6::Core
+                    Qt6::Widgets
                     Qt6::Quick
 )
 

@@ -54,10 +54,10 @@ int main(int argc, char* argv[])
 {
     // clang-format off
     // App
-    QGuiApplication app(argc, argv);
-    QGuiApplication::setOrganizationName("Librum-Reader");
-    QGuiApplication::setOrganizationDomain("librumreader.com");
-    QGuiApplication::setApplicationName("Librum");
+    QApplication app(argc, argv);
+    QApplication::setOrganizationName("Librum-Reader");
+    QApplication::setOrganizationDomain("librumreader.com");
+    QApplication::setApplicationName("Librum");
     QQuickStyle::setStyle(QStringLiteral("Default"));
 
     QIcon icon(":/src/logo.ico");
