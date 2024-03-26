@@ -4,73 +4,82 @@
 <context>
     <name>MAboutPage</name>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="33"/>
+        <location filename="../settings/MAboutPage.qml" line="34"/>
         <source>About</source>
         <translation>حول</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="34"/>
+        <location filename="../settings/MAboutPage.qml" line="35"/>
         <source>About this application</source>
         <translation>حول هذا التطبيق</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="60"/>
+        <location filename="../settings/MAboutPage.qml" line="61"/>
         <source>Details</source>
         <translation>التفاصيل</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="69"/>
+        <location filename="../settings/MAboutPage.qml" line="70"/>
         <source>CURRENT VERSION</source>
         <extracomment>Keep it capitalized</extracomment>
         <translation>الإصدار الحالي</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="85"/>
+        <location filename="../settings/MAboutPage.qml" line="86"/>
         <source>QT VERSION</source>
         <extracomment>Keep it capitalized</extracomment>
         <translation>إصدار QT</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="106"/>
-        <source>Up-to date</source>
-        <translation>مُحَدث</translation>
+        <location filename="../settings/MAboutPage.qml" line="105"/>
+        <source>Feedback?</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="138"/>
+        <source>Up-to date</source>
+        <translation type="vanished">مُحَدث</translation>
+    </message>
+    <message>
+        <location filename="../settings/MAboutPage.qml" line="143"/>
         <source>Creator</source>
         <translation>الصانع</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="147"/>
         <source>COMPANY NAME</source>
         <extracomment>Keep it capitalized</extracomment>
-        <translation>اسم الشركة</translation>
+        <translation type="vanished">اسم الشركة</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="163"/>
+        <location filename="../settings/MAboutPage.qml" line="152"/>
         <source>WEBSITE</source>
         <extracomment>Keep it capitalized</extracomment>
         <translation>موقع الويب</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="188"/>
+        <location filename="../settings/MAboutPage.qml" line="177"/>
         <source>CONTACT</source>
         <extracomment>Keep it capitalized</extracomment>
         <translation>اتصل</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="214"/>
+        <location filename="../settings/MAboutPage.qml" line="203"/>
+        <source>DISCORD</source>
+        <extracomment>Keep it capitalized</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/MAboutPage.qml" line="228"/>
         <source>GITHUB</source>
         <extracomment>Keep it capitalized</extracomment>
         <translation>GITHUB</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="260"/>
+        <location filename="../settings/MAboutPage.qml" line="274"/>
         <source>This App</source>
         <translation>هذا التطبيق</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="282"/>
+        <location filename="../settings/MAboutPage.qml" line="296"/>
         <source>Librum is here for everyone who just wants to enjoy a good book.
 We hope you have a great time using it! Feel free to leave us a rating and some feedback.</source>
         <translation>Librum موجود هنا لكل من يريد الاستمتاع بكتاب جيد.
@@ -1108,6 +1117,29 @@ Either you are offline, or your storage is full.</source>
     </message>
 </context>
 <context>
+    <name>MFeedbackPopup</name>
+    <message>
+        <location filename="../modules/CustomComponents/MFeedbackPopup.qml" line="40"/>
+        <source>Got some feedback?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../modules/CustomComponents/MFeedbackPopup.qml" line="55"/>
+        <source>Your feedback is crucial for improving Librum. Would you mind sharing your experience by taking a quick survey?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../modules/CustomComponents/MFeedbackPopup.qml" line="74"/>
+        <source>No, Thanks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../modules/CustomComponents/MFeedbackPopup.qml" line="88"/>
+        <source>Let&apos;s do this!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MFilterByButton</name>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByButton.qml" line="46"/>
@@ -1305,216 +1337,216 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MHomePage</name>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="120"/>
+        <location filename="../homePage/MHomePage.qml" line="140"/>
         <source>A new version is available!</source>
         <translation>إصدار جديد متاح!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="122"/>
+        <location filename="../homePage/MHomePage.qml" line="142"/>
         <source>Update Now</source>
         <translation>حدث الآن</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="170"/>
+        <location filename="../homePage/MHomePage.qml" line="190"/>
         <source>Home</source>
         <extracomment>As in &apos;Home Page&apos;, might be closer to &apos;Start&apos; in other languages</extracomment>
         <translation>الصفحة الرئيسية</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="171"/>
+        <location filename="../homePage/MHomePage.qml" line="191"/>
         <source>You have %1 books</source>
         <translation>لديك %1 كتاب</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="187"/>
+        <location filename="../homePage/MHomePage.qml" line="207"/>
         <source>Add books</source>
         <translation>أضف كتب</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="481"/>
+        <location filename="../homePage/MHomePage.qml" line="501"/>
         <source>Remove Book?</source>
         <translation>احذف الكتاب؟</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="482"/>
+        <location filename="../homePage/MHomePage.qml" line="502"/>
         <source>Deleting a book is a permanent action, no one will be
  able to restore it afterwards!</source>
         <translation>حذف كتاب هو عمل دائم، لا أحد
 سيكون قادر على استعادته بعد ذلك!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="483"/>
-        <location filename="../homePage/MHomePage.qml" line="542"/>
+        <location filename="../homePage/MHomePage.qml" line="503"/>
+        <location filename="../homePage/MHomePage.qml" line="562"/>
         <source>Remove from Device</source>
         <translation>احذف من الجهاز</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="484"/>
-        <location filename="../homePage/MHomePage.qml" line="543"/>
+        <location filename="../homePage/MHomePage.qml" line="504"/>
+        <location filename="../homePage/MHomePage.qml" line="563"/>
         <source>Delete Everywhere</source>
         <translation>احذف من كل مكان</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="495"/>
-        <location filename="../homePage/MHomePage.qml" line="506"/>
+        <location filename="../homePage/MHomePage.qml" line="515"/>
+        <location filename="../homePage/MHomePage.qml" line="526"/>
         <source>Uninstalling failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="495"/>
+        <location filename="../homePage/MHomePage.qml" line="515"/>
         <source>Can&apos;t uninstall book since it is not downloaded.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="503"/>
+        <location filename="../homePage/MHomePage.qml" line="523"/>
         <source>Uninstalling succeeded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="504"/>
+        <location filename="../homePage/MHomePage.qml" line="524"/>
         <source>The book was deleted from your device.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="507"/>
-        <location filename="../homePage/MHomePage.qml" line="521"/>
+        <location filename="../homePage/MHomePage.qml" line="527"/>
+        <location filename="../homePage/MHomePage.qml" line="541"/>
         <source>Something went wrong.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="517"/>
+        <location filename="../homePage/MHomePage.qml" line="537"/>
         <source>Deleting succeeded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="518"/>
+        <location filename="../homePage/MHomePage.qml" line="538"/>
         <source>The book was successfully deleted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="520"/>
+        <location filename="../homePage/MHomePage.qml" line="540"/>
         <source>Deleting failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="540"/>
+        <location filename="../homePage/MHomePage.qml" line="560"/>
         <source>Remove Books?</source>
         <translation>حذف الكتب؟</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="541"/>
+        <location filename="../homePage/MHomePage.qml" line="561"/>
         <source>Deleting books is a permanent action, no one will be
  able to restore it afterwards!</source>
         <translation>حذف الكتب هو إجراء دائم،
  لن يكون أحد قادرًا على استعادته بعد ذلك!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="590"/>
-        <location filename="../homePage/MHomePage.qml" line="620"/>
+        <location filename="../homePage/MHomePage.qml" line="610"/>
+        <location filename="../homePage/MHomePage.qml" line="640"/>
         <source>Remove from Folder?</source>
         <translation>حذف من المجلد؟</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="591"/>
+        <location filename="../homePage/MHomePage.qml" line="611"/>
         <source>This action will not delete the original book.</source>
         <translation>هذا الإجراء لن يقوم بحذف الكتاب الأصلي.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="592"/>
-        <location filename="../homePage/MHomePage.qml" line="622"/>
-        <location filename="../homePage/MHomePage.qml" line="689"/>
+        <location filename="../homePage/MHomePage.qml" line="612"/>
+        <location filename="../homePage/MHomePage.qml" line="642"/>
+        <location filename="../homePage/MHomePage.qml" line="709"/>
         <source>Cancel</source>
         <translation>إلغاء</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="593"/>
-        <location filename="../homePage/MHomePage.qml" line="623"/>
+        <location filename="../homePage/MHomePage.qml" line="613"/>
+        <location filename="../homePage/MHomePage.qml" line="643"/>
         <source>Remove</source>
         <translation>أزل</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="621"/>
+        <location filename="../homePage/MHomePage.qml" line="641"/>
         <source>This action will not delete the original books.</source>
         <translation>هذا الإجراء لن يقوم بحذف الكتب الأصلية.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="671"/>
+        <location filename="../homePage/MHomePage.qml" line="691"/>
         <source>Save</source>
         <translation>احفظ</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="686"/>
+        <location filename="../homePage/MHomePage.qml" line="706"/>
         <source>Limit Reached</source>
         <translation>وصلت إلى الحد</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="687"/>
+        <location filename="../homePage/MHomePage.qml" line="707"/>
         <source>You have reached your upload limit.
 Delete unused books to free up space or upgrade.</source>
         <translation>لقد وصلت إلى حد الرفع.
 إما أن تحذف الكتب غير المستخدمة لتفريغ مساحة أو الترقية.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="738"/>
+        <location filename="../homePage/MHomePage.qml" line="758"/>
         <source>Ok</source>
         <translation>حسناً</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="688"/>
+        <location filename="../homePage/MHomePage.qml" line="708"/>
         <source>Upgrade</source>
         <translation>ترقية</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="707"/>
+        <location filename="../homePage/MHomePage.qml" line="727"/>
         <source>Book already exists</source>
         <translation>الكتاب موجود بالفعل</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="708"/>
+        <location filename="../homePage/MHomePage.qml" line="728"/>
         <source>It looks like this book already exists in your library:</source>
         <translation>يبدو أن هذا الكتاب موجود بالفعل في مكتبتك:</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="711"/>
+        <location filename="../homePage/MHomePage.qml" line="731"/>
         <source>Are you sure you that want to add it again?
 </source>
         <translation>هل أنت متأكد من أنك تريد إضافته مرة أخرى؟
 </translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="714"/>
+        <location filename="../homePage/MHomePage.qml" line="734"/>
         <source>Add</source>
         <translation>أضف</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="715"/>
+        <location filename="../homePage/MHomePage.qml" line="735"/>
         <source>Don&apos;t add</source>
         <translation>لا تضف</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="736"/>
+        <location filename="../homePage/MHomePage.qml" line="756"/>
         <source>Unsupported File</source>
         <translation>ملف غير مدعوم</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="737"/>
+        <location filename="../homePage/MHomePage.qml" line="757"/>
         <source>Oops! This file is not supported by Librum.</source>
         <translation>عفوًا! هذا الملف غير مدعوم من Librum.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="753"/>
+        <location filename="../homePage/MHomePage.qml" line="782"/>
         <source>Import</source>
         <translation>إدراج</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="756"/>
+        <location filename="../homePage/MHomePage.qml" line="785"/>
         <source>All files</source>
         <translation>كل الملفات</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="757"/>
-        <location filename="../homePage/MHomePage.qml" line="758"/>
-        <location filename="../homePage/MHomePage.qml" line="759"/>
+        <location filename="../homePage/MHomePage.qml" line="786"/>
+        <location filename="../homePage/MHomePage.qml" line="787"/>
+        <location filename="../homePage/MHomePage.qml" line="788"/>
         <source>files</source>
         <translation>ملفات</translation>
     </message>
