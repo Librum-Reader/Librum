@@ -6,6 +6,10 @@ It's not **just** an e-book reader. With Librum, you can manage your own online 
  
 Librum also provides free access to over 70,000 books and personal reading statistics while being free and completely open source.
 
+___
+
+Join us on [Discord](https://discord.gg/hSX64qsFHc)
+
 
 # Preview
 
