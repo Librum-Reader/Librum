@@ -115,7 +115,7 @@ elseif(WIN32)
     set(MUPDF_OUTPUT_DIR "${PROJECT_SOURCE_DIR}/libs/mupdf/platform/win32/x64/$<IF:$<CONFIG:Debug>,Debug,Release>")
     set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/mupdfcpp64.lib" PARENT_SCOPE)
     set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/mupdfcpp64.lib")
-    set(MUPDF_BUILD_COMMAND python scripts/mupdfwrap.py ${VENV_OPTION} -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b -j 0 m01)
+    set(MUPDF_BUILD_COMMAND python scripts/mupdfwrap.py ${VENV_OPTION} -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b --m-target mutool -j 0 m01)
 endif()
 
 message("MuPdf build command: " ${MUPDF_BUILD_COMMAND})
