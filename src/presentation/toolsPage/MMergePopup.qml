@@ -229,7 +229,7 @@ Popup {
 
                 mergeButton.loading = true
 
-                var name = "Merged: " + bookSelector.selectedItems[0].title
+                var name = "Merged " + bookSelector.selectedItems[0].title
                 ToolsController.merge(name, bookSelector.selectedItems.map(
                                           x => x.filePath))
             }

@@ -161,7 +161,7 @@ Popup {
 
                 extractButton.loading = true
 
-                var name = "Rearranged: " + bookSelector.selectedItems[0].title
+                var name = "Rearranged " + bookSelector.selectedItems[0].title
                 ToolsController.extractPages(
                             name, bookSelector.selectedItems[0].filePath,
                             splitStringInput.text)
