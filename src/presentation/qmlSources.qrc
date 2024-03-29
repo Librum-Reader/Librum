@@ -23,7 +23,6 @@
         <file>modules/CustomComponents/comboBox/MComboBox.qml</file>
         <file>modules/CustomComponents/comboBox/MComboBoxPopup.qml</file>
         <file>modules/CustomComponents/MPageCleanup.qml</file>
-        <file>addOnsPage/MAddOnsPage.qml</file>
         <file>forgotPasswordPage/MForgotPasswordPage.qml</file>
         <file>freeBooksPage/MFreeBooksPage.qml</file>
         <file>freeBooksPage/explorerToolbar/MExplorerToolbar.qml</file>
@@ -94,7 +93,6 @@
         <file>modules/CustomComponents/MConfirmAccountDeletionPopup.qml</file>
         <file>settings/updatesPage/MWindowsUpdatingPopup.qml</file>
         <file>readingPage/MSelectionOptionsPopup.qml</file>
-        <file>readingPage/MColorSelectionPopup.qml</file>
         <file>modules/CustomComponents/MSlider.qml</file>
         <file>readingPage/MDictionaryPopup.qml</file>
         <file>readingPage/MBookmarkItem.qml</file>
@@ -114,5 +112,17 @@
         <file>readingPage/MExternalReadingPage.qml</file>
         <file>readingPage/externalReadingToolbar/MExternalReadingOptionsPopup.qml</file>
         <file>readingPage/externalReadingToolbar/MExternalReadingToolBar.qml</file>
+        <file>toolsPage/MToolsPage.qml</file>
+        <file>toolsPage/MMergePopup.qml</file>
+        <file>modules/CustomComponents/bookSelector/MBookSelector.qml</file>
+        <file>modules/CustomComponents/bookSelector/MBookSelectorPopup.qml</file>
+        <file>modules/CustomComponents/MAlertBox.qml</file>
+        <file>modules/CustomComponents/MProgressArc.qml</file>
+        <file>modules/CustomComponents/MSpinner.qml</file>
+        <file>toolsPage/MExtractPagesPopup.qml</file>
+        <file>toolsPage/MImageToPdfPopup.qml</file>
+        <file>toolsPage/MPdfToImagePopup.qml</file>
+        <file>GlobalSettings.qml</file>
+        <file>modules/CustomComponents/MFeedbackPopup.qml</file>
     </qresource>
 </RCC>

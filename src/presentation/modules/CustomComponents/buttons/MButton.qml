@@ -3,10 +3,12 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import Librum.style
 import Librum.fonts
+import CustomComponents
 
 Item {
     id: root
     property bool active: false
+    property bool loading: false
     property bool currentlyHovered: mouseArea.containsMouse
     property bool currentlyPressed: mouseArea.pressed
 
@@ -52,6 +54,7 @@ Item {
             id: layout
             anchors.verticalCenter: root.centerContentVertically ? parent.verticalCenter : undefined
             anchors.horizontalCenter: root.centerContentHorizontally ? parent.horizontalCenter : undefined
+            visible: !root.loading
             spacing: root.imageSpacing
 
             Image {
@@ -85,13 +88,20 @@ Item {
             }
         }
 
+        MSpinner {
+            id: spinner
+            visible: root.loading
+            anchors.centerIn: parent
+        }
+
         MouseArea {
             id: mouseArea
             anchors.fill: parent
             hoverEnabled: true
             cursorShape: Qt.PointingHandCursor
 
-            onClicked: root.clicked()
+            onClicked: if (!root.loading)
+                           root.clicked()
         }
     }
 

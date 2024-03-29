@@ -8,7 +8,7 @@ struct BookForDeletion
 {
     QUuid uuid;
     bool downloaded;
-    QString format;
+    QString extension;
 };
 
 }  // namespace application::utility

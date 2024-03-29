@@ -25,6 +25,8 @@ class ADAPTERS_EXPORT IAppInfoController : public QObject
     Q_PROPERTY(QString newsWebsite READ getNewsWebsite CONSTANT)
     Q_PROPERTY(QString companyEmail READ getCompanyEmail CONSTANT)
     Q_PROPERTY(QString githubLink READ getGithubLink CONSTANT)
+    Q_PROPERTY(QString feedbackLink READ getFeedbackLink CONSTANT)
+    Q_PROPERTY(QString discord READ getDiscord CONSTANT)
     Q_PROPERTY(QString currentQtVersion READ getCurrentQtVersion CONSTANT)
     Q_PROPERTY(QString operatingSystem READ getOperatingSystem CONSTANT)
     Q_PROPERTY(int systemFontSize READ getSystemFontSize CONSTANT)
@@ -48,6 +50,8 @@ private:
     virtual QString getNewsWebsite() const = 0;
     virtual QString getCompanyEmail() const = 0;
     virtual QString getGithubLink() const = 0;
+    virtual QString getFeedbackLink() const = 0;
+    virtual QString getDiscord() const = 0;
     virtual QString getCurrentQtVersion() const = 0;
     virtual QString getOperatingSystem() const = 0;
     virtual double getSystemFontSize() const = 0;

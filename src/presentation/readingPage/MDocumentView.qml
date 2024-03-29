@@ -155,13 +155,9 @@ Pane {
             onContentYChanged: {
                 NavigationLogic.updateCurrentPageCounter()
                 selectionOptionsPopup.close()
-                colorSelectionPopup.close()
             }
 
-            onContentXChanged: {
-                selectionOptionsPopup.close()
-                colorSelectionPopup.close()
-            }
+            onContentXChanged: selectionOptionsPopup.close()
 
             Component.onCompleted: root.setPage(root.bookController.currentPage)
 
@@ -238,31 +234,14 @@ Pane {
     MSelectionOptionsPopup {
         id: selectionOptionsPopup
         property real highlightCenterX
-        property real highlightTopY
+        property real highlightBottomY
 
         onNewWidth: internal.openSelectionOptionsPopup(-1, -1)
-
-        onHighlightOptionSelected: uuid => {
-                                       if (selectionOptionsPopup.highlight == "")
-                                       colorSelectionPopup.highlight = uuid
-                                       else
-                                       colorSelectionPopup.highlight
-                                       = selectionOptionsPopup.highlight
-
-                                       internal.openPopupAt(
-                                           colorSelectionPopup,
-                                           selectionOptionsPopup.highlightCenterX,
-                                           selectionOptionsPopup.highlightTopY)
-                                   }
 
         onExplanationOptionSelected: text => {
                                          explanationPopup.question = text
                                          explanationPopup.open()
                                      }
-    }
-
-    MColorSelectionPopup {
-        id: colorSelectionPopup
     }
 
     MDictionaryPopup {
@@ -319,23 +298,27 @@ Pane {
         id: internal
         property string optionNameCursorModeHiddenAfterDelay: "Hidden after delay"
 
-        function openSelectionOptionsPopup(centerX, topY) {
-            if (centerX === -1 && topY === -1) {
+        function openSelectionOptionsPopup(centerX, bottomY) {
+            if (centerX === -1 && bottomY === -1) {
                 centerX = selectionOptionsPopup.highlightCenterX
-                topY = selectionOptionsPopup.highlightTopY
+                bottomY = selectionOptionsPopup.highlightBottomY
             }
             selectionOptionsPopup.highlightCenterX = centerX
-            selectionOptionsPopup.highlightTopY = topY
+            selectionOptionsPopup.highlightBottomY = bottomY
 
-            internal.openPopupAt(selectionOptionsPopup, centerX, topY)
+            internal.openPopupAt(selectionOptionsPopup, centerX, bottomY)
         }
 
-        function openPopupAt(popup, centerX, topY) {
+        function openPopupAt(popup, centerX, bottomY) {
             let pageYOffset = pageView.contentY - activeFocusItem.y
             let pageXOffset = pageView.contentX - activeFocusItem.x
-            let posX = centerX + pageView.x - popup.width / 2 - pageXOffset
-            let posY = topY - popup.height - pageYOffset - 6
 
+            let posY = bottomY + -pageYOffset + 6
+            let spaceToBottom = (pageView.y + root.height) - (posY + popup.height)
+            if (spaceToBottom < 0)
+                posY = posY + spaceToBottom
+
+            let posX = centerX + pageView.x - popup.width / 2 - pageXOffset
             let spaceToRight = (pageView.x + pageView.width) - (posX + popup.width)
             if (spaceToRight < 0)
                 posX = posX + spaceToRight

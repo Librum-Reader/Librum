@@ -4,6 +4,7 @@
 #include <QString>
 #include "adapters_export.hpp"
 #include "book_dto.hpp"
+#include "book_title_model.hpp"
 #include "i_library_controller.hpp"
 #include "i_library_service.hpp"
 #include "library_model.hpp"
@@ -39,6 +40,7 @@ public:
     void syncWithServer() override;
     int saveBookToFile(const QString& uuid, const QUrl& path) override;
     data_models::LibraryProxyModel* getLibraryModel() override;
+    data_models::BookTitleProxyModel* getBookTitleModel() override;
 
 public slots:
     void refreshLastOpenedFlag(const QString& uuid) override;
@@ -56,6 +58,8 @@ private:
     application::ILibraryService* m_libraryService;
     data_models::LibraryModel m_libraryModel;
     data_models::LibraryProxyModel m_libraryProxyModel;
+    data_models::BookTitleModel m_bookTitleModel;
+    data_models::BookTitleProxyModel m_bookTitleProxyModel;
     bool m_currentlySyncing = false;
 };
 

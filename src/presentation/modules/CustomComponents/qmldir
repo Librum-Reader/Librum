@@ -25,3 +25,8 @@ MWarningPopup 1.0 MWarningPopup.qml
 MToolTip 1.0 MToolTip.qml
 MConfirmAccountDeletionPopup 1.0 MConfirmAccountDeletionPopup.qml
 MSlider 1.0 MSlider.qml
+MBookSelector 1.0 bookSelector/MBookSelector.qml
+MAlertBox 1.0 MAlertBox.qml
+MProgressArc 1.0 MProgressArc.qml
+MSpinner 1.0 MSpinner.qml
+MFeedbackPopup 1.0 MFeedbackPopup.qml

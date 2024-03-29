@@ -7,6 +7,7 @@ import Librum.controllers
 import Librum.style
 import Librum.icons
 import Librum.fonts
+import Librum.globalSettings
 
 MFlickWrapper {
     id: root
@@ -97,20 +98,24 @@ MFlickWrapper {
 
                     MButton {
                         Layout.topMargin: 21
-                        Layout.preferredWidth: 120
-                        Layout.preferredHeight: 32
-                        borderColor: Style.colorGreenBorder
-                        backgroundColor: Style.colorGreenBackground
-                        imagePath: Icons.checkGreen
-                        imageSize: 20
-                        text: qsTr("Up-to date")
-                        fontSize: Fonts.size10dot5
-                        textColor: Style.colorGreenText
+                        Layout.preferredWidth: 140
+                        Layout.preferredHeight: 40
+                        borderWidth: 0
+                        backgroundColor: Style.colorBasePurple
+                        text: qsTr("Feedback?")
+                        fontSize: Fonts.size12
+                        textColor: Style.colorFocusedButtonText
                         imageSpacing: 6
                         opacityOnPressed: 0.8
 
-                        onClicked: loadSettingsPage(updatesPage,
-                                                    settingsSidebar.updatesItem)
+                        onClicked: {
+                            Qt.openUrlExternally(AppInfoController.feedbackLink)
+
+                            // Ask the user again in half a year after they've taken the survey
+                            var date = new Date()
+                            date.setDate((new Date()).getDate() + 183)
+                            GlobalSettings.lastFeedbackQuery = date.toString()
+                        }
                     }
                 }
             }
@@ -143,22 +148,6 @@ MFlickWrapper {
 
                     Label {
                         Layout.topMargin: 18
-                        //: Keep it capitalized
-                        text: qsTr("COMPANY NAME")
-                        color: Style.colorLightText
-                        font.pointSize: Fonts.size10dot25
-                        font.weight: Font.Bold
-                    }
-
-                    Label {
-                        Layout.topMargin: 1
-                        text: AppInfoController.companyName
-                        color: Style.colorBasePurple
-                        font.pointSize: Fonts.size13dot5
-                    }
-
-                    Label {
-                        Layout.topMargin: 12
                         //: Keep it capitalized
                         text: qsTr("WEBSITE")
                         color: Style.colorLightText
@@ -205,6 +194,31 @@ MFlickWrapper {
 
                             onClicked: Qt.openUrlExternally(
                                            "mailto:" + AppInfoController.companyEmail)
+                        }
+                    }
+
+                    Label {
+                        Layout.topMargin: 12
+                        //: Keep it capitalized
+                        text: qsTr("DISCORD")
+                        color: Style.colorLightText
+                        font.pointSize: Fonts.size10dot25
+                        font.weight: Font.Bold
+                    }
+
+                    Label {
+                        Layout.topMargin: 1
+                        text: AppInfoController.discord
+                        color: Style.colorBasePurple
+                        font.pointSize: Fonts.size13dot5
+
+                        MouseArea {
+                            id: discordLinkArea
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+
+                            onClicked: Qt.openUrlExternally(
+                                           AppInfoController.discord)
                         }
                     }
 

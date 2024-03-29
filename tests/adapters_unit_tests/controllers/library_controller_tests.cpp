@@ -73,7 +73,7 @@ struct ALibraryController : public ::testing::Test
     void SetUp() override
     {
         EXPECT_CALL(bookServiceMock, getBooks())
-            .WillOnce(ReturnRef(bookVector));
+            .WillRepeatedly(ReturnRef(bookVector));
 
         bookController =
             std::make_unique<controllers::LibraryController>(&bookServiceMock);

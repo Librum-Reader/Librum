@@ -260,18 +260,18 @@ void LibraryStorageAccess::downloadBookMedia(const QString& authToken,
                     return;
                 }
 
-                // The server sends the book format in a header
-                QString bookFormat = reply->rawHeader("Format");
+                // The server sends the book extension in a header
+                QString bookExtension = reply->rawHeader("Extension");
                 emit downloadingBookMediaChunkReady(reply->readAll(), false,
-                                                    uuid, bookFormat);
+                                                    uuid, bookExtension);
             });
 
     connect(reply, &QNetworkReply::finished, this,
             [this, reply, uuid]()
             {
-                QString bookFormat = reply->rawHeader("Format");
+                QString bookExtension = reply->rawHeader("Extension");
                 emit downloadingBookMediaChunkReady(QByteArray(), true, uuid,
-                                                    bookFormat);
+                                                    bookExtension);
 
                 reply->deleteLater();
             });
@@ -292,7 +292,7 @@ void LibraryStorageAccess::processGettingBooksMetaDataResult(
         api_error_helper::logErrorMessage(reply, "Getting books");
 
         std::vector<QJsonObject> empty;
-        emit gettingBooksMetaDataFinished(empty);
+        emit gettingBooksMetaDataFinished(empty, false);
         reply->deleteLater();
         return;
     }
@@ -307,7 +307,7 @@ void LibraryStorageAccess::processGettingBooksMetaDataResult(
         books.emplace_back(jsonBook.toObject());
     }
 
-    emit gettingBooksMetaDataFinished(books);
+    emit gettingBooksMetaDataFinished(books, true);
     reply->deleteLater();
 }
 

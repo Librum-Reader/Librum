@@ -9,6 +9,7 @@
 #include <set>
 #include "adapters_export.hpp"
 #include "book_dto.hpp"
+#include "book_title_proxy_model.hpp"
 #include "library_proxy_model.hpp"
 
 namespace adapters
@@ -25,6 +26,8 @@ class ADAPTERS_EXPORT ILibraryController : public QObject
     Q_OBJECT
     Q_PROPERTY(adapters::data_models::LibraryProxyModel* libraryModel READ
                    getLibraryModel CONSTANT)
+    Q_PROPERTY(adapters::data_models::BookTitleProxyModel* bookTitleModel READ
+                   getBookTitleModel CONSTANT)
     Q_PROPERTY(int bookCount READ getBookCount NOTIFY bookCountChanged)
     Q_PROPERTY(bool isSyncing READ isSyncing NOTIFY isSyncingChanged)
 
@@ -81,6 +84,7 @@ public:
     Q_INVOKABLE virtual int saveBookToFile(const QString& uuid,
                                            const QUrl& path) = 0;
     virtual data_models::LibraryProxyModel* getLibraryModel() = 0;
+    virtual data_models::BookTitleProxyModel* getBookTitleModel() = 0;
 
 public slots:
     Q_INVOKABLE virtual void refreshLastOpenedFlag(const QString& uuid) = 0;

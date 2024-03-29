@@ -11,13 +11,12 @@ Popup {
     id: root
     property string highlight: ""
     signal newWidth
-    signal highlightOptionSelected(string uuid)
     signal dictionaryOptionSelected(string word)
     signal explanationOptionSelected(string word)
 
-    width: selectionOptionsListView.width
-    height: 32
     padding: 0
+    width: layout.width
+    height: layout.height
     background: Rectangle {
         color: Style.colorControlBackground
         radius: 4
@@ -25,8 +24,6 @@ Popup {
         border.color: Style.colorContainerBorder
     }
 
-    onOpened: selectionOptionsListView.model
-              = (baseRoot.externalBookMode ? externalBookActionPage : firstActionsPage)
     onClosed: root.highlight = ""
 
     Shortcut {
@@ -50,279 +47,216 @@ Popup {
     Image {
         id: triangleDecoration
         x: parent.width / 2 - implicitWidth / 2
-        y: parent.y + parent.height - 1
+        y: -5 - root.verticalPadding
         source: Icons.popupDroplet
-        rotation: 180
     }
 
-    ListView {
-        id: selectionOptionsListView
-        property bool firstTimeOpened: true
+    ColumnLayout {
+        id: layout
+        spacing: 6
 
-        width: contentWidth
-        height: parent.height
-        orientation: ListView.Horizontal
-        spacing: 2
-        model: baseRoot.externalBookMode ? externalBookActionPage : firstActionsPage
-        boundsBehavior: Flickable.StopAtBounds
+        RowLayout {
+            id: highlightRow
+            Layout.leftMargin: 10
+            Layout.rightMargin: 10
+            Layout.topMargin: 8
+            spacing: 0
 
-        onModelChanged: {
-            // Prevent the selection popup being opened on initialization
-            if (firstTimeOpened) {
-                firstTimeOpened = false
-                return
+            component ColorItem: Rectangle {
+                id: colorItem
+                property string colorName
+                Layout.preferredHeight: 26
+                Layout.preferredWidth: 26
+                color: "transparent"
+                opacity: colorItemArea.pressed ? 0.7 : 1
+
+                Rectangle {
+                    width: 15
+                    height: width
+                    anchors.centerIn: parent
+                    radius: width
+                    color: SettingsController.appearanceSettings[colorItem.colorName]
+                }
+
+                MouseArea {
+                    id: colorItemArea
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onContainsMouseChanged: activeFocusItem.setPointingCursor()
+
+                    onClicked: {
+                        let uuid = root.highlight
+                        if (root.highlight == "") {
+                            uuid = internal.createHighlight()
+                        }
+
+                        // Change highlight color
+                        activeFocusItem.changeHighlightColor(
+                                    uuid,
+                                    SettingsController.appearanceSettings[colorItem.colorName],
+                                    SettingsController.appearanceSettings.HighlightOpacity)
+
+                        // Remember the last color used
+                        SettingsController.setSetting(
+                                    SettingKeys.DefaultHighlightColorName,
+                                    colorItem.colorName,
+                                    SettingGroups.Appearance)
+
+                        root.close()
+                    }
+                }
             }
 
-            selectionOptionsListView.forceLayout()
-            root.newWidth()
+            ColorItem {
+                colorName: "HighlightColorA"
+            }
+
+            ColorItem {
+                colorName: "HighlightColorB"
+            }
+
+            ColorItem {
+                colorName: "HighlightColorC"
+            }
+
+            ColorItem {
+                colorName: "HighlightColorD"
+            }
+
+            ColorItem {
+                colorName: "HighlightColorE"
+            }
         }
-    }
-
-    component SelectionOptionsPopupItem: Rectangle {
-        id: action
-        property string text
-        property color textColor: Style.colorText
-        property var clickedFunction: function () {}
-
-        height: selectionOptionsListView.height
-        implicitWidth: actionText.implicitWidth
-        color: "transparent"
-        opacity: actionArea.pressed ? 0.8 : 1
 
         Label {
-            id: actionText
-            height: parent.height
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            padding: 10
-            text: action.text
-            color: action.textColor
-            font.pointSize: Fonts.size12
-        }
-
-        MouseArea {
-            id: actionArea
-            anchors.fill: parent
-            cursorShape: Qt.PointingHandCursor
-            hoverEnabled: true
-
-            onClicked: {
-                action.clickedFunction()
-
-                root.close()
-            }
-        }
-    }
-
-    component Separator: Rectangle {
-        y: 1 // Move one down
-        height: selectionOptionsListView.height - 2
-        implicitWidth: 2
-        color: Style.colorSeparator
-    }
-
-    ObjectModel {
-        id: firstActionsPage
-
-        SelectionOptionsPopupItem {
-            id: copyAction
-            text: qsTr("Copy")
-            clickedFunction: function () {
-                if (root.highlight == "")
-                    activeFocusItem.copySelectedText()
-                else
-                    activeFocusItem.copyHighlightedText(root.highlight)
-            }
-        }
-
-        Separator {}
-
-        SelectionOptionsPopupItem {
-            id: highlightAction
-            text: qsTr("Highlight")
-            visible: !baseRoot.externalBookMode
-            clickedFunction: function () {
-                // We do not want to create a new highlight when clicking on
-                // one and selecting the "Highlight" option to edit it.
-                let uuid = root.highlight
-                if (root.highlight == "") {
-                    uuid = internal.createHighlight()
-                }
-
-                root.highlightOptionSelected(uuid)
-            }
-        }
-
-        Separator {}
-
-        SelectionOptionsPopupItem {
-            id: lookUpAction
-            text: qsTr("Look Up")
-            clickedFunction: function () {
-                let text = ""
-                if (root.highlight == "")
-                    text = activeFocusItem.getSelectedText()
-                else
-                    text = activeFocusItem.getHighlightedText(root.highlight)
-
-                // Removing any . or , from the start and the end of the word
-                text = text.replace(/^[,.]+|[,.]+$/g, '')
-
-                // Make the first letter lower case. When the word is at the start of a sentence,
-                // the first letter will be upper case, which in turn causes the dictionary to fail.
-                const firstLetter = text.charAt(0).toLowerCase()
-                const restOfString = text.slice(1)
-                // Get the rest of the string
-                text = firstLetter + restOfString
-
-                DictionaryController.getDefinitionForWord(text)
-                root.dictionaryOptionSelected(text)
-            }
-        }
-
-        Separator {}
-
-        Rectangle {
-            height: selectionOptionsListView.height
-            width: 26
-            color: "transparent"
-
-            RowLayout {
-                anchors.fill: parent
-
-                Image {
-                    id: goToPage2Button
-                    Layout.alignment: Qt.AlignCenter
-                    Layout.rightMargin: 4
-                    source: Icons.arrowheadNextIcon
-                }
-            }
+            id: copyText
+            Layout.fillWidth: true
+            Layout.leftMargin: 16
+            Layout.rightMargin: 16
+            Layout.topMargin: -2
+            opacity: copyTextArea.pressed ? 0.6 : 1
+            text: "Copy"
+            color: Style.colorText
+            font.weight: Font.Normal
+            font.pointSize: Fonts.size12dot5
 
             MouseArea {
+                id: copyTextArea
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
                 hoverEnabled: true
 
-                onClicked: selectionOptionsListView.model = secondActionsPage
-            }
-        }
-    }
+                onClicked: {
+                    if (root.highlight == "")
+                        activeFocusItem.copySelectedText()
+                    else
+                        activeFocusItem.copyHighlightedText(root.highlight)
 
-    ObjectModel {
-        id: secondActionsPage
-
-        Rectangle {
-            height: selectionOptionsListView.height
-            width: 26
-            color: "transparent"
-
-            RowLayout {
-                anchors.fill: parent
-
-                Image {
-                    id: goToPage1Button
-                    Layout.alignment: Qt.AlignCenter
-                    Layout.leftMargin: 2
-                    rotation: 180
-                    source: Icons.arrowheadNextIcon
+                    root.close()
                 }
             }
+        }
+
+        Label {
+            id: lookUpText
+            Layout.fillWidth: true
+            Layout.leftMargin: 16
+            Layout.rightMargin: 16
+            opacity: lookUpTextArea.pressed ? 0.6 : 1
+            text: "Look Up"
+            color: Style.colorText
+            font.weight: Font.Normal
+            font.pointSize: Fonts.size12dot5
 
             MouseArea {
+                id: lookUpTextArea
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
                 hoverEnabled: true
 
-                onClicked: selectionOptionsListView.model = firstActionsPage
+                onClicked: {
+                    let text = ""
+                    if (root.highlight == "")
+                        text = activeFocusItem.getSelectedText()
+                    else
+                        text = activeFocusItem.getHighlightedText(
+                                    root.highlight)
+                    // Removing any . or , from the start and the end of the word
+                    text = text.replace(/^[,.]+|[,.]+$/g, '')
+                    // Make the first letter lower case. When the word is at the start of a sentence,
+                    // the first letter will be upper case, which in turn causes the dictionary to fail.
+                    const firstLetter = text.charAt(0).toLowerCase()
+                    const restOfString = text.slice(1)
+                    // Get the rest of the string
+                    text = firstLetter + restOfString
+                    DictionaryController.getDefinitionForWord(text)
+
+                    // root.dictionaryOptionSelected(text)
+                    root.close()
+                }
             }
         }
 
-        Separator {}
+        Label {
+            id: explainText
+            Layout.fillWidth: true
+            Layout.leftMargin: 16
+            Layout.rightMargin: 16
+            opacity: explainTextArea.pressed ? 0.6 : 1
+            text: "Ai Explain"
+            color: Style.colorText
+            font.pointSize: Fonts.size12dot5
+            font.weight: Font.Normal
 
-        SelectionOptionsPopupItem {
-            id: explainAction
-            text: qsTr("Explain")
-            clickedFunction: function () {
-                let text = ""
-                if (root.highlight == "")
-                    text = activeFocusItem.getSelectedText()
-                else
-                    text = activeFocusItem.getHighlightedText(root.highlight)
+            MouseArea {
+                id: explainTextArea
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                hoverEnabled: true
 
-                root.explanationOptionSelected(text)
+                onClicked: {
+                    let text = ""
+                    if (root.highlight == "")
+                        text = activeFocusItem.getSelectedText()
+                    else
+                        text = activeFocusItem.getHighlightedText(
+                                    root.highlight)
+                    root.explanationOptionSelected(text)
+
+                    root.close()
+                }
             }
         }
 
-        Separator {
-            visible: root.highlight != ""
-            width: visible ? implicitWidth : 0
-        }
+        Label {
+            id: removeHighlightText
+            Layout.fillWidth: true
+            Layout.leftMargin: 16
+            Layout.rightMargin: 16
+            visible: root.highlight !== ""
+            opacity: removeHighlightArea.pressed ? 0.6 : 1
+            text: "Remove"
+            color: Style.colorErrorText
+            font.pointSize: Fonts.size12dot5
+            font.weight: Font.Normal
 
-        SelectionOptionsPopupItem {
-            id: removeAction
-            width: visible ? implicitWidth : 0
-            text: qsTr("Remove")
-            textColor: Style.colorErrorText
-            visible: root.highlight != ""
+            MouseArea {
+                id: removeHighlightArea
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                hoverEnabled: true
 
-            clickedFunction: function () {
-                activeFocusItem.removeHighlight(root.highlight)
-            }
-        }
-    }
-
-    ObjectModel {
-        id: externalBookActionPage
-
-        SelectionOptionsPopupItem {
-            text: qsTr("Copy")
-            clickedFunction: function () {
-                if (root.highlight == "")
-                    activeFocusItem.copySelectedText()
-                else
-                    activeFocusItem.copyHighlightedText(root.highlight)
+                onClicked: {
+                    activeFocusItem.removeHighlight(root.highlight)
+                    root.close()
+                }
             }
         }
 
-        Separator {}
-
-        SelectionOptionsPopupItem {
-            text: qsTr("Look Up")
-            clickedFunction: function () {
-                let text = ""
-                if (root.highlight == "")
-                    text = activeFocusItem.getSelectedText()
-                else
-                    text = activeFocusItem.getHighlightedText(root.highlight)
-
-                // Removing any . or , from the start and the end of the word
-                text = text.replace(/^[,.]+|[,.]+$/g, '')
-
-                // Make the first letter lower case. When the word is at the start of a sentence,
-                // the first letter will be upper case, which in turn causes the dictionary to fail.
-                const firstLetter = text.charAt(0).toLowerCase()
-                const restOfString = text.slice(1)
-                // Get the rest of the string
-                text = firstLetter + restOfString
-
-                DictionaryController.getDefinitionForWord(text)
-                root.dictionaryOptionSelected(text)
-            }
-        }
-
-        Separator {}
-
-        SelectionOptionsPopupItem {
-            text: qsTr("Explain")
-            clickedFunction: function () {
-                let text = ""
-                if (root.highlight == "")
-                    text = activeFocusItem.getSelectedText()
-                else
-                    text = activeFocusItem.getHighlightedText(root.highlight)
-
-                root.explanationOptionSelected(text)
-            }
+        Item {
+            id: bottomSpacing
+            height: 9 - layout.spacing
         }
     }
 

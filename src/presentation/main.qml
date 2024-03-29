@@ -4,7 +4,8 @@ import QtQuick.Layouts
 import QtQuick.Window
 import Librum.models
 import Librum.controllers
-import "PageNavigationLogic.js" as Logic
+import CustomComponents
+import "PageNavigationLogic.js" as PageNavLogic
 
 import "sidebar"
 import "homePage"
@@ -13,7 +14,7 @@ import "registerPage"
 import "freeBooksPage"
 import "settings"
 import "statisticsPage"
-import "addOnsPage"
+import "toolsPage"
 import "forgotPasswordPage"
 import "readingPage"
 
@@ -60,6 +61,7 @@ ApplicationWindow {
         StackView {
             id: pageManager
             property bool pageHasSidebar: false
+            property var prevPage: null
 
             Layout.fillWidth: true
             Layout.fillHeight: true
@@ -71,6 +73,68 @@ ApplicationWindow {
             pushExit: null
             replaceEnter: null
             replaceExit: null
+
+            ListView {
+                id: alertList
+                z: 100
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: parent.top
+                anchors.topMargin: 4
+                width: 600
+                spacing: 4
+                height: contentHeight
+                model: ListModel {}
+                delegate: MAlertBox {
+                    onDestroyAlert: index => alertList.model.remove(index)
+                }
+
+                add: Transition {
+                    NumberAnimation {
+                        property: "opacity"
+                        from: 0
+                        to: 1.0
+                        duration: 400
+                    }
+                    NumberAnimation {
+                        property: "scale"
+                        from: 0
+                        to: 1.0
+                        duration: 400
+                    }
+                }
+
+                remove: Transition {
+                    ParallelAnimation {
+                        NumberAnimation {
+                            property: "opacity"
+                            to: 0
+                            duration: 250
+                        }
+                        NumberAnimation {
+                            properties: "y"
+                            to: -40
+                            duration: 250
+                        }
+                        NumberAnimation {
+                            properties: "scale"
+                            to: 0.2
+                            duration: 250
+                        }
+                    }
+                }
+
+                displaced: Transition {
+                    NumberAnimation {
+                        property: "opacity"
+                        to: 1.0
+                        duration: 400
+                    }
+                    NumberAnimation {
+                        property: "scale"
+                        to: 1.0
+                    }
+                }
+            }
         }
     }
 
@@ -100,8 +164,8 @@ ApplicationWindow {
         MSettings {}
     }
     Component {
-        id: addOnsPage
-        MAddOnsPage {}
+        id: toolsPage
+        MToolsPage {}
     }
     Component {
         id: statisticsPage
@@ -116,21 +180,34 @@ ApplicationWindow {
         MExternalReadingPage {}
     }
 
+    function showAlert(level, title, message) {
+        if (alertList.model.count >= 3) {
+            alertList.model.remove(2)
+        }
+
+        alertList.model.insert(0, {
+                                   "level": level,
+                                   "title": title,
+                                   "message": message
+                               })
+    }
+
 
     /*
       loadPage() manages the page switching through out the application
       */
     function loadPage(page, sidebarItem, doSamePageCheck = true) {
         // Prevent switching to the same page that is currently active
-        if (doSamePageCheck && Logic.checkIfNewPageIsTheSameAsOld(sidebarItem))
+        if (doSamePageCheck && PageNavLogic.checkIfNewPageIsTheSameAsOld(
+                    sidebarItem))
             return
 
         // Terminate any pending operation on the previous page
-        if (!Logic.terminateActionOfCurrentPage(page, sidebarItem))
+        if (!PageNavLogic.terminateActionOfCurrentPage(page, sidebarItem))
             return
 
         // Switch the page
-        Logic.switchPage(page, sidebarItem)
+        PageNavLogic.switchPage(page, sidebarItem)
     }
 
 

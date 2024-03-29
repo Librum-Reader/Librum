@@ -249,6 +249,7 @@ MFlickWrapper {
             if (!policyIsAccepted())
                 return
 
+            registerButton.loading = true
             AuthController.registerUser(nameInput.text, emailInput.text,
                                         passwordInput.text,
                                         acceptPolicy.checked)
@@ -263,6 +264,8 @@ MFlickWrapper {
         }
 
         function proccessRegistrationResult(errorCode, message) {
+            registerButton.loading = false
+
             if (errorCode === ErrorCode.NoError) {
                 confirmEmailPopup.open()
                 confirmEmailPopup.giveFocus()

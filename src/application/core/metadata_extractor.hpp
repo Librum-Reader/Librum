@@ -18,6 +18,7 @@ private:
     QImage getCover();
     QString getTitleFromPath();
     QString getDocumentSize();
+    QString getBookExtension();
     double roundToPrecisionOf2(double raw);
 
     std::unique_ptr<mupdf::FzDocument> m_document;

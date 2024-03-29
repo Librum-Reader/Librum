@@ -10,9 +10,11 @@ import Librum.fonts
 import Librum.controllers
 import Librum.globals
 import Librum.models
+import Librum.globalSettings
 import "toolbar"
 import "manageTagsPopup"
 import "folderSidebar"
+import "../loginPage"
 
 Page {
     id: root
@@ -24,12 +26,28 @@ Page {
     }
 
     Component.onCompleted: {
-        if (!baseRoot.isExitingReadingPage){
+        // We don't want to show the feedback popup when coming from the login page
+        // since that might be annoying to the user.
+        if (!(pageManager.prevPage instanceof MLoginPage)) {
+            feedbackTimer.start()
+        }
+
+        if (!baseRoot.isExitingReadingPage) {
             LibraryController.libraryModel.folder = "all";
         } else {
             folderSidebar.toggle();
             baseRoot.isExitingReadingPage = false;
         }
+    }
+
+    // Add a slight delay to showing the feedback timer
+    Timer {
+        id: feedbackTimer
+        interval: 500
+        running: false
+        repeat: false
+
+        onTriggered: internal.showFeedbackPopupIfNeeded()
     }
 
     Shortcut {
@@ -249,6 +267,20 @@ Page {
                         id: bookDelegate
 
                         onLeftButtonClicked: {
+                            // If book selection mode is enabled we just want to select / deselect the clicked book
+                            if (Globals.bookSelectionModeEnabled) {
+                                var index = Globals.selectedBooks.indexOf(
+                                            model.uuid)
+                                if (index !== -1) {
+                                    bookDelegate.deselect()
+                                    Globals.selectedBooks.splice(index, 1)
+                                } else {
+                                    bookDelegate.select()
+                                    Globals.selectedBooks.push(model.uuid)
+                                }
+                                return
+                            }
+
                             if (model.downloaded) {
                                 Globals.selectedBook = LibraryController.getBook(
                                             model.uuid)
@@ -482,10 +514,38 @@ Page {
                              acceptDeletionPopup.giveFocus()
         onDecisionMade: close()
 
-        onLeftButtonClicked: internal.uninstallBook(Globals.selectedBook.uuid)
-        onRightButtonClicked: internal.deleteBook(
-                                  Globals.selectedBook.uuid,
-                                  Globals.selectedBook.projectGutenbergId)
+        onLeftButtonClicked: {
+            // Only uninstall the book if it's downloaded
+            if (!Globals.selectedBook.downloaded) {
+                showAlert("error", qsTr("Uninstalling failed"), qsTr(
+                              "Can't uninstall book since it is not downloaded."))
+                return
+            }
+
+            let success = LibraryController.uninstallBook(
+                    Globals.selectedBook.uuid)
+            if (success === BookOperationStatus.Success) {
+                showAlert("success", qsTr("Uninstalling succeeded"),
+                          qsTr("The book was deleted from your device."))
+            } else {
+                showAlert("error", qsTr("Uninstalling failed"),
+                          qsTr("Something went wrong."))
+            }
+        }
+
+        onRightButtonClicked: {
+            let success = internal.deleteBook(
+                    Globals.selectedBook.uuid,
+                    Globals.selectedBook.projectGutenbergId)
+
+            if (success) {
+                showAlert("success", qsTr("Deleting succeeded"),
+                          qsTr("The book was successfully deleted."))
+            } else {
+                showAlert("error", qsTr("Deleting failed"),
+                          qsTr("Something went wrong."))
+            }
+        }
     }
 
 
@@ -515,7 +575,11 @@ Page {
 
         onLeftButtonClicked: {
             for (var i = 0; i < selectedBooks.length; i++) {
-                internal.uninstallBook(selectedBooks[i])
+                if (!LibraryController.getBook(selectedBooks[i]).downloaded) {
+                    continue
+                }
+
+                LibraryController.uninstallBook(selectedBooks[i])
             }
 
             clearState()
@@ -709,6 +773,15 @@ Page {
         }
     }
 
+    MFeedbackPopup {
+        id: feedbackPopup
+        x: Math.round(
+               root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
+        y: Math.round(
+               root.height / 2 - implicitHeight / 2 - root.topPadding - 50)
+        visible: false
+    }
+
     FileDialog {
         id: importFilesDialog
         acceptLabel: qsTr("Import")
@@ -808,15 +881,14 @@ Page {
             internal.addBooks(internal.booksCurrentlyAdding)
         }
 
-        function uninstallBook(uuid) {
-            LibraryController.uninstallBook(uuid)
-        }
-
         function deleteBook(uuid, gutenbergId) {
             let status = LibraryController.deleteBook(uuid)
-            if (status === BookOperationStatus.Success) {
+            let success = status === BookOperationStatus.Success
+            if (success) {
                 FreeBooksController.unmarkBookAsDownloaded(gutenbergId)
             }
+
+            return success
         }
 
         function removeBookFromItsFolder(uuid) {
@@ -824,6 +896,28 @@ Page {
             operationsMap[LibraryController.MetaProperty.ParentFolderId] = ""
 
             LibraryController.updateBook(uuid, operationsMap)
+        }
+
+        function showFeedbackPopupIfNeeded() {
+            var last = new Date(GlobalSettings.lastFeedbackQuery)
+            var now = new Date()
+
+            if (internal.addDays(last, 7) <= now) {
+                feedbackPopup.open()
+                feedbackPopup.giveFocus()
+                GlobalSettings.lastFeedbackQuery = now
+            }
+        }
+
+        function addDays(date, days) {
+            var result = new Date(date)
+            result.setDate(result.getDate() + days)
+            return result
+        }
+
+        function addSeconds(date, seconds) {
+            const milliseconds = seconds * 1000
+            return new Date(date.getTime() + milliseconds)
         }
     }
 }

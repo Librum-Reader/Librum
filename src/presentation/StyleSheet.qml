@@ -4,6 +4,7 @@ import QtQuick
 import QtCore
 import Librum.controllers
 import Librum.icons
+import Librum.globalSettings
 
 Item {
     id: styleSheet
@@ -22,6 +23,7 @@ Item {
     property color colorText
     property color colorErrorText
     property color colorTitle
+    property color colorLightTitle
     property color colorMatteTitle
     property color colorBannerText
     property color colorLinkText
@@ -56,6 +58,8 @@ Item {
     property color colorBookImageBackground
     property color colorErrorBackground
     property color colorContainerBackground
+    property color colorToolBackground
+    property color colorToolListItemBackground
     property color colorPopupBackground
     property color colorBookBackground
     property color colorReadingViewBackground
@@ -74,6 +78,16 @@ Item {
     property color colorCheckboxBorder
     property color colorContainerBorder
     property color colorErrorBorder
+    property color colorToolListItemBorder
+
+    // Alerts
+    property color colorAlertSuccessBackground: "#EAFBE7"
+    property color colorAlertErrorBackground: "#FCECEA"
+    property color colorAlertInfoBackground: "#F0F0FF"
+    property color colorAlertSuccessBorder
+    property color colorAlertErrorBorder
+    property color colorAlertInfoBorder
+    property color colorAlertClose
 
     // Other
     property color colorDropArea
@@ -86,7 +100,7 @@ Item {
     property color colorFolderIconSelection
 
     state: (SettingsController.appearanceSettings.Theme
-            === undefined ? lastRunSettings.theme : SettingsController.appearanceSettings.Theme)
+            === undefined ? GlobalSettings.theme : SettingsController.appearanceSettings.Theme)
 
     states: [
         State {
@@ -138,6 +152,10 @@ Item {
             PropertyChanges {
                 target: styleSheet
                 colorTitle: "#32324D"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorLightTitle: "#7E7E89"
             }
             PropertyChanges {
                 target: styleSheet
@@ -241,6 +259,14 @@ Item {
             }
             PropertyChanges {
                 target: styleSheet
+                colorToolBackground: "#F6F6F9"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorToolListItemBackground: "#D2D2D2"
+            }
+            PropertyChanges {
+                target: styleSheet
                 colorPopupBackground: "#FFFFFF"
             }
             PropertyChanges {
@@ -304,6 +330,40 @@ Item {
             PropertyChanges {
                 target: styleSheet
                 colorErrorBorder: "#E87964"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorToolListItemBorder: "#C1C1C1"
+            }
+
+            // Alerts
+            PropertyChanges {
+                target: styleSheet
+                colorAlertSuccessBackground: "#EAFBE7"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorAlertErrorBackground: "#FCECEA"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorAlertInfoBackground: "#F0F0FF"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorAlertSuccessBorder: "#C6F0C2"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorAlertErrorBorder: "#F5C0B8"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorAlertInfoBorder: "#D9D8FF"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorAlertClose: "#434344"
             }
 
             // Other
@@ -389,6 +449,10 @@ Item {
             PropertyChanges {
                 target: styleSheet
                 colorTitle: "#CBCBCB"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorLightTitle: "#CBCBCB"
             }
             PropertyChanges {
                 target: styleSheet
@@ -492,6 +556,14 @@ Item {
             }
             PropertyChanges {
                 target: styleSheet
+                colorToolBackground: "#343534"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorToolListItemBackground: "#222222"
+            }
+            PropertyChanges {
+                target: styleSheet
                 colorPopupBackground: "#2C2C2C"
             }
             PropertyChanges {
@@ -556,6 +628,40 @@ Item {
                 target: styleSheet
                 colorErrorBorder: "#CB4C34"
             }
+            PropertyChanges {
+                target: styleSheet
+                colorToolListItemBorder: "#1E1E1E"
+            }
+
+            // Alerts
+            PropertyChanges {
+                target: styleSheet
+                colorAlertSuccessBackground: "#2F452B"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorAlertErrorBackground: "#442B29"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorAlertInfoBackground: "#393956"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorAlertSuccessBorder: "#395837"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorAlertErrorBorder: "#50342F"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorAlertInfoBorder: "#474666"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorAlertClose: "#D5D5D5"
+            }
 
             // Other
             PropertyChanges {
@@ -595,14 +701,5 @@ Item {
 
     // Change icons
     onStateChanged: Icons.setState(state)
-
-    // Settings which capture the application theme the last time the application ran.
-    // This way the correct theme is also chosen before the user is authenticated.
-    Settings {
-        id: lastRunSettings
-        location: "last_run_settings"
-
-        property string theme: "Dark"
-    }
-    Component.onDestruction: lastRunSettings.theme = styleSheet.state
+    Component.onDestruction: GlobalSettings.theme = styleSheet.state
 }

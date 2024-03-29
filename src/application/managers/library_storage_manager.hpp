@@ -37,13 +37,14 @@ public:
 private slots:
     void saveDownloadedBookMediaChunkToFile(const QByteArray& data,
                                             bool isLastChunk, const QUuid& uuid,
-                                            const QString& format);
+                                            const QString& extension);
     void saveDownloadedCoverToFile(const QByteArray& data, const QUuid& uuid);
-    void processBookMetadata(std::vector<domain::entities::Book>& books);
+    void processBookMetadata(std::vector<domain::entities::Book>& books,
+                             bool success);
 
 private:
     bool userLoggedIn();
-    void deleteBookFile(const QUuid& uuid, const QString& format);
+    void deleteBookFile(const QUuid& uuid, const QString& extension);
     QString getBookCoverPath(const QUuid& uuid);
     bool bookCoverExistsLocally(const QUuid& uuid);
 

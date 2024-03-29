@@ -70,7 +70,6 @@
         <file>resources/images/light_mode/settings_sidebar/account_icon.svg</file>
         <file>resources/images/light_mode/settings_sidebar/about_selected_icon.svg</file>
         <file>resources/images/light_mode/settings_sidebar/about_icon.svg</file>
-        <file>resources/images/light_mode/sidebar/settings_icon.svg</file>
         <file>resources/images/light_mode/sidebar/puzzle_icon.svg</file>
         <file>resources/images/light_mode/sidebar/pieChart_icon.svg</file>
         <file>resources/images/light_mode/sidebar/home_icon.svg</file>
@@ -168,7 +167,6 @@
         <file>resources/images/dark_mode/settings_sidebar/about_selected_icon.svg</file>
         <file>resources/images/dark_mode/settings_sidebar/about_icon.svg</file>
         <file>resources/images/dark_mode/sidebar/settings_icon.svg</file>
-        <file>resources/images/dark_mode/sidebar/puzzle_icon.svg</file>
         <file>resources/images/dark_mode/sidebar/pieChart_icon.svg</file>
         <file>resources/images/dark_mode/sidebar/home_icon.svg</file>
         <file>resources/images/dark_mode/sidebar/empty_profile_icon.svg</file>
@@ -206,7 +204,6 @@
         <file>src/logo.ico</file>
         <file>resources/images/light_mode/decision/close_popup_white_icon.svg</file>
         <file>app_info.json</file>
-        <file>resources/animations/loading_animation.gif</file>
         <file>resources/images/dark_mode/illustrations/not_found.svg</file>
         <file>resources/images/light_mode/illustrations/not_found.svg</file>
         <file>resources/images/light_mode/decoration/warning_circle_icon.svg</file>
@@ -396,5 +393,13 @@
         <file>resources/images/folder_icons/fingerprint.svg</file>
         <file>resources/images/light_mode/book_popup/folder_icon.svg</file>
         <file>resources/images/dark_mode/book_popup/folder_icon.svg</file>
+        <file>resources/images/light_mode/sidebar/wrench_icon.svg</file>
+        <file>resources/images/dark_mode/sidebar/wrench_icon.svg</file>
+        <file>resources/images/light_mode/decision/x_icon.svg</file>
+        <file>resources/images/dark_mode/decision/x_icon.svg</file>
+        <file>resources/images/error_circle_icon.svg</file>
+        <file>resources/images/check_circle_green_icon.svg</file>
+        <file>resources/images/info_circle_icon.svg</file>
+        <file>resources/images/light_mode/sidebar/settings_icon.svg</file>
     </qresource>
 </RCC>

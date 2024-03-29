@@ -23,6 +23,8 @@ set(application_SRC
     interfaces/managers/i_library_storage_manager.hpp
     interfaces/utility/i_metadata_extractor.hpp
     interfaces/utility/i_local_library_tracker.hpp
+    interfaces/utility/i_book_getter.hpp
+    interfaces/services/i_tools_service.hpp
 
     services/authentication_service.cpp
     services/authentication_service.hpp
@@ -44,6 +46,8 @@ set(application_SRC
     services/ai_explanation_service.hpp
     services/folder_service.hpp
     services/folder_service.cpp
+    services/tools_service.hpp
+    services/tools_service.cpp
 
     managers/library_storage_manager.cpp
     managers/library_storage_manager.hpp
@@ -87,6 +91,7 @@ set(application_SRC
     core/utils/text_selector.hpp
     core/utils/text_selector.cpp
     core/utils/search_options.hpp
+    core/utils/mutool_utils.hpp
 )
 
 
@@ -105,12 +110,12 @@ if(UNIX)
     set(MUPDF_OUTPUT_DIR "${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>")
     set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/libmupdfcpp.so")
     set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/libmupdfcpp.so" PARENT_SCOPE)
-    set(MUPDF_BUILD_COMMAND ./scripts/mupdfwrap.py ${VENV_OPTION} -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b --m-target libs ${EXTRA_MAKE_AGRS} -j 0 m01)
+    set(MUPDF_BUILD_COMMAND ./scripts/mupdfwrap.py ${VENV_OPTION} -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b --m-target 'libs tools' ${EXTRA_MAKE_AGRS} -j 0 m01)
 elseif(WIN32)
     set(MUPDF_OUTPUT_DIR "${PROJECT_SOURCE_DIR}/libs/mupdf/platform/win32/x64/$<IF:$<CONFIG:Debug>,Debug,Release>")
     set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/mupdfcpp64.lib" PARENT_SCOPE)
     set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/mupdfcpp64.lib")
-    set(MUPDF_BUILD_COMMAND python scripts/mupdfwrap.py ${VENV_OPTION} -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b -j 0 m01)
+    set(MUPDF_BUILD_COMMAND python scripts/mupdfwrap.py ${VENV_OPTION} -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b --m-target mutool -j 0 m01)
 endif()
 
 message("MuPdf build command: " ${MUPDF_BUILD_COMMAND})
@@ -134,13 +139,23 @@ else()
     set(USE_SYSTEM_LIBJPEG_VALUE no)
 endif()
 
+if(UNIX)
+    set(EXECUTABLE_EXTENSION "")
+else()
+    set(EXECUTABLE_EXTENSION ".exe")
+endif()
 
 add_custom_target(mupdf
+   # Build mupdf
    COMMAND ${CMAKE_COMMAND} -E env
         ${ANDROID_COMPILERS}
         "USE_SYSTEM_LIBJPEG=${USE_SYSTEM_LIBJPEG_VALUE}"
         "USE_SONAME=no"
         ${MUPDF_BUILD_COMMAND}
+   # Copy mutool to the build directory
+   COMMAND ${CMAKE_COMMAND} -E copy
+        "${MUPDF_OUTPUT_DIR}/mutool${EXECUTABLE_EXTENSION}"
+        "${PROJECT_BINARY_DIR}/mutool${EXECUTABLE_EXTENSION}"
    BYPRODUCTS ${MUPDF_OUTPUT}
    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/mupdf
    COMMENT "Building mupdf (This takes a while) ..."
@@ -165,7 +180,6 @@ endif()
 add_library(application
                 SHARED
                     ${application_SRC}
-                    interfaces/utility/i_book_getter.hpp
 )
 
 add_dependencies(application mupdf) # Ensure the mupdf target is built before the application target
@@ -240,6 +254,7 @@ if(LINUX)
     # Install mupdf's shared libraries
     install(FILES ${MUPDF_OUTPUT_DIR}/libmupdfcpp.so
                   ${MUPDF_OUTPUT_DIR}/libmupdf.so
+                  ${MUPDF_OUTPUT_DIR}/mutool${EXECUTABLE_EXTENSION}
             DESTINATION lib)
 
     # Install links with correct permissions

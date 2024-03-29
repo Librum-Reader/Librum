@@ -212,7 +212,7 @@ void PageView::mousePressEvent(QMouseEvent* event)
 void PageView::handleClickingOnHighlight(const Highlight* highlight)
 {
     // Scale the highlight rects (initially zoom of 1) to the current zoom and
-    // get the center x and top y position of the highlight.
+    // get the center x and bottom y position of the highlight.
     auto rects = highlight->getRects();
     QList<QRectF> qRects;
     qRects.reserve(rects.size());
@@ -223,7 +223,7 @@ void PageView::handleClickingOnHighlight(const Highlight* highlight)
             qRectF, m_pageController->getZoom() / window()->devicePixelRatio());
         qRects.append(qRectF);
     }
-    auto positions = getCenterXAndTopYFromRects(qRects);
+    auto positions = getCenterXAndBottomYFromRects(qRects);
 
     auto uuidAsString = highlight->getUuid().toString(QUuid::WithoutBraces);
     m_bookController->highlightSelected(positions.first, positions.second,
@@ -270,7 +270,7 @@ void PageView::mouseReleaseEvent(QMouseEvent* event)
             restoredRects.push_back(rect);
         }
 
-        auto positions = getCenterXAndTopYFromRects(restoredRects);
+        auto positions = getCenterXAndBottomYFromRects(restoredRects);
 
         emit m_bookController->textSelectionFinished(positions.first,
                                                      positions.second);
@@ -279,12 +279,12 @@ void PageView::mouseReleaseEvent(QMouseEvent* event)
     m_doubleClickHold = false;
 }
 
-QPair<float, float> PageView::getCenterXAndTopYFromRects(
+QPair<float, float> PageView::getCenterXAndBottomYFromRects(
     const QList<QRectF>& rects)
 {
     float mostLeftX = std::numeric_limits<float>::max();
     float mostRightX = 0;
-    float topY = std::numeric_limits<float>::max();
+    float bottomY = 0;
     for(auto& rect : rects)
     {
         if(rect.x() < mostLeftX)
@@ -293,12 +293,12 @@ QPair<float, float> PageView::getCenterXAndTopYFromRects(
         if(rect.x() + rect.width() > mostRightX)
             mostRightX = rect.x() + rect.width();
 
-        if(rect.top() < topY)
-            topY = rect.top();
+        if(rect.bottom() > bottomY)
+            bottomY = rect.bottom();
     }
 
     auto centerX = (mostLeftX + mostRightX) / 2;
-    return { centerX, topY };
+    return { centerX, bottomY };
 }
 
 void PageView::mouseMoveEvent(QMouseEvent* event)

@@ -38,6 +38,8 @@
 #include "metadata_extractor.hpp"
 #include "settings_controller.hpp"
 #include "settings_service.hpp"
+#include "tools_controller.hpp"
+#include "tools_service.hpp"
 #include "user_controller.hpp"
 #include "user_service.hpp"
 #include "user_storage_access.hpp"
@@ -121,6 +123,10 @@ const auto diConfig = []
         // Settings
         di::bind<ISettingsController>().to<controllers::SettingsController>(),
         di::bind<ISettingsService>().to<services::SettingsService>(),
+
+        // Tools
+        di::bind<IToolsController>().to<controllers::ToolsController>(),
+        di::bind<IToolsService>().to<services::ToolsService>(),
 
         // Utility
         di::bind<application::IMetadataExtractor>()
