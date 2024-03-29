@@ -99,7 +99,8 @@ private:
     void setCorrectCursor(int x, int y);
 
     bool rectsAreOnSameLine(const QRectF& rect1, const QRectF& rect2);
-    QPair<float, float> getCenterXAndBottomYFromRects(const QList<QRectF>& rects);
+    QPair<float, float> getCenterXAndBottomYFromRects(
+        const QList<QRectF>& rects);
 
     std::unique_ptr<adapters::controllers::PageController> m_pageController;
     adapters::IBookController* m_bookController = nullptr;
