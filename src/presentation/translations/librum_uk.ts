@@ -33,7 +33,7 @@
     <message>
         <location filename="../settings/MAboutPage.qml" line="105"/>
         <source>Feedback?</source>
-        <translation type="unfinished"></translation>
+        <translation>Зворотній звʼязок?</translation>
     </message>
     <message>
         <source>Up-to date</source>
@@ -65,7 +65,7 @@
         <location filename="../settings/MAboutPage.qml" line="203"/>
         <source>DISCORD</source>
         <extracomment>Keep it capitalized</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>DISCORD</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="228"/>
@@ -727,7 +727,7 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../modules/CustomComponents/bookSelector/MBookSelector.qml" line="14"/>
         <source>Search Books...</source>
-        <translation type="unfinished"></translation>
+        <translation>Шукати Книги...</translation>
     </message>
 </context>
 <context>
@@ -985,12 +985,12 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="52"/>
         <source>Upgrade</source>
-        <translation type="unfinished">Покращити</translation>
+        <translation>Покращити</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="53"/>
         <source>to continue.</source>
-        <translation type="unfinished"></translation>
+        <translation>продовжувати.</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="58"/>
@@ -1090,37 +1090,37 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../toolsPage/MExtractPagesPopup.qml" line="40"/>
         <source>Extraction succeeded</source>
-        <translation type="unfinished"></translation>
+        <translation>Видобування завершено</translation>
     </message>
     <message>
         <location filename="../toolsPage/MExtractPagesPopup.qml" line="41"/>
         <source>The new book was added to your library.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нова книга була додана до вашої бібліотеки.</translation>
     </message>
     <message>
         <location filename="../toolsPage/MExtractPagesPopup.qml" line="43"/>
         <source>Extraction failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Видобування не вдалось</translation>
     </message>
     <message>
         <location filename="../toolsPage/MExtractPagesPopup.qml" line="44"/>
         <source>The extraction failed. Please try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Видобування не вдалось. Будь-ласка,спробуйте ще раз.</translation>
     </message>
     <message>
         <location filename="../toolsPage/MExtractPagesPopup.qml" line="63"/>
         <source>Extract Page(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Видобути Сторінку(и)</translation>
     </message>
     <message>
         <location filename="../toolsPage/MExtractPagesPopup.qml" line="133"/>
         <source>Add a comma separated list of page numbers or ranges to extract.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вкажіть список сторінок або їх інтервалів для видобування.</translation>
     </message>
     <message>
         <location filename="../toolsPage/MExtractPagesPopup.qml" line="157"/>
         <source>Extract</source>
-        <translation type="unfinished"></translation>
+        <translation>Видобути</translation>
     </message>
 </context>
 <context>
@@ -1128,22 +1128,22 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../modules/CustomComponents/MFeedbackPopup.qml" line="40"/>
         <source>Got some feedback?</source>
-        <translation type="unfinished"></translation>
+        <translation>Маєте побажаня?</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MFeedbackPopup.qml" line="55"/>
         <source>Your feedback is crucial for improving Librum. Would you mind sharing your experience by taking a quick survey?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваш зворотній звʼязок дуже важливий для покращення Librum. Чи не будете проти поділитись враженням від користування, пройшовши коротке опитування?</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MFeedbackPopup.qml" line="74"/>
         <source>No, Thanks</source>
-        <translation type="unfinished"></translation>
+        <translation>Ні, дякую</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MFeedbackPopup.qml" line="88"/>
         <source>Let&apos;s do this!</source>
-        <translation type="unfinished"></translation>
+        <translation>Давайте!</translation>
     </message>
 </context>
 <context>
@@ -1397,43 +1397,43 @@ Either you are offline, or your storage is full.</source>
         <location filename="../homePage/MHomePage.qml" line="515"/>
         <location filename="../homePage/MHomePage.qml" line="526"/>
         <source>Uninstalling failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Деінсталяція не вдалась</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="515"/>
         <source>Can&apos;t uninstall book since it is not downloaded.</source>
-        <translation type="unfinished"></translation>
+        <translation>Деінсталювати книгу не монжа, оскільки вона не завантажена.</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="523"/>
         <source>Uninstalling succeeded</source>
-        <translation type="unfinished"></translation>
+        <translation>Деінсталяція вдалася</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="524"/>
         <source>The book was deleted from your device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Книга була видалена з вашого пристрою.</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="527"/>
         <location filename="../homePage/MHomePage.qml" line="541"/>
         <source>Something went wrong.</source>
-        <translation type="unfinished"></translation>
+        <translation>Щось пішло не так.</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="537"/>
         <source>Deleting succeeded</source>
-        <translation type="unfinished"></translation>
+        <translation>Видалення завершено</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="538"/>
         <source>The book was successfully deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Книга була успішно видалена.</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="540"/>
         <source>Deleting failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Видалення не вдалось</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="560"/>
@@ -1563,28 +1563,28 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../toolsPage/MImageToPdfPopup.qml" line="39"/>
         <source>Convertion succeeded</source>
-        <translation type="unfinished"></translation>
+        <translation>Конвертація вдалась</translation>
     </message>
     <message>
         <location filename="../toolsPage/MImageToPdfPopup.qml" line="40"/>
         <source>The new book was added to your library.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нова книга була додана до вашої бібліотеки.</translation>
     </message>
     <message>
         <location filename="../toolsPage/MImageToPdfPopup.qml" line="42"/>
         <source>Convertion failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Конвертація не вдалась</translation>
     </message>
     <message>
         <location filename="../toolsPage/MImageToPdfPopup.qml" line="43"/>
         <source>The conversion failed. Please try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Конвертація не вдалась. Будь-ласка, спробуйте ще раз.</translation>
     </message>
     <message>
         <location filename="../toolsPage/MImageToPdfPopup.qml" line="62"/>
         <location filename="../toolsPage/MImageToPdfPopup.qml" line="148"/>
         <source>Convert</source>
-        <translation type="unfinished"></translation>
+        <translation>Конвертувати</translation>
     </message>
 </context>
 <context>
@@ -1673,33 +1673,33 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../toolsPage/MMergePopup.qml" line="41"/>
         <source>Merge succeeded</source>
-        <translation type="unfinished"></translation>
+        <translation>Обʼєднання завершено</translation>
     </message>
     <message>
         <location filename="../toolsPage/MMergePopup.qml" line="42"/>
         <source>The merged book was added to your library.</source>
-        <translation type="unfinished"></translation>
+        <translation>Обʼєднана книга була додана до вашої бібліотеки.</translation>
     </message>
     <message>
         <location filename="../toolsPage/MMergePopup.qml" line="44"/>
         <source>Merge failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Обʼєднання не вдалось</translation>
     </message>
     <message>
         <location filename="../toolsPage/MMergePopup.qml" line="45"/>
         <source>The merged failed. Please try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Обʼєднання не вдалось. Будь-ласка, спробуйте ще раз.</translation>
     </message>
     <message>
         <location filename="../toolsPage/MMergePopup.qml" line="67"/>
         <location filename="../toolsPage/MMergePopup.qml" line="223"/>
         <source>Merge</source>
-        <translation type="unfinished"></translation>
+        <translation>Обʼєднати</translation>
     </message>
     <message>
         <location filename="../toolsPage/MMergePopup.qml" line="242"/>
         <source>Select two or more books to merge.</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть дві або більше книг для обʼєднання.</translation>
     </message>
 </context>
 <context>
@@ -1751,32 +1751,32 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../toolsPage/MPdfToImagePopup.qml" line="39"/>
         <source>Convertion succeeded</source>
-        <translation type="unfinished"></translation>
+        <translation>Конвертація завершена</translation>
     </message>
     <message>
         <location filename="../toolsPage/MPdfToImagePopup.qml" line="40"/>
         <source>The new book was added to your library.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нова книга була додана до вашої бібліотеки.</translation>
     </message>
     <message>
         <location filename="../toolsPage/MPdfToImagePopup.qml" line="42"/>
         <source>Convertion failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Конвертація не вдалася</translation>
     </message>
     <message>
         <location filename="../toolsPage/MPdfToImagePopup.qml" line="43"/>
         <source>The conversion failed. Please try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Конвертація не вдалась. Будь-ласка, спробуйте ще раз.</translation>
     </message>
     <message>
         <location filename="../toolsPage/MPdfToImagePopup.qml" line="62"/>
         <source>Pdf to Image</source>
-        <translation type="unfinished"></translation>
+        <translation>PDF в картинку</translation>
     </message>
     <message>
         <location filename="../toolsPage/MPdfToImagePopup.qml" line="148"/>
         <source>Convert</source>
-        <translation type="unfinished"></translation>
+        <translation>Конвертувати</translation>
     </message>
 </context>
 <context>
@@ -2019,7 +2019,7 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../readingPage/MSelectionOptionsPopup.qml" line="207"/>
         <source>Ai Explain</source>
-        <translation type="unfinished"></translation>
+        <translation>ШІ Поясніть</translation>
     </message>
     <message>
         <source>Highlight</source>
@@ -2163,7 +2163,7 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../sidebar/MSidebar.qml" line="169"/>
         <source>Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Інструменти</translation>
     </message>
     <message>
         <source>Add-ons</source>
@@ -2422,42 +2422,42 @@ working on fun projects, supporting our community and trying to make the world a
     <message>
         <location filename="../toolsPage/MToolsPage.qml" line="25"/>
         <source>PDF Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Інструменти PDF</translation>
     </message>
     <message>
         <location filename="../toolsPage/MToolsPage.qml" line="26"/>
         <source>Powerful tools to modify your PDF files</source>
-        <translation type="unfinished"></translation>
+        <translation>Потужні інструменти для редагування ваших PDF файлів</translation>
     </message>
     <message>
         <location filename="../toolsPage/MToolsPage.qml" line="101"/>
         <source>Merge</source>
-        <translation type="unfinished"></translation>
+        <translation>Обʼєднати</translation>
     </message>
     <message>
         <location filename="../toolsPage/MToolsPage.qml" line="102"/>
         <source>Merge multiple books into one</source>
-        <translation type="unfinished"></translation>
+        <translation>Обʼєднати декілька книг в одну</translation>
     </message>
     <message>
         <location filename="../toolsPage/MToolsPage.qml" line="107"/>
         <source>Extract Page(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Видобути сторінку(и)</translation>
     </message>
     <message>
         <location filename="../toolsPage/MToolsPage.qml" line="108"/>
         <source>Extract selected pages from a book</source>
-        <translation type="unfinished"></translation>
+        <translation>Видобути вибрані сторінки з книги</translation>
     </message>
     <message>
         <location filename="../toolsPage/MToolsPage.qml" line="113"/>
         <source>Image to PDF</source>
-        <translation type="unfinished"></translation>
+        <translation>Картинку в PDF</translation>
     </message>
     <message>
         <location filename="../toolsPage/MToolsPage.qml" line="114"/>
         <source>Convert an image (PNG, JPEG, SVG, GIF) to PDF</source>
-        <translation type="unfinished"></translation>
+        <translation>Конвертувати картинку (PNG, JPEG, SVG, GIF) в PDF</translation>
     </message>
 </context>
 <context>
