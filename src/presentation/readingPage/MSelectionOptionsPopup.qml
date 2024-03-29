@@ -139,7 +139,7 @@ Popup {
             text: "Copy"
             color: Style.colorText
             font.weight: Font.Normal
-            font.pointSize: Fonts.size12dot5
+            font.pointSize: Fonts.size12dot25
 
             MouseArea {
                 id: copyTextArea
@@ -167,7 +167,7 @@ Popup {
             text: "Look Up"
             color: Style.colorText
             font.weight: Font.Normal
-            font.pointSize: Fonts.size12dot5
+            font.pointSize: Fonts.size12dot25
 
             MouseArea {
                 id: lookUpTextArea
@@ -206,7 +206,7 @@ Popup {
             opacity: explainTextArea.pressed ? 0.6 : 1
             text: "Ai Explain"
             color: Style.colorText
-            font.pointSize: Fonts.size12dot5
+            font.pointSize: Fonts.size12dot25
             font.weight: Font.Normal
 
             MouseArea {
@@ -238,7 +238,7 @@ Popup {
             opacity: removeHighlightArea.pressed ? 0.6 : 1
             text: "Remove"
             color: Style.colorErrorText
-            font.pointSize: Fonts.size12dot5
+            font.pointSize: Fonts.size12dot25
             font.weight: Font.Normal
 
             MouseArea {
