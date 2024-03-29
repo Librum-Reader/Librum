@@ -127,6 +127,8 @@ Popup {
         Label {
             id: explenation
             Layout.leftMargin: splitStringInput.x + 1
+            Layout.preferredWidth: splitStringInput.width
+            wrapMode: Text.WordWrap
             Layout.topMargin: 6
             text: qsTr("Add a comma separated list of page numbers or ranges to extract.")
             color: Style.colorText

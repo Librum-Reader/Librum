@@ -33,7 +33,7 @@
     <message>
         <location filename="../settings/MAboutPage.qml" line="105"/>
         <source>Feedback?</source>
-        <translation type="unfinished"></translation>
+        <translation>Feedback?</translation>
     </message>
     <message>
         <source>Up-to date</source>
@@ -65,7 +65,7 @@
         <location filename="../settings/MAboutPage.qml" line="203"/>
         <source>DISCORD</source>
         <extracomment>Keep it capitalized</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>DISCORD</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="228"/>
@@ -853,7 +853,7 @@ niemand wird es wiederherstellen können!</translation>
     <message>
         <location filename="../modules/CustomComponents/bookSelector/MBookSelector.qml" line="14"/>
         <source>Search Books...</source>
-        <translation type="unfinished"></translation>
+        <translation>Bücher suchen...</translation>
     </message>
 </context>
 <context>
@@ -1111,12 +1111,12 @@ niemand wird es wiederherstellen können!</translation>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="52"/>
         <source>Upgrade</source>
-        <translation type="unfinished">Upgrade</translation>
+        <translation>Upgrade</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="53"/>
         <source>to continue.</source>
-        <translation type="unfinished"></translation>
+        <translation>um fortzufahren.</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="58"/>
@@ -1216,37 +1216,37 @@ niemand wird es wiederherstellen können!</translation>
     <message>
         <location filename="../toolsPage/MExtractPagesPopup.qml" line="40"/>
         <source>Extraction succeeded</source>
-        <translation type="unfinished"></translation>
+        <translation>Extraktion erfolgreich</translation>
     </message>
     <message>
         <location filename="../toolsPage/MExtractPagesPopup.qml" line="41"/>
         <source>The new book was added to your library.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das neue Buch wurde zu deiner Bibliothek hinzugefügt.</translation>
     </message>
     <message>
         <location filename="../toolsPage/MExtractPagesPopup.qml" line="43"/>
         <source>Extraction failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Extraktion fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="../toolsPage/MExtractPagesPopup.qml" line="44"/>
         <source>The extraction failed. Please try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Extraktion ist fehlgeschlagen. Bitte versuche es erneut.</translation>
     </message>
     <message>
         <location filename="../toolsPage/MExtractPagesPopup.qml" line="63"/>
         <source>Extract Page(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Seite(n) Extrahieren</translation>
     </message>
     <message>
         <location filename="../toolsPage/MExtractPagesPopup.qml" line="131"/>
         <source>Add a comma separated list of page numbers or ranges to extract.</source>
-        <translation type="unfinished"></translation>
+        <translation>Füge eine durch Kommas getrennte Liste von Seitenzahlen oder Bereichen hinzu, die extrahiert werden sollen.</translation>
     </message>
     <message>
         <location filename="../toolsPage/MExtractPagesPopup.qml" line="155"/>
         <source>Extract</source>
-        <translation type="unfinished"></translation>
+        <translation>Extrahieren</translation>
     </message>
 </context>
 <context>
@@ -1254,22 +1254,22 @@ niemand wird es wiederherstellen können!</translation>
     <message>
         <location filename="../modules/CustomComponents/MFeedbackPopup.qml" line="40"/>
         <source>Got some feedback?</source>
-        <translation type="unfinished"></translation>
+        <translation>Hast du Feedback?</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MFeedbackPopup.qml" line="55"/>
         <source>Your feedback is crucial for improving Librum. Would you mind sharing your experience by taking a quick survey?</source>
-        <translation type="unfinished"></translation>
+        <translation>Dein Feedback ist wichtig um Librum zu verbessern. Würdest du an einer kurzen Umfrage teilnehmen um deine Erfahrungen zu teilen?</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MFeedbackPopup.qml" line="74"/>
         <source>No, Thanks</source>
-        <translation type="unfinished"></translation>
+        <translation>Nein, Danke</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MFeedbackPopup.qml" line="88"/>
         <source>Let&apos;s do this!</source>
-        <translation type="unfinished"></translation>
+        <translation>Los geht&apos;s!</translation>
     </message>
 </context>
 <context>
@@ -1584,43 +1584,43 @@ niemand wird es wiederherstellen können!</translation>
         <location filename="../homePage/MHomePage.qml" line="515"/>
         <location filename="../homePage/MHomePage.qml" line="526"/>
         <source>Uninstalling failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Deinstallation fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="515"/>
         <source>Can&apos;t uninstall book since it is not downloaded.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Buch kann nicht deinstalliert werden, da es nicht heruntergeladen ist.</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="523"/>
         <source>Uninstalling succeeded</source>
-        <translation type="unfinished"></translation>
+        <translation>Deinstallation erfolgreich</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="524"/>
         <source>The book was deleted from your device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Buch wurde von deinem Gerät gelöscht.</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="527"/>
         <location filename="../homePage/MHomePage.qml" line="541"/>
         <source>Something went wrong.</source>
-        <translation type="unfinished"></translation>
+        <translation>Etwas ist schiefgegangen.</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="537"/>
         <source>Deleting succeeded</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen erfolgreich</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="538"/>
         <source>The book was successfully deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Buch wurde erfolgreich gelöscht.</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="540"/>
         <source>Deleting failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="560"/>
@@ -1750,28 +1750,28 @@ Lösche alte Bücher um Speicherplatzu freizugeben oder upgrade deinen Account.<
     <message>
         <location filename="../toolsPage/MImageToPdfPopup.qml" line="39"/>
         <source>Convertion succeeded</source>
-        <translation type="unfinished"></translation>
+        <translation>Konvertierung erfolgreich</translation>
     </message>
     <message>
         <location filename="../toolsPage/MImageToPdfPopup.qml" line="40"/>
         <source>The new book was added to your library.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das neue Buch wurde zu deiner Bibliothek hinzugefügt.</translation>
     </message>
     <message>
         <location filename="../toolsPage/MImageToPdfPopup.qml" line="42"/>
         <source>Convertion failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Konvertierung fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="../toolsPage/MImageToPdfPopup.qml" line="43"/>
         <source>The conversion failed. Please try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Konvertierung ist fehlgeschlagen. Bitte versuche es erneut.</translation>
     </message>
     <message>
         <location filename="../toolsPage/MImageToPdfPopup.qml" line="62"/>
         <location filename="../toolsPage/MImageToPdfPopup.qml" line="148"/>
         <source>Convert</source>
-        <translation type="unfinished"></translation>
+        <translation>Konvertieren</translation>
     </message>
 </context>
 <context>
@@ -1860,33 +1860,33 @@ Lösche alte Bücher um Speicherplatzu freizugeben oder upgrade deinen Account.<
     <message>
         <location filename="../toolsPage/MMergePopup.qml" line="41"/>
         <source>Merge succeeded</source>
-        <translation type="unfinished"></translation>
+        <translation>Zusammenführen erfolgreich</translation>
     </message>
     <message>
         <location filename="../toolsPage/MMergePopup.qml" line="42"/>
         <source>The merged book was added to your library.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das zusammengeführte Buch wurde zu deiner Bibliothek hinzugefügt.</translation>
     </message>
     <message>
         <location filename="../toolsPage/MMergePopup.qml" line="44"/>
         <source>Merge failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Zusammenführen fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="../toolsPage/MMergePopup.qml" line="45"/>
         <source>The merged failed. Please try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Zusammenführung ist fehlgeschlagen. Bitte versuche es erneut.</translation>
     </message>
     <message>
         <location filename="../toolsPage/MMergePopup.qml" line="67"/>
         <location filename="../toolsPage/MMergePopup.qml" line="223"/>
         <source>Merge</source>
-        <translation type="unfinished"></translation>
+        <translation>Zusammenführen</translation>
     </message>
     <message>
         <location filename="../toolsPage/MMergePopup.qml" line="242"/>
         <source>Select two or more books to merge.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wähle zwei oder mehr Bücher zum zusammenzuführen aus.</translation>
     </message>
 </context>
 <context>
@@ -1938,32 +1938,32 @@ Lösche alte Bücher um Speicherplatzu freizugeben oder upgrade deinen Account.<
     <message>
         <location filename="../toolsPage/MPdfToImagePopup.qml" line="39"/>
         <source>Convertion succeeded</source>
-        <translation type="unfinished"></translation>
+        <translation>Konvertierung erfolgreich</translation>
     </message>
     <message>
         <location filename="../toolsPage/MPdfToImagePopup.qml" line="40"/>
         <source>The new book was added to your library.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das neue Buch wurde zu deiner Bibliothek hinzugefügt.</translation>
     </message>
     <message>
         <location filename="../toolsPage/MPdfToImagePopup.qml" line="42"/>
         <source>Convertion failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Konvertierung fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="../toolsPage/MPdfToImagePopup.qml" line="43"/>
         <source>The conversion failed. Please try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Konvertierung ist fehlgeschlagen. Bitte versuche es erneut.</translation>
     </message>
     <message>
         <location filename="../toolsPage/MPdfToImagePopup.qml" line="62"/>
         <source>Pdf to Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Pdf zu Bild</translation>
     </message>
     <message>
         <location filename="../toolsPage/MPdfToImagePopup.qml" line="148"/>
         <source>Convert</source>
-        <translation type="unfinished"></translation>
+        <translation>Konvertieren</translation>
     </message>
 </context>
 <context>
@@ -2370,7 +2370,7 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
     <message>
         <location filename="../sidebar/MSidebar.qml" line="169"/>
         <source>Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Werkzeuge</translation>
     </message>
     <message>
         <source>Add-ons</source>
@@ -2634,42 +2634,42 @@ an Projekten zu arbeiten, unserer Community zu helfen und versuchen, die Welt zu
     <message>
         <location filename="../toolsPage/MToolsPage.qml" line="25"/>
         <source>PDF Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>PDF Werkzeuge</translation>
     </message>
     <message>
         <location filename="../toolsPage/MToolsPage.qml" line="26"/>
         <source>Powerful tools to modify your PDF files</source>
-        <translation type="unfinished"></translation>
+        <translation>Mächtige Werkzeuge für deine PDF Bücher</translation>
     </message>
     <message>
         <location filename="../toolsPage/MToolsPage.qml" line="101"/>
         <source>Merge</source>
-        <translation type="unfinished"></translation>
+        <translation>Zusammenführen</translation>
     </message>
     <message>
         <location filename="../toolsPage/MToolsPage.qml" line="102"/>
         <source>Merge multiple books into one</source>
-        <translation type="unfinished"></translation>
+        <translation>Führe mehrere Bücher zusammen</translation>
     </message>
     <message>
         <location filename="../toolsPage/MToolsPage.qml" line="107"/>
         <source>Extract Page(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Seite(n) extrahieren</translation>
     </message>
     <message>
         <location filename="../toolsPage/MToolsPage.qml" line="108"/>
         <source>Extract selected pages from a book</source>
-        <translation type="unfinished"></translation>
+        <translation>Extrahiere ausgewählte Seiten aus deinem Buch</translation>
     </message>
     <message>
         <location filename="../toolsPage/MToolsPage.qml" line="113"/>
         <source>Image to PDF</source>
-        <translation type="unfinished"></translation>
+        <translation>Bild zu PDF</translation>
     </message>
     <message>
         <location filename="../toolsPage/MToolsPage.qml" line="114"/>
         <source>Convert an image (PNG, JPEG, SVG, GIF) to PDF</source>
-        <translation type="unfinished"></translation>
+        <translation>Konvertiere ein Bild (PNG, JPEG, SVG, GIF) zu PDF</translation>
     </message>
 </context>
 <context>
