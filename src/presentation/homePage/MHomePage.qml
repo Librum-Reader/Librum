@@ -31,8 +31,10 @@ Page {
         if (!(pageManager.prevPage instanceof MLoginPage)) {
             feedbackTimer.start()
         }
+    }
 
-        LibraryController.libraryModel.folder = "all"
+    Component.onDestruction: {
+        toolbar.selectBooksCheckBoxActivated = false
     }
 
     // Add a slight delay to showing the feedback timer
@@ -188,8 +190,21 @@ Page {
                     Layout.topMargin: updateBanner.visible ? 24 : 44
                     //: As in 'Home Page', might be closer to 'Start' in other languages
                     titleText: qsTr("Home")
-                    descriptionText: qsTr("You have %1 books").arg(
-                                         LibraryController.bookCount)
+                    descriptionText: {
+                        let folder = LibraryController.libraryModel.folder
+                        if (folder === "all") {
+                            return qsTr("You have %1 books").arg(
+                                        LibraryController.bookCount)
+                        }
+
+                        let sentence = qsTr("In Folder") + ": "
+                        if (folder === "unsorted") {
+                            return sentence + qsTr("Unsorted")
+                        }
+
+                        let folderName = FolderController.getFolder(folder).name
+                        return sentence + folderName
+                    }
                 }
 
                 Item {
@@ -806,8 +821,6 @@ Page {
                              event.accepted = true
                          }
                      }
-
-    Component.onDestruction: toolbar.selectBooksCheckBoxActivated = false
 
     QtObject {
         id: internal
