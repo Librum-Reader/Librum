@@ -68,6 +68,7 @@ Popup {
                 Layout.preferredHeight: 26
                 Layout.preferredWidth: 26
                 color: "transparent"
+                opacity: colorItemArea.pressed ? 0.7 : 1
 
                 Rectangle {
                     width: 15
@@ -78,6 +79,7 @@ Popup {
                 }
 
                 MouseArea {
+                    id: colorItemArea
                     anchors.fill: parent
                     hoverEnabled: true
                     cursorShape: Qt.PointingHandCursor
@@ -133,12 +135,14 @@ Popup {
             Layout.leftMargin: 16
             Layout.rightMargin: 16
             Layout.topMargin: -2
+            opacity: copyTextArea.pressed ? 0.6 : 1
             text: "Copy"
             color: Style.colorText
-            font.weight: Font.Medium
+            font.weight: Font.Normal
             font.pointSize: Fonts.size12dot5
 
             MouseArea {
+                id: copyTextArea
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
                 hoverEnabled: true
@@ -159,12 +163,14 @@ Popup {
             Layout.fillWidth: true
             Layout.leftMargin: 16
             Layout.rightMargin: 16
+            opacity: lookUpTextArea.pressed ? 0.6 : 1
             text: "Look Up"
             color: Style.colorText
-            font.weight: Font.Medium
+            font.weight: Font.Normal
             font.pointSize: Fonts.size12dot5
 
             MouseArea {
+                id: lookUpTextArea
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
                 hoverEnabled: true
@@ -185,7 +191,9 @@ Popup {
                     // Get the rest of the string
                     text = firstLetter + restOfString
                     DictionaryController.getDefinitionForWord(text)
-                    root.dictionaryOptionSelected(text)
+
+                    // root.dictionaryOptionSelected(text)
+                    root.close()
                 }
             }
         }
@@ -195,13 +203,14 @@ Popup {
             Layout.fillWidth: true
             Layout.leftMargin: 16
             Layout.rightMargin: 16
-            Layout.bottomMargin: 10
+            opacity: explainTextArea.pressed ? 0.6 : 1
             text: "Ai Explain"
             color: Style.colorText
             font.pointSize: Fonts.size12dot5
-            font.weight: Font.Medium
+            font.weight: Font.Normal
 
             MouseArea {
+                id: explainTextArea
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
                 hoverEnabled: true
@@ -214,8 +223,40 @@ Popup {
                         text = activeFocusItem.getHighlightedText(
                                     root.highlight)
                     root.explanationOptionSelected(text)
+
+                    root.close()
                 }
             }
+        }
+
+        Label {
+            id: removeHighlightText
+            Layout.fillWidth: true
+            Layout.leftMargin: 16
+            Layout.rightMargin: 16
+            visible: root.highlight !== ""
+            opacity: removeHighlightArea.pressed ? 0.6 : 1
+            text: "Remove"
+            color: Style.colorErrorText
+            font.pointSize: Fonts.size12dot5
+            font.weight: Font.Normal
+
+            MouseArea {
+                id: removeHighlightArea
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                hoverEnabled: true
+
+                onClicked: {
+                    activeFocusItem.removeHighlight(root.highlight)
+                    root.close()
+                }
+            }
+        }
+
+        Item {
+            id: bottomSpacing
+            height: 9 - layout.spacing
         }
     }
 

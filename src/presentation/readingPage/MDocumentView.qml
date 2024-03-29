@@ -312,9 +312,13 @@ Pane {
         function openPopupAt(popup, centerX, bottomY) {
             let pageYOffset = pageView.contentY - activeFocusItem.y
             let pageXOffset = pageView.contentX - activeFocusItem.x
-            let posX = centerX + pageView.x - popup.width / 2 - pageXOffset
-            let posY = bottomY + -pageYOffset + 6
 
+            let posY = bottomY + -pageYOffset + 6
+            let spaceToBottom = (pageView.y + root.height) - (posY + popup.height)
+            if (spaceToBottom < 0)
+                posY = posY + spaceToBottom
+
+            let posX = centerX + pageView.x - popup.width / 2 - pageXOffset
             let spaceToRight = (pageView.x + pageView.width) - (posX + popup.width)
             if (spaceToRight < 0)
                 posX = posX + spaceToRight

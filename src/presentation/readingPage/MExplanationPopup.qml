@@ -47,10 +47,10 @@ Popup {
         function onLimitReached() {
             errorItem.visible = true
             //: Make sure that the words make a valid sentence
-            errorText.text = qsTr('You have reached your daily limit.') + ' ' + qsTr(
-                        'Click') + ' <a href="update" style="color: '
-                    + Style.colorBasePurple + '; text-decoration: none;">'
-                    + qsTr('here') + '</a> ' + qsTr('to learn more.')
+            errorText.text = qsTr('You have reached your daily limit.') + ' '
+                    + ' <a href="update" style="color: ' + Style.colorBasePurple
+                    + '; text-decoration: none;">' + qsTr(
+                        'Upgrade') + '</a> ' + qsTr('to continue.')
         }
 
         function onRequestTooLong() {
@@ -210,7 +210,7 @@ Popup {
                         font.weight: Font.Medium
                         font.pointSize: Fonts.size14
                         onLinkActivated: Qt.openUrlExternally(
-                                             AppInfoController.website + "/whyAiLimits")
+                                             AppInfoController.website + "/pricing")
 
                         // Switch to the proper cursor when hovering above the link
                         MouseArea {
