@@ -1346,33 +1346,43 @@ Você está offline ou seu armazenamento está cheio.</translation>
 <context>
     <name>MHomePage</name>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="140"/>
+        <location filename="../homePage/MHomePage.qml" line="142"/>
         <source>A new version is available!</source>
         <translation>Nova versão está disponível!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="142"/>
+        <location filename="../homePage/MHomePage.qml" line="144"/>
         <source>Update Now</source>
         <translation>Atualizar Agora</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="190"/>
+        <location filename="../homePage/MHomePage.qml" line="192"/>
         <source>Home</source>
         <extracomment>As in &apos;Home Page&apos;, might be closer to &apos;Start&apos; in other languages</extracomment>
         <translation>Início</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="191"/>
+        <location filename="../homePage/MHomePage.qml" line="196"/>
         <source>You have %1 books</source>
         <translation>Você tem %1 livros</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="207"/>
+        <location filename="../homePage/MHomePage.qml" line="200"/>
+        <source>In Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../homePage/MHomePage.qml" line="202"/>
+        <source>Unsorted</source>
+        <translation type="unfinished">Não classificado</translation>
+    </message>
+    <message>
+        <location filename="../homePage/MHomePage.qml" line="222"/>
         <source>Add books</source>
         <translation>Adicionar livros</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="501"/>
+        <location filename="../homePage/MHomePage.qml" line="516"/>
         <source>Remove Book?</source>
         <translation>Remover Livro?</translation>
     </message>
@@ -1381,24 +1391,24 @@ Você está offline ou seu armazenamento está cheio.</translation>
         <translation type="vanished">Excluir um livro é uma ação permanente, ninguém poderá restaurá-lo depois!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="503"/>
-        <location filename="../homePage/MHomePage.qml" line="562"/>
+        <location filename="../homePage/MHomePage.qml" line="518"/>
+        <location filename="../homePage/MHomePage.qml" line="577"/>
         <source>Remove from Device</source>
         <translation>Remover do Dispositivo</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="504"/>
-        <location filename="../homePage/MHomePage.qml" line="563"/>
+        <location filename="../homePage/MHomePage.qml" line="519"/>
+        <location filename="../homePage/MHomePage.qml" line="578"/>
         <source>Delete Everywhere</source>
         <translation>Apagar em toda parte</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="691"/>
+        <location filename="../homePage/MHomePage.qml" line="706"/>
         <source>Save</source>
         <translation>Salvar</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="706"/>
+        <location filename="../homePage/MHomePage.qml" line="721"/>
         <source>Limit Reached</source>
         <translation>Limite Atingido</translation>
     </message>
@@ -1407,22 +1417,22 @@ Você está offline ou seu armazenamento está cheio.</translation>
         <translation type="vanished">Limite de upload atingido. Exclua livros para liberar espaço ou faça um upgrade.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="758"/>
+        <location filename="../homePage/MHomePage.qml" line="773"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="708"/>
+        <location filename="../homePage/MHomePage.qml" line="723"/>
         <source>Upgrade</source>
         <translation>Atualizar</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="727"/>
+        <location filename="../homePage/MHomePage.qml" line="742"/>
         <source>Book already exists</source>
         <translation>O livro já existe</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="728"/>
+        <location filename="../homePage/MHomePage.qml" line="743"/>
         <source>It looks like this book already exists in your library:</source>
         <translation>Parece que este livro já existe na sua biblioteca:</translation>
     </message>
@@ -1431,140 +1441,140 @@ Você está offline ou seu armazenamento está cheio.</translation>
         <translation type="vanished">Tem certeza de quer adicioná-lo novamente?</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="502"/>
+        <location filename="../homePage/MHomePage.qml" line="517"/>
         <source>Deleting a book is a permanent action, no one will be
  able to restore it afterwards!</source>
         <translation>Excluir um livro é uma ação permanente, ninguém poderá restaurá-lo depois!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="515"/>
-        <location filename="../homePage/MHomePage.qml" line="526"/>
+        <location filename="../homePage/MHomePage.qml" line="530"/>
+        <location filename="../homePage/MHomePage.qml" line="541"/>
         <source>Uninstalling failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="515"/>
+        <location filename="../homePage/MHomePage.qml" line="530"/>
         <source>Can&apos;t uninstall book since it is not downloaded.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="523"/>
+        <location filename="../homePage/MHomePage.qml" line="538"/>
         <source>Uninstalling succeeded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="524"/>
+        <location filename="../homePage/MHomePage.qml" line="539"/>
         <source>The book was deleted from your device.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="527"/>
-        <location filename="../homePage/MHomePage.qml" line="541"/>
+        <location filename="../homePage/MHomePage.qml" line="542"/>
+        <location filename="../homePage/MHomePage.qml" line="556"/>
         <source>Something went wrong.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="537"/>
+        <location filename="../homePage/MHomePage.qml" line="552"/>
         <source>Deleting succeeded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="538"/>
+        <location filename="../homePage/MHomePage.qml" line="553"/>
         <source>The book was successfully deleted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="540"/>
+        <location filename="../homePage/MHomePage.qml" line="555"/>
         <source>Deleting failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="560"/>
+        <location filename="../homePage/MHomePage.qml" line="575"/>
         <source>Remove Books?</source>
         <translation>Remover livros?</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="561"/>
+        <location filename="../homePage/MHomePage.qml" line="576"/>
         <source>Deleting books is a permanent action, no one will be
  able to restore it afterwards!</source>
         <translation>Excluir livros é uma ação permanente, ninguém será capaz de restaurá-la posteriormente!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="610"/>
-        <location filename="../homePage/MHomePage.qml" line="640"/>
+        <location filename="../homePage/MHomePage.qml" line="625"/>
+        <location filename="../homePage/MHomePage.qml" line="655"/>
         <source>Remove from Folder?</source>
         <translation>Remover da pasta?</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="611"/>
+        <location filename="../homePage/MHomePage.qml" line="626"/>
         <source>This action will not delete the original book.</source>
         <translation>Essa ação não irá excluir o livro original.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="612"/>
-        <location filename="../homePage/MHomePage.qml" line="642"/>
-        <location filename="../homePage/MHomePage.qml" line="709"/>
+        <location filename="../homePage/MHomePage.qml" line="627"/>
+        <location filename="../homePage/MHomePage.qml" line="657"/>
+        <location filename="../homePage/MHomePage.qml" line="724"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="613"/>
-        <location filename="../homePage/MHomePage.qml" line="643"/>
+        <location filename="../homePage/MHomePage.qml" line="628"/>
+        <location filename="../homePage/MHomePage.qml" line="658"/>
         <source>Remove</source>
         <translation>Remover</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="641"/>
+        <location filename="../homePage/MHomePage.qml" line="656"/>
         <source>This action will not delete the original books.</source>
         <translation>Esta ação não irá excluir os livros originais.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="707"/>
+        <location filename="../homePage/MHomePage.qml" line="722"/>
         <source>You have reached your upload limit.
 Delete unused books to free up space or upgrade.</source>
         <translation>Limite de upload atingido. Exclua livros para liberar espaço ou faça um upgrade.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="731"/>
+        <location filename="../homePage/MHomePage.qml" line="746"/>
         <source>Are you sure you that want to add it again?
 </source>
         <translation>Tem certeza de quer adicioná-lo novamente?
 </translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="734"/>
+        <location filename="../homePage/MHomePage.qml" line="749"/>
         <source>Add</source>
         <translation>Adicionar</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="735"/>
+        <location filename="../homePage/MHomePage.qml" line="750"/>
         <source>Don&apos;t add</source>
         <translation>Não adicionar</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="756"/>
+        <location filename="../homePage/MHomePage.qml" line="771"/>
         <source>Unsupported File</source>
         <translation>Arquivo não suportado</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="757"/>
+        <location filename="../homePage/MHomePage.qml" line="772"/>
         <source>Oops! This file is not supported by Librum.</source>
         <translation>Ops! Este arquivo não é suportado pelo Librum.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="782"/>
+        <location filename="../homePage/MHomePage.qml" line="797"/>
         <source>Import</source>
         <translation>Importar</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="785"/>
+        <location filename="../homePage/MHomePage.qml" line="800"/>
         <source>All files</source>
         <translation>Todos os arquivos</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="786"/>
-        <location filename="../homePage/MHomePage.qml" line="787"/>
-        <location filename="../homePage/MHomePage.qml" line="788"/>
+        <location filename="../homePage/MHomePage.qml" line="801"/>
+        <location filename="../homePage/MHomePage.qml" line="802"/>
+        <location filename="../homePage/MHomePage.qml" line="803"/>
         <source>files</source>
         <translation>arquivos</translation>
     </message>

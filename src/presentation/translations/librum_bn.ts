@@ -1315,216 +1315,226 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MHomePage</name>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="140"/>
+        <location filename="../homePage/MHomePage.qml" line="142"/>
         <source>A new version is available!</source>
         <translation>একটি নতুন ভার্ষন উপলব্ধ!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="142"/>
+        <location filename="../homePage/MHomePage.qml" line="144"/>
         <source>Update Now</source>
         <translation>এখন আপডেট করুন</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="190"/>
+        <location filename="../homePage/MHomePage.qml" line="192"/>
         <source>Home</source>
         <extracomment>As in &apos;Home Page&apos;, might be closer to &apos;Start&apos; in other languages</extracomment>
         <translation>হোম</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="191"/>
+        <location filename="../homePage/MHomePage.qml" line="196"/>
         <source>You have %1 books</source>
         <translation>আপনার বই আছে %1</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="207"/>
+        <location filename="../homePage/MHomePage.qml" line="200"/>
+        <source>In Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../homePage/MHomePage.qml" line="202"/>
+        <source>Unsorted</source>
+        <translation type="unfinished">অবাছাইকৃত</translation>
+    </message>
+    <message>
+        <location filename="../homePage/MHomePage.qml" line="222"/>
         <source>Add books</source>
         <translation>বই যোগ করুন</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="501"/>
+        <location filename="../homePage/MHomePage.qml" line="516"/>
         <source>Remove Book?</source>
         <translation>বই সরাবেন?</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="502"/>
+        <location filename="../homePage/MHomePage.qml" line="517"/>
         <source>Deleting a book is a permanent action, no one will be
  able to restore it afterwards!</source>
         <translation>বই ডিলিট করার অ্যাকশনটি অপরিবর্তনশীল, তথা কেউ সেগুলো 
 ফিরিয়ে আনতে পারবে না!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="503"/>
-        <location filename="../homePage/MHomePage.qml" line="562"/>
+        <location filename="../homePage/MHomePage.qml" line="518"/>
+        <location filename="../homePage/MHomePage.qml" line="577"/>
         <source>Remove from Device</source>
         <translation>ডিভাইস থেকে মুছে ফেলুন</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="504"/>
-        <location filename="../homePage/MHomePage.qml" line="563"/>
+        <location filename="../homePage/MHomePage.qml" line="519"/>
+        <location filename="../homePage/MHomePage.qml" line="578"/>
         <source>Delete Everywhere</source>
         <translation>সবজায়গা থেকে মুছে ফেলুন</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="515"/>
-        <location filename="../homePage/MHomePage.qml" line="526"/>
+        <location filename="../homePage/MHomePage.qml" line="530"/>
+        <location filename="../homePage/MHomePage.qml" line="541"/>
         <source>Uninstalling failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="515"/>
+        <location filename="../homePage/MHomePage.qml" line="530"/>
         <source>Can&apos;t uninstall book since it is not downloaded.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="523"/>
+        <location filename="../homePage/MHomePage.qml" line="538"/>
         <source>Uninstalling succeeded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="524"/>
+        <location filename="../homePage/MHomePage.qml" line="539"/>
         <source>The book was deleted from your device.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="527"/>
-        <location filename="../homePage/MHomePage.qml" line="541"/>
+        <location filename="../homePage/MHomePage.qml" line="542"/>
+        <location filename="../homePage/MHomePage.qml" line="556"/>
         <source>Something went wrong.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="537"/>
+        <location filename="../homePage/MHomePage.qml" line="552"/>
         <source>Deleting succeeded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="538"/>
+        <location filename="../homePage/MHomePage.qml" line="553"/>
         <source>The book was successfully deleted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="540"/>
+        <location filename="../homePage/MHomePage.qml" line="555"/>
         <source>Deleting failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="560"/>
+        <location filename="../homePage/MHomePage.qml" line="575"/>
         <source>Remove Books?</source>
         <translation>বইগুলো কি মুছে ফেলবেন?</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="561"/>
+        <location filename="../homePage/MHomePage.qml" line="576"/>
         <source>Deleting books is a permanent action, no one will be
  able to restore it afterwards!</source>
         <translation>বই ডিলিট করার অ্যাকশনটি অপরিবর্তনশীল, তথা কেউ সেগুলো 
 ফিরিয়ে আনতে পারবে না!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="610"/>
-        <location filename="../homePage/MHomePage.qml" line="640"/>
+        <location filename="../homePage/MHomePage.qml" line="625"/>
+        <location filename="../homePage/MHomePage.qml" line="655"/>
         <source>Remove from Folder?</source>
         <translation>ফোল্ডার থেকে মুছে ফেলবেন?</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="611"/>
+        <location filename="../homePage/MHomePage.qml" line="626"/>
         <source>This action will not delete the original book.</source>
         <translation>এই অ্যাকশনটি আসল বইটিকে ডিলিট করবে না।</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="612"/>
-        <location filename="../homePage/MHomePage.qml" line="642"/>
-        <location filename="../homePage/MHomePage.qml" line="709"/>
+        <location filename="../homePage/MHomePage.qml" line="627"/>
+        <location filename="../homePage/MHomePage.qml" line="657"/>
+        <location filename="../homePage/MHomePage.qml" line="724"/>
         <source>Cancel</source>
         <translation>বাতিল</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="613"/>
-        <location filename="../homePage/MHomePage.qml" line="643"/>
+        <location filename="../homePage/MHomePage.qml" line="628"/>
+        <location filename="../homePage/MHomePage.qml" line="658"/>
         <source>Remove</source>
         <translation>মুছুন</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="641"/>
+        <location filename="../homePage/MHomePage.qml" line="656"/>
         <source>This action will not delete the original books.</source>
         <translation>এই অ্যাকশনটি আসল বইগুলো ডিলিট করবে না।</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="691"/>
+        <location filename="../homePage/MHomePage.qml" line="706"/>
         <source>Save</source>
         <translation>সেভ</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="706"/>
+        <location filename="../homePage/MHomePage.qml" line="721"/>
         <source>Limit Reached</source>
         <translation>লিমিট অতিবাহিত হয়েছে</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="707"/>
+        <location filename="../homePage/MHomePage.qml" line="722"/>
         <source>You have reached your upload limit.
 Delete unused books to free up space or upgrade.</source>
         <translation>আপনি আপনার আপলোড লিমিট অতিবাহিত করেছেন।
 অব্যবহৃত বইগুলো মুছে ফেলে জায়গা খালি করুন অথবা আপগ্রেড করুন।</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="758"/>
+        <location filename="../homePage/MHomePage.qml" line="773"/>
         <source>Ok</source>
         <translation>ওকে</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="708"/>
+        <location filename="../homePage/MHomePage.qml" line="723"/>
         <source>Upgrade</source>
         <translation>আপগ্রেড</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="727"/>
+        <location filename="../homePage/MHomePage.qml" line="742"/>
         <source>Book already exists</source>
         <translation>বই ইতোমধ্যেই আছে</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="728"/>
+        <location filename="../homePage/MHomePage.qml" line="743"/>
         <source>It looks like this book already exists in your library:</source>
         <translation>দেখে মনে হচ্ছে বইটি ইতোমধ্যেই আপনার লাইব্রেরীতে আছে:</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="731"/>
+        <location filename="../homePage/MHomePage.qml" line="746"/>
         <source>Are you sure you that want to add it again?
 </source>
         <translation>আপনি কি নিশ্চিত যে আপনি এটি আবার যুক্ত করতে চান?
 </translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="734"/>
+        <location filename="../homePage/MHomePage.qml" line="749"/>
         <source>Add</source>
         <translation>যুক্ত করুন</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="735"/>
+        <location filename="../homePage/MHomePage.qml" line="750"/>
         <source>Don&apos;t add</source>
         <translation>যুক্ত করবেন না</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="756"/>
+        <location filename="../homePage/MHomePage.qml" line="771"/>
         <source>Unsupported File</source>
         <translation>অসমর্থিত ফাইল</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="757"/>
+        <location filename="../homePage/MHomePage.qml" line="772"/>
         <source>Oops! This file is not supported by Librum.</source>
         <translation>উফফফ! এই ফাইটি লিবরাম দ্বারা সমর্থিত নয়।</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="782"/>
+        <location filename="../homePage/MHomePage.qml" line="797"/>
         <source>Import</source>
         <translation>আমদানি</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="785"/>
+        <location filename="../homePage/MHomePage.qml" line="800"/>
         <source>All files</source>
         <translation>সব ফাইলগুলো</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="786"/>
-        <location filename="../homePage/MHomePage.qml" line="787"/>
-        <location filename="../homePage/MHomePage.qml" line="788"/>
+        <location filename="../homePage/MHomePage.qml" line="801"/>
+        <location filename="../homePage/MHomePage.qml" line="802"/>
+        <location filename="../homePage/MHomePage.qml" line="803"/>
         <source>files</source>
         <translation>ফাইলগুলো</translation>
     </message>
