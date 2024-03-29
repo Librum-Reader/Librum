@@ -23,7 +23,14 @@ Page {
         color: Style.colorPageBackground
     }
 
-    Component.onCompleted: LibraryController.libraryModel.folder = "all"
+    Component.onCompleted: {
+        if (!baseRoot.isExitingReadingPage){
+            LibraryController.libraryModel.folder = "all";
+        } else {
+            folderSidebar.toggle();
+            baseRoot.isExitingReadingPage = false;
+        }
+    }
 
     Shortcut {
         sequence: SettingsController.shortcuts.AddBook

@@ -25,6 +25,7 @@ ApplicationWindow {
     property bool notifyAboutUpdates: true
     property bool rightAlign: AppInfoController.language === "العربية"
     property bool externalBookMode: false
+    property bool isExitingReadingPage: false
 
     // Only initalize once at the start
     Component.onCompleted: externalBookMode = externalBook
@@ -159,6 +160,11 @@ ApplicationWindow {
         let page = pageManager.currentItem
         page.loadSettingsPage(page.updatesPage,
                               page.settingsSidebar.updatesItem)
+    }
+
+    function exitReadingPage() {
+        baseRoot.isExitingReadingPage = true
+        loadPage(homePage, sidebar.homeItem, false);
     }
 
     QtObject {

@@ -135,7 +135,7 @@ Page {
             bookTitle: Globals.selectedBook.title
 
             onBackButtonClicked: {
-                loadPage(homePage, sidebar.homeItem, false)
+                exitReadingPage()
             }
 
             onChapterButtonClicked: {
