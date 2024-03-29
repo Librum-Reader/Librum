@@ -971,19 +971,26 @@ Either you are offline, or your storage is full.</source>
         <translation>لقد وصلت إلى الحد اليومي.</translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="50"/>
         <source>Click</source>
-        <translation>اضغط</translation>
+        <translation type="vanished">اضغط</translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="53"/>
         <source>here</source>
-        <translation>هنا</translation>
+        <translation type="vanished">هنا</translation>
+    </message>
+    <message>
+        <source>to learn more.</source>
+        <translation type="vanished">لمعرفة المزيد.</translation>
+    </message>
+    <message>
+        <location filename="../readingPage/MExplanationPopup.qml" line="52"/>
+        <source>Upgrade</source>
+        <translation type="unfinished">ترقية</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="53"/>
-        <source>to learn more.</source>
-        <translation>لمعرفة المزيد.</translation>
+        <source>to continue.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="58"/>
@@ -2005,32 +2012,24 @@ Confirm your email by clicking the link we sent you.</source>
 <context>
     <name>MSelectionOptionsPopup</name>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="129"/>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="278"/>
         <source>Copy</source>
-        <translation>انسخ</translation>
+        <translation type="vanished">انسخ</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="142"/>
         <source>Highlight</source>
-        <translation>ظلل</translation>
+        <translation type="vanished">ظلل</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="160"/>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="290"/>
         <source>Look Up</source>
-        <translation>بحث في القاموس عن</translation>
+        <translation type="vanished">بحث في القاموس عن</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="244"/>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="316"/>
         <source>Explain</source>
-        <translation>اشرح</translation>
+        <translation type="vanished">اشرح</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="264"/>
         <source>Remove</source>
-        <translation>أزل</translation>
+        <translation type="vanished">أزل</translation>
     </message>
 </context>
 <context>

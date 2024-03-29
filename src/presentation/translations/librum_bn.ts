@@ -950,19 +950,26 @@ Either you are offline, or your storage is full.</source>
         <translation>আপনি আপনার দৈনিক সীমায় পৌঁছেছেন।</translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="50"/>
         <source>Click</source>
-        <translation>ক্লিক</translation>
+        <translation type="vanished">ক্লিক</translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="53"/>
         <source>here</source>
-        <translation>এখানে</translation>
+        <translation type="vanished">এখানে</translation>
+    </message>
+    <message>
+        <source>to learn more.</source>
+        <translation type="vanished">আরো জানতে।</translation>
+    </message>
+    <message>
+        <location filename="../readingPage/MExplanationPopup.qml" line="52"/>
+        <source>Upgrade</source>
+        <translation type="unfinished">আপগ্রেড</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="53"/>
-        <source>to learn more.</source>
-        <translation>আরো জানতে।</translation>
+        <source>to continue.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="58"/>
@@ -1960,32 +1967,24 @@ Confirm your email by clicking the link we sent you.</source>
 <context>
     <name>MSelectionOptionsPopup</name>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="129"/>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="278"/>
         <source>Copy</source>
-        <translation>কপি</translation>
+        <translation type="vanished">কপি</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="142"/>
         <source>Highlight</source>
-        <translation>হাইলাইট</translation>
+        <translation type="vanished">হাইলাইট</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="160"/>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="290"/>
         <source>Look Up</source>
-        <translation>খুঁজে দেখো</translation>
+        <translation type="vanished">খুঁজে দেখো</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="244"/>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="316"/>
         <source>Explain</source>
-        <translation>ব্যাখ্যা কর</translation>
+        <translation type="vanished">ব্যাখ্যা কর</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="264"/>
         <source>Remove</source>
-        <translation>মুছে ফেল</translation>
+        <translation type="vanished">মুছে ফেল</translation>
     </message>
 </context>
 <context>

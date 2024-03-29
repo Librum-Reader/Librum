@@ -969,19 +969,26 @@ Mungkin karena kamu offline, atau penyimpananmu penuh.</translation>
         <translation>Kamu telah mencapai batas harian.</translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="50"/>
         <source>Click</source>
-        <translation>Klik</translation>
+        <translation type="vanished">Klik</translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="53"/>
         <source>here</source>
-        <translation>disini</translation>
+        <translation type="vanished">disini</translation>
+    </message>
+    <message>
+        <source>to learn more.</source>
+        <translation type="vanished">untuk pelajari lebih jauh.</translation>
+    </message>
+    <message>
+        <location filename="../readingPage/MExplanationPopup.qml" line="52"/>
+        <source>Upgrade</source>
+        <translation type="unfinished">Upgrade</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="53"/>
-        <source>to learn more.</source>
-        <translation>untuk pelajari lebih jauh.</translation>
+        <source>to continue.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="58"/>
@@ -2002,32 +2009,24 @@ Konfirmasi emailmu lewat link yang kami kirimkan.</translation>
 <context>
     <name>MSelectionOptionsPopup</name>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="129"/>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="278"/>
         <source>Copy</source>
-        <translation>Salin</translation>
+        <translation type="vanished">Salin</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="142"/>
         <source>Highlight</source>
-        <translation>Soroti</translation>
+        <translation type="vanished">Soroti</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="160"/>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="290"/>
         <source>Look Up</source>
-        <translation>Cari</translation>
+        <translation type="vanished">Cari</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="244"/>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="316"/>
         <source>Explain</source>
-        <translation>Jelaskan</translation>
+        <translation type="vanished">Jelaskan</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="264"/>
         <source>Remove</source>
-        <translation>Hapus</translation>
+        <translation type="vanished">Hapus</translation>
     </message>
 </context>
 <context>

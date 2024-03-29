@@ -1097,19 +1097,26 @@ niemand wird es wiederherstellen können!</translation>
         <translation>Du hast dein tägliches Limit erreicht.</translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="50"/>
         <source>Click</source>
-        <translation>Klick</translation>
+        <translation type="vanished">Klick</translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="53"/>
         <source>here</source>
-        <translation>hier</translation>
+        <translation type="vanished">hier</translation>
+    </message>
+    <message>
+        <source>to learn more.</source>
+        <translation type="vanished">um mehr zu lernen.</translation>
+    </message>
+    <message>
+        <location filename="../readingPage/MExplanationPopup.qml" line="52"/>
+        <source>Upgrade</source>
+        <translation type="unfinished">Upgrade</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="53"/>
-        <source>to learn more.</source>
-        <translation>um mehr zu lernen.</translation>
+        <source>to continue.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="58"/>
@@ -2216,32 +2223,24 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
 <context>
     <name>MSelectionOptionsPopup</name>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="129"/>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="278"/>
         <source>Copy</source>
-        <translation>Kopieren</translation>
+        <translation type="vanished">Kopieren</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="142"/>
         <source>Highlight</source>
-        <translation>Markieren</translation>
+        <translation type="vanished">Markieren</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="160"/>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="290"/>
         <source>Look Up</source>
-        <translation>Nachgucken</translation>
+        <translation type="vanished">Nachgucken</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="244"/>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="316"/>
         <source>Explain</source>
-        <translation>Erklären</translation>
+        <translation type="vanished">Erklären</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="264"/>
         <source>Remove</source>
-        <translation>Entfernen</translation>
+        <translation type="vanished">Entfernen</translation>
     </message>
 </context>
 <context>

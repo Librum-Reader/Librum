@@ -926,18 +926,13 @@ Either you are offline, or your storage is full.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="50"/>
-        <source>Click</source>
+        <location filename="../readingPage/MExplanationPopup.qml" line="52"/>
+        <source>Upgrade</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="53"/>
-        <source>here</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="53"/>
-        <source>to learn more.</source>
+        <source>to continue.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1925,37 +1920,6 @@ Confirm your email by clicking the link we sent you.</source>
         <location filename="../settings/accountPage/MSelectProfilePictureArea.qml" line="157"/>
         <location filename="../settings/accountPage/MSelectProfilePictureArea.qml" line="158"/>
         <source>files</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MSelectionOptionsPopup</name>
-    <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="129"/>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="278"/>
-        <source>Copy</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="142"/>
-        <source>Highlight</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="160"/>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="290"/>
-        <source>Look Up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="244"/>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="316"/>
-        <source>Explain</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="264"/>
-        <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

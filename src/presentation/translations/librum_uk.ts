@@ -971,19 +971,26 @@ Either you are offline, or your storage is full.</source>
         <translation>Ви досягли щоденного ліміту.</translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="50"/>
         <source>Click</source>
-        <translation>Натисніть</translation>
+        <translation type="vanished">Натисніть</translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="53"/>
         <source>here</source>
-        <translation>тут</translation>
+        <translation type="vanished">тут</translation>
+    </message>
+    <message>
+        <source>to learn more.</source>
+        <translation type="vanished">щоб дізнатись більше.</translation>
+    </message>
+    <message>
+        <location filename="../readingPage/MExplanationPopup.qml" line="52"/>
+        <source>Upgrade</source>
+        <translation type="unfinished">Покращити</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="53"/>
-        <source>to learn more.</source>
-        <translation>щоб дізнатись більше.</translation>
+        <source>to continue.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="58"/>
@@ -2005,32 +2012,24 @@ Confirm your email by clicking the link we sent you.</source>
 <context>
     <name>MSelectionOptionsPopup</name>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="129"/>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="278"/>
         <source>Copy</source>
-        <translation>Копіювати</translation>
+        <translation type="vanished">Копіювати</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="142"/>
         <source>Highlight</source>
-        <translation>Виділити</translation>
+        <translation type="vanished">Виділити</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="160"/>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="290"/>
         <source>Look Up</source>
-        <translation>Дивитись визначення</translation>
+        <translation type="vanished">Дивитись визначення</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="244"/>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="316"/>
         <source>Explain</source>
-        <translation>Пояснити</translation>
+        <translation type="vanished">Пояснити</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="264"/>
         <source>Remove</source>
-        <translation>Видалити</translation>
+        <translation type="vanished">Видалити</translation>
     </message>
 </context>
 <context>
