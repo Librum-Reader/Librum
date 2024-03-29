@@ -765,7 +765,7 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MComboBox</name>
     <message>
-        <location filename="../modules/CustomComponents/comboBox/MComboBox.qml" line="39"/>
+        <location filename="../modules/CustomComponents/comboBox/MComboBox.qml" line="40"/>
         <source>Any</source>
         <translation>যেকোনো</translation>
     </message>
@@ -1092,12 +1092,12 @@ Either you are offline, or your storage is full.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../toolsPage/MExtractPagesPopup.qml" line="131"/>
+        <location filename="../toolsPage/MExtractPagesPopup.qml" line="133"/>
         <source>Add a comma separated list of page numbers or ranges to extract.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../toolsPage/MExtractPagesPopup.qml" line="155"/>
+        <location filename="../toolsPage/MExtractPagesPopup.qml" line="157"/>
         <source>Extract</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1967,24 +1967,32 @@ Confirm your email by clicking the link we sent you.</source>
 <context>
     <name>MSelectionOptionsPopup</name>
     <message>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="139"/>
         <source>Copy</source>
-        <translation type="vanished">কপি</translation>
+        <translation>কপি</translation>
+    </message>
+    <message>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="207"/>
+        <source>Ai Explain</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Highlight</source>
         <translation type="vanished">হাইলাইট</translation>
     </message>
     <message>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="167"/>
         <source>Look Up</source>
-        <translation type="vanished">খুঁজে দেখো</translation>
+        <translation>খুঁজে দেখো</translation>
     </message>
     <message>
         <source>Explain</source>
         <translation type="vanished">ব্যাখ্যা কর</translation>
     </message>
     <message>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="239"/>
         <source>Remove</source>
-        <translation type="vanished">মুছে ফেল</translation>
+        <translation>মুছে ফেল</translation>
     </message>
 </context>
 <context>

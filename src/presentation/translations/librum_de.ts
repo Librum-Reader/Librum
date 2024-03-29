@@ -912,7 +912,7 @@ niemand wird es wiederherstellen können!</translation>
 <context>
     <name>MComboBox</name>
     <message>
-        <location filename="../modules/CustomComponents/comboBox/MComboBox.qml" line="39"/>
+        <location filename="../modules/CustomComponents/comboBox/MComboBox.qml" line="40"/>
         <source>Any</source>
         <translation>Beliebig</translation>
     </message>
@@ -1239,12 +1239,12 @@ niemand wird es wiederherstellen können!</translation>
         <translation>Seite(n) Extrahieren</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MExtractPagesPopup.qml" line="131"/>
+        <location filename="../toolsPage/MExtractPagesPopup.qml" line="133"/>
         <source>Add a comma separated list of page numbers or ranges to extract.</source>
         <translation>Füge eine durch Kommas getrennte Liste von Seitenzahlen oder Bereichen hinzu, die extrahiert werden sollen.</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MExtractPagesPopup.qml" line="155"/>
+        <location filename="../toolsPage/MExtractPagesPopup.qml" line="157"/>
         <source>Extract</source>
         <translation>Extrahieren</translation>
     </message>
@@ -2223,24 +2223,32 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
 <context>
     <name>MSelectionOptionsPopup</name>
     <message>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="139"/>
         <source>Copy</source>
-        <translation type="vanished">Kopieren</translation>
+        <translation>Kopieren</translation>
+    </message>
+    <message>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="207"/>
+        <source>Ai Explain</source>
+        <translation>Ki Erklärung</translation>
     </message>
     <message>
         <source>Highlight</source>
         <translation type="vanished">Markieren</translation>
     </message>
     <message>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="167"/>
         <source>Look Up</source>
-        <translation type="vanished">Nachgucken</translation>
+        <translation>Nachgucken</translation>
     </message>
     <message>
         <source>Explain</source>
         <translation type="vanished">Erklären</translation>
     </message>
     <message>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="239"/>
         <source>Remove</source>
-        <translation type="vanished">Entfernen</translation>
+        <translation>Entfernen</translation>
     </message>
 </context>
 <context>

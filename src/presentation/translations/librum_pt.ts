@@ -788,7 +788,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
 <context>
     <name>MComboBox</name>
     <message>
-        <location filename="../modules/CustomComponents/comboBox/MComboBox.qml" line="39"/>
+        <location filename="../modules/CustomComponents/comboBox/MComboBox.qml" line="40"/>
         <source>Any</source>
         <translation>Qualquer</translation>
     </message>
@@ -1115,12 +1115,12 @@ Você está offline ou seu armazenamento está cheio.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../toolsPage/MExtractPagesPopup.qml" line="131"/>
+        <location filename="../toolsPage/MExtractPagesPopup.qml" line="133"/>
         <source>Add a comma separated list of page numbers or ranges to extract.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../toolsPage/MExtractPagesPopup.qml" line="155"/>
+        <location filename="../toolsPage/MExtractPagesPopup.qml" line="157"/>
         <source>Extract</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2030,24 +2030,32 @@ Confirm your email by clicking the link we sent you.</source>
 <context>
     <name>MSelectionOptionsPopup</name>
     <message>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="139"/>
         <source>Copy</source>
-        <translation type="vanished">Copiar</translation>
+        <translation>Copiar</translation>
+    </message>
+    <message>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="207"/>
+        <source>Ai Explain</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Highlight</source>
         <translation type="vanished">Destacar</translation>
     </message>
     <message>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="167"/>
         <source>Look Up</source>
-        <translation type="vanished">Procurar</translation>
+        <translation>Procurar</translation>
     </message>
     <message>
         <source>Explain</source>
         <translation type="vanished">Explicar</translation>
     </message>
     <message>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="239"/>
         <source>Remove</source>
-        <translation type="vanished">Remover</translation>
+        <translation>Remover</translation>
     </message>
 </context>
 <context>

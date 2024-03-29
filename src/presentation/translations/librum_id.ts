@@ -784,7 +784,7 @@ Mungkin karena kamu offline, atau penyimpananmu penuh.</translation>
 <context>
     <name>MComboBox</name>
     <message>
-        <location filename="../modules/CustomComponents/comboBox/MComboBox.qml" line="39"/>
+        <location filename="../modules/CustomComponents/comboBox/MComboBox.qml" line="40"/>
         <source>Any</source>
         <translation>Apa saja</translation>
     </message>
@@ -1111,12 +1111,12 @@ Mungkin karena kamu offline, atau penyimpananmu penuh.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../toolsPage/MExtractPagesPopup.qml" line="131"/>
+        <location filename="../toolsPage/MExtractPagesPopup.qml" line="133"/>
         <source>Add a comma separated list of page numbers or ranges to extract.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../toolsPage/MExtractPagesPopup.qml" line="155"/>
+        <location filename="../toolsPage/MExtractPagesPopup.qml" line="157"/>
         <source>Extract</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2009,24 +2009,32 @@ Konfirmasi emailmu lewat link yang kami kirimkan.</translation>
 <context>
     <name>MSelectionOptionsPopup</name>
     <message>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="139"/>
         <source>Copy</source>
-        <translation type="vanished">Salin</translation>
+        <translation>Salin</translation>
+    </message>
+    <message>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="207"/>
+        <source>Ai Explain</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Highlight</source>
         <translation type="vanished">Soroti</translation>
     </message>
     <message>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="167"/>
         <source>Look Up</source>
-        <translation type="vanished">Cari</translation>
+        <translation>Cari</translation>
     </message>
     <message>
         <source>Explain</source>
         <translation type="vanished">Jelaskan</translation>
     </message>
     <message>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="239"/>
         <source>Remove</source>
-        <translation type="vanished">Hapus</translation>
+        <translation>Hapus</translation>
     </message>
 </context>
 <context>

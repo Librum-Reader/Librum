@@ -136,7 +136,7 @@ Popup {
             Layout.rightMargin: 16
             Layout.topMargin: -2
             opacity: copyTextArea.pressed ? 0.6 : 1
-            text: "Copy"
+            text: qsTr("Copy")
             color: Style.colorText
             font.weight: Font.Normal
             font.pointSize: Fonts.size12dot25
@@ -164,7 +164,7 @@ Popup {
             Layout.leftMargin: 16
             Layout.rightMargin: 16
             opacity: lookUpTextArea.pressed ? 0.6 : 1
-            text: "Look Up"
+            text: qsTr("Look Up")
             color: Style.colorText
             font.weight: Font.Normal
             font.pointSize: Fonts.size12dot25
@@ -204,7 +204,7 @@ Popup {
             Layout.leftMargin: 16
             Layout.rightMargin: 16
             opacity: explainTextArea.pressed ? 0.6 : 1
-            text: "Ai Explain"
+            text: qsTr("Ai Explain")
             color: Style.colorText
             font.pointSize: Fonts.size12dot25
             font.weight: Font.Normal
@@ -236,7 +236,7 @@ Popup {
             Layout.rightMargin: 16
             visible: root.highlight !== ""
             opacity: removeHighlightArea.pressed ? 0.6 : 1
-            text: "Remove"
+            text: qsTr("Remove")
             color: Style.colorErrorText
             font.pointSize: Fonts.size12dot25
             font.weight: Font.Normal

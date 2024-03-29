@@ -789,7 +789,7 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MComboBox</name>
     <message>
-        <location filename="../modules/CustomComponents/comboBox/MComboBox.qml" line="39"/>
+        <location filename="../modules/CustomComponents/comboBox/MComboBox.qml" line="40"/>
         <source>Any</source>
         <translation>없음</translation>
     </message>
@@ -1112,12 +1112,12 @@ Either you are offline, or your storage is full.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../toolsPage/MExtractPagesPopup.qml" line="131"/>
+        <location filename="../toolsPage/MExtractPagesPopup.qml" line="133"/>
         <source>Add a comma separated list of page numbers or ranges to extract.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../toolsPage/MExtractPagesPopup.qml" line="155"/>
+        <location filename="../toolsPage/MExtractPagesPopup.qml" line="157"/>
         <source>Extract</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2010,24 +2010,32 @@ Confirm your email by clicking the link we sent you.</source>
 <context>
     <name>MSelectionOptionsPopup</name>
     <message>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="139"/>
         <source>Copy</source>
-        <translation type="vanished">복사</translation>
+        <translation>복사</translation>
+    </message>
+    <message>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="207"/>
+        <source>Ai Explain</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Highlight</source>
         <translation type="vanished">강조</translation>
     </message>
     <message>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="167"/>
         <source>Look Up</source>
-        <translation type="vanished">찾기</translation>
+        <translation>찾기</translation>
     </message>
     <message>
         <source>Explain</source>
         <translation type="vanished">설명</translation>
     </message>
     <message>
+        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="239"/>
         <source>Remove</source>
-        <translation type="vanished">삭제</translation>
+        <translation>삭제</translation>
     </message>
 </context>
 <context>
