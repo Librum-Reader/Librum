@@ -270,10 +270,20 @@ Pane {
             Component.onCompleted: zoomAssignment.start()
             Timer {
                 id: zoomAssignment
+                property int firstTime: 0
+
                 interval: 5
-                onTriggered: zoomComboBox.text = Qt.binding(function () {
-                    return Math.round(BookController.zoom * 100) + "%"
-                })
+                onTriggered: {
+                    zoomComboBox.text = Qt.binding(function () {
+                        return Math.round(BookController.zoom * 100) + "%"
+                    })
+
+                    // Only wanna do this the first time
+                    if (firstTime == 0) {
+                        zoomComboBox.setDefaultItem(zoomComboBox.text)
+                        firstTime++
+                    }
+                }
             }
 
             // Remove % sign from text

@@ -215,11 +215,13 @@ Item {
     function setDefaultItem(itemName) {
         for (var i = 0; i < selectionPopup.model.count; i++) {
             if (selectionPopup.model.get(i)[contentPropertyName] === itemName) {
+                print("Found at index: " + i)
                 selectItem(i)
                 return
             }
         }
 
+        selectionPopup.listView.currentIndex = -1
         selectionPopup.defaultIndex = -1
     }
 
