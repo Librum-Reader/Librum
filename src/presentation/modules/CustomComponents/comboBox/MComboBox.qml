@@ -10,6 +10,7 @@ Item {
     property alias text: selectionPopup.selectedContent
     property bool multiSelect: false
     property string boxBackgroundColor: Style.colorContainerBackground
+    property alias allowUnselectingItems: selectionPopup.allowUnselectingItems
 
     property alias model: selectionPopup.model
 

@@ -31,7 +31,8 @@ function selectItem(index) {
     }
 
     if (newItem === listView.currentSelected) {
-        deselectCurrentItem()
+        if (root.allowUnselectingItems)
+            deselectCurrentItem()
         return
     }
 

@@ -220,6 +220,7 @@ Pane {
             dropdownIcon: Icons.dropdownDark
             dropdownIconSize: 9
             checkBoxStyle: false
+            allowUnselectingItems: false
             model: ListModel {
                 ListElement {
                     text: "15%"

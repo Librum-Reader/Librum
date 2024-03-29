@@ -12,6 +12,7 @@ Popup {
     property string contentPropertyName: "text"
     property alias model: listView.model
     property alias listView: listView
+    property bool allowUnselectingItems: true
     property int itemHeight: 28
     property int maxHeight: 208
     property int defaultIndex: -1
