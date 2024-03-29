@@ -47,7 +47,7 @@ Popup {
     Image {
         id: triangleDecoration
         x: parent.width / 2 - implicitWidth / 2
-        y: -5 - root.verticalPadding
+        y: -6 - root.verticalPadding
         source: Icons.popupDroplet
     }
 
