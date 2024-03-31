@@ -7,7 +7,7 @@ namespace adapters
 {
 
 /**
- * The AiExplanation class makes the API calls to the server to get the
+ * The IAiExplanationAccess class makes the API calls to the server to get the
  * explanation for text.
  */
 class ADAPTERS_EXPORT IAiExplanationAccess : public QObject

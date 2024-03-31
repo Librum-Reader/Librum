@@ -10,7 +10,7 @@ namespace adapters
 {
 
 /**
- * The UserStorageAccess class makes the API calls to the user storage server.
+ * The IUserStorageAccess class makes the API calls to the user storage server.
  */
 class ADAPTERS_EXPORT IUserStorageAccess : public QObject
 {

@@ -8,7 +8,7 @@ namespace adapters
 {
 
 /**
- * The FolderStorageAccess class makes the API calls to the API of the used
+ * The IFolderStorageAccess class makes the API calls to the API of the used
  * Folder to store folders, etc. from it.
  */
 class ADAPTERS_EXPORT IFolderStorageAccess : public QObject

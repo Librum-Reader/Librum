@@ -7,7 +7,7 @@ namespace adapters
 {
 
 /**
- * The AppInfo class makes the API calls to the server to query metainformation
+ * The IAppInfoAccess class makes the API calls to the server to query metainformation
  * about Librum.
  */
 class ADAPTERS_EXPORT IAppInfoAccess : public QObject
