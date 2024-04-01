@@ -29,10 +29,7 @@
 #include "i_free_books_service.hpp"
 #include "i_library_service.hpp"
 #include "i_user_service.hpp"
-#include "key_sequence_recorder.hpp"
 #include "library_proxy_model.hpp"
-#include "message_handler.hpp"
-#include "page_view.hpp"
 #include "setting_groups.hpp"
 #include "setting_keys.hpp"
 #include "shortcuts_proxy_model.hpp"
@@ -40,6 +37,12 @@
 #include "tools_controller.hpp"
 #include "user_controller.hpp"
 #include "word_definition_dto.hpp"
+
+#if !defined(Q_OS_ANDROID) && !defined(Q_OS_IOS)
+    #include "key_sequence_recorder.hpp"
+    #include "message_handler.hpp"
+    #include "page_view.hpp"
+#endif
 
 
 using namespace adapters::controllers;
@@ -63,7 +66,9 @@ int main(int argc, char* argv[])
     QIcon icon(":/src/logo.ico");
     app.setWindowIcon(icon);
 
+#if !defined(Q_OS_ANDROID) && !defined(Q_OS_IOS)
     qInstallMessageHandler(logging::messageHandler);
+#endif
     setupGlobalSettings();
     setupFonts();
 
@@ -79,14 +84,17 @@ int main(int argc, char* argv[])
     qmlRegisterType<adapters::data_models::BookTitleProxyModel>("Librum.models", 1, 0, "BookTitleModel");
     qmlRegisterType<adapters::data_models::FreeBooksModel>("Librum.models", 1, 0, "FreeBooksModel");
     qmlRegisterType<adapters::data_models::ShortcutsProxyModel>("Librum.models", 1, 0, "ShortcutsProxyModel");
-    qmlRegisterType<cpp_elements::KeySequenceRecorder>("Librum.elements", 1, 0, "KeySequenceRecorder");
-    qmlRegisterType<cpp_elements::PageView>("Librum.elements", 1, 0, "PageView");
     qRegisterMetaType<adapters::dtos::BookDto>();
     qRegisterMetaType<adapters::dtos::TagDto>();
     qRegisterMetaType<adapters::dtos::FolderDto>();
     qRegisterMetaType<adapters::dtos::DictionaryEntryDto>();
     qRegisterMetaType<adapters::dtos::WordTypeDto>();
     qRegisterMetaType<adapters::dtos::WordDefinitionDto>();
+
+#if !defined(Q_OS_ANDROID) && !defined(Q_OS_IOS)
+    qmlRegisterType<cpp_elements::KeySequenceRecorder>("Librum.elements", 1, 0, "KeySequenceRecorder");
+    qmlRegisterType<cpp_elements::PageView>("Librum.elements", 1, 0, "PageView");
+#endif
 
 
     // Authentication Stack
@@ -242,23 +250,23 @@ int main(int argc, char* argv[])
     // Setup translations
     QSettings settings;
     auto storedLanguage = settings.value("language", QVariant("")).toString();
-    if(storedLanguage.isEmpty())
-    {
-        // If no language was specified in the settings, deduce the system language
-        const QStringList uiLanguages = QLocale::system().uiLanguages();
-        for(const QString& locale : uiLanguages)
-        {
-            const QString name = QLocale(locale).name();
-            if(appInfoController->switchToLanguage(name))
-            {
-                break;
-            }
-        }
-    }
-    else
-    {
-        appInfoController->switchToLanguage(storedLanguage);
-    }
+    // if(storedLanguage.isEmpty())
+    // {
+    //     // If no language was specified in the settings, deduce the system language
+    //     const QStringList uiLanguages = QLocale::system().uiLanguages();
+    //     for(const QString& locale : uiLanguages)
+    //     {
+    //         const QString name = QLocale(locale).name();
+    //         if(appInfoController->switchToLanguage(name))
+    //         {
+    //             break;
+    //         }
+    //     }
+    // }
+    // else
+    // {
+    //     appInfoController->switchToLanguage(storedLanguage);
+    // }
 
     if(app.arguments().size() == 2)
     {

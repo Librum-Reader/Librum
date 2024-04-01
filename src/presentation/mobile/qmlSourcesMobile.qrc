@@ -1,0 +1,24 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>loginPage/MLoginPage.qml</file>
+        <file>startPage/MStartPage.qml</file>
+        <file>modules/CustomComponents/buttons/MButton.qml</file>
+        <file>modules/CustomComponents/qmldir</file>
+        <file>modules/CustomComponents/MLabeledInputBox.qml</file>
+        <file>registerPage/MRegisterPage.qml</file>
+        <file>modules/CustomComponents/MLogo.qml</file>
+        <file>modules/CustomComponents/MCheckBox.qml</file>
+        <file>navbar/MNavbar.qml</file>
+        <file>navbar/MNavbarItem.qml</file>
+        <file>explorePage/MExplorePage.qml</file>
+        <file>profilePage/MProfilePage.qml</file>
+        <file>libraryPage/MLibraryPage.qml</file>
+        <file>profilePage/MProfileCard.qml</file>
+        <file>profilePage/MProfilePicture.qml</file>
+        <file>profilePage/MProfileItem.qml</file>
+        <file>modules/CustomComponents/MFlickWrapper.qml</file>
+        <file>myAccountPage/MMyAccountPage.qml</file>
+        <file>modules/CustomComponents/buttons/MBackButton.qml</file>
+    </qresource>
+</RCC>
