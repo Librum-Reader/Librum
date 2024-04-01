@@ -146,11 +146,11 @@ else()
     set(EXECUTABLE_EXTENSION ".exe")
 endif()
 
+# Build mupdf
 add_custom_target(mupdf
-   # Build mupdf
    COMMAND ${CMAKE_COMMAND} -E env
-        "CC=${CC_COMMAND}"
-        "CXX=${CXX_COMMAND}"
+        $<$<NOT:$<STREQUAL:"${CC_COMMAND}","">>:CC=${CC_COMMAND}>
+        $<$<NOT:$<STREQUAL:"${CXX_COMMAND}","">>:CXX=${CXX_COMMAND}>
         "USE_SYSTEM_LIBJPEG=${USE_SYSTEM_LIBJPEG_VALUE}"
         "USE_SONAME=no"
         ${MUPDF_BUILD_COMMAND}
