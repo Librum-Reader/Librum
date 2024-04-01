@@ -20,5 +20,6 @@
         <file>modules/CustomComponents/MFlickWrapper.qml</file>
         <file>myAccountPage/MMyAccountPage.qml</file>
         <file>modules/CustomComponents/buttons/MBackButton.qml</file>
+        <file>libraryPage/MBook.qml</file>
     </qresource>
 </RCC>
