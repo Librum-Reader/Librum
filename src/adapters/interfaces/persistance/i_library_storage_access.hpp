@@ -9,7 +9,7 @@ namespace adapters
 {
 
 /**
- * The IAuthenticationAccess class makes the API calls to the authentication
+ * The ILibraryStorageAccess class makes the API calls to the book storage
  * server.
  */
 class ADAPTERS_EXPORT ILibraryStorageAccess : public QObject
