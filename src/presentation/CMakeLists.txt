@@ -10,7 +10,10 @@ endif()
 
 if(ANDROID)
     set(CPP_SOURCE_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/mobile/modules/CppElements")
-    set(CPP_FILES)
+    set(CPP_FILES
+            mobile/modules/CppElements/page_view.hpp
+            mobile/modules/CppElements/page_view.cpp
+    )
 else()
     set(CPP_SOURCE_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/desktop/modules/CppElements")
     set(CPP_FILES
@@ -27,6 +30,8 @@ add_library(presentation
                     ${QML_SOURCE_QRC_PATH}
                     qmlSourcesGeneral.qrc
                     ${CPP_FILES}
+                    mobile/modules/CppElements/page_view.hpp mobile/modules/CppElements/page_view.cpp
+                    mobile/modules/CppElements/presentation_export.hpp
 )
 
 

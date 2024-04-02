@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import Librum.style
 import Librum.fonts
 import Librum.controllers
+import Librum.globals
 import CustomComponents
 
 Page {
@@ -43,7 +44,24 @@ Page {
                 maximumFlickVelocity: 2500
                 clip: true
                 model: LibraryController.libraryModel
-                delegate: MBook {}
+                delegate: MBook {
+                    id: bookDelegate
+
+                    onClicked: {
+                        if (model.downloaded) {
+                            Globals.selectedBook = LibraryController.getBook(
+                                        model.uuid)
+                            BookController.setUp(Globals.selectedBook.uuid)
+
+                            LibraryController.refreshLastOpenedFlag(
+                                        Globals.selectedBook.uuid)
+
+                            loadPage(readingPage)
+                        } else {
+                            LibraryController.downloadBookMedia(model.uuid)
+                        }
+                    }
+                }
             }
 
             ScrollBar {

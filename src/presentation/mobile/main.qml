@@ -8,6 +8,7 @@ import "registerPage"
 import "navbar"
 import "libraryPage"
 import "explorePage"
+import "readingPage"
 import "profilePage"
 import "myAccountPage"
 
@@ -18,6 +19,15 @@ ApplicationWindow {
     height: 480
     visibility: Window.Maximized
     title: qsTr("Librum")
+
+    onClosing: {
+        if (stackView.depth > 2) {
+            close.accepted = false
+            let item = stackView.pop()
+        } else {
+            return
+        }
+    }
 
     ColumnLayout {
         anchors.fill: parent
@@ -64,6 +74,10 @@ ApplicationWindow {
         MLibraryPage {}
     }
     Component {
+        id: readingPage
+        MReadingPage {}
+    }
+    Component {
         id: explorePage
         MExplorePage {}
     }
@@ -90,6 +104,6 @@ ApplicationWindow {
             navbar.currentItem = navbarItem
         }
 
-        stackView.replace(page)
+        stackView.push(page)
     }
 }

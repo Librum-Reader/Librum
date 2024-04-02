@@ -21,5 +21,7 @@
         <file>myAccountPage/MMyAccountPage.qml</file>
         <file>modules/CustomComponents/buttons/MBackButton.qml</file>
         <file>libraryPage/MBook.qml</file>
+        <file>readingPage/MReadingPage.qml</file>
+        <file>readingPage/MDocumentView.qml</file>
     </qresource>
 </RCC>

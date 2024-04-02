@@ -9,10 +9,7 @@ import Librum.globals
 
 Item {
     id: root
-    property bool downloading: false
-    signal leftButtonClicked(int index)
-    signal rightButtonClicked(int index, var mouse)
-    signal moreOptionClicked(int index, var point)
+    signal clicked
 
     implicitWidth: 120
     implicitHeight: 190
@@ -28,6 +25,17 @@ Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
             color: Style.colorBookImageBackground
+
+            Image {
+                id: downloadBookIcon
+                anchors.centerIn: parent
+                visible: !model.downloaded
+                sourceSize.width: 32
+                fillMode: Image.PreserveAspectFit
+                source: Icons.downloadSelected
+                opacity: 1
+                z: 3
+            }
 
             ColumnLayout {
                 id: upperPartLayout
@@ -85,6 +93,10 @@ Item {
                 }
             }
         }
+    }
+
+    TapHandler {
+        onTapped: root.clicked()
     }
 
     function giveFocus() {
