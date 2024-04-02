@@ -43,17 +43,17 @@ Page {
     }
     Shortcut {
         sequence: "Shift+3"
-        onActivated: loadSettingsPage(shortcutsPage,
-                                      settingsSidebar.shortcutsItem)
+        onActivated: loadSettingsPage(behaviorSettingsPage,
+                                      settingsSidebar.behaviorSettingsItem)
     }
     Shortcut {
         sequence: "Shift+4"
-        onActivated: loadSettingsPage(updatesPage, settingsSidebar.updatesItem)
+        onActivated: loadSettingsPage(shortcutsPage, settingsSidebar.shortcutsItem)
     }
     Shortcut {
         sequence: "Shift+5"
-        onActivated: loadSettingsPage(behaviorSettingsPage,
-                                      settingsSidebar.generalSettingsItem)
+        onActivated: loadSettingsPage(updatesPage,
+                                      settingsSidebar.updatesItem)
     }
     Shortcut {
         sequence: "Shift+6"
@@ -108,16 +108,16 @@ Page {
         MAppearancePage {}
     }
     Component {
+        id: behaviorSettingsPage
+        MBehaviorPage {}
+    }
+    Component {
         id: shortcutsPage
         MShortcutsPage {}
     }
     Component {
         id: updatesPage
         MUpdatesPage {}
-    }
-    Component {
-        id: behaviorSettingsPage
-        MBehaviorPage {}
     }
     Component {
         id: accountPage
