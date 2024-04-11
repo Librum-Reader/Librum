@@ -102,15 +102,17 @@ if(NOT ${NO_VENV})
     set(VENV_OPTION "--venv")
 endif()
 
+set(BUILD_MUTOOL true)
 if(ANDROID)
     set(EXTRA_MAKE_AGRS --m-vars 'HAVE_OBJCOPY=no HAVE_LIBCRYPTO=no')
+    set(BUILD_MUTOOL false)
 endif()
 
 if(UNIX)
     set(MUPDF_OUTPUT_DIR "${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>")
     set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/libmupdfcpp.so")
     set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/libmupdfcpp.so" PARENT_SCOPE)
-    set(MUPDF_BUILD_COMMAND ./scripts/mupdfwrap.py ${VENV_OPTION} -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b --m-target 'libs tools' ${EXTRA_MAKE_AGRS} -j 0 m01)
+    set(MUPDF_BUILD_COMMAND ./scripts/mupdfwrap.py ${VENV_OPTION} -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b --m-target 'libs $<$<BOOL:${BUILD_MUTOOL}>:tools>' ${EXTRA_MAKE_AGRS} -j 0 m01)
 elseif(WIN32)
     set(MUPDF_OUTPUT_DIR "${PROJECT_SOURCE_DIR}/libs/mupdf/platform/win32/x64/$<IF:$<CONFIG:Debug>,Debug,Release>")
     set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/mupdfcpp64.lib" PARENT_SCOPE)
@@ -125,9 +127,8 @@ set(CC_COMMAND "${CMAKE_C_COMPILER}")
 set(CXX_COMMAND "${CMAKE_CXX_COMPILER}")
 
 if(ANDROID)
-    string(APPEND CC_COMMAND " --target=aarch64-none-linux-android23 --sysroot=/home/creapermann/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot")
-    string(APPEND CXX_COMMAND " --target=aarch64-none-linux-android23 --sysroot=/home/creapermann/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot")
-    set(ANDROID_COMPILERS "CC=${CC_COMMAND}" "CXX=${CXX_COMMAND}")
+    string(APPEND CC_COMMAND " --target=aarch64-none-linux-android23 --sysroot=${ANDROID_NDK}/toolchains/llvm/prebuilt/linux-x86_64/sysroot")
+    string(APPEND CXX_COMMAND " --target=aarch64-none-linux-android23 --sysroot=${ANDROID_NDK}/toolchains/llvm/prebuilt/linux-x86_64/sysroot")
 endif()
 
 
@@ -145,22 +146,30 @@ else()
     set(EXECUTABLE_EXTENSION ".exe")
 endif()
 
+# Build mupdf
 add_custom_target(mupdf
-   # Build mupdf
    COMMAND ${CMAKE_COMMAND} -E env
-        ${ANDROID_COMPILERS}
+        $<$<NOT:$<STREQUAL:"${CC_COMMAND}","">>:CC=${CC_COMMAND}>
+        $<$<NOT:$<STREQUAL:"${CXX_COMMAND}","">>:CXX=${CXX_COMMAND}>
         "USE_SYSTEM_LIBJPEG=${USE_SYSTEM_LIBJPEG_VALUE}"
         "USE_SONAME=no"
         ${MUPDF_BUILD_COMMAND}
-   # Copy mutool to the build directory
-   COMMAND ${CMAKE_COMMAND} -E copy
-        "${MUPDF_OUTPUT_DIR}/mutool${EXECUTABLE_EXTENSION}"
-        "${PROJECT_BINARY_DIR}/mutool${EXECUTABLE_EXTENSION}"
    BYPRODUCTS ${MUPDF_OUTPUT}
    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/mupdf
    COMMENT "Building mupdf (This takes a while) ..."
 )
 
+# Copy the mutool executable to the build directory
+if(BUILD_MUTOOL)
+    add_custom_command(
+        TARGET mupdf POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+                "${MUPDF_OUTPUT_DIR}/mutool${EXECUTABLE_EXTENSION}"
+                "${PROJECT_BINARY_DIR}/mutool${EXECUTABLE_EXTENSION}"
+        BYPRODUCTS "${PROJECT_BINARY_DIR}/mutool${EXECUTABLE_EXTENSION}"
+        DEPENDS ${MUPDF_OUTPUT}
+    )
+endif()
 
 #Copy the mupdf dlls to the build directory for windows
 if(WIN32)

@@ -32,11 +32,13 @@ Item {
     property real size13dot5: systemSize + 4.5
     property real size14: systemSize + 5
     property real size15: systemSize + 6
+    property real size15dot5: systemSize + 6.5
     property real size16: systemSize + 7
     property real size16dot5: systemSize + 7.5
     property real size17: systemSize + 8
     property real size18: systemSize + 9
     property real size19: systemSize + 10
+    property real size19dot5: systemSize + 10.5
     property real size20: systemSize + 11
     property real size21: systemSize + 12
     property real size22: systemSize + 13
@@ -44,6 +46,7 @@ Item {
     property real size25: systemSize + 16
     property real size26: systemSize + 17
     property real size28: systemSize + 19
+    property real size34: systemSize + 25
     property real size42: systemSize + 33
     property real size46: systemSize + 37
 }

@@ -1,4 +1,5 @@
 #include "page_controller.hpp"
+#include <QDebug>
 #include "fz_utils.hpp"
 #include "mupdf/classes.h"
 
@@ -54,10 +55,12 @@ void PageController::setInvertColor(bool newInvertColor)
     m_pageImageOutdated = true;
 }
 
-QImage PageController::renderPage()
+QImage PageController::renderPage(int pageNr)
 {
     if(!m_pageImageOutdated)
         return m_pageImage;
+
+    qDebug() << "Re-rendering page nr: " << pageNr;
 
     auto zoom = m_matrix.a;
     m_pageImage = utils::qImageFromPixmap(m_pageGenerator.renderPage(zoom));

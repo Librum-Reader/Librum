@@ -1,6 +1,9 @@
 # Configuration
-set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/presentation/modules ${CMAKE_CURRENT_BINARY_DIR}/" CACHE STRING "Qml modules")
-
+if(ANDROID)
+    set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/presentation/mobile/modules CACHE STRING "Qml modules" FORCE)
+else()
+    set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/presentation/desktop/modules CACHE STRING "Qml modules" FORCE)
+endif()
 
 # Language
 set(CMAKE_CXX_STANDARD 20)
@@ -47,7 +50,6 @@ if(ANDROID)
     list(APPEND CUSTOM_ANDROID_EXTRA_LIBS "${PROJECT_SOURCE_DIR}/libs/mupdf/build/shared-debug/libmupdf.so")
     list(APPEND CUSTOM_ANDROID_EXTRA_LIBS "${PROJECT_SOURCE_DIR}/libs/mupdf/build/shared-debug/libmupdfcpp.so")
     string(REPLACE ";" "," CUSTOM_ANDROID_EXTRA_LIBS_STRING "${CUSTOM_ANDROID_EXTRA_LIBS}")
-
     set_property(TARGET librum PROPERTY QT_ANDROID_EXTRA_LIBS
         ${ANDROID_SDK_ROOT}/android_openssl/ssl_3/arm64-v8a/libcrypto_3.so
         ${ANDROID_SDK_ROOT}/android_openssl/ssl_3/arm64-v8a/libssl_3.so

@@ -401,5 +401,16 @@
         <file>resources/images/check_circle_green_icon.svg</file>
         <file>resources/images/info_circle_icon.svg</file>
         <file>resources/images/light_mode/sidebar/settings_icon.svg</file>
+        <file>resources/images/mobile/arrow_left.svg</file>
+        <file>resources/images/mobile/folder.svg</file>
+        <file>resources/images/mobile/profile.svg</file>
+        <file>resources/images/mobile/brush.svg</file>
+        <file>resources/images/mobile/sign_out.svg</file>
+        <file>resources/images/mobile/library.svg</file>
+        <file>resources/images/mobile/server.svg</file>
+        <file>resources/images/mobile/explore.svg</file>
+        <file>resources/images/mobile/refresh.svg</file>
+        <file>resources/images/mobile/diamond.svg</file>
+        <file>resources/images/mobile/gear.svg</file>
     </qresource>
 </RCC>
