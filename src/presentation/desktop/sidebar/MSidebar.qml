@@ -28,22 +28,27 @@ Item {
     Shortcut {
         sequence: "Ctrl+1"
         onActivated: loadPage(freeBooksPage, root.freeBooksItem)
+        enabled: root.visible
     }
     Shortcut {
         sequence: "Ctrl+2"
         onActivated: loadPage(homePage, root.homeItem)
+        enabled: root.visible
     }
     Shortcut {
         sequence: "Ctrl+3"
         onActivated: loadPage(statisticsPage, root.statisticsItem)
+        enabled: root.visible
     }
     Shortcut {
         sequence: "Ctrl+4"
         onActivated: loadPage(toolsPage, root.toolsItem)
+        enabled: root.visible
     }
     Shortcut {
         sequence: "Ctrl+5"
         onActivated: loadPage(settings, root.settingsItem)
+        enabled: root.visible
     }
 
     Pane {
