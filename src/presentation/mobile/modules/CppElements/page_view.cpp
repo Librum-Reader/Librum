@@ -54,7 +54,7 @@ void PageView::setBookController(IBookController* newBookController)
 
                 // The offsets are only valid once the page was rendered, make
                 // sure that it is always rendered first.
-                m_pageController->renderPage(m_pageNumber);
+                m_pageController->renderPage();
 
                 auto xOffset = m_pageController->getXOffset();
                 auto yOffset = m_pageController->getYOffset();

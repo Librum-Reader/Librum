@@ -29,7 +29,7 @@ public:
 
     virtual void setInvertColor(bool newInvertColor) = 0;
 
-    virtual QImage renderPage(int pageNr) = 0;
+    virtual QImage renderPage() = 0;
 
     virtual bool pointIsAboveText(const QPointF& point) = 0;
     virtual bool pointIsAboveLink(const QPointF& point) = 0;

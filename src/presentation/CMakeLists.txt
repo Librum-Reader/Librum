@@ -30,8 +30,6 @@ add_library(presentation
                     ${QML_SOURCE_QRC_PATH}
                     qmlSourcesGeneral.qrc
                     ${CPP_FILES}
-                    mobile/modules/CppElements/page_view.hpp mobile/modules/CppElements/page_view.cpp
-                    mobile/modules/CppElements/presentation_export.hpp
 )
 
 

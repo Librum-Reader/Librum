@@ -25,7 +25,7 @@ public:
 
     void setInvertColor(bool newInvertColor) override;
 
-    QImage renderPage(int pageNr) override;
+    QImage renderPage() override;
 
     bool pointIsAboveText(const QPointF& point) override;
     bool pointIsAboveLink(const QPointF& point) override;

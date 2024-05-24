@@ -55,12 +55,10 @@ void PageController::setInvertColor(bool newInvertColor)
     m_pageImageOutdated = true;
 }
 
-QImage PageController::renderPage(int pageNr)
+QImage PageController::renderPage()
 {
     if(!m_pageImageOutdated)
         return m_pageImage;
-
-    qDebug() << "Re-rendering page nr: " << pageNr;
 
     auto zoom = m_matrix.a;
     m_pageImage = utils::qImageFromPixmap(m_pageGenerator.renderPage(zoom));
