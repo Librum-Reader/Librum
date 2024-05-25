@@ -11,9 +11,9 @@ Item {
     id: root
     property MSettingsSidebarItem aboutItem: aboutItem
     property MSettingsSidebarItem appearanceItem: appearanceItem
+    property MSettingsSidebarItem behaviorSettingsItem: behaviorSettingsItem
     property MSettingsSidebarItem shortcutsItem: shortcutsItem
     property MSettingsSidebarItem updatesItem: updatesItem
-    property MSettingsSidebarItem behaviorSettingsItem: behaviorSettingsItem
     property MSettingsSidebarItem accountItem: accountItem
     property MSettingsSidebarItem storageItem: storageItem
     property MSettingsSidebarItem supportUsItem: supportUsItem
