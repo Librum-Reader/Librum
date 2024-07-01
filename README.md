@@ -6,15 +6,13 @@ It's not **just** an e-book reader. With Librum, you can manage your own online 
  
 Librum also provides free access to over 70,000 books and personal reading statistics while being free and completely open source.
 
-___
-
-Join us on [Discord](https://discord.gg/hSX64qsFHc)
-
 <br>
+
+Download Librum from [our website](https://librumreader.com)!
+
 
 # Table of Contents
 - [Preview](#Preview)
-- [Where can I get Librum?](#where-can-i-get-librum)
 - [Contributing](#Contributing)
 - [Contact](#Contact)
 - [Donations](#Donations)
@@ -52,14 +50,6 @@ Customize Librum to make it personal to you
 
 ![image](https://github.com/Librum-Reader/Librum/assets/69865187/b8995cf1-a0e6-4993-8c8b-92f7f8e79ebd)
 
-
-<br>
-
-# Where can I get Librum?
-
-Simply go to https://librumreader.com to download Librum.
-
-If you want to build Librum from source, follow the instructions [here](#build-guide).
 
 <br>
 
