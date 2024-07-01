@@ -87,16 +87,7 @@ As a team of opensource developers we rely on donations to continue working on p
 
 # Translations
 
-Librum is currently available in:
-- English
-- German
-- Russian
-- Ukrainian
-- Indonesian
-- Italian
-- Korean
-- Portuguese
-- Mandarin
+Librum is currently available in the languages listed [here](https://github.com/Librum-Reader/Librum/tree/main/src/presentation/translations)
 
 If you want to translate Librum to another language, follow the steps below:
 - Download [this file](https://github.com/Librum-Reader/Librum/blob/dev/develop/src/presentation/translations/librum_en.ts)
