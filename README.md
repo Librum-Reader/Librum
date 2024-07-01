@@ -10,6 +10,21 @@ ___
 
 Join us on [Discord](https://discord.gg/hSX64qsFHc)
 
+<br>
+
+# Table of Contents
+- [Preview](#Preview)
+- [Where can I get Librum?](#Where-can-I-get-Librum?)
+- [Contributing](#Contributing)
+- [Contact](#Contact)
+- [Donations](#Donations)
+- [Translations](#Translations)
+- [Documentation](#Documentation)
+- [Self-hosting](#Self-hosting)
+- [Details](#Details)
+- [Build Guide](#Build-Guide)
+
+<br>
 
 # Preview
 
@@ -45,6 +60,18 @@ Customize Librum to make it personal to you
 Simply go to https://librumreader.com to download Librum.
 
 If you want to build Librum from source, follow the instructions [here](#build-guide).
+
+<br>
+
+# Contributing
+
+If you'd to support Librum's development, check out: https://librumreader.com/contribute
+<br>
+<br>
+All of the current feature requests, bugs and tasks are listed in the [issues](https://github.com/Librum-Reader/Librum/issues). Easy tasks are labeled "good first issue", so that is a good starting point.
+<br>
+<br>
+PS: Feel free to tag me (@DavidLazarescu) in the comments of any issue if you have questions. 
 
 <br>
 
@@ -102,21 +129,6 @@ Notes:
 
 For documentation go to [Librum's GitHub-wiki](https://github.com/Librum-Reader/Librum/wiki)
 
-<br>
-
-# Contributing
-
-If you'd like to contribute, check out: https://librumreader.com/contribute
-<br>
-<br>
-If you are interested in contributing, feel free to contact us on either:<br>
-1. Discord (m_david#0631)
-2. Email (contact@librumreader.com)
-<br>
-We are following a pull request workflow where every contribution is sent as a pull request and merged into the dev/develop branch for testing. <br>
-Please make sure to run clang format, keep to the conventions used throughout the application and ensure that all tests pass, before submitting any pull request.
-
-<br>
 <br>
 
 # Self-hosting
