@@ -14,7 +14,7 @@ Join us on [Discord](https://discord.gg/hSX64qsFHc)
 
 # Table of Contents
 - [Preview](#Preview)
-- [Where can I get Librum?](#Where-can-I-get-Librum?)
+- [Where can I get Librum?](#where-can-i-get-librum)
 - [Contributing](#Contributing)
 - [Contact](#Contact)
 - [Donations](#Donations)
