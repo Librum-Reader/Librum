@@ -4,34 +4,34 @@
 <context>
     <name>MAboutPage</name>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="34"/>
+        <location filename="../desktop/settings/MAboutPage.qml" line="34"/>
         <source>About</source>
         <translation>Про програму</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="35"/>
+        <location filename="../desktop/settings/MAboutPage.qml" line="35"/>
         <source>About this application</source>
         <translation>Про цей додаток</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="61"/>
+        <location filename="../desktop/settings/MAboutPage.qml" line="61"/>
         <source>Details</source>
         <translation>Деталі</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="70"/>
+        <location filename="../desktop/settings/MAboutPage.qml" line="70"/>
         <source>CURRENT VERSION</source>
         <extracomment>Keep it capitalized</extracomment>
         <translation>ПОТОЧНА ВЕРСІЯ</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="86"/>
+        <location filename="../desktop/settings/MAboutPage.qml" line="86"/>
         <source>QT VERSION</source>
         <extracomment>Keep it capitalized</extracomment>
         <translation>ВЕРСІЯ QT</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="105"/>
+        <location filename="../desktop/settings/MAboutPage.qml" line="105"/>
         <source>Feedback?</source>
         <translation>Зворотній звʼязок?</translation>
     </message>
@@ -40,7 +40,7 @@
         <translation type="vanished">Актуальна</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="143"/>
+        <location filename="../desktop/settings/MAboutPage.qml" line="143"/>
         <source>Creator</source>
         <translation>Автор</translation>
     </message>
@@ -50,36 +50,36 @@
         <translation type="vanished">НАЗВА КОМПАНІЇ</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="152"/>
+        <location filename="../desktop/settings/MAboutPage.qml" line="152"/>
         <source>WEBSITE</source>
         <extracomment>Keep it capitalized</extracomment>
         <translation>ВЕБСАЙТ</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="177"/>
+        <location filename="../desktop/settings/MAboutPage.qml" line="177"/>
         <source>CONTACT</source>
         <extracomment>Keep it capitalized</extracomment>
         <translation>КОНТАКТИ</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="203"/>
+        <location filename="../desktop/settings/MAboutPage.qml" line="203"/>
         <source>DISCORD</source>
         <extracomment>Keep it capitalized</extracomment>
         <translation>DISCORD</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="228"/>
+        <location filename="../desktop/settings/MAboutPage.qml" line="228"/>
         <source>GITHUB</source>
         <extracomment>Keep it capitalized</extracomment>
         <translation>GITHUB</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="274"/>
+        <location filename="../desktop/settings/MAboutPage.qml" line="274"/>
         <source>This App</source>
         <translation>Про Додаток</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="296"/>
+        <location filename="../desktop/settings/MAboutPage.qml" line="296"/>
         <source>Librum is here for everyone who just wants to enjoy a good book.
 We hope you have a great time using it! Feel free to leave us a rating and some feedback.</source>
         <translation>Librum створений для всіх, хто хоче насолодитись хорошою книгою.
@@ -89,23 +89,23 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
 <context>
     <name>MAcceptPolicy</name>
     <message>
-        <location filename="../registerPage/MAcceptPolicy.qml" line="48"/>
+        <location filename="../desktop/registerPage/MAcceptPolicy.qml" line="48"/>
         <source>I accept the</source>
         <extracomment>Make sure to translate the following words together to make a logical sentence</extracomment>
         <translation>Я приймаю</translation>
     </message>
     <message>
-        <location filename="../registerPage/MAcceptPolicy.qml" line="50"/>
+        <location filename="../desktop/registerPage/MAcceptPolicy.qml" line="50"/>
         <source>Terms of Service</source>
         <translation>Умови використання</translation>
     </message>
     <message>
-        <location filename="../registerPage/MAcceptPolicy.qml" line="51"/>
+        <location filename="../desktop/registerPage/MAcceptPolicy.qml" line="51"/>
         <source>and the</source>
         <translation>та</translation>
     </message>
     <message>
-        <location filename="../registerPage/MAcceptPolicy.qml" line="53"/>
+        <location filename="../desktop/registerPage/MAcceptPolicy.qml" line="53"/>
         <source>Privacy Policy</source>
         <translation>Політику конфіденційності</translation>
     </message>
@@ -113,18 +113,18 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
 <context>
     <name>MAccountPage</name>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="68"/>
+        <location filename="../desktop/settings/accountPage/MAccountPage.qml" line="68"/>
         <source>Account</source>
         <translation>Акаунт</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="85"/>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="465"/>
+        <location filename="../desktop/settings/accountPage/MAccountPage.qml" line="85"/>
+        <location filename="../desktop/settings/accountPage/MAccountPage.qml" line="465"/>
         <source>Save</source>
         <translation>Зберегти</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="127"/>
+        <location filename="../desktop/settings/accountPage/MAccountPage.qml" line="127"/>
         <source>Profile</source>
         <translation>Профіль</translation>
     </message>
@@ -137,93 +137,93 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <translation type="vanished">Ім&apos;я</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="138"/>
+        <location filename="../desktop/settings/accountPage/MAccountPage.qml" line="138"/>
         <source>Name</source>
         <translation>Ім&apos;я</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="153"/>
+        <location filename="../desktop/settings/accountPage/MAccountPage.qml" line="153"/>
         <source>Email</source>
         <translation>Email</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="169"/>
+        <location filename="../desktop/settings/accountPage/MAccountPage.qml" line="169"/>
         <source>Tier</source>
         <translation>Рівень</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="232"/>
+        <location filename="../desktop/settings/accountPage/MAccountPage.qml" line="232"/>
         <source>Change password</source>
         <translation>Змінити пароль</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="248"/>
+        <location filename="../desktop/settings/accountPage/MAccountPage.qml" line="248"/>
         <source>Password</source>
         <translation>Пароль</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="269"/>
+        <location filename="../desktop/settings/accountPage/MAccountPage.qml" line="269"/>
         <source>Password confirmation</source>
         <translation>Підтвердження паролю</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="310"/>
+        <location filename="../desktop/settings/accountPage/MAccountPage.qml" line="310"/>
         <source>Your data</source>
         <translation>Ваші дані</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="321"/>
+        <location filename="../desktop/settings/accountPage/MAccountPage.qml" line="321"/>
         <source>Analyse your reading to make better recommendations</source>
         <translation>Аналізувати ваше читання для кращих рекомендацій</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="335"/>
+        <location filename="../desktop/settings/accountPage/MAccountPage.qml" line="335"/>
         <source>Anonymously share information about the books you read to help us improve Librum</source>
         <translation>Анонімно надавати інформацію про книги, що Ви читаєте. Це допомогає нам покращити Librum</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="349"/>
+        <location filename="../desktop/settings/accountPage/MAccountPage.qml" line="349"/>
         <source>Collect data on crashes so that we can prevent it from happening again</source>
         <translation>Збирати інформацію у випадку краху, щоб ми могли запобігти повторенню подібних помилок</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="362"/>
+        <location filename="../desktop/settings/accountPage/MAccountPage.qml" line="362"/>
         <source>Collect data to display in your statistics</source>
         <translation>Збирати інформацію для відображення у вашій статистиці</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="393"/>
+        <location filename="../desktop/settings/accountPage/MAccountPage.qml" line="393"/>
         <source>Your Account</source>
         <translation>Ваш акаунт</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="408"/>
+        <location filename="../desktop/settings/accountPage/MAccountPage.qml" line="408"/>
         <source>Logout</source>
         <translation>Вихід</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="428"/>
+        <location filename="../desktop/settings/accountPage/MAccountPage.qml" line="428"/>
         <source>Delete Your Account</source>
         <translation>Видалити Ваш акаунт</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="463"/>
+        <location filename="../desktop/settings/accountPage/MAccountPage.qml" line="463"/>
         <source>Whoops</source>
         <translation>Упс</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="464"/>
+        <location filename="../desktop/settings/accountPage/MAccountPage.qml" line="464"/>
         <source>It looks like you forgot to save your changes, are you sure that you dont want to save them?</source>
         <translation>Здається, Ви забули зберегти зміни, Ви впевнені що не хочете зберегти їх?</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="466"/>
+        <location filename="../desktop/settings/accountPage/MAccountPage.qml" line="466"/>
         <source>Don&apos;t save</source>
         <translation>Не зберігати</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="503"/>
-        <location filename="../settings/accountPage/MAccountPage.qml" line="506"/>
+        <location filename="../desktop/settings/accountPage/MAccountPage.qml" line="503"/>
+        <location filename="../desktop/settings/accountPage/MAccountPage.qml" line="506"/>
         <source>Passwords don&apos;t match!</source>
         <translation>Паролі не співпадають!</translation>
     </message>
@@ -231,42 +231,42 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
 <context>
     <name>MAddFolderPopup</name>
     <message>
-        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="76"/>
+        <location filename="../desktop/homePage/folderSidebar/MAddFolderPopup.qml" line="76"/>
         <source>Edit Folder</source>
         <translation>Редагувати папку</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="76"/>
+        <location filename="../desktop/homePage/folderSidebar/MAddFolderPopup.qml" line="76"/>
         <source>Create Folder</source>
         <translation>Створити папку</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="103"/>
+        <location filename="../desktop/homePage/folderSidebar/MAddFolderPopup.qml" line="103"/>
         <source>Folder Name</source>
         <translation>Назва папки</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="198"/>
+        <location filename="../desktop/homePage/folderSidebar/MAddFolderPopup.qml" line="198"/>
         <source>Icon</source>
         <translation>Іконка</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="239"/>
+        <location filename="../desktop/homePage/folderSidebar/MAddFolderPopup.qml" line="239"/>
         <source>Color</source>
         <translation>Колір</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="278"/>
+        <location filename="../desktop/homePage/folderSidebar/MAddFolderPopup.qml" line="278"/>
         <source>Description</source>
         <translation>Опис</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="324"/>
+        <location filename="../desktop/homePage/folderSidebar/MAddFolderPopup.qml" line="324"/>
         <source>Update</source>
         <translation>Оновити</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="324"/>
+        <location filename="../desktop/homePage/folderSidebar/MAddFolderPopup.qml" line="324"/>
         <source>Create</source>
         <translation>Створити</translation>
     </message>
@@ -285,37 +285,37 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
 <context>
     <name>MAddShortcutPopup</name>
     <message>
-        <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="110"/>
+        <location filename="../desktop/settings/shortcutsPage/MAddShortcutPopup.qml" line="110"/>
         <source>Edit Shortcuts</source>
         <translation>Редагувати комбінації клавіш</translation>
     </message>
     <message>
-        <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="127"/>
+        <location filename="../desktop/settings/shortcutsPage/MAddShortcutPopup.qml" line="127"/>
         <source>Action</source>
         <translation>Дія</translation>
     </message>
     <message>
-        <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="134"/>
+        <location filename="../desktop/settings/shortcutsPage/MAddShortcutPopup.qml" line="134"/>
         <source>None selected</source>
         <translation>Не обрано</translation>
     </message>
     <message>
-        <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="170"/>
+        <location filename="../desktop/settings/shortcutsPage/MAddShortcutPopup.qml" line="170"/>
         <source>The shortcut</source>
         <translation>Комбінація</translation>
     </message>
     <message>
-        <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="170"/>
+        <location filename="../desktop/settings/shortcutsPage/MAddShortcutPopup.qml" line="170"/>
         <source>is already used for</source>
         <translation>вже використовується</translation>
     </message>
     <message>
-        <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="189"/>
+        <location filename="../desktop/settings/shortcutsPage/MAddShortcutPopup.qml" line="189"/>
         <source>Apply</source>
         <translation>Застосувати</translation>
     </message>
     <message>
-        <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="223"/>
+        <location filename="../desktop/settings/shortcutsPage/MAddShortcutPopup.qml" line="223"/>
         <source>Cancel</source>
         <translation>Скасувати</translation>
     </message>
@@ -323,7 +323,7 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
 <context>
     <name>MAddTagBox</name>
     <message>
-        <location filename="../homePage/manageTagsPopup/MAddTagBox.qml" line="48"/>
+        <location filename="../desktop/homePage/manageTagsPopup/MAddTagBox.qml" line="48"/>
         <source>Add a tag...</source>
         <translation>Додати тег...</translation>
     </message>
@@ -331,17 +331,17 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
 <context>
     <name>MAddTagBoxPopup</name>
     <message>
-        <location filename="../homePage/manageTagsPopup/MAddTagBoxPopup.qml" line="98"/>
+        <location filename="../desktop/homePage/manageTagsPopup/MAddTagBoxPopup.qml" line="98"/>
         <source>Add</source>
         <translation>Додати</translation>
     </message>
     <message>
-        <location filename="../homePage/manageTagsPopup/MAddTagBoxPopup.qml" line="110"/>
+        <location filename="../desktop/homePage/manageTagsPopup/MAddTagBoxPopup.qml" line="110"/>
         <source>Rename</source>
         <translation>Перейменувати</translation>
     </message>
     <message>
-        <location filename="../homePage/manageTagsPopup/MAddTagBoxPopup.qml" line="119"/>
+        <location filename="../desktop/homePage/manageTagsPopup/MAddTagBoxPopup.qml" line="119"/>
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
@@ -349,99 +349,99 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
 <context>
     <name>MAppearancePage</name>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="34"/>
+        <location filename="../desktop/settings/MAppearancePage.qml" line="34"/>
         <source>Appearance</source>
         <translation>Зовнішній вигляд</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="35"/>
+        <location filename="../desktop/settings/MAppearancePage.qml" line="35"/>
         <source>Make your own experience</source>
         <translation>Створіть власний візуальний досвід</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="51"/>
+        <location filename="../desktop/settings/MAppearancePage.qml" line="51"/>
         <source>Restore Defaults</source>
         <translation>Скинути на значення по-замовчуванню</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="105"/>
+        <location filename="../desktop/settings/MAppearancePage.qml" line="105"/>
         <source>Display</source>
         <translation>Відображення</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="115"/>
+        <location filename="../desktop/settings/MAppearancePage.qml" line="115"/>
         <source>Theme</source>
         <translation>Тема</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="127"/>
+        <location filename="../desktop/settings/MAppearancePage.qml" line="127"/>
         <source>Dark</source>
         <translation>Темна</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="129"/>
+        <location filename="../desktop/settings/MAppearancePage.qml" line="129"/>
         <source>Light</source>
         <translation>Світла</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="144"/>
+        <location filename="../desktop/settings/MAppearancePage.qml" line="144"/>
         <source>Language</source>
         <translation>Мова</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="218"/>
+        <location filename="../desktop/settings/MAppearancePage.qml" line="218"/>
         <source>Reading</source>
         <translation>Читання</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="228"/>
+        <location filename="../desktop/settings/MAppearancePage.qml" line="228"/>
         <source>Page spacing</source>
         <translation>Відступ сторінок</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="255"/>
+        <location filename="../desktop/settings/MAppearancePage.qml" line="255"/>
         <source>Display book title in titlebar</source>
         <translation>Показувати назву книги в заголовку</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="280"/>
+        <location filename="../desktop/settings/MAppearancePage.qml" line="280"/>
         <source>Default Zoom</source>
         <translation>Масштаб по-замовчуванню</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="326"/>
+        <location filename="../desktop/settings/MAppearancePage.qml" line="326"/>
         <source>Highlights</source>
         <translation>Виділення</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="335"/>
+        <location filename="../desktop/settings/MAppearancePage.qml" line="335"/>
         <source>Colors</source>
         <translation>Кольори</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="457"/>
+        <location filename="../desktop/settings/MAppearancePage.qml" line="457"/>
         <source>Opacity</source>
         <translation>Прозорість</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="513"/>
+        <location filename="../desktop/settings/MAppearancePage.qml" line="513"/>
         <source>Reset settings?</source>
         <translation>Скинути параметри?</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="514"/>
+        <location filename="../desktop/settings/MAppearancePage.qml" line="514"/>
         <source>Resetting your settings is a permanent action, there
  will be no way to restore them!</source>
         <translation>Скидування налаштувань не можна скасувати,
 Ви не зможете їх відновити!</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="515"/>
+        <location filename="../desktop/settings/MAppearancePage.qml" line="515"/>
         <source>No, Keep</source>
         <translation>Ні, залишити як є</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="516"/>
+        <location filename="../desktop/settings/MAppearancePage.qml" line="516"/>
         <source>Yes, Reset</source>
         <translation>Так, скинути</translation>
     </message>
@@ -449,84 +449,84 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
 <context>
     <name>MBehaviorPage</name>
     <message>
-        <location filename="../settings/MBehaviorPage.qml" line="38"/>
+        <location filename="../desktop/settings/MBehaviorPage.qml" line="38"/>
         <source>Behavior</source>
         <translation>Поведінка</translation>
     </message>
     <message>
-        <location filename="../settings/MBehaviorPage.qml" line="39"/>
+        <location filename="../desktop/settings/MBehaviorPage.qml" line="39"/>
         <source>Change the way Librum works</source>
         <translation>Змініть те, як працює Librum</translation>
     </message>
     <message>
-        <location filename="../settings/MBehaviorPage.qml" line="55"/>
+        <location filename="../desktop/settings/MBehaviorPage.qml" line="55"/>
         <source>Restore Defaults</source>
         <translation>Відновити по-замовчуванню</translation>
     </message>
     <message>
-        <location filename="../settings/MBehaviorPage.qml" line="85"/>
+        <location filename="../desktop/settings/MBehaviorPage.qml" line="85"/>
         <source>Books</source>
         <translation>Книги</translation>
     </message>
     <message>
-        <location filename="../settings/MBehaviorPage.qml" line="95"/>
+        <location filename="../desktop/settings/MBehaviorPage.qml" line="95"/>
         <source>Cursor mode</source>
         <translation>Режим курсору</translation>
     </message>
     <message>
-        <location filename="../settings/MBehaviorPage.qml" line="107"/>
+        <location filename="../desktop/settings/MBehaviorPage.qml" line="107"/>
         <source>Hidden after delay</source>
         <translation>Сховати після затримки</translation>
     </message>
     <message>
-        <location filename="../settings/MBehaviorPage.qml" line="107"/>
+        <location filename="../desktop/settings/MBehaviorPage.qml" line="107"/>
         <source>Always visible</source>
         <translation>Завжди видимий</translation>
     </message>
     <message>
-        <location filename="../settings/MBehaviorPage.qml" line="132"/>
+        <location filename="../desktop/settings/MBehaviorPage.qml" line="132"/>
         <source>Hide cursor after delay</source>
         <translation>Сховати курсор після затримки</translation>
     </message>
     <message>
-        <location filename="../settings/MBehaviorPage.qml" line="157"/>
+        <location filename="../desktop/settings/MBehaviorPage.qml" line="157"/>
         <source>ms</source>
         <translation>мс</translation>
     </message>
     <message>
-        <location filename="../settings/MBehaviorPage.qml" line="169"/>
+        <location filename="../desktop/settings/MBehaviorPage.qml" line="169"/>
         <source>Include new lines in copied text</source>
         <translation>Включати символи нової строки в скопійованому тексті</translation>
     </message>
     <message>
-        <location filename="../settings/MBehaviorPage.qml" line="181"/>
+        <location filename="../desktop/settings/MBehaviorPage.qml" line="181"/>
         <source>ON</source>
         <translation>ВВІМК</translation>
     </message>
     <message>
-        <location filename="../settings/MBehaviorPage.qml" line="183"/>
+        <location filename="../desktop/settings/MBehaviorPage.qml" line="183"/>
         <source>OFF</source>
         <translation>ВИМК</translation>
     </message>
     <message>
-        <location filename="../settings/MBehaviorPage.qml" line="205"/>
+        <location filename="../desktop/settings/MBehaviorPage.qml" line="205"/>
         <source>Reset settings?</source>
         <translation>Скинути параметри?</translation>
     </message>
     <message>
-        <location filename="../settings/MBehaviorPage.qml" line="206"/>
+        <location filename="../desktop/settings/MBehaviorPage.qml" line="206"/>
         <source>Resetting your settings is a permanent action, there
  will be no way to restore them!</source>
         <translation>Скидування налаштувань не можна скасувати,
 Ви не зможете їх відновити!</translation>
     </message>
     <message>
-        <location filename="../settings/MBehaviorPage.qml" line="207"/>
+        <location filename="../desktop/settings/MBehaviorPage.qml" line="207"/>
         <source>No, Keep</source>
         <translation>Ні, залишити як є</translation>
     </message>
     <message>
-        <location filename="../settings/MBehaviorPage.qml" line="208"/>
+        <location filename="../desktop/settings/MBehaviorPage.qml" line="208"/>
         <source>Yes, Reset</source>
         <translation>Так, скинути</translation>
     </message>
@@ -534,13 +534,15 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
 <context>
     <name>MBook</name>
     <message>
-        <location filename="../homePage/MBook.qml" line="186"/>
-        <location filename="../homePage/MBook.qml" line="201"/>
+        <location filename="../desktop/homePage/MBook.qml" line="186"/>
+        <location filename="../desktop/homePage/MBook.qml" line="201"/>
+        <location filename="../mobile/libraryPage/MBook.qml" line="75"/>
+        <location filename="../mobile/libraryPage/MBook.qml" line="89"/>
         <source>Unknown</source>
         <translation>Невідомий</translation>
     </message>
     <message>
-        <location filename="../homePage/MBook.qml" line="332"/>
+        <location filename="../desktop/homePage/MBook.qml" line="332"/>
         <source>Your book has not been uploaded to the cloud.
 Either you are offline, or your storage is full.</source>
         <translation>Ваша книга не була завантажена в хмару.
@@ -550,102 +552,102 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MBookDetailsPopup</name>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="71"/>
+        <location filename="../desktop/homePage/MBookDetailsPopup.qml" line="71"/>
         <source>Book details</source>
         <translation>Деталі книги</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="174"/>
+        <location filename="../desktop/homePage/MBookDetailsPopup.qml" line="174"/>
         <source>Change</source>
         <translation>Змінити</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="189"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="398"/>
+        <location filename="../desktop/homePage/MBookDetailsPopup.qml" line="189"/>
+        <location filename="../desktop/homePage/MBookDetailsPopup.qml" line="398"/>
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="249"/>
+        <location filename="../desktop/homePage/MBookDetailsPopup.qml" line="249"/>
         <source>Title</source>
         <translation>Назва</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="237"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="272"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="430"/>
+        <location filename="../desktop/homePage/MBookDetailsPopup.qml" line="237"/>
+        <location filename="../desktop/homePage/MBookDetailsPopup.qml" line="272"/>
+        <location filename="../desktop/homePage/MBookDetailsPopup.qml" line="430"/>
         <source>Unknown</source>
         <translation>Невідомо</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="256"/>
+        <location filename="../desktop/homePage/MBookDetailsPopup.qml" line="256"/>
         <source>Authors</source>
         <translation>Автори</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="262"/>
+        <location filename="../desktop/homePage/MBookDetailsPopup.qml" line="262"/>
         <source>Pages</source>
         <translation>Сторінки</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="271"/>
+        <location filename="../desktop/homePage/MBookDetailsPopup.qml" line="271"/>
         <source>Language</source>
         <translation>Мова</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="286"/>
+        <location filename="../desktop/homePage/MBookDetailsPopup.qml" line="286"/>
         <source>Document creator</source>
         <translation>Автор документу</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="293"/>
+        <location filename="../desktop/homePage/MBookDetailsPopup.qml" line="293"/>
         <source>Creation date</source>
         <translation>Дата створення</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="301"/>
+        <location filename="../desktop/homePage/MBookDetailsPopup.qml" line="301"/>
         <source>Format</source>
         <translation>Формат</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="308"/>
+        <location filename="../desktop/homePage/MBookDetailsPopup.qml" line="308"/>
         <source>Document size</source>
         <translation>Розмір документу</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="316"/>
+        <location filename="../desktop/homePage/MBookDetailsPopup.qml" line="316"/>
         <source>Added</source>
         <translation>Додано</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="322"/>
+        <location filename="../desktop/homePage/MBookDetailsPopup.qml" line="322"/>
         <source>Last opened</source>
         <translation>Відкрито востаннє</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="348"/>
+        <location filename="../desktop/homePage/MBookDetailsPopup.qml" line="348"/>
         <source>Apply</source>
         <translation>Застосувати</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="373"/>
+        <location filename="../desktop/homePage/MBookDetailsPopup.qml" line="373"/>
         <source>Cancel</source>
         <translation>Скасувати</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="417"/>
+        <location filename="../desktop/homePage/MBookDetailsPopup.qml" line="417"/>
         <source>Select</source>
         <translation>Вибрати</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="420"/>
+        <location filename="../desktop/homePage/MBookDetailsPopup.qml" line="420"/>
         <source>All files</source>
         <translation>Всі файли</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="421"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="422"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="423"/>
+        <location filename="../desktop/homePage/MBookDetailsPopup.qml" line="421"/>
+        <location filename="../desktop/homePage/MBookDetailsPopup.qml" line="422"/>
+        <location filename="../desktop/homePage/MBookDetailsPopup.qml" line="423"/>
         <source>files</source>
         <translation>файли</translation>
     </message>
@@ -653,18 +655,18 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MBookMultiSelectRightClickPopup</name>
     <message>
-        <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="25"/>
+        <location filename="../desktop/homePage/MBookMultiSelectRightClickPopup.qml" line="25"/>
         <source>Mark as read</source>
         <extracomment>If this is too long in any language, use &quot;Read&quot; (past form) instead</extracomment>
         <translation>Прочитано</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="34"/>
+        <location filename="../desktop/homePage/MBookMultiSelectRightClickPopup.qml" line="34"/>
         <source>Remove books</source>
         <translation>Видалити книги</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="44"/>
+        <location filename="../desktop/homePage/MBookMultiSelectRightClickPopup.qml" line="44"/>
         <source>Move to Folder</source>
         <extracomment>If this is too long, use &quot;To Folder&quot; instead</extracomment>
         <translation>В папку</translation>
@@ -681,32 +683,32 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MBookRightClickPopup</name>
     <message>
-        <location filename="../homePage/MBookRightClickPopup.qml" line="32"/>
+        <location filename="../desktop/homePage/MBookRightClickPopup.qml" line="32"/>
         <source>Download</source>
         <translation>Завантажити</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookRightClickPopup.qml" line="43"/>
+        <location filename="../desktop/homePage/MBookRightClickPopup.qml" line="43"/>
         <source>Read book</source>
         <translation>Читати</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookRightClickPopup.qml" line="52"/>
+        <location filename="../desktop/homePage/MBookRightClickPopup.qml" line="52"/>
         <source>Book details</source>
         <translation>Деталі книги</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookRightClickPopup.qml" line="64"/>
+        <location filename="../desktop/homePage/MBookRightClickPopup.qml" line="64"/>
         <source>Save to files</source>
         <translation>Зберегти у файли</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookRightClickPopup.qml" line="92"/>
+        <location filename="../desktop/homePage/MBookRightClickPopup.qml" line="92"/>
         <source>Manage tags</source>
         <translation>Змінити теги</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookRightClickPopup.qml" line="102"/>
+        <location filename="../desktop/homePage/MBookRightClickPopup.qml" line="102"/>
         <source>Move to Folder</source>
         <extracomment>If this is too long, use &quot;To Folder&quot; instead</extracomment>
         <translation>В папку</translation>
@@ -717,7 +719,7 @@ Either you are offline, or your storage is full.</source>
         <translation type="vanished">Прочитано</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookRightClickPopup.qml" line="111"/>
+        <location filename="../desktop/homePage/MBookRightClickPopup.qml" line="111"/>
         <source>Remove book</source>
         <translation>Видалити</translation>
     </message>
@@ -725,7 +727,7 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MBookSelector</name>
     <message>
-        <location filename="../modules/CustomComponents/bookSelector/MBookSelector.qml" line="14"/>
+        <location filename="../desktop/modules/CustomComponents/bookSelector/MBookSelector.qml" line="14"/>
         <source>Search Books...</source>
         <translation>Шукати Книги...</translation>
     </message>
@@ -733,38 +735,38 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MBookmarksSidebar</name>
     <message>
-        <location filename="../readingPage/MBookmarksSidebar.qml" line="29"/>
+        <location filename="../desktop/readingPage/MBookmarksSidebar.qml" line="29"/>
         <source>Bookmarks</source>
         <translation>Закладки</translation>
     </message>
     <message>
-        <location filename="../readingPage/MBookmarksSidebar.qml" line="54"/>
+        <location filename="../desktop/readingPage/MBookmarksSidebar.qml" line="54"/>
         <source>Search</source>
         <translation>Пошук</translation>
     </message>
     <message>
-        <location filename="../readingPage/MBookmarksSidebar.qml" line="137"/>
+        <location filename="../desktop/readingPage/MBookmarksSidebar.qml" line="137"/>
         <source>Add Bookmark</source>
         <translation>Додати закладку</translation>
     </message>
     <message>
-        <location filename="../readingPage/MBookmarksSidebar.qml" line="191"/>
+        <location filename="../desktop/readingPage/MBookmarksSidebar.qml" line="191"/>
         <source>New Bookmark</source>
         <translation>Нова закладка</translation>
     </message>
     <message>
-        <location filename="../readingPage/MBookmarksSidebar.qml" line="155"/>
+        <location filename="../desktop/readingPage/MBookmarksSidebar.qml" line="155"/>
         <source>Follow</source>
         <extracomment>Context: &quot;Follow&quot; the bookmark (go to its page)</extracomment>
         <translation>Перейти</translation>
     </message>
     <message>
-        <location filename="../readingPage/MBookmarksSidebar.qml" line="167"/>
+        <location filename="../desktop/readingPage/MBookmarksSidebar.qml" line="167"/>
         <source>Rename</source>
         <translation>Ред. назву</translation>
     </message>
     <message>
-        <location filename="../readingPage/MBookmarksSidebar.qml" line="179"/>
+        <location filename="../desktop/readingPage/MBookmarksSidebar.qml" line="179"/>
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
@@ -772,13 +774,13 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MChapterSidebar</name>
     <message>
-        <location filename="../readingPage/MChapterSidebar.qml" line="36"/>
+        <location filename="../desktop/readingPage/MChapterSidebar.qml" line="36"/>
         <source>Contents</source>
         <extracomment>Context: Contents of the book, also known as outline</extracomment>
         <translation>Зміст</translation>
     </message>
     <message>
-        <location filename="../readingPage/MChapterSidebar.qml" line="61"/>
+        <location filename="../desktop/readingPage/MChapterSidebar.qml" line="61"/>
         <source>Search</source>
         <translation>Пошук</translation>
     </message>
@@ -786,7 +788,7 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MComboBox</name>
     <message>
-        <location filename="../modules/CustomComponents/comboBox/MComboBox.qml" line="40"/>
+        <location filename="../desktop/modules/CustomComponents/comboBox/MComboBox.qml" line="40"/>
         <source>Any</source>
         <translation>Будь-який</translation>
     </message>
@@ -794,37 +796,37 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MConfirmAccountDeletionPopup</name>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="65"/>
+        <location filename="../desktop/modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="65"/>
         <source>Confirm Account Deletion</source>
         <translation>Підтвердіть видалення акаунту</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="79"/>
+        <location filename="../desktop/modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="79"/>
         <source>Deleting your account is an irreversible action.&lt;br&gt;Once you delete your account, there is &lt;b&gt;no&lt;/b&gt; going back. Please be certain.</source>
         <translation>Видалення Вашого акаунту - незворотня дія.&lt;br&gt;Після видалення акаунту, скасувати це &lt;b&gt;не&lt;/b&gt; можна. Будь-ласка, будьте впевнені у виборі.</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="91"/>
+        <location filename="../desktop/modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="91"/>
         <source>Your Email</source>
         <translation>Ваш Email</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="93"/>
+        <location filename="../desktop/modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="93"/>
         <source>Confirm the deletion by entering your Account&apos;s email.</source>
         <translation>Підтвердіть видалення акаунту, ввівши Ваш Email до акаунту.</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="112"/>
+        <location filename="../desktop/modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="112"/>
         <source>Cancel</source>
         <translation>Скасувати</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="128"/>
+        <location filename="../desktop/modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="128"/>
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="138"/>
+        <location filename="../desktop/modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="138"/>
         <source>Your email is wrong</source>
         <translation>Невірна електронна адреса</translation>
     </message>
@@ -832,22 +834,22 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MDeleteFolderPopup</name>
     <message>
-        <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="50"/>
+        <location filename="../desktop/homePage/folderSidebar/MDeleteFolderPopup.qml" line="50"/>
         <source>Delete %1</source>
         <translation>Видалити %1</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="80"/>
+        <location filename="../desktop/homePage/folderSidebar/MDeleteFolderPopup.qml" line="80"/>
         <source>Books inside the folder will not be deleted.</source>
         <translation>Книги в папці не будуть видалені.</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="99"/>
+        <location filename="../desktop/homePage/folderSidebar/MDeleteFolderPopup.qml" line="99"/>
         <source>Cancel</source>
         <translation>Скасувати</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="114"/>
+        <location filename="../desktop/homePage/folderSidebar/MDeleteFolderPopup.qml" line="114"/>
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
@@ -855,17 +857,17 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MDescriptionPopup</name>
     <message>
-        <location filename="../homePage/folderSidebar/MDescriptionPopup.qml" line="48"/>
+        <location filename="../desktop/homePage/folderSidebar/MDescriptionPopup.qml" line="48"/>
         <source>Describe this folder</source>
         <translation>Опишіть цю папку</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MDescriptionPopup.qml" line="102"/>
+        <location filename="../desktop/homePage/folderSidebar/MDescriptionPopup.qml" line="102"/>
         <source>This folder is about...</source>
         <translation>Ця папка про...</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MDescriptionPopup.qml" line="138"/>
+        <location filename="../desktop/homePage/folderSidebar/MDescriptionPopup.qml" line="138"/>
         <source>Done</source>
         <translation>Готово</translation>
     </message>
@@ -873,22 +875,22 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MDictionaryPopup</name>
     <message>
-        <location filename="../readingPage/MDictionaryPopup.qml" line="101"/>
+        <location filename="../desktop/readingPage/MDictionaryPopup.qml" line="101"/>
         <source>Search</source>
         <translation>Пошук</translation>
     </message>
     <message>
-        <location filename="../readingPage/MDictionaryPopup.qml" line="355"/>
+        <location filename="../desktop/readingPage/MDictionaryPopup.qml" line="355"/>
         <source>No definitions found</source>
         <translation>Не знайдено</translation>
     </message>
     <message>
-        <location filename="../readingPage/MDictionaryPopup.qml" line="363"/>
+        <location filename="../desktop/readingPage/MDictionaryPopup.qml" line="363"/>
         <source>Search online</source>
         <translation>Пошук онлайн</translation>
     </message>
     <message>
-        <location filename="../readingPage/MDictionaryPopup.qml" line="395"/>
+        <location filename="../desktop/readingPage/MDictionaryPopup.qml" line="395"/>
         <source>Source</source>
         <translation>Джерело</translation>
     </message>
@@ -896,42 +898,42 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MDownloadBookPopup</name>
     <message>
-        <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="82"/>
+        <location filename="../desktop/freeBooksPage/MDownloadBookPopup.qml" line="82"/>
         <source>Download book</source>
         <translation>Завантажити книгу</translation>
     </message>
     <message>
-        <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="138"/>
+        <location filename="../desktop/freeBooksPage/MDownloadBookPopup.qml" line="138"/>
         <source>Title</source>
         <translation>Назва</translation>
     </message>
     <message>
-        <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="155"/>
+        <location filename="../desktop/freeBooksPage/MDownloadBookPopup.qml" line="155"/>
         <source>Authors</source>
         <translation>Автори</translation>
     </message>
     <message>
-        <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="172"/>
+        <location filename="../desktop/freeBooksPage/MDownloadBookPopup.qml" line="172"/>
         <source>Language</source>
         <translation>Мова</translation>
     </message>
     <message>
-        <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="189"/>
+        <location filename="../desktop/freeBooksPage/MDownloadBookPopup.qml" line="189"/>
         <source>Downloads</source>
         <translation>Завантажень</translation>
     </message>
     <message>
-        <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="207"/>
+        <location filename="../desktop/freeBooksPage/MDownloadBookPopup.qml" line="207"/>
         <source>Format</source>
         <translation>Формат</translation>
     </message>
     <message>
-        <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="237"/>
+        <location filename="../desktop/freeBooksPage/MDownloadBookPopup.qml" line="237"/>
         <source>Download</source>
         <translation>Завантажити</translation>
     </message>
     <message>
-        <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="263"/>
+        <location filename="../desktop/freeBooksPage/MDownloadBookPopup.qml" line="263"/>
         <source>Cancel</source>
         <translation>Скасувати</translation>
     </message>
@@ -939,12 +941,12 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MDualToggle</name>
     <message>
-        <location filename="../modules/CustomComponents/MDualToggle.qml" line="15"/>
+        <location filename="../desktop/modules/CustomComponents/MDualToggle.qml" line="15"/>
         <source>Left</source>
         <translation>Зліва</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MDualToggle.qml" line="17"/>
+        <location filename="../desktop/modules/CustomComponents/MDualToggle.qml" line="17"/>
         <source>Right</source>
         <translation>Справа</translation>
     </message>
@@ -952,12 +954,12 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MEmptyScreenContent</name>
     <message>
-        <location filename="../homePage/MEmptyScreenContent.qml" line="36"/>
+        <location filename="../desktop/homePage/MEmptyScreenContent.qml" line="36"/>
         <source>Quite empty here, what about adding your first book?</source>
         <translation>Досить порожньо тут, як нарахунок додання Вашої першої книги?</translation>
     </message>
     <message>
-        <location filename="../homePage/MEmptyScreenContent.qml" line="53"/>
+        <location filename="../desktop/homePage/MEmptyScreenContent.qml" line="53"/>
         <source>Add book</source>
         <translation>Додати книгу</translation>
     </message>
@@ -965,7 +967,7 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MExplanationPopup</name>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="50"/>
+        <location filename="../desktop/readingPage/MExplanationPopup.qml" line="50"/>
         <source>You have reached your daily limit.</source>
         <extracomment>Make sure that the words make a valid sentence</extracomment>
         <translation>Ви досягли щоденного ліміту.</translation>
@@ -983,90 +985,98 @@ Either you are offline, or your storage is full.</source>
         <translation type="vanished">щоб дізнатись більше.</translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="52"/>
+        <location filename="../desktop/readingPage/MExplanationPopup.qml" line="52"/>
         <source>Upgrade</source>
         <translation>Покращити</translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="53"/>
+        <location filename="../desktop/readingPage/MExplanationPopup.qml" line="53"/>
         <source>to continue.</source>
         <translation>продовжувати.</translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="58"/>
+        <location filename="../desktop/readingPage/MExplanationPopup.qml" line="58"/>
         <source>Oops! The text is too long. Please shorten your selection.</source>
         <translation>Упс! Цей текст занадто довгий. Будь-ласка, скоротіть Ваше виділення.</translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="67"/>
+        <location filename="../desktop/readingPage/MExplanationPopup.qml" line="67"/>
         <source>Explain</source>
         <translation>Поясніть</translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="71"/>
+        <location filename="../desktop/readingPage/MExplanationPopup.qml" line="71"/>
         <source>Explain like I&apos;m five</source>
         <translation>Поясніть ніби я дошкільня</translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="75"/>
+        <location filename="../desktop/readingPage/MExplanationPopup.qml" line="75"/>
         <source>Summarize</source>
         <translation>Підсумувати</translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="79"/>
+        <location filename="../desktop/readingPage/MExplanationPopup.qml" line="79"/>
         <source>Give more information</source>
         <translation>Надайте більше інформації</translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="83"/>
+        <location filename="../desktop/readingPage/MExplanationPopup.qml" line="83"/>
         <source>Explain visually</source>
         <translation>Пояснити візуально</translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="113"/>
+        <location filename="../desktop/readingPage/MExplanationPopup.qml" line="113"/>
         <source>Mode</source>
         <translation>Режим</translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="121"/>
+        <location filename="../desktop/readingPage/MExplanationPopup.qml" line="121"/>
         <source>None selected</source>
         <translation>Жоден не вибрано</translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="144"/>
+        <location filename="../desktop/readingPage/MExplanationPopup.qml" line="144"/>
         <source>Request</source>
         <translation>Запит</translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="283"/>
+        <location filename="../desktop/readingPage/MExplanationPopup.qml" line="283"/>
         <source>Note: AI responses can be inaccurate</source>
         <translation>Примітка: AI відповіді можуть бути неточними</translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="299"/>
+        <location filename="../desktop/readingPage/MExplanationPopup.qml" line="299"/>
         <source>Ask</source>
         <translation>Запитати</translation>
     </message>
 </context>
 <context>
+    <name>MExplorePage</name>
+    <message>
+        <location filename="../mobile/explorePage/MExplorePage.qml" line="19"/>
+        <source>Explore Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MExternalReadingOptionsPopup</name>
     <message>
-        <location filename="../readingPage/externalReadingToolbar/MExternalReadingOptionsPopup.qml" line="118"/>
+        <location filename="../desktop/readingPage/externalReadingToolbar/MExternalReadingOptionsPopup.qml" line="118"/>
         <source>Invert colors</source>
         <translation>Інвертувати кольори</translation>
     </message>
     <message>
-        <location filename="../readingPage/externalReadingToolbar/MExternalReadingOptionsPopup.qml" line="147"/>
+        <location filename="../desktop/readingPage/externalReadingToolbar/MExternalReadingOptionsPopup.qml" line="147"/>
         <source>Sync book</source>
         <translation>Синхронізувати книгу</translation>
     </message>
     <message>
-        <location filename="../readingPage/externalReadingToolbar/MExternalReadingOptionsPopup.qml" line="165"/>
+        <location filename="../desktop/readingPage/externalReadingToolbar/MExternalReadingOptionsPopup.qml" line="165"/>
         <source>More options</source>
         <translation>Більше опцій</translation>
     </message>
     <message>
-        <location filename="../readingPage/externalReadingToolbar/MExternalReadingOptionsPopup.qml" line="186"/>
+        <location filename="../desktop/readingPage/externalReadingToolbar/MExternalReadingOptionsPopup.qml" line="186"/>
         <source>Save</source>
         <translation>Зберегти</translation>
     </message>
@@ -1074,12 +1084,12 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MExternalReadingToolBar</name>
     <message>
-        <location filename="../readingPage/externalReadingToolbar/MExternalReadingToolBar.qml" line="14"/>
+        <location filename="../desktop/readingPage/externalReadingToolbar/MExternalReadingToolBar.qml" line="14"/>
         <source>Unknown name</source>
         <translation>Невідоме імʼя</translation>
     </message>
     <message>
-        <location filename="../readingPage/externalReadingToolbar/MExternalReadingToolBar.qml" line="168"/>
+        <location filename="../desktop/readingPage/externalReadingToolbar/MExternalReadingToolBar.qml" line="168"/>
         <source>of</source>
         <extracomment>As in 21 &quot;of&quot; 400</extracomment>
         <translation>з</translation>
@@ -1088,37 +1098,37 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MExtractPagesPopup</name>
     <message>
-        <location filename="../toolsPage/MExtractPagesPopup.qml" line="40"/>
+        <location filename="../desktop/toolsPage/MExtractPagesPopup.qml" line="40"/>
         <source>Extraction succeeded</source>
         <translation>Видобування завершено</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MExtractPagesPopup.qml" line="41"/>
+        <location filename="../desktop/toolsPage/MExtractPagesPopup.qml" line="41"/>
         <source>The new book was added to your library.</source>
         <translation>Нова книга була додана до вашої бібліотеки.</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MExtractPagesPopup.qml" line="43"/>
+        <location filename="../desktop/toolsPage/MExtractPagesPopup.qml" line="43"/>
         <source>Extraction failed</source>
         <translation>Видобування не вдалось</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MExtractPagesPopup.qml" line="44"/>
+        <location filename="../desktop/toolsPage/MExtractPagesPopup.qml" line="44"/>
         <source>The extraction failed. Please try again.</source>
         <translation>Видобування не вдалось. Будь-ласка,спробуйте ще раз.</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MExtractPagesPopup.qml" line="63"/>
+        <location filename="../desktop/toolsPage/MExtractPagesPopup.qml" line="63"/>
         <source>Extract Page(s)</source>
         <translation>Видобути Сторінку(и)</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MExtractPagesPopup.qml" line="133"/>
+        <location filename="../desktop/toolsPage/MExtractPagesPopup.qml" line="133"/>
         <source>Add a comma separated list of page numbers or ranges to extract.</source>
         <translation>Вкажіть список сторінок або їх інтервалів для видобування.</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MExtractPagesPopup.qml" line="157"/>
+        <location filename="../desktop/toolsPage/MExtractPagesPopup.qml" line="157"/>
         <source>Extract</source>
         <translation>Видобути</translation>
     </message>
@@ -1126,22 +1136,22 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MFeedbackPopup</name>
     <message>
-        <location filename="../modules/CustomComponents/MFeedbackPopup.qml" line="40"/>
+        <location filename="../desktop/modules/CustomComponents/MFeedbackPopup.qml" line="40"/>
         <source>Got some feedback?</source>
         <translation>Маєте побажаня?</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MFeedbackPopup.qml" line="55"/>
+        <location filename="../desktop/modules/CustomComponents/MFeedbackPopup.qml" line="55"/>
         <source>Your feedback is crucial for improving Librum. Would you mind sharing your experience by taking a quick survey?</source>
         <translation>Ваш зворотній звʼязок дуже важливий для покращення Librum. Чи не будете проти поділитись враженням від користування, пройшовши коротке опитування?</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MFeedbackPopup.qml" line="74"/>
+        <location filename="../desktop/modules/CustomComponents/MFeedbackPopup.qml" line="74"/>
         <source>No, Thanks</source>
         <translation>Ні, дякую</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MFeedbackPopup.qml" line="88"/>
+        <location filename="../desktop/modules/CustomComponents/MFeedbackPopup.qml" line="88"/>
         <source>Let&apos;s do this!</source>
         <translation>Давайте!</translation>
     </message>
@@ -1149,7 +1159,7 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MFilterByButton</name>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByButton.qml" line="46"/>
+        <location filename="../desktop/homePage/toolbar/filterByButton/MFilterByButton.qml" line="46"/>
         <source>Filters</source>
         <translation>Фільтри</translation>
     </message>
@@ -1157,12 +1167,12 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MFilterByPopup</name>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="73"/>
+        <location filename="../desktop/homePage/toolbar/filterByButton/MFilterByPopup.qml" line="73"/>
         <source>e.g. Uncle bob</source>
         <translation>наприклад. Дядя Боб</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="76"/>
+        <location filename="../desktop/homePage/toolbar/filterByButton/MFilterByPopup.qml" line="76"/>
         <source>Authors</source>
         <translation>Автори</translation>
     </message>
@@ -1175,63 +1185,63 @@ Either you are offline, or your storage is full.</source>
         <translation type="vanished">Додано</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="121"/>
+        <location filename="../desktop/homePage/toolbar/filterByButton/MFilterByPopup.qml" line="121"/>
         <source>Read</source>
         <translation>Прочитано</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="139"/>
+        <location filename="../desktop/homePage/toolbar/filterByButton/MFilterByPopup.qml" line="139"/>
         <source>Unread</source>
         <translation>Непрочитано</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="160"/>
+        <location filename="../desktop/homePage/toolbar/filterByButton/MFilterByPopup.qml" line="160"/>
         <source>Format</source>
         <translation>Формат</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="100"/>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="161"/>
+        <location filename="../desktop/homePage/toolbar/filterByButton/MFilterByPopup.qml" line="100"/>
+        <location filename="../desktop/homePage/toolbar/filterByButton/MFilterByPopup.qml" line="161"/>
         <source>Any</source>
         <translation>Будь-який</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="99"/>
+        <location filename="../desktop/homePage/toolbar/filterByButton/MFilterByPopup.qml" line="99"/>
         <source>Language</source>
         <translation>Мова</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="171"/>
+        <location filename="../desktop/homePage/toolbar/filterByButton/MFilterByPopup.qml" line="171"/>
         <source>Pdf</source>
         <translation>PDF</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="174"/>
+        <location filename="../desktop/homePage/toolbar/filterByButton/MFilterByPopup.qml" line="174"/>
         <source>Epub</source>
         <translation>Epub</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="177"/>
+        <location filename="../desktop/homePage/toolbar/filterByButton/MFilterByPopup.qml" line="177"/>
         <source>Mobi</source>
         <translation>Mobi</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="180"/>
+        <location filename="../desktop/homePage/toolbar/filterByButton/MFilterByPopup.qml" line="180"/>
         <source>Txt</source>
         <translation>Txt</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="194"/>
+        <location filename="../desktop/homePage/toolbar/filterByButton/MFilterByPopup.qml" line="194"/>
         <source>Only Books</source>
         <translation>Тільки книги</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="212"/>
+        <location filename="../desktop/homePage/toolbar/filterByButton/MFilterByPopup.qml" line="212"/>
         <source>Only Files</source>
         <translation>Тільки файли</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="233"/>
+        <location filename="../desktop/homePage/toolbar/filterByButton/MFilterByPopup.qml" line="233"/>
         <source>Apply Filter</source>
         <translation>Застосувати фільтр</translation>
     </message>
@@ -1239,22 +1249,22 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MFolderSidebar</name>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="86"/>
+        <location filename="../desktop/homePage/folderSidebar/MFolderSidebar.qml" line="86"/>
         <source>Organize</source>
         <translation>Організувати</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="106"/>
+        <location filename="../desktop/homePage/folderSidebar/MFolderSidebar.qml" line="106"/>
         <source>All Books</source>
         <translation>Всі книги</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="117"/>
+        <location filename="../desktop/homePage/folderSidebar/MFolderSidebar.qml" line="117"/>
         <source>Unsorted</source>
         <translation>Несортовані</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="143"/>
+        <location filename="../desktop/homePage/folderSidebar/MFolderSidebar.qml" line="143"/>
         <source>Folders</source>
         <translation>Папки</translation>
     </message>
@@ -1262,22 +1272,22 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MFolderSidebarItemRigthclickPopup</name>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="76"/>
+        <location filename="../desktop/homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="76"/>
         <source>Create subfolder</source>
         <translation>Створити підпапку</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="88"/>
+        <location filename="../desktop/homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="88"/>
         <source>Edit</source>
         <translation>Редагувати</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="101"/>
+        <location filename="../desktop/homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="101"/>
         <source>Move to</source>
         <translation>Перемістити</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="123"/>
+        <location filename="../desktop/homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="123"/>
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
@@ -1285,27 +1295,27 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MForgotPasswordPage</name>
     <message>
-        <location filename="../forgotPasswordPage/MForgotPasswordPage.qml" line="75"/>
+        <location filename="../desktop/forgotPasswordPage/MForgotPasswordPage.qml" line="75"/>
         <source>Forgot Password</source>
         <translation>Забули пароль</translation>
     </message>
     <message>
-        <location filename="../forgotPasswordPage/MForgotPasswordPage.qml" line="87"/>
+        <location filename="../desktop/forgotPasswordPage/MForgotPasswordPage.qml" line="87"/>
         <source>Enter your email and we&apos;ll send you a link to reset your password</source>
         <translation>Введіть ваш Email і ми надішлемо посилання для скидання паролю</translation>
     </message>
     <message>
-        <location filename="../forgotPasswordPage/MForgotPasswordPage.qml" line="130"/>
+        <location filename="../desktop/forgotPasswordPage/MForgotPasswordPage.qml" line="130"/>
         <source>Send Email</source>
         <translation>Відправити лист</translation>
     </message>
     <message>
-        <location filename="../forgotPasswordPage/MForgotPasswordPage.qml" line="147"/>
+        <location filename="../desktop/forgotPasswordPage/MForgotPasswordPage.qml" line="147"/>
         <source>Back to Login</source>
         <translation>Назад до входу</translation>
     </message>
     <message>
-        <location filename="../forgotPasswordPage/MForgotPasswordPage.qml" line="173"/>
+        <location filename="../desktop/forgotPasswordPage/MForgotPasswordPage.qml" line="173"/>
         <source>Email sent! Keep an eye on your inbox</source>
         <translation>Лист надіслано! Перевірте Вашу поштову скриньку</translation>
     </message>
@@ -1313,7 +1323,7 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MFreeBook</name>
     <message>
-        <location filename="../freeBooksPage/MFreeBook.qml" line="128"/>
+        <location filename="../desktop/freeBooksPage/MFreeBook.qml" line="128"/>
         <source>.jpeg</source>
         <translation>.jpeg</translation>
     </message>
@@ -1321,22 +1331,22 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MFreeBooksPage</name>
     <message>
-        <location filename="../freeBooksPage/MFreeBooksPage.qml" line="22"/>
+        <location filename="../desktop/freeBooksPage/MFreeBooksPage.qml" line="22"/>
         <source>No books were found</source>
         <translation>Книги не знайдено</translation>
     </message>
     <message>
-        <location filename="../freeBooksPage/MFreeBooksPage.qml" line="28"/>
+        <location filename="../desktop/freeBooksPage/MFreeBooksPage.qml" line="28"/>
         <source>Couldn&apos;t load free books. Please, check your network connection</source>
         <translation>Не вдалось завантажити безкоштовні книги. Будь-ласка, перевірте Ваше зʼєднання з мережею</translation>
     </message>
     <message>
-        <location filename="../freeBooksPage/MFreeBooksPage.qml" line="79"/>
+        <location filename="../desktop/freeBooksPage/MFreeBooksPage.qml" line="79"/>
         <source>Free books</source>
         <translation>Безкоштовні книги</translation>
     </message>
     <message>
-        <location filename="../freeBooksPage/MFreeBooksPage.qml" line="80"/>
+        <location filename="../desktop/freeBooksPage/MFreeBooksPage.qml" line="80"/>
         <source>Choose from over 70,000 books</source>
         <translation>Виберіть з більш ніж 70 000 книг</translation>
     </message>
@@ -1344,226 +1354,226 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MHomePage</name>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="142"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="142"/>
         <source>A new version is available!</source>
         <translation>Доступна нова версія!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="144"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="144"/>
         <source>Update Now</source>
         <translation>Оновити зараз</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="192"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="192"/>
         <source>Home</source>
         <extracomment>As in &apos;Home Page&apos;, might be closer to &apos;Start&apos; in other languages</extracomment>
         <translation>Початок</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="196"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="196"/>
         <source>You have %1 books</source>
         <translation>Ви маєте %1 книг</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="200"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="200"/>
         <source>In Folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="202"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="202"/>
         <source>Unsorted</source>
         <translation type="unfinished">Несортовані</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="222"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="222"/>
         <source>Add books</source>
         <translation>Додати книги</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="516"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="516"/>
         <source>Remove Book?</source>
         <translation>Видалити книгу?</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="517"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="517"/>
         <source>Deleting a book is a permanent action, no one will be
  able to restore it afterwards!</source>
         <translation>Видалення книги незворотня дія, ніхто не зможе
 її відновити після цього!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="518"/>
-        <location filename="../homePage/MHomePage.qml" line="577"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="518"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="577"/>
         <source>Remove from Device</source>
         <translation>Видалити з пристрою</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="519"/>
-        <location filename="../homePage/MHomePage.qml" line="578"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="519"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="578"/>
         <source>Delete Everywhere</source>
         <translation>Видалити всюди</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="530"/>
-        <location filename="../homePage/MHomePage.qml" line="541"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="530"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="541"/>
         <source>Uninstalling failed</source>
         <translation>Деінсталяція не вдалась</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="530"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="530"/>
         <source>Can&apos;t uninstall book since it is not downloaded.</source>
         <translation>Деінсталювати книгу не монжа, оскільки вона не завантажена.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="538"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="538"/>
         <source>Uninstalling succeeded</source>
         <translation>Деінсталяція вдалася</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="539"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="539"/>
         <source>The book was deleted from your device.</source>
         <translation>Книга була видалена з вашого пристрою.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="542"/>
-        <location filename="../homePage/MHomePage.qml" line="556"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="542"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="556"/>
         <source>Something went wrong.</source>
         <translation>Щось пішло не так.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="552"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="552"/>
         <source>Deleting succeeded</source>
         <translation>Видалення завершено</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="553"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="553"/>
         <source>The book was successfully deleted.</source>
         <translation>Книга була успішно видалена.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="555"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="555"/>
         <source>Deleting failed</source>
         <translation>Видалення не вдалось</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="575"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="575"/>
         <source>Remove Books?</source>
         <translation>Видалити книги?</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="576"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="576"/>
         <source>Deleting books is a permanent action, no one will be
  able to restore it afterwards!</source>
         <translation>Видалення книг - незворотня дія, ніхто не зможе
 їх відновити після цього!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="625"/>
-        <location filename="../homePage/MHomePage.qml" line="655"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="625"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="655"/>
         <source>Remove from Folder?</source>
         <translation>Видалити з папки?</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="626"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="626"/>
         <source>This action will not delete the original book.</source>
         <translation>Ця дія не видаляє оригінал книги.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="627"/>
-        <location filename="../homePage/MHomePage.qml" line="657"/>
-        <location filename="../homePage/MHomePage.qml" line="724"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="627"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="657"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="724"/>
         <source>Cancel</source>
         <translation>Скасувати</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="628"/>
-        <location filename="../homePage/MHomePage.qml" line="658"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="628"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="658"/>
         <source>Remove</source>
         <translation>Видалити</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="656"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="656"/>
         <source>This action will not delete the original books.</source>
         <translation>Ця дія не видаляє оригінальні книги.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="706"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="706"/>
         <source>Save</source>
         <translation>Зберегти</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="721"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="721"/>
         <source>Limit Reached</source>
         <translation>Ліміт досягнуто</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="722"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="722"/>
         <source>You have reached your upload limit.
 Delete unused books to free up space or upgrade.</source>
         <translation>Ви досягли ліміту на завантаження.
 Видаліть застарілі книги, щоб звільнити місце або покращіть тариф.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="773"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="773"/>
         <source>Ok</source>
         <translation>Ок</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="723"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="723"/>
         <source>Upgrade</source>
         <translation>Покращити</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="742"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="742"/>
         <source>Book already exists</source>
         <translation>Книга вже існує</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="743"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="743"/>
         <source>It looks like this book already exists in your library:</source>
         <translation>Здається, ця книга вже існує у Вашій бібліотеці:</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="746"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="746"/>
         <source>Are you sure you that want to add it again?
 </source>
         <translation>Ви впевнені, що хочете додати її ще раз?
 </translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="749"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="749"/>
         <source>Add</source>
         <translation>Додати</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="750"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="750"/>
         <source>Don&apos;t add</source>
         <translation>Не додавати</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="771"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="771"/>
         <source>Unsupported File</source>
         <translation>Не підтримується</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="772"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="772"/>
         <source>Oops! This file is not supported by Librum.</source>
         <translation>Упс! Цей файл не підтримується Librum.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="797"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="797"/>
         <source>Import</source>
         <translation>Імпорт</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="800"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="800"/>
         <source>All files</source>
         <translation>Всі файли</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="801"/>
-        <location filename="../homePage/MHomePage.qml" line="802"/>
-        <location filename="../homePage/MHomePage.qml" line="803"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="801"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="802"/>
+        <location filename="../desktop/homePage/MHomePage.qml" line="803"/>
         <source>files</source>
         <translation>файли</translation>
     </message>
@@ -1571,28 +1581,28 @@ Delete unused books to free up space or upgrade.</source>
 <context>
     <name>MImageToPdfPopup</name>
     <message>
-        <location filename="../toolsPage/MImageToPdfPopup.qml" line="39"/>
+        <location filename="../desktop/toolsPage/MImageToPdfPopup.qml" line="39"/>
         <source>Convertion succeeded</source>
         <translation>Конвертація вдалась</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MImageToPdfPopup.qml" line="40"/>
+        <location filename="../desktop/toolsPage/MImageToPdfPopup.qml" line="40"/>
         <source>The new book was added to your library.</source>
         <translation>Нова книга була додана до вашої бібліотеки.</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MImageToPdfPopup.qml" line="42"/>
+        <location filename="../desktop/toolsPage/MImageToPdfPopup.qml" line="42"/>
         <source>Convertion failed</source>
         <translation>Конвертація не вдалась</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MImageToPdfPopup.qml" line="43"/>
+        <location filename="../desktop/toolsPage/MImageToPdfPopup.qml" line="43"/>
         <source>The conversion failed. Please try again.</source>
         <translation>Конвертація не вдалась. Будь-ласка, спробуйте ще раз.</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MImageToPdfPopup.qml" line="62"/>
-        <location filename="../toolsPage/MImageToPdfPopup.qml" line="148"/>
+        <location filename="../desktop/toolsPage/MImageToPdfPopup.qml" line="62"/>
+        <location filename="../desktop/toolsPage/MImageToPdfPopup.qml" line="148"/>
         <source>Convert</source>
         <translation>Конвертувати</translation>
     </message>
@@ -1600,80 +1610,100 @@ Delete unused books to free up space or upgrade.</source>
 <context>
     <name>MLoginPage</name>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="143"/>
+        <location filename="../desktop/loginPage/MLoginPage.qml" line="143"/>
+        <location filename="../mobile/loginPage/MLoginPage.qml" line="57"/>
         <source>Welcome back!</source>
         <translation>Вітаємо!</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="153"/>
+        <location filename="../desktop/loginPage/MLoginPage.qml" line="153"/>
+        <location filename="../mobile/loginPage/MLoginPage.qml" line="67"/>
         <source>Log into your account</source>
         <translation>Увійдіть у Ваш акаунт</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="164"/>
+        <location filename="../desktop/loginPage/MLoginPage.qml" line="164"/>
+        <location filename="../mobile/loginPage/MLoginPage.qml" line="77"/>
         <source>Email</source>
         <translation>Email</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="179"/>
+        <location filename="../desktop/loginPage/MLoginPage.qml" line="179"/>
+        <location filename="../mobile/loginPage/MLoginPage.qml" line="86"/>
         <source>Password</source>
         <translation>Пароль</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="225"/>
+        <location filename="../desktop/loginPage/MLoginPage.qml" line="225"/>
         <source>Remember me</source>
         <translation>Запамʼятати мене</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="246"/>
+        <location filename="../desktop/loginPage/MLoginPage.qml" line="246"/>
+        <location filename="../mobile/loginPage/MLoginPage.qml" line="109"/>
         <source>Forgot password?</source>
         <translation>Забули пароль?</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="274"/>
+        <location filename="../desktop/loginPage/MLoginPage.qml" line="274"/>
         <source>Login</source>
         <translation>Увійти</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="299"/>
+        <location filename="../desktop/loginPage/MLoginPage.qml" line="299"/>
         <source>Don&apos;t have an account? Register</source>
         <translation>Не маєте акаунту? Зареєструйтесь</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="320"/>
+        <location filename="../desktop/loginPage/MLoginPage.qml" line="320"/>
         <source>We&apos;re Sorry</source>
         <translation>Перепрошуємо</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="321"/>
+        <location filename="../desktop/loginPage/MLoginPage.qml" line="321"/>
         <source>Logging you in failed, please try again later.</source>
         <translation>Вхід не вдався, будь-ласка, спробуйте пізніше.</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="322"/>
+        <location filename="../desktop/loginPage/MLoginPage.qml" line="322"/>
         <source>Ok</source>
         <translation>Ок</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="323"/>
+        <location filename="../desktop/loginPage/MLoginPage.qml" line="323"/>
         <source>Report</source>
         <translation>Повідомити про збій</translation>
+    </message>
+    <message>
+        <location filename="../mobile/loginPage/MLoginPage.qml" line="101"/>
+        <source>Sign in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mobile/loginPage/MLoginPage.qml" line="138"/>
+        <source>Don&apos;t have an account? </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mobile/loginPage/MLoginPage.qml" line="146"/>
+        <source>Register!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MManageTagsPopup</name>
     <message>
-        <location filename="../homePage/manageTagsPopup/MManageTagsPopup.qml" line="31"/>
+        <location filename="../desktop/homePage/manageTagsPopup/MManageTagsPopup.qml" line="31"/>
         <source>TAGS</source>
         <translation>ТЕГИ</translation>
     </message>
     <message>
-        <location filename="../homePage/manageTagsPopup/MManageTagsPopup.qml" line="69"/>
+        <location filename="../desktop/homePage/manageTagsPopup/MManageTagsPopup.qml" line="69"/>
         <source>Manage Tags</source>
         <translation>Керувати тегами</translation>
     </message>
     <message>
-        <location filename="../homePage/manageTagsPopup/MManageTagsPopup.qml" line="166"/>
+        <location filename="../desktop/homePage/manageTagsPopup/MManageTagsPopup.qml" line="166"/>
         <source>Done</source>
         <translation>Готово</translation>
     </message>
@@ -1681,33 +1711,33 @@ Delete unused books to free up space or upgrade.</source>
 <context>
     <name>MMergePopup</name>
     <message>
-        <location filename="../toolsPage/MMergePopup.qml" line="41"/>
+        <location filename="../desktop/toolsPage/MMergePopup.qml" line="41"/>
         <source>Merge succeeded</source>
         <translation>Обʼєднання завершено</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MMergePopup.qml" line="42"/>
+        <location filename="../desktop/toolsPage/MMergePopup.qml" line="42"/>
         <source>The merged book was added to your library.</source>
         <translation>Обʼєднана книга була додана до вашої бібліотеки.</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MMergePopup.qml" line="44"/>
+        <location filename="../desktop/toolsPage/MMergePopup.qml" line="44"/>
         <source>Merge failed</source>
         <translation>Обʼєднання не вдалось</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MMergePopup.qml" line="45"/>
+        <location filename="../desktop/toolsPage/MMergePopup.qml" line="45"/>
         <source>The merged failed. Please try again.</source>
         <translation>Обʼєднання не вдалось. Будь-ласка, спробуйте ще раз.</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MMergePopup.qml" line="67"/>
-        <location filename="../toolsPage/MMergePopup.qml" line="223"/>
+        <location filename="../desktop/toolsPage/MMergePopup.qml" line="67"/>
+        <location filename="../desktop/toolsPage/MMergePopup.qml" line="223"/>
         <source>Merge</source>
         <translation>Обʼєднати</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MMergePopup.qml" line="242"/>
+        <location filename="../desktop/toolsPage/MMergePopup.qml" line="242"/>
         <source>Select two or more books to merge.</source>
         <translation>Виберіть дві або більше книг для обʼєднання.</translation>
     </message>
@@ -1715,30 +1745,53 @@ Delete unused books to free up space or upgrade.</source>
 <context>
     <name>MMoveToFolderPopup</name>
     <message>
-        <location filename="../homePage/folderSidebar/MMoveToFolderPopup.qml" line="63"/>
+        <location filename="../desktop/homePage/folderSidebar/MMoveToFolderPopup.qml" line="63"/>
         <source>Move to</source>
         <translation>Перемістити</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MMoveToFolderPopup.qml" line="328"/>
+        <location filename="../desktop/homePage/folderSidebar/MMoveToFolderPopup.qml" line="328"/>
         <source>Cancel</source>
         <translation>Скасувати</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MMoveToFolderPopup.qml" line="347"/>
+        <location filename="../desktop/homePage/folderSidebar/MMoveToFolderPopup.qml" line="347"/>
         <source>Select</source>
         <translation>Вибрати</translation>
     </message>
 </context>
 <context>
+    <name>MMyAccountPage</name>
+    <message>
+        <location filename="../mobile/myAccountPage/MMyAccountPage.qml" line="45"/>
+        <source>My Account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mobile/myAccountPage/MMyAccountPage.qml" line="120"/>
+        <source>Name</source>
+        <translation type="unfinished">Ім&apos;я</translation>
+    </message>
+    <message>
+        <location filename="../mobile/myAccountPage/MMyAccountPage.qml" line="129"/>
+        <source>Email</source>
+        <translation type="unfinished">Email</translation>
+    </message>
+    <message>
+        <location filename="../mobile/myAccountPage/MMyAccountPage.qml" line="144"/>
+        <source>Save Changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MNoBookSatisfiesFilterItem</name>
     <message>
-        <location filename="../homePage/MNoBookSatisfiesFilterItem.qml" line="23"/>
+        <location filename="../desktop/homePage/MNoBookSatisfiesFilterItem.qml" line="23"/>
         <source>No book satisfies the filter conditions</source>
         <translation>Жодна книга не підходить під фільтр</translation>
     </message>
     <message>
-        <location filename="../homePage/MNoBookSatisfiesFilterItem.qml" line="37"/>
+        <location filename="../desktop/homePage/MNoBookSatisfiesFilterItem.qml" line="37"/>
         <source>Remove Filters</source>
         <translation>Видалити фільтри</translation>
     </message>
@@ -1746,12 +1799,12 @@ Delete unused books to free up space or upgrade.</source>
 <context>
     <name>MOnOffToggle</name>
     <message>
-        <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="23"/>
+        <location filename="../desktop/modules/CustomComponents/MOnOffToggle.qml" line="23"/>
         <source>OFF</source>
         <translation>ВИМК</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="25"/>
+        <location filename="../desktop/modules/CustomComponents/MOnOffToggle.qml" line="25"/>
         <source>ON</source>
         <translation>ВВІМК</translation>
     </message>
@@ -1759,50 +1812,113 @@ Delete unused books to free up space or upgrade.</source>
 <context>
     <name>MPdfToImagePopup</name>
     <message>
-        <location filename="../toolsPage/MPdfToImagePopup.qml" line="39"/>
+        <location filename="../desktop/toolsPage/MPdfToImagePopup.qml" line="39"/>
         <source>Convertion succeeded</source>
         <translation>Конвертація завершена</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MPdfToImagePopup.qml" line="40"/>
+        <location filename="../desktop/toolsPage/MPdfToImagePopup.qml" line="40"/>
         <source>The new book was added to your library.</source>
         <translation>Нова книга була додана до вашої бібліотеки.</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MPdfToImagePopup.qml" line="42"/>
+        <location filename="../desktop/toolsPage/MPdfToImagePopup.qml" line="42"/>
         <source>Convertion failed</source>
         <translation>Конвертація не вдалася</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MPdfToImagePopup.qml" line="43"/>
+        <location filename="../desktop/toolsPage/MPdfToImagePopup.qml" line="43"/>
         <source>The conversion failed. Please try again.</source>
         <translation>Конвертація не вдалась. Будь-ласка, спробуйте ще раз.</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MPdfToImagePopup.qml" line="62"/>
+        <location filename="../desktop/toolsPage/MPdfToImagePopup.qml" line="62"/>
         <source>Pdf to Image</source>
         <translation>PDF в картинку</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MPdfToImagePopup.qml" line="148"/>
+        <location filename="../desktop/toolsPage/MPdfToImagePopup.qml" line="148"/>
         <source>Convert</source>
         <translation>Конвертувати</translation>
     </message>
 </context>
 <context>
+    <name>MProfilePage</name>
+    <message>
+        <location filename="../mobile/profilePage/MProfilePage.qml" line="24"/>
+        <source>Profile</source>
+        <translation type="unfinished">Профіль</translation>
+    </message>
+    <message>
+        <location filename="../mobile/profilePage/MProfilePage.qml" line="60"/>
+        <source>Account</source>
+        <translation type="unfinished">Акаунт</translation>
+    </message>
+    <message>
+        <location filename="../mobile/profilePage/MProfilePage.qml" line="84"/>
+        <source>My Account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mobile/profilePage/MProfilePage.qml" line="93"/>
+        <source>Storage</source>
+        <translation type="unfinished">Сховище</translation>
+    </message>
+    <message>
+        <location filename="../mobile/profilePage/MProfilePage.qml" line="105"/>
+        <source>Settings</source>
+        <translation type="unfinished">Налаштування</translation>
+    </message>
+    <message>
+        <location filename="../mobile/profilePage/MProfilePage.qml" line="129"/>
+        <source>About</source>
+        <translation type="unfinished">Про програму</translation>
+    </message>
+    <message>
+        <location filename="../mobile/profilePage/MProfilePage.qml" line="137"/>
+        <source>Appearance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mobile/profilePage/MProfilePage.qml" line="147"/>
+        <source>Behavior</source>
+        <translation type="unfinished">Поведінка</translation>
+    </message>
+    <message>
+        <location filename="../mobile/profilePage/MProfilePage.qml" line="159"/>
+        <source>Actions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mobile/profilePage/MProfilePage.qml" line="184"/>
+        <source>Refreshing...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mobile/profilePage/MProfilePage.qml" line="184"/>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mobile/profilePage/MProfilePage.qml" line="193"/>
+        <source>Logout</source>
+        <translation type="unfinished">Вихід</translation>
+    </message>
+</context>
+<context>
     <name>MProfilePopup</name>
     <message>
-        <location filename="../sidebar/MProfilePopup.qml" line="44"/>
+        <location filename="../desktop/sidebar/MProfilePopup.qml" line="44"/>
         <source>Sync</source>
         <translation>Синхронізація</translation>
     </message>
     <message>
-        <location filename="../sidebar/MProfilePopup.qml" line="61"/>
+        <location filename="../desktop/sidebar/MProfilePopup.qml" line="61"/>
         <source>Manage Profile</source>
         <translation>Профіль</translation>
     </message>
     <message>
-        <location filename="../sidebar/MProfilePopup.qml" line="77"/>
+        <location filename="../desktop/sidebar/MProfilePopup.qml" line="77"/>
         <source>Logout</source>
         <translation>Вихід</translation>
     </message>
@@ -1810,22 +1926,22 @@ Delete unused books to free up space or upgrade.</source>
 <context>
     <name>MReadingOptionsPopup</name>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="118"/>
+        <location filename="../desktop/readingPage/readingToolbar/MReadingOptionsPopup.qml" line="118"/>
         <source>Invert colors</source>
         <translation>Інвертувати кольори</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="147"/>
+        <location filename="../desktop/readingPage/readingToolbar/MReadingOptionsPopup.qml" line="147"/>
         <source>Sync book</source>
         <translation>Синхронізувати книгу</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="165"/>
+        <location filename="../desktop/readingPage/readingToolbar/MReadingOptionsPopup.qml" line="165"/>
         <source>More options</source>
         <translation>Більше опцій</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="186"/>
+        <location filename="../desktop/readingPage/readingToolbar/MReadingOptionsPopup.qml" line="186"/>
         <source>Save</source>
         <translation>Зберегти</translation>
     </message>
@@ -1833,22 +1949,22 @@ Delete unused books to free up space or upgrade.</source>
 <context>
     <name>MReadingSearchbar</name>
     <message>
-        <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="93"/>
+        <location filename="../desktop/readingPage/readingSearchbar/MReadingSearchbar.qml" line="93"/>
         <source>Options</source>
         <translation>Опції</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="142"/>
+        <location filename="../desktop/readingPage/readingSearchbar/MReadingSearchbar.qml" line="142"/>
         <source>Find</source>
         <translation>Знайти</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="169"/>
+        <location filename="../desktop/readingPage/readingSearchbar/MReadingSearchbar.qml" line="169"/>
         <source>Next</source>
         <translation>Наступний</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="188"/>
+        <location filename="../desktop/readingPage/readingSearchbar/MReadingSearchbar.qml" line="188"/>
         <source>Previous</source>
         <translation>Попередній</translation>
     </message>
@@ -1856,17 +1972,17 @@ Delete unused books to free up space or upgrade.</source>
 <context>
     <name>MReadingSearchbarOptionsPopup</name>
     <message>
-        <location filename="../readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml" line="52"/>
+        <location filename="../desktop/readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml" line="52"/>
         <source>From start</source>
         <translation>З початку</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml" line="66"/>
+        <location filename="../desktop/readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml" line="66"/>
         <source>Case sensitive</source>
         <translation>Регістро-залежний</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml" line="80"/>
+        <location filename="../desktop/readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml" line="80"/>
         <source>Whole words</source>
         <translation>Цілі слова</translation>
     </message>
@@ -1874,12 +1990,12 @@ Delete unused books to free up space or upgrade.</source>
 <context>
     <name>MReadingToolBar</name>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingToolBar.qml" line="14"/>
+        <location filename="../desktop/readingPage/readingToolbar/MReadingToolBar.qml" line="14"/>
         <source>Unknown name</source>
         <translation>Невідоме імʼя</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingToolBar.qml" line="188"/>
+        <location filename="../desktop/readingPage/readingToolbar/MReadingToolBar.qml" line="188"/>
         <source>of</source>
         <extracomment>As in 21 &quot;of&quot; 400</extracomment>
         <translation>з</translation>
@@ -1888,13 +2004,13 @@ Delete unused books to free up space or upgrade.</source>
 <context>
     <name>MRecordKeyBox</name>
     <message>
-        <location filename="../settings/shortcutsPage/MRecordKeyBox.qml" line="25"/>
+        <location filename="../desktop/settings/shortcutsPage/MRecordKeyBox.qml" line="25"/>
         <source>Key</source>
         <extracomment>As in key on the keyboard</extracomment>
         <translation>Клавіша</translation>
     </message>
     <message>
-        <location filename="../settings/shortcutsPage/MRecordKeyBox.qml" line="105"/>
+        <location filename="../desktop/settings/shortcutsPage/MRecordKeyBox.qml" line="105"/>
         <source>Press to record</source>
         <extracomment>As in recording a key that is pressed on the keyboard</extracomment>
         <translation>Натисніть для запису</translation>
@@ -1903,12 +2019,13 @@ Delete unused books to free up space or upgrade.</source>
 <context>
     <name>MRegisterPage</name>
     <message>
-        <location filename="../registerPage/MRegisterPage.qml" line="79"/>
+        <location filename="../desktop/registerPage/MRegisterPage.qml" line="79"/>
+        <location filename="../mobile/registerPage/MRegisterPage.qml" line="38"/>
         <source>Welcome!</source>
         <translation>Ласкаво просимо!</translation>
     </message>
     <message>
-        <location filename="../registerPage/MRegisterPage.qml" line="90"/>
+        <location filename="../desktop/registerPage/MRegisterPage.qml" line="90"/>
         <source>Your credentials are only used to authenticate yourself. Everything will be stored in a secure database.</source>
         <translation>Ваші дані для входу використовуються тільки для аутентифікації. Все буде збережено в захищеній базі даних.</translation>
     </message>
@@ -1921,12 +2038,14 @@ Delete unused books to free up space or upgrade.</source>
         <translation type="vanished">Імʼя</translation>
     </message>
     <message>
-        <location filename="../registerPage/MRegisterPage.qml" line="128"/>
+        <location filename="../desktop/registerPage/MRegisterPage.qml" line="128"/>
+        <location filename="../mobile/registerPage/MRegisterPage.qml" line="66"/>
         <source>Email</source>
         <translation>Email</translation>
     </message>
     <message>
-        <location filename="../registerPage/MRegisterPage.qml" line="142"/>
+        <location filename="../desktop/registerPage/MRegisterPage.qml" line="142"/>
+        <location filename="../mobile/registerPage/MRegisterPage.qml" line="75"/>
         <source>Password</source>
         <translation>Пароль</translation>
     </message>
@@ -1935,34 +2054,35 @@ Delete unused books to free up space or upgrade.</source>
         <translation type="vanished">Підтвердіть пароль</translation>
     </message>
     <message>
-        <location filename="../registerPage/MRegisterPage.qml" line="115"/>
+        <location filename="../desktop/registerPage/MRegisterPage.qml" line="115"/>
+        <location filename="../mobile/registerPage/MRegisterPage.qml" line="58"/>
         <source>Name</source>
         <translation>Ім&apos;я</translation>
     </message>
     <message>
-        <location filename="../registerPage/MRegisterPage.qml" line="180"/>
+        <location filename="../desktop/registerPage/MRegisterPage.qml" line="180"/>
         <source>Let&apos;s start</source>
         <translation>Розпочати</translation>
     </message>
     <message>
-        <location filename="../registerPage/MRegisterPage.qml" line="202"/>
+        <location filename="../desktop/registerPage/MRegisterPage.qml" line="202"/>
         <source>Already have an account? Login</source>
         <translation>Вже маєте акаунт? Увійти</translation>
     </message>
     <message>
-        <location filename="../registerPage/MRegisterPage.qml" line="229"/>
+        <location filename="../desktop/registerPage/MRegisterPage.qml" line="229"/>
         <source>Confirm Your Email</source>
         <translation>Підтвердіть Ваш Email</translation>
     </message>
     <message>
-        <location filename="../registerPage/MRegisterPage.qml" line="230"/>
+        <location filename="../desktop/registerPage/MRegisterPage.qml" line="230"/>
         <source>You&apos;re are almost ready to go!
 Confirm your email by clicking the link we sent you.</source>
         <translation>Майже готово!
 Підтвердіть Ваш Email, натиснувши на посилання, що ми Вам відправили.</translation>
     </message>
     <message>
-        <location filename="../registerPage/MRegisterPage.qml" line="231"/>
+        <location filename="../desktop/registerPage/MRegisterPage.qml" line="231"/>
         <source>Resend</source>
         <translation>Відправити ще раз</translation>
     </message>
@@ -1970,11 +2090,52 @@ Confirm your email by clicking the link we sent you.</source>
         <source>Passwords don&apos;t match</source>
         <translation type="vanished">Паролі не співпадають</translation>
     </message>
+    <message>
+        <location filename="../mobile/registerPage/MRegisterPage.qml" line="48"/>
+        <source>Create an account and start reading!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mobile/registerPage/MRegisterPage.qml" line="91"/>
+        <source>Register</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mobile/registerPage/MRegisterPage.qml" line="111"/>
+        <source>Already have an account? </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mobile/registerPage/MRegisterPage.qml" line="119"/>
+        <source>Sign in!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mobile/registerPage/MRegisterPage.qml" line="144"/>
+        <source>By clicking Register, you agree to our</source>
+        <extracomment>Make sure to translate the following words together to make a logical sentence</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mobile/registerPage/MRegisterPage.qml" line="146"/>
+        <source>Terms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mobile/registerPage/MRegisterPage.qml" line="147"/>
+        <source>and</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mobile/registerPage/MRegisterPage.qml" line="149"/>
+        <source>Privacy Policy</source>
+        <translation type="unfinished">Політику конфіденційності</translation>
+    </message>
 </context>
 <context>
     <name>MSearchButton</name>
     <message>
-        <location filename="../modules/CustomComponents/buttons/MSearchButton.qml" line="14"/>
+        <location filename="../desktop/modules/CustomComponents/buttons/MSearchButton.qml" line="14"/>
         <source>Search for books</source>
         <translation>Шукати книги</translation>
     </message>
@@ -1982,7 +2143,7 @@ Confirm your email by clicking the link we sent you.</source>
 <context>
     <name>MSelectColorPopup</name>
     <message>
-        <location filename="../homePage/folderSidebar/MSelectColorPopup.qml" line="42"/>
+        <location filename="../desktop/homePage/folderSidebar/MSelectColorPopup.qml" line="42"/>
         <source>Pick a color</source>
         <translation>Оберіть колір</translation>
     </message>
@@ -1990,12 +2151,12 @@ Confirm your email by clicking the link we sent you.</source>
 <context>
     <name>MSelectIconPopup</name>
     <message>
-        <location filename="../homePage/folderSidebar/MSelectIconPopup.qml" line="43"/>
+        <location filename="../desktop/homePage/folderSidebar/MSelectIconPopup.qml" line="43"/>
         <source>Pick an icon</source>
         <translation>Оберіть іконку</translation>
     </message>
     <message>
-        <location filename="../homePage/folderSidebar/MSelectIconPopup.qml" line="101"/>
+        <location filename="../desktop/homePage/folderSidebar/MSelectIconPopup.qml" line="101"/>
         <source>Search</source>
         <translation>Пошук</translation>
     </message>
@@ -2003,18 +2164,18 @@ Confirm your email by clicking the link we sent you.</source>
 <context>
     <name>MSelectProfilePictureArea</name>
     <message>
-        <location filename="../settings/accountPage/MSelectProfilePictureArea.qml" line="107"/>
+        <location filename="../desktop/settings/accountPage/MSelectProfilePictureArea.qml" line="107"/>
         <source>Click to select an image or drop it into in this area</source>
         <translation>Натиність, щоб обрати картинку або перетягніть її в цю область</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MSelectProfilePictureArea.qml" line="157"/>
+        <location filename="../desktop/settings/accountPage/MSelectProfilePictureArea.qml" line="157"/>
         <source>All files</source>
         <translation>Всі файли</translation>
     </message>
     <message>
-        <location filename="../settings/accountPage/MSelectProfilePictureArea.qml" line="157"/>
-        <location filename="../settings/accountPage/MSelectProfilePictureArea.qml" line="158"/>
+        <location filename="../desktop/settings/accountPage/MSelectProfilePictureArea.qml" line="157"/>
+        <location filename="../desktop/settings/accountPage/MSelectProfilePictureArea.qml" line="158"/>
         <source>files</source>
         <translation>файли</translation>
     </message>
@@ -2022,12 +2183,12 @@ Confirm your email by clicking the link we sent you.</source>
 <context>
     <name>MSelectionOptionsPopup</name>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="139"/>
+        <location filename="../desktop/readingPage/MSelectionOptionsPopup.qml" line="139"/>
         <source>Copy</source>
         <translation>Копіювати</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="207"/>
+        <location filename="../desktop/readingPage/MSelectionOptionsPopup.qml" line="207"/>
         <source>Ai Explain</source>
         <translation>ШІ Поясніть</translation>
     </message>
@@ -2036,7 +2197,7 @@ Confirm your email by clicking the link we sent you.</source>
         <translation type="vanished">Виділити</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="167"/>
+        <location filename="../desktop/readingPage/MSelectionOptionsPopup.qml" line="167"/>
         <source>Look Up</source>
         <translation>Дивитись визначення</translation>
     </message>
@@ -2045,7 +2206,7 @@ Confirm your email by clicking the link we sent you.</source>
         <translation type="vanished">Пояснити</translation>
     </message>
     <message>
-        <location filename="../readingPage/MSelectionOptionsPopup.qml" line="239"/>
+        <location filename="../desktop/readingPage/MSelectionOptionsPopup.qml" line="239"/>
         <source>Remove</source>
         <translation>Видалити</translation>
     </message>
@@ -2053,59 +2214,59 @@ Confirm your email by clicking the link we sent you.</source>
 <context>
     <name>MSettingsSidebar</name>
     <message>
-        <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="55"/>
+        <location filename="../desktop/settings/settingsSidebar/MSettingsSidebar.qml" line="55"/>
         <source>Settings</source>
         <translation>Налаштування</translation>
     </message>
     <message>
-        <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="74"/>
+        <location filename="../desktop/settings/settingsSidebar/MSettingsSidebar.qml" line="74"/>
         <source>GLOBAL SETTINGS</source>
         <extracomment>Keep it capitalized</extracomment>
         <translation>ГЛОБАЛЬНІ НАЛАШТУВАННЯ</translation>
     </message>
     <message>
-        <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="90"/>
+        <location filename="../desktop/settings/settingsSidebar/MSettingsSidebar.qml" line="90"/>
         <source>About</source>
         <translation>Про програму</translation>
     </message>
     <message>
-        <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="106"/>
+        <location filename="../desktop/settings/settingsSidebar/MSettingsSidebar.qml" line="106"/>
         <source>Appearance</source>
         <translation>Зовнішній вид</translation>
     </message>
     <message>
-        <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="122"/>
+        <location filename="../desktop/settings/settingsSidebar/MSettingsSidebar.qml" line="122"/>
         <source>Behavior</source>
         <translation>Поведінка</translation>
     </message>
     <message>
-        <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="139"/>
+        <location filename="../desktop/settings/settingsSidebar/MSettingsSidebar.qml" line="139"/>
         <source>Shortcuts</source>
         <translation>Комбінації клавіш</translation>
     </message>
     <message>
-        <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="155"/>
+        <location filename="../desktop/settings/settingsSidebar/MSettingsSidebar.qml" line="155"/>
         <source>Updates</source>
         <translation>Оновлення</translation>
     </message>
     <message>
-        <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="166"/>
+        <location filename="../desktop/settings/settingsSidebar/MSettingsSidebar.qml" line="166"/>
         <source>USER &amp; ACCOUNT</source>
         <extracomment>Keep it capitalized</extracomment>
         <translation>КОРИСТУВАЧ І АКАУНТ</translation>
     </message>
     <message>
-        <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="182"/>
+        <location filename="../desktop/settings/settingsSidebar/MSettingsSidebar.qml" line="182"/>
         <source>Account</source>
         <translation>Акаунт</translation>
     </message>
     <message>
-        <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="198"/>
+        <location filename="../desktop/settings/settingsSidebar/MSettingsSidebar.qml" line="198"/>
         <source>Storage</source>
         <translation>Сховище</translation>
     </message>
     <message>
-        <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="215"/>
+        <location filename="../desktop/settings/settingsSidebar/MSettingsSidebar.qml" line="215"/>
         <source>Support us</source>
         <translation>Підтримати нас</translation>
     </message>
@@ -2113,7 +2274,7 @@ Confirm your email by clicking the link we sent you.</source>
 <context>
     <name>MShortcutDelegate</name>
     <message>
-        <location filename="../settings/shortcutsPage/MShortcutDelegate.qml" line="65"/>
+        <location filename="../desktop/settings/shortcutsPage/MShortcutDelegate.qml" line="65"/>
         <source>None</source>
         <translation>Ніякий</translation>
     </message>
@@ -2121,34 +2282,34 @@ Confirm your email by clicking the link we sent you.</source>
 <context>
     <name>MShortcutsPage</name>
     <message>
-        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="39"/>
+        <location filename="../desktop/settings/shortcutsPage/MShortcutsPage.qml" line="39"/>
         <source>Shortcuts</source>
         <translation>Комібнації клавіш</translation>
     </message>
     <message>
-        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="40"/>
+        <location filename="../desktop/settings/shortcutsPage/MShortcutsPage.qml" line="40"/>
         <source>Make your own experience</source>
         <translation>Налаштуйте під себе</translation>
     </message>
     <message>
-        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="57"/>
+        <location filename="../desktop/settings/shortcutsPage/MShortcutsPage.qml" line="57"/>
         <source>Edit shortcut</source>
         <translation>Редагувати комбінацію</translation>
     </message>
     <message>
-        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="110"/>
+        <location filename="../desktop/settings/shortcutsPage/MShortcutsPage.qml" line="110"/>
         <source>ACTION</source>
         <extracomment>Keep it capitalized</extracomment>
         <translation>ДІЯ</translation>
     </message>
     <message>
-        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="124"/>
+        <location filename="../desktop/settings/shortcutsPage/MShortcutsPage.qml" line="124"/>
         <source>SHORTCUTS</source>
         <extracomment>Keep it capitalized</extracomment>
         <translation>КОМБІНАЦІЇ</translation>
     </message>
     <message>
-        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="139"/>
+        <location filename="../desktop/settings/shortcutsPage/MShortcutsPage.qml" line="139"/>
         <source>Search for shortcuts</source>
         <translation>Пошук комбінацій</translation>
     </message>
@@ -2156,22 +2317,22 @@ Confirm your email by clicking the link we sent you.</source>
 <context>
     <name>MSidebar</name>
     <message>
-        <location filename="../sidebar/MSidebar.qml" line="116"/>
+        <location filename="../desktop/sidebar/MSidebar.qml" line="116"/>
         <source>Free books</source>
         <translation>Безкоштовні книги</translation>
     </message>
     <message>
-        <location filename="../sidebar/MSidebar.qml" line="138"/>
+        <location filename="../desktop/sidebar/MSidebar.qml" line="138"/>
         <source>Home</source>
         <translation>Початок</translation>
     </message>
     <message>
-        <location filename="../sidebar/MSidebar.qml" line="149"/>
+        <location filename="../desktop/sidebar/MSidebar.qml" line="149"/>
         <source>Statistics</source>
         <translation>Статистика</translation>
     </message>
     <message>
-        <location filename="../sidebar/MSidebar.qml" line="169"/>
+        <location filename="../desktop/sidebar/MSidebar.qml" line="169"/>
         <source>Tools</source>
         <translation>Інструменти</translation>
     </message>
@@ -2180,7 +2341,7 @@ Confirm your email by clicking the link we sent you.</source>
         <translation type="vanished">Доповнення</translation>
     </message>
     <message>
-        <location filename="../sidebar/MSidebar.qml" line="180"/>
+        <location filename="../desktop/sidebar/MSidebar.qml" line="180"/>
         <source>Settings</source>
         <translation>Налаштування</translation>
     </message>
@@ -2188,7 +2349,7 @@ Confirm your email by clicking the link we sent you.</source>
 <context>
     <name>MSortByButton</name>
     <message>
-        <location filename="../homePage/toolbar/sortByButton/MSortByButton.qml" line="46"/>
+        <location filename="../desktop/homePage/toolbar/sortByButton/MSortByButton.qml" line="46"/>
         <source>Sort</source>
         <translation>Сортування</translation>
     </message>
@@ -2196,40 +2357,88 @@ Confirm your email by clicking the link we sent you.</source>
 <context>
     <name>MSortByPopup</name>
     <message>
-        <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="65"/>
+        <location filename="../desktop/homePage/toolbar/sortByButton/MSortByPopup.qml" line="65"/>
         <source>Recently added</source>
         <translation>Останні додані</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="69"/>
+        <location filename="../desktop/homePage/toolbar/sortByButton/MSortByPopup.qml" line="69"/>
         <source>Recently read</source>
         <translation>Останні прочитані</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="73"/>
+        <location filename="../desktop/homePage/toolbar/sortByButton/MSortByPopup.qml" line="73"/>
         <source>Progress</source>
         <translation>Прогрес</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="77"/>
+        <location filename="../desktop/homePage/toolbar/sortByButton/MSortByPopup.qml" line="77"/>
         <source>Book (A-Z)</source>
         <translation>Книга (А-Я)</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="81"/>
+        <location filename="../desktop/homePage/toolbar/sortByButton/MSortByPopup.qml" line="81"/>
         <source>Authors (A-Z)</source>
         <translation>Автори (А-Я)</translation>
     </message>
 </context>
 <context>
+    <name>MStartPage</name>
+    <message>
+        <location filename="../mobile/startPage/MStartPage.qml" line="82"/>
+        <source>Reading books was never this easy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mobile/startPage/MStartPage.qml" line="95"/>
+        <source>Increase your productivity through a simple and modern interface combined with powerful tools.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mobile/startPage/MStartPage.qml" line="129"/>
+        <source>Build your own online library</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mobile/startPage/MStartPage.qml" line="141"/>
+        <source>Add books to build your own online library that you can access at anytime from anywhere.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mobile/startPage/MStartPage.qml" line="175"/>
+        <source>Organize your library your way</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mobile/startPage/MStartPage.qml" line="187"/>
+        <source>Add your books to collections, tag them and sort them in any way you want.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mobile/startPage/MStartPage.qml" line="220"/>
+        <source>Continue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mobile/startPage/MStartPage.qml" line="220"/>
+        <source>Get started</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mobile/startPage/MStartPage.qml" line="245"/>
+        <source>Sign In</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MStatisticsPage</name>
     <message>
-        <location filename="../statisticsPage/MStatisticsPage.qml" line="22"/>
+        <location filename="../desktop/statisticsPage/MStatisticsPage.qml" line="22"/>
         <source>Statistics Page</source>
         <translation>Статистика</translation>
     </message>
     <message>
-        <location filename="../statisticsPage/MStatisticsPage.qml" line="33"/>
+        <location filename="../desktop/statisticsPage/MStatisticsPage.qml" line="33"/>
         <source>Currently in Development</source>
         <translation>Наразі в розробці</translation>
     </message>
@@ -2237,22 +2446,22 @@ Confirm your email by clicking the link we sent you.</source>
 <context>
     <name>MStoragePage</name>
     <message>
-        <location filename="../settings/MStoragePage.qml" line="42"/>
+        <location filename="../desktop/settings/MStoragePage.qml" line="42"/>
         <source>Storage</source>
         <translation>Сховище</translation>
     </message>
     <message>
-        <location filename="../settings/MStoragePage.qml" line="43"/>
+        <location filename="../desktop/settings/MStoragePage.qml" line="43"/>
         <source>Your storage</source>
         <translation>Ваше сховище</translation>
     </message>
     <message>
-        <location filename="../settings/MStoragePage.qml" line="59"/>
+        <location filename="../desktop/settings/MStoragePage.qml" line="59"/>
         <source>Upgrade</source>
         <translation>Покращити</translation>
     </message>
     <message>
-        <location filename="../settings/MStoragePage.qml" line="113"/>
+        <location filename="../desktop/settings/MStoragePage.qml" line="113"/>
         <source>YOUR TIER</source>
         <extracomment>Keep capitalized (&quot;TIER&quot; as in subscription)</extracomment>
         <translation>ВАШ РІВЕНЬ</translation>
@@ -2267,34 +2476,34 @@ Confirm your email by clicking the link we sent you.</source>
         <translation type="vanished">Дізнатись про рівні</translation>
     </message>
     <message>
-        <location filename="../settings/MStoragePage.qml" line="147"/>
+        <location filename="../desktop/settings/MStoragePage.qml" line="147"/>
         <source>Upgrade Now</source>
         <translation>Покращити</translation>
     </message>
     <message>
-        <location filename="../settings/MStoragePage.qml" line="179"/>
+        <location filename="../desktop/settings/MStoragePage.qml" line="179"/>
         <source>USED STORAGE</source>
         <extracomment>Keep capitalized</extracomment>
         <translation>ВИКОРИСТАНЕ СХОВИЩЕ</translation>
     </message>
     <message>
-        <location filename="../settings/MStoragePage.qml" line="212"/>
+        <location filename="../desktop/settings/MStoragePage.qml" line="212"/>
         <source>Used Storage</source>
         <translation>Використане сховище</translation>
     </message>
     <message>
-        <location filename="../settings/MStoragePage.qml" line="239"/>
+        <location filename="../desktop/settings/MStoragePage.qml" line="239"/>
         <source>Remaining Storage</source>
         <translation>Вільне сховище</translation>
     </message>
     <message>
-        <location filename="../settings/MStoragePage.qml" line="295"/>
+        <location filename="../desktop/settings/MStoragePage.qml" line="295"/>
         <source>YOUR BOOKS</source>
         <extracomment>Keep capitalized</extracomment>
         <translation>ВАШІ КНИГИ</translation>
     </message>
     <message>
-        <location filename="../settings/MStoragePage.qml" line="314"/>
+        <location filename="../desktop/settings/MStoragePage.qml" line="314"/>
         <source>Books in your Library</source>
         <translation>Книги у Вашій Бібліотеці</translation>
     </message>
@@ -2322,45 +2531,45 @@ Confirm your email by clicking the link we sent you.</source>
 <context>
     <name>MSupportUsPage</name>
     <message>
-        <location filename="../settings/MSupportUsPage.qml" line="33"/>
-        <location filename="../settings/MSupportUsPage.qml" line="95"/>
+        <location filename="../desktop/settings/MSupportUsPage.qml" line="33"/>
+        <location filename="../desktop/settings/MSupportUsPage.qml" line="95"/>
         <source>Support us</source>
         <translation>Підтримати нас</translation>
     </message>
     <message>
-        <location filename="../settings/MSupportUsPage.qml" line="34"/>
+        <location filename="../desktop/settings/MSupportUsPage.qml" line="34"/>
         <source>Thanks for considering</source>
         <translation>Дякуємо за увагу</translation>
     </message>
     <message>
-        <location filename="../settings/MSupportUsPage.qml" line="69"/>
+        <location filename="../desktop/settings/MSupportUsPage.qml" line="69"/>
         <source>We are a small team of opensource developers creating apps for the community. We love
 working on fun projects, supporting our community and trying to make the world a better place.</source>
         <translation>Ми маленька команда open-source розробників, що створюють додатки для спільноти. Ми любимо
 працювати над веселими проектами, підтримуючи нашу спільноту і робити світ кращим.</translation>
     </message>
     <message>
-        <location filename="../settings/MSupportUsPage.qml" line="79"/>
+        <location filename="../desktop/settings/MSupportUsPage.qml" line="79"/>
         <source>If you feel like supporting us and our projects, feel free to support us:</source>
         <translation>Якщо Ви не проти підтримати нас та наші проєкти, звʼяжіться з нами:</translation>
     </message>
     <message>
-        <location filename="../settings/MSupportUsPage.qml" line="109"/>
+        <location filename="../desktop/settings/MSupportUsPage.qml" line="109"/>
         <source>You can support us in many other ways as well, if you are a developer or a designer, feel free to</source>
         <translation>Ви також можете підтримати нас іншими способами, якщо Ви розробник або дизайнер,</translation>
     </message>
     <message>
-        <location filename="../settings/MSupportUsPage.qml" line="111"/>
+        <location filename="../desktop/settings/MSupportUsPage.qml" line="111"/>
         <source>contribute to Librum</source>
         <translation>долучайтесь до розробки Librum</translation>
     </message>
     <message>
-        <location filename="../settings/MSupportUsPage.qml" line="112"/>
+        <location filename="../desktop/settings/MSupportUsPage.qml" line="112"/>
         <source>If you are not, you can still help us by spreading the word about Librum.</source>
         <translation>В іншому випадку, Ви також можете допомогти нам, розповсюджуючи звістку про Librum.</translation>
     </message>
     <message>
-        <location filename="../settings/MSupportUsPage.qml" line="147"/>
+        <location filename="../desktop/settings/MSupportUsPage.qml" line="147"/>
         <source>Thank you for your support. We hope you enjoy Librum!</source>
         <translation>Дякуємо за Вашу підтримку. Сподіваємось, Вам до вподоби Librum!</translation>
     </message>
@@ -2368,7 +2577,7 @@ working on fun projects, supporting our community and trying to make the world a
 <context>
     <name>MTagSelectorButton</name>
     <message>
-        <location filename="../homePage/toolbar/tagSelector/MTagSelectorButton.qml" line="46"/>
+        <location filename="../desktop/homePage/toolbar/tagSelector/MTagSelectorButton.qml" line="46"/>
         <source>Tags</source>
         <translation>Теги</translation>
     </message>
@@ -2376,17 +2585,17 @@ working on fun projects, supporting our community and trying to make the world a
 <context>
     <name>MTagSelectorPopup</name>
     <message>
-        <location filename="../homePage/toolbar/tagSelector/MTagSelectorPopup.qml" line="119"/>
+        <location filename="../desktop/homePage/toolbar/tagSelector/MTagSelectorPopup.qml" line="119"/>
         <source>Select</source>
         <translation>Вибрати</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/tagSelector/MTagSelectorPopup.qml" line="131"/>
+        <location filename="../desktop/homePage/toolbar/tagSelector/MTagSelectorPopup.qml" line="131"/>
         <source>Rename</source>
         <translation>Перейменувати</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/tagSelector/MTagSelectorPopup.qml" line="140"/>
+        <location filename="../desktop/homePage/toolbar/tagSelector/MTagSelectorPopup.qml" line="140"/>
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
@@ -2394,12 +2603,12 @@ working on fun projects, supporting our community and trying to make the world a
 <context>
     <name>MTitle</name>
     <message>
-        <location filename="../modules/CustomComponents/MTitle.qml" line="9"/>
+        <location filename="../desktop/modules/CustomComponents/MTitle.qml" line="9"/>
         <source>Title</source>
         <translation>Назва</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MTitle.qml" line="10"/>
+        <location filename="../desktop/modules/CustomComponents/MTitle.qml" line="10"/>
         <source>Description</source>
         <translation>Опис</translation>
     </message>
@@ -2407,22 +2616,22 @@ working on fun projects, supporting our community and trying to make the world a
 <context>
     <name>MToolbar</name>
     <message>
-        <location filename="../homePage/toolbar/MToolbar.qml" line="74"/>
+        <location filename="../desktop/homePage/toolbar/MToolbar.qml" line="74"/>
         <source>Remove Filters</source>
         <translation>Видалити фільтри</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/MToolbar.qml" line="87"/>
+        <location filename="../desktop/homePage/toolbar/MToolbar.qml" line="87"/>
         <source>Remove Tags</source>
         <translation>Видалити теги</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/MToolbar.qml" line="143"/>
+        <location filename="../desktop/homePage/toolbar/MToolbar.qml" line="143"/>
         <source>You are offline</source>
         <translation>Ви офлайн</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/MToolbar.qml" line="150"/>
+        <location filename="../desktop/homePage/toolbar/MToolbar.qml" line="150"/>
         <source>Your library is being synchronized with the cloud</source>
         <translation>Ваша бібліотека синхронізується з хмарою</translation>
     </message>
@@ -2430,42 +2639,42 @@ working on fun projects, supporting our community and trying to make the world a
 <context>
     <name>MToolsPage</name>
     <message>
-        <location filename="../toolsPage/MToolsPage.qml" line="25"/>
+        <location filename="../desktop/toolsPage/MToolsPage.qml" line="25"/>
         <source>PDF Tools</source>
         <translation>Інструменти PDF</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MToolsPage.qml" line="26"/>
+        <location filename="../desktop/toolsPage/MToolsPage.qml" line="26"/>
         <source>Powerful tools to modify your PDF files</source>
         <translation>Потужні інструменти для редагування ваших PDF файлів</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MToolsPage.qml" line="101"/>
+        <location filename="../desktop/toolsPage/MToolsPage.qml" line="101"/>
         <source>Merge</source>
         <translation>Обʼєднати</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MToolsPage.qml" line="102"/>
+        <location filename="../desktop/toolsPage/MToolsPage.qml" line="102"/>
         <source>Merge multiple books into one</source>
         <translation>Обʼєднати декілька книг в одну</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MToolsPage.qml" line="107"/>
+        <location filename="../desktop/toolsPage/MToolsPage.qml" line="107"/>
         <source>Extract Page(s)</source>
         <translation>Видобути сторінку(и)</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MToolsPage.qml" line="108"/>
+        <location filename="../desktop/toolsPage/MToolsPage.qml" line="108"/>
         <source>Extract selected pages from a book</source>
         <translation>Видобути вибрані сторінки з книги</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MToolsPage.qml" line="113"/>
+        <location filename="../desktop/toolsPage/MToolsPage.qml" line="113"/>
         <source>Image to PDF</source>
         <translation>Картинку в PDF</translation>
     </message>
     <message>
-        <location filename="../toolsPage/MToolsPage.qml" line="114"/>
+        <location filename="../desktop/toolsPage/MToolsPage.qml" line="114"/>
         <source>Convert an image (PNG, JPEG, SVG, GIF) to PDF</source>
         <translation>Конвертувати картинку (PNG, JPEG, SVG, GIF) в PDF</translation>
     </message>
@@ -2473,22 +2682,22 @@ working on fun projects, supporting our community and trying to make the world a
 <context>
     <name>MUpToDate</name>
     <message>
-        <location filename="../settings/updatesPage/MUpToDate.qml" line="37"/>
+        <location filename="../desktop/settings/updatesPage/MUpToDate.qml" line="37"/>
         <source>You are up to date!</source>
         <translation>У Вас остання версія!</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpToDate.qml" line="47"/>
+        <location filename="../desktop/settings/updatesPage/MUpToDate.qml" line="47"/>
         <source>Make sure to check for updates regularly, so you dont miss out on any great features.</source>
         <translation>Перевіряйте оноволення регулярно, щоб не пропустити жоден корисний функціонал.</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpToDate.qml" line="56"/>
+        <location filename="../desktop/settings/updatesPage/MUpToDate.qml" line="56"/>
         <source>Your current version is:</source>
         <translation>Ваша поточна версія:</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpToDate.qml" line="85"/>
+        <location filename="../desktop/settings/updatesPage/MUpToDate.qml" line="85"/>
         <source>See our latest changes at:</source>
         <translation>Перегляньте останні зміни на:</translation>
     </message>
@@ -2496,65 +2705,65 @@ working on fun projects, supporting our community and trying to make the world a
 <context>
     <name>MUpdatesAvailable</name>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="50"/>
+        <location filename="../desktop/settings/updatesPage/MUpdatesAvailable.qml" line="50"/>
         <source>A new update is available!</source>
         <translation>Доступна нова версія!</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="60"/>
+        <location filename="../desktop/settings/updatesPage/MUpdatesAvailable.qml" line="60"/>
         <source>Download the new version to get great new improvements.</source>
         <translation>Завантажте нову версію для нових покращень.</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="69"/>
+        <location filename="../desktop/settings/updatesPage/MUpdatesAvailable.qml" line="69"/>
         <source>The newest version is:</source>
         <translation>Найновіша версія:</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="95"/>
+        <location filename="../desktop/settings/updatesPage/MUpdatesAvailable.qml" line="95"/>
         <source>Update</source>
         <translation>Оновити</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="114"/>
+        <location filename="../desktop/settings/updatesPage/MUpdatesAvailable.qml" line="114"/>
         <source>See the exact changes on our website at:</source>
         <translation>Перегляньте конкретні зміни на нашому веб-сайті:</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="155"/>
+        <location filename="../desktop/settings/updatesPage/MUpdatesAvailable.qml" line="155"/>
         <source>Updating on Linux</source>
         <translation>Оновлення на Linux</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="156"/>
+        <location filename="../desktop/settings/updatesPage/MUpdatesAvailable.qml" line="156"/>
         <source>Please use your package manager to update Librum or download the newest version from our</source>
         <translation>Будь-ласка використайте Ваш менеджер пакетів, щоб оновити Librum, або завантажте останню версію з</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="158"/>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="182"/>
+        <location filename="../desktop/settings/updatesPage/MUpdatesAvailable.qml" line="158"/>
+        <location filename="../desktop/settings/updatesPage/MUpdatesAvailable.qml" line="182"/>
         <source>website</source>
         <translation>нашого вебсайту</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="160"/>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="184"/>
+        <location filename="../desktop/settings/updatesPage/MUpdatesAvailable.qml" line="160"/>
+        <location filename="../desktop/settings/updatesPage/MUpdatesAvailable.qml" line="184"/>
         <source>Close</source>
         <translation>Закрити</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="161"/>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="185"/>
+        <location filename="../desktop/settings/updatesPage/MUpdatesAvailable.qml" line="161"/>
+        <location filename="../desktop/settings/updatesPage/MUpdatesAvailable.qml" line="185"/>
         <source>Email Us</source>
         <translation>Звʼязатись з нами</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="179"/>
+        <location filename="../desktop/settings/updatesPage/MUpdatesAvailable.qml" line="179"/>
         <source>The Update Failed</source>
         <translation>Оновлення не вдалось</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="180"/>
+        <location filename="../desktop/settings/updatesPage/MUpdatesAvailable.qml" line="180"/>
         <source>Please try again later or download the newest version from our</source>
         <translation>Будь-ласка, спробуйте пізніше або завантажте новую версію з</translation>
     </message>
@@ -2562,12 +2771,12 @@ working on fun projects, supporting our community and trying to make the world a
 <context>
     <name>MUpdatesPage</name>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesPage.qml" line="33"/>
+        <location filename="../desktop/settings/updatesPage/MUpdatesPage.qml" line="33"/>
         <source>Updates</source>
         <translation>Оновлення</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesPage.qml" line="34"/>
+        <location filename="../desktop/settings/updatesPage/MUpdatesPage.qml" line="34"/>
         <source>Any new update?</source>
         <translation>Є нові оновлення?</translation>
     </message>
@@ -2575,22 +2784,22 @@ working on fun projects, supporting our community and trying to make the world a
 <context>
     <name>MWarningPopup</name>
     <message>
-        <location filename="../modules/CustomComponents/MWarningPopup.qml" line="11"/>
+        <location filename="../desktop/modules/CustomComponents/MWarningPopup.qml" line="11"/>
         <source>Accept</source>
         <translation>Прийняти</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MWarningPopup.qml" line="12"/>
+        <location filename="../desktop/modules/CustomComponents/MWarningPopup.qml" line="12"/>
         <source>Decline</source>
         <translation>Відмовитись</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MWarningPopup.qml" line="13"/>
+        <location filename="../desktop/modules/CustomComponents/MWarningPopup.qml" line="13"/>
         <source>Do you Accept?</source>
         <translation>Ви приймаєте?</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MWarningPopup.qml" line="14"/>
+        <location filename="../desktop/modules/CustomComponents/MWarningPopup.qml" line="14"/>
         <source>Message</source>
         <translation>Повідомлення</translation>
     </message>
@@ -2598,12 +2807,12 @@ working on fun projects, supporting our community and trying to make the world a
 <context>
     <name>MWindowsUpdatingPopup</name>
     <message>
-        <location filename="../settings/updatesPage/MWindowsUpdatingPopup.qml" line="60"/>
+        <location filename="../desktop/settings/updatesPage/MWindowsUpdatingPopup.qml" line="60"/>
         <source>Updating</source>
         <translation>Оновлення</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MWindowsUpdatingPopup.qml" line="67"/>
+        <location filename="../desktop/settings/updatesPage/MWindowsUpdatingPopup.qml" line="67"/>
         <source>Downloading</source>
         <translation>Завантаження</translation>
     </message>
@@ -2611,9 +2820,14 @@ working on fun projects, supporting our community and trying to make the world a
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.qml" line="37"/>
+        <location filename="../desktop/main.qml" line="37"/>
         <source>Librum - Your ebook reader</source>
         <translation>Librum - Ваша читалка цифрових-книг</translation>
+    </message>
+    <message>
+        <location filename="../mobile/main.qml" line="21"/>
+        <source>Librum</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
