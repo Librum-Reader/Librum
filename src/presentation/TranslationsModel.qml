@@ -49,4 +49,8 @@ ListModel {
         text: "বাংলা"
         code: "bn"
     }
+    ListElement {
+        text: "Français"
+        code: "fr"
+    }
 }
