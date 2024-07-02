@@ -117,6 +117,7 @@ For documentation go to [Librum's GitHub-wiki](https://github.com/Librum-Reader/
 To self-host Librum you need to run [Librum-Server](https://github.com/Librum-Reader/Librum-Server) locally (instructions can be found [here](https://github.com/Librum-Reader/Librum-Server#self-hosting)) and tell the client to use your self-hosted server by:
 - (Linux) Editing ~/.config/Librum-Reader/Librum.conf and setting `selfHosted=true` and `serverHost` to your server's url (e.g. `serverHost=https://127.0.0.1:5001`)
 - (Windows) Opening the registry editor (Press `Win + R` and search for `regedit`), navigating to `HKEY_CURRENT_USER\Software\Librum-Reader\Librum` and setting `selfHosted=true` and `serverHost` to your server's url
+- (macOS) Editing ~/Library/Preferences/com.librumreader.Librum.plist with a plist editor and setting `selfHosted` to `true` and `serverHost` to your server's url (e.g. `https://127.0.0.1:5001`)
 
 Make sure to run the application before following the steps above, to generate the required files.
 
@@ -129,8 +130,8 @@ Part of Librum's aim is to work on **any** platform. No matter where you are or 
 We support:
 - Windows
 - GNU/Linux
-- MacOS
-- IOS (Coming Soon)
+- macOS
+- iOS (Coming Soon)
 - Android (Coming Soon)
 <br>
 
@@ -281,7 +282,7 @@ Here are some things to keep in mind during the build process.
 
 <br>
 
-## For MacOS
+## For macOS
 
 ### Prerequisites
 - cmake                             (https://cmake.org/download)
@@ -312,7 +313,7 @@ The installation is straight forward, just follow the steps below:
     ```sh
     cmake -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=Off -DCMAKE_PREFIX_PATH=<path/to/Qt> ..
     ```
-    Set `CMAKE_PREFIX_PATH` to your Qt installation path. Installing Qt via the online installer usually installs it to `/Users/<name>/Qt/<version>/macos`
+    Set `CMAKE_PREFIX_PATH` to your Qt installation path. Installing Qt via the online installer usually installs it to `~/Qt`
 6. Build the project
     ```sh
     cmake --build . -j $(nproc)
@@ -321,6 +322,8 @@ The installation is straight forward, just follow the steps below:
     ```sh
     cmake --install
     ```
-Note: Make sure to add `/usr/local/lib` to your DYLIB path, for MacOS to find the installed libraries by exporting `DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/usr/local/lib`.
+Note: Make sure to add `/usr/local/lib` to your DYLIB path, for macOS to find the installed libraries by exporting `DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/usr/local/lib`.
+
+ 8. Run the binary at `/usr/local/lib/librum`.
 
 <br>
