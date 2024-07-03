@@ -53,4 +53,8 @@ ListModel {
         text: "Français"
         code: "fr"
     }
+    ListElement {
+        text: "Tiếng Việt"
+        code: "vi"
+    }
 }
