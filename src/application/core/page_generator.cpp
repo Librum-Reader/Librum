@@ -86,12 +86,11 @@ mupdf::FzPixmap PageGenerator::renderPage(float zoom, const std::string& hexColo
     auto pixmap = getEmptyPixmap(matrix);
 
 	// Set the color of the pixmap to rgb #124455
-	// float color[3] = {0.0705882, 0.270588, 0.333333};
-	mupdf::FzColorspace fz_colorspace = mupdf::FzColorspace::Fixed_RGB;
-	mupdf::FzColorParams fz_color_params = mupdf::FzColorParams();
-	pixmap.fz_fill_pixmap_with_color(mupdf::FzColorspace::Fixed_RGB, convertHexToRGB(hexColor).data(), fz_color_params);
+	pixmap.fz_fill_pixmap_with_color(mupdf::FzColorspace::Fixed_RGB, convertHexToRGB(hexColor).data(), mupdf::FzColorParams());
 
+	// Define options with text color
     auto drawDevice = mupdf::fz_new_draw_device(mupdf::FzMatrix(), pixmap);
+
 
     // Determine the page offset the first time we render the page
     if(m_pageXOffset == 0 && m_pageYOffset == 0)
@@ -127,18 +126,11 @@ mupdf::FzPixmap PageGenerator::renderPage(float zoom, const std::string& hexColo
     m_displayList.fz_run_display_list(drawDevice, matrix, rect, cookie);
     drawDevice.fz_close_device();
 
+	// A bad attempt to change text color....
+	// pixmap.fz_tint_pixmap(0xF4F4F4, 0x000000);
+
     if(m_invertColor)
         pixmap.fz_invert_pixmap();
-
-
-	// Debugging and to understand mupdf API
-	printf("Color isRGB: %d\n", pixmap.colorspace().fz_colorspace_is_rgb());
-	printf("Color name: %s\n", pixmap.colorspace().fz_colorspace_name());
-	printf("Color n value: %d\n", pixmap.colorspace().fz_colorspace_n());
-	printf("Color in float array: %f\n", pixmap.colorspace().m_internal[0]);
-	printf("Color in float array: %f\n", pixmap.colorspace().m_internal[1]);
-	printf("Color in float array: %f\n", pixmap.colorspace().m_internal[2]);
-
 
     return pixmap;
 }
@@ -156,7 +148,6 @@ std::array<float, 3> PageGenerator::convertHexToRGB(const std::string& hex)
     }
     return rgb;
 }
-
 
 mupdf::FzPixmap PageGenerator::getEmptyPixmap(
     const mupdf::FzMatrix& matrix) const
