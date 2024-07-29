@@ -71,11 +71,6 @@ void PageGenerator::setupLinks()
     }
 }
 
-// mupdf::FzPixmap PageGenerator::renderPage(float zoom)
-// {
-// 	renderPage(zoom, "#000000");
-// }
-
 mupdf::FzPixmap PageGenerator::renderPage(float zoom, const std::string& hexColor)
 {
     // Create matrix with zoom
@@ -85,12 +80,10 @@ mupdf::FzPixmap PageGenerator::renderPage(float zoom, const std::string& hexColo
 
     auto pixmap = getEmptyPixmap(matrix);
 
-	// Set the color of the pixmap to rgb #124455
+	// Set initial color of pixmap to custom rgb hex code
 	pixmap.fz_fill_pixmap_with_color(mupdf::FzColorspace::Fixed_RGB, convertHexToRGB(hexColor).data(), mupdf::FzColorParams());
 
-	// Define options with text color
     auto drawDevice = mupdf::fz_new_draw_device(mupdf::FzMatrix(), pixmap);
-
 
     // Determine the page offset the first time we render the page
     if(m_pageXOffset == 0 && m_pageYOffset == 0)
@@ -135,6 +128,7 @@ mupdf::FzPixmap PageGenerator::renderPage(float zoom, const std::string& hexColo
     return pixmap;
 }
 
+// Convert hex color to acceptable rgb format for colorspace
 std::array<float, 3> PageGenerator::convertHexToRGB(const std::string& hex)
 {	
     std::array<float, 3> rgb = {0.0f, 0.0f, 0.0f};

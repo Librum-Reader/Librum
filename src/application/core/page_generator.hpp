@@ -30,7 +30,6 @@ public:
     int getPageXOffset() const;
     int getPageYOffset() const;
 
-    // mupdf::FzPixmap renderPage(float zoom);
     mupdf::FzPixmap renderPage(float zoom, const std::string& hexColor);
     void setInvertColor(bool newInvertColor);
 
