@@ -71,7 +71,7 @@ void PageGenerator::setupLinks()
     }
 }
 
-mupdf::FzPixmap PageGenerator::renderPage(float zoom)
+mupdf::FzPixmap PageGenerator::renderPage(float zoom, const std::string& hexColor)
 {
     // Create matrix with zoom
     mupdf::FzMatrix matrix;
@@ -79,6 +79,10 @@ mupdf::FzPixmap PageGenerator::renderPage(float zoom)
     matrix.d = zoom;
 
     auto pixmap = getEmptyPixmap(matrix);
+
+	// Set initial color of pixmap to custom rgb hex code
+	pixmap.fz_fill_pixmap_with_color(mupdf::FzColorspace::Fixed_RGB, convertHexToRGB(hexColor).data(), mupdf::FzColorParams());
+
     auto drawDevice = mupdf::fz_new_draw_device(mupdf::FzMatrix(), pixmap);
 
     // Determine the page offset the first time we render the page
@@ -115,10 +119,28 @@ mupdf::FzPixmap PageGenerator::renderPage(float zoom)
     m_displayList.fz_run_display_list(drawDevice, matrix, rect, cookie);
     drawDevice.fz_close_device();
 
+	// A bad attempt to change text color....
+	// pixmap.fz_tint_pixmap(0xF4F4F4, 0x000000);
+
     if(m_invertColor)
         pixmap.fz_invert_pixmap();
 
     return pixmap;
+}
+
+// Convert hex color to acceptable rgb format for colorspace
+std::array<float, 3> PageGenerator::convertHexToRGB(const std::string& hex)
+{	
+    std::array<float, 3> rgb = {0.0f, 0.0f, 0.0f};
+    if (hex[0] == '#') {
+        std::string hexColor = hex.substr(1);
+
+        // Convert hex to rgb
+        rgb[0] = std::stoi(hexColor.substr(0, 2), nullptr, 16) / 255.0f;
+        rgb[1] = std::stoi(hexColor.substr(2, 2), nullptr, 16) / 255.0f;
+        rgb[2] = std::stoi(hexColor.substr(4, 2), nullptr, 16) / 255.0f;
+    }
+    return rgb;
 }
 
 mupdf::FzPixmap PageGenerator::getEmptyPixmap(

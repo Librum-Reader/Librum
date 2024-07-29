@@ -156,7 +156,7 @@ QImage MetadataExtractor::getCover()
     try
     {
         core::PageGenerator page(m_document.get(), 0);
-        return utils::qImageFromPixmap(page.renderPage(1.0));
+        return utils::qImageFromPixmap(page.renderPage(1.0, "#FFFFFF"));	// #FFFFFF is white color for default cover
     }
     catch(...)
     {

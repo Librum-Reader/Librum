@@ -60,7 +60,7 @@ QImage PageController::renderPage()
         return m_pageImage;
 
     auto zoom = m_matrix.a;
-    m_pageImage = utils::qImageFromPixmap(m_pageGenerator.renderPage(zoom));
+    m_pageImage = utils::qImageFromPixmap(m_pageGenerator.renderPage(zoom, "#CECECE"));	// Require custom color passed from qml
 
     auto xOffset = m_pageGenerator.getPageXOffset();
     auto yOffset = m_pageGenerator.getPageYOffset();

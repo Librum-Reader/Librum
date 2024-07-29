@@ -1,6 +1,7 @@
 #pragma once
 #include <QList>
 #include <QPair>
+#include <array>
 #include <string>
 #include <vector>
 #include "application_export.hpp"
@@ -29,7 +30,7 @@ public:
     int getPageXOffset() const;
     int getPageYOffset() const;
 
-    mupdf::FzPixmap renderPage(float zoom);
+    mupdf::FzPixmap renderPage(float zoom, const std::string& hexColor);
     void setInvertColor(bool newInvertColor);
 
     bool pointIsAboveText(mupdf::FzPoint point);
@@ -42,6 +43,8 @@ public:
                                                     mupdf::FzPoint end);
     utils::FzPointPair getPositionsForLineSelection(mupdf::FzPoint point);
     std::string getTextFromSelection(mupdf::FzPoint start, mupdf::FzPoint end);
+
+	std::array<float, 3> convertHexToRGB(const std::string& hex);
 
 private:
     void setupDisplayList(const mupdf::FzRect& boundPage);
