@@ -21,7 +21,8 @@ set(translation_files
     translations/librum_ru.ts
     translations/librum_ko.ts
     translations/librum_ar.ts
-    translations/librum_zh.ts
+    translations/librum_zh_CN.ts
+    translations/librum_zh_TW.ts
     translations/librum_uk.ts
     translations/librum_pt.ts
     translations/librum_id.ts

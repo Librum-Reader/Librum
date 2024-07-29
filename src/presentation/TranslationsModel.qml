@@ -34,8 +34,12 @@ ListModel {
         code: "ko"
     }
     ListElement {
-        text: "中文"
-        code: "zh"
+        text: "简体中文"
+        code: "zh_CN"
+    }
+    ListElement {
+        text: "繁體中文"
+        code: "zh_TW"
     }
     ListElement {
         text: "Português"
