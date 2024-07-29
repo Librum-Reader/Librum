@@ -28,7 +28,10 @@ ListModel {
         text: "Русский" // Russian
     }
     ListElement {
-        text: "中文" // Chinese
+        text: "简体中文" // Simplified Chinese
+    }
+    ListElement {
+        text: "繁體中文" // Traditional Chinese
     }
     ListElement {
         text: "日本語" // Japanese
