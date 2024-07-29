@@ -71,7 +71,12 @@ void PageGenerator::setupLinks()
     }
 }
 
-mupdf::FzPixmap PageGenerator::renderPage(float zoom)
+// mupdf::FzPixmap PageGenerator::renderPage(float zoom)
+// {
+// 	renderPage(zoom, "#000000");
+// }
+
+mupdf::FzPixmap PageGenerator::renderPage(float zoom, const std::string& hexColor)
 {
     // Create matrix with zoom
     mupdf::FzMatrix matrix;
@@ -79,6 +84,13 @@ mupdf::FzPixmap PageGenerator::renderPage(float zoom)
     matrix.d = zoom;
 
     auto pixmap = getEmptyPixmap(matrix);
+
+	// Set the color of the pixmap to rgb #124455
+	// float color[3] = {0.0705882, 0.270588, 0.333333};
+	mupdf::FzColorspace fz_colorspace = mupdf::FzColorspace::Fixed_RGB;
+	mupdf::FzColorParams fz_color_params = mupdf::FzColorParams();
+	pixmap.fz_fill_pixmap_with_color(mupdf::FzColorspace::Fixed_RGB, convertHexToRGB(hexColor).data(), fz_color_params);
+
     auto drawDevice = mupdf::fz_new_draw_device(mupdf::FzMatrix(), pixmap);
 
     // Determine the page offset the first time we render the page
@@ -118,8 +130,33 @@ mupdf::FzPixmap PageGenerator::renderPage(float zoom)
     if(m_invertColor)
         pixmap.fz_invert_pixmap();
 
+
+	// Debugging and to understand mupdf API
+	printf("Color isRGB: %d\n", pixmap.colorspace().fz_colorspace_is_rgb());
+	printf("Color name: %s\n", pixmap.colorspace().fz_colorspace_name());
+	printf("Color n value: %d\n", pixmap.colorspace().fz_colorspace_n());
+	printf("Color in float array: %f\n", pixmap.colorspace().m_internal[0]);
+	printf("Color in float array: %f\n", pixmap.colorspace().m_internal[1]);
+	printf("Color in float array: %f\n", pixmap.colorspace().m_internal[2]);
+
+
     return pixmap;
 }
+
+std::array<float, 3> PageGenerator::convertHexToRGB(const std::string& hex)
+{	
+    std::array<float, 3> rgb = {0.0f, 0.0f, 0.0f};
+    if (hex[0] == '#') {
+        std::string hexColor = hex.substr(1);
+
+        // Convert hex to rgb
+        rgb[0] = std::stoi(hexColor.substr(0, 2), nullptr, 16) / 255.0f;
+        rgb[1] = std::stoi(hexColor.substr(2, 2), nullptr, 16) / 255.0f;
+        rgb[2] = std::stoi(hexColor.substr(4, 2), nullptr, 16) / 255.0f;
+    }
+    return rgb;
+}
+
 
 mupdf::FzPixmap PageGenerator::getEmptyPixmap(
     const mupdf::FzMatrix& matrix) const
