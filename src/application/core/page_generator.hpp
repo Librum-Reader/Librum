@@ -48,7 +48,7 @@ private:
     void setupTextPage(int pageNumber);
     void setupSymbolBounds();
     void setupLinks();
-    mupdf::FzPixmap getEmptyPixmap(const mupdf::FzMatrix& matrix) const;
+    mupdf::FzPixmap getEmptyPixmap(const mupdf::FzMatrix& scaleMatrix) const;
     void setPageOffsets(int xOffset, int yOffset);
 
     const mupdf::FzDocument* m_document;

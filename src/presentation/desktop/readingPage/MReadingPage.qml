@@ -34,17 +34,6 @@ Page {
         onTriggered: internal.saveCurrentPage()
     }
 
-    // Shortcut {
-    //     id: zoomIn
-    //     sequences: [SettingsController.shortcuts.ZoomIn]
-    //     onActivated: documentView.changeZoomBy(1.13)
-    // }
-
-    // Shortcut {
-    //     id: zoomOut
-    //     sequences: [SettingsController.shortcuts.ZoomOut]
-    //     onActivated: documentView.changeZoomBy(0.87)
-    // }
     Shortcut {
         id: nextPage
         sequences: [SettingsController.shortcuts.NextPage]
@@ -117,7 +106,6 @@ Page {
         MReadingToolBar {
             id: toolbar
             Layout.fillWidth: true
-            currentPage: BookController.currentPage
             pageCount: BookController.pageCount
             bookTitle: Globals.selectedBook.title
 
@@ -163,6 +151,10 @@ Page {
             onOptionsPopupVisibileChanged: {
                 optionsButton.active = !optionsButton.active
             }
+
+            onZoomChanged: newZoom => {
+                               documentView.setZoom(newZoom)
+                           }
 
             PropertyAnimation {
                 id: hideToolbar
@@ -329,8 +321,7 @@ Page {
         property bool fullScreen: false
         property int prevCurrentPage: -1
 
-        // Just assign it once (no binding)
-        Component.onCompleted: prevCurrentPage = BookController.currentPage
+        Component.onCompleted: prevCurrentPage = documentView.documentView.currentPage
 
         function startFullScreenMode() {
             if (internal.fullScreen)
@@ -357,7 +348,7 @@ Page {
         }
 
         function saveCurrentPage() {
-            let currentPage = BookController.currentPage
+            let currentPage = documentView.documentView.currentPage
             if (currentPage === internal.prevCurrentPage)
                 return
 

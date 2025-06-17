@@ -19,20 +19,20 @@ void imageCleanupHandler(void* data)
     delete[] samples;
 }
 
-QRectF fzRectToQRectF(const mupdf::FzRect& rect)
+}  // namespace
+
+using FzPointPair = QPair<mupdf::FzPoint, mupdf::FzPoint>;
+
+inline QRectF fzRectToQRectF(const mupdf::FzRect& rect)
 {
     return QRectF(rect.x0, rect.y0, rect.x1 - rect.x0, rect.y1 - rect.y0);
 }
 
-mupdf::FzRect qRectFtoFzRect(const QRectF& rect)
+inline mupdf::FzRect qRectFtoFzRect(const QRectF& rect)
 {
     return mupdf::FzRect(rect.topLeft().x(), rect.topLeft().y(),
                          rect.bottomRight().x(), rect.bottomRight().y());
 }
-
-}  // namespace
-
-using FzPointPair = QPair<mupdf::FzPoint, mupdf::FzPoint>;
 
 // Public
 inline QPointF scalePointToCurrentZoom(const QPointF& point, float oldZoom,

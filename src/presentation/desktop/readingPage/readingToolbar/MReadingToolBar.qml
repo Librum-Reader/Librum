@@ -12,7 +12,6 @@ Pane {
     id: root
     property bool fullScreenMode: false
     property string bookTitle: qsTr("Unknown name")
-    property int currentPage: 0
     property int lastPage: 0
     property int pageCount: 0
     property alias chapterButton: chapterButton
@@ -28,6 +27,7 @@ Pane {
     signal currentPageButtonClicked
     signal fullScreenButtonClicked
     signal optionsPopupVisibileChanged
+    signal zoomChanged(real zoom)
 
     implicitHeight: 48
     padding: 8
@@ -142,10 +142,10 @@ Pane {
                         horizontalAlignment: TextInput.AlignHCenter
                         verticalAlignment: TextInput.AlignVCenter
                         selectByMouse: true
-                        text: root.currentPage + 1
                         color: Style.colorBaseInputText
                         font.pointSize: Fonts.size12
                         font.weight: Font.Normal
+                        text: documentView.documentView.currentPage + 1
                         validator: IntValidator {
                             bottom: 0
                             top: 99999
@@ -164,18 +164,10 @@ Pane {
                         // but we present them as 1 to pageCount to the user.
                         onEditingFinished: {
                             let newPage = Number(inputField.text)
-                            if (root.currentPage == newPage - 1)
-                                return
+                            documentView.documentView.currentPage = newPage - 1
 
-                            if (newPage < 1 || newPage > root.pageCount) {
-                                inputField.text = Qt.binding(
-                                            () => root.currentPage + 1)
-                                return
-                            }
-
-                            documentView.setPage(newPage - 1)
-                            documentView.forceActiveFocus(
-                                        ) // Discard focus when finished
+                            // Discard focus when finished
+                            documentView.documentView.forceActiveFocus()
                         }
                     }
                 }
@@ -266,35 +258,23 @@ Pane {
                 }
             }
 
-            // Need to run a timer to create the binding, since the combobox does not set the text correctly
-            // when trying to just assign it during onCompleted
-            Component.onCompleted: zoomAssignment.start()
-            Timer {
-                id: zoomAssignment
-                property int firstTime: 0
-
-                interval: 5
-                onTriggered: {
-                    zoomComboBox.text = Qt.binding(function () {
-                        return Math.round(BookController.zoom * 100) + "%"
-                    })
-
-                    // Only wanna do this the first time
-                    if (firstTime == 0) {
-                        zoomComboBox.selectItemByValue(zoomComboBox.text)
-                        firstTime++
-                    }
-                }
-            }
-
-            // Remove % sign from text
             onItemChanged: {
                 if (text === "")
                     return
 
-                BookController.zoom = zoomComboBox.text.substring(
-                            0, zoomComboBox.text.length - 1) / 100
-                zoomAssignment.start() // Force rebinding
+                // Remove % sign from text and convert to number
+                let zoom = zoomComboBox.text.substring(
+                        0, zoomComboBox.text.length - 1) / 100
+                root.zoomChanged(zoom)
+                zoomComboBox.closePopup()
+            }
+
+            Connections {
+                target: documentView.documentView
+                function onCurrentZoomChanged() {
+                    zoomComboBox.text = Math.round(
+                                documentView.documentView.currentZoom * 100) + "%"
+                }
             }
         }
 
