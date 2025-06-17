@@ -60,7 +60,8 @@ inline std::vector<uint32_t> toUtf32(const QString& str)
     std::vector<uint32_t> result;
     result.reserve(str.size());
 
-    for (QChar ch : str) {
+    for (QChar ch : str)
+    {
         result.push_back(ch.unicode());
     }
 
