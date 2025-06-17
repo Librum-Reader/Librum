@@ -45,7 +45,7 @@ bool BookmarksProxyModel::lessThan(const QModelIndex& left,
 bool BookmarksProxyModel::filterAcceptsRow(
     int source_row, const QModelIndex& source_parent) const
 {
-    if(m_filterString.isEmpty())
+    if(m_filterString.isEmpty() || !m_filterScorer)
         return true;
 
     auto index = sourceModel()->index(source_row, 0, source_parent);
@@ -60,7 +60,10 @@ bool BookmarksProxyModel::filterAcceptsRow(
 
 void BookmarksProxyModel::setFilterString(QString newFilterString)
 {
+
     m_filterString = newFilterString;
+    auto input = string_utils::toUtf32(newFilterString);
+    m_filterScorer = std::make_unique<rapidfuzz::fuzz::CachedRatio<uint32_t>>(input);
     emit filterStringUpdated();
     invalidate();
 }

@@ -54,4 +54,17 @@ inline bool lexicographicallyLess(const QString& left, const QString& right)
     return left.toLower() < right.toLower();
 }
 
+// QString is utf-16 and needs to be utf-32 for rapidfuzz
+inline std::vector<uint32_t> toUtf32(const QString& str)
+{
+    std::vector<uint32_t> result;
+    result.reserve(str.size());
+
+    for (QChar ch : str) {
+        result.push_back(ch.unicode());
+    }
+
+    return result;
+}
+
 }  // namespace string_utils
