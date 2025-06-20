@@ -29,7 +29,7 @@ private:
     QNetworkRequest createRequest(QUrl url);
 
     QNetworkAccessManager m_networkAccessManager;
-    QString domain;
+    QString m_serverHost;
 };
 
 }  // namespace infrastructure::persistence

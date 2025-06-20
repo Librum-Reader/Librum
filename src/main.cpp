@@ -51,7 +51,7 @@ using namespace application::services;
 
 
 void registerTypes();
-void setupGlobalSettings();
+void initializeAppSettings();
 void setupFonts();
 
 int main(int argc, char* argv[])
@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
 #if !defined(Q_OS_ANDROID) && !defined(Q_OS_IOS)
     qInstallMessageHandler(logging::messageHandler);
 #endif
-    setupGlobalSettings();
+    initializeAppSettings();
     setupFonts();
 
     // Register types
@@ -308,31 +308,34 @@ int main(int argc, char* argv[])
     // clang-format on
 }
 
-void setupGlobalSettings()
+void initializeAppSettings()
 {
-    QSettings settings;
-    QString cfgFile = settings.value("serverHost", QVariant("")).toString();
-    if(cfgFile.isEmpty())
-        settings.setValue("serverHost", "https://api.librumreader.com");
+    QSettings appSettings;
 
-    QString sslSettings = settings.value("selfHosted", QVariant("")).toString();
-    if(sslSettings.isEmpty())
-        settings.setValue("selfHosted", "false");
+    QString selfHosted =
+        appSettings.value("selfHosted", QVariant("")).toString();
+    if(selfHosted.isEmpty())
+        appSettings.setValue("selfHosted", "false");
+
+    QString serverHost =
+        appSettings.value("serverHost", QVariant("")).toString();
+    if(serverHost.isEmpty())
+        appSettings.setValue("serverHost", "https://api.librumreader.com");
 }
 
-void loadFont(const QString& path)
+void addFont(const QString& path)
 {
-    int result = QFontDatabase::addApplicationFont(path);
-    if(result == -1)
-        qWarning() << QString("Loading font file: %1 failed.").arg(path);
+    int laodedFontId = QFontDatabase::addApplicationFont(path);
+    if(laodedFontId == -1)
+        qWarning() << QString("Failed to load font file: %1.").arg(path);
 }
 
 void setupFonts()
 {
-    loadFont(":/resources/fonts/SF-Pro-Display-Bold.otf");
-    loadFont(":/resources/fonts/SF-Pro-Display-Medium.otf");
-    loadFont(":/resources/fonts/SF-Pro-Display-Regular.otf");
-    loadFont(":/resources/fonts/SF-Pro-Display-Semibold.otf");
+    addFont(":/resources/fonts/SF-Pro-Display-Bold.otf");
+    addFont(":/resources/fonts/SF-Pro-Display-Medium.otf");
+    addFont(":/resources/fonts/SF-Pro-Display-Regular.otf");
+    addFont(":/resources/fonts/SF-Pro-Display-Semibold.otf");
 
     QFont defaultFont("SF Pro Display");
     defaultFont.setLetterSpacing(QFont::AbsoluteSpacing, 0.1);

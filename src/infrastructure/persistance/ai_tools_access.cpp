@@ -13,15 +13,15 @@ namespace infrastructure::persistence
 
 AiToolsAccess::AiToolsAccess()
 {
-    QSettings settings;
-    domain = settings.value("serverHost").toString();
+    QSettings appSettings;
+    m_serverHost = appSettings.value("serverHost").toString();
 }
 
 void AiToolsAccess::getExplanation(const QString& authToken,
                                    const QString& query, const QString& mode)
 {
     auto request =
-        createRequest(domain + data::aiCompletionEndpoint, authToken);
+        createRequest(m_serverHost + data::aiCompletionEndpoint, authToken);
     request.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
                          QNetworkRequest::AlwaysNetwork);
 
@@ -90,7 +90,7 @@ void AiToolsAccess::getTranslation(const QString& authToken,
                                    const QString& targetLang)
 {
     auto request =
-        createRequest(domain + data::aiTranslationEndpoint, authToken);
+        createRequest(m_serverHost + data::aiTranslationEndpoint, authToken);
     request.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
                          QNetworkRequest::AlwaysNetwork);
 
