@@ -758,7 +758,8 @@ Page {
         }
 
         onLeftButtonClicked: LibraryController.addBook(
-                                 internal.lastAddedBookPath, true)
+                                 internal.lastAddedBookPath, true, 0,
+                                 LibraryController.libraryModel.folder)
     }
 
     MWarningPopup {
@@ -866,7 +867,8 @@ Page {
             for (var i = container.length - 1; i >= 0; i--) {
                 internal.lastAddedBookPath = container[i]
                 let result = LibraryController.addBook(
-                        internal.lastAddedBookPath)
+                        internal.lastAddedBookPath, false, 0,
+                        LibraryController.libraryModel.folder)
 
                 // Remove the already added book
                 container.splice(i, 1)

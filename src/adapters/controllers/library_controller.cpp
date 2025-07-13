@@ -125,7 +125,7 @@ void LibraryController::syncWithServer()
 }
 
 int LibraryController::addBook(const QString& path, bool allowDuplicates,
-                               int projectGutenbergId)
+                               int projectGutenbergId, QString parentFolder)
 {
     auto localPath = QUrl(path).toLocalFile();
     QFileInfo fileInfo(localPath);
@@ -134,7 +134,7 @@ int LibraryController::addBook(const QString& path, bool allowDuplicates,
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
     auto result = m_libraryService->addBook(localPath, allowDuplicates,
-                                            projectGutenbergId);
+                                            projectGutenbergId, parentFolder);
     QApplication::restoreOverrideCursor();
 
     emit addingBookFinished(
