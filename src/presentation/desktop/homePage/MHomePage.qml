@@ -864,14 +864,14 @@ Page {
         // adding is resumed by calling continueAddingBooks().
         function addBooks(container) {
             internal.booksCurrentlyAdding = container
-            for (var i = container.length - 1; i >= 0; i--) {
-                internal.lastAddedBookPath = container[i]
+            for (var i = internal.booksCurrentlyAdding.length - 1; i >= 0; i--) {
+                internal.lastAddedBookPath = internal.booksCurrentlyAdding[i]
                 let result = LibraryController.addBook(
                         internal.lastAddedBookPath, false, 0,
                         LibraryController.libraryModel.folder)
 
                 // Remove the already added book
-                container.splice(i, 1)
+                internal.booksCurrentlyAdding.splice(i, 1)
 
                 if (result === BookOperationStatus.OpeningBookFailed) {
                     unsupportedFilePopup.open()
