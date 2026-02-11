@@ -56,6 +56,16 @@ void AuthenticationService::tryAutomaticLogin()
     processAuthenticationResult(authData.token, ErrorCode::NoError);
 }
 
+void AuthenticationService::loginOffline()
+{
+    // Generate a dummy token for offline mode
+    QString dummyToken = "offline_token";
+    QString dummyEmail = "offline_user@local";
+    
+    emit loggedIn(dummyToken, dummyEmail);
+    emit loginFinished(ErrorCode::NoError);
+}
+
 void AuthenticationService::logoutUser()
 {
     emit loggedOut();

@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Controls.Basic
 import QtQuick.Layouts
 import CustomComponents
 import Librum.style
@@ -69,13 +70,12 @@ Pane {
                 Layout.fillWidth: true
             }
 
-            IconImage {
+            Image {
                 id: closeIcon
                 source: Icons.xIcon
                 Layout.alignment: Qt.AlignVCenter
                 sourceSize.width: 22
                 opacity: closeArea.pressed ? 0.6 : 1
-                color: Style.colorAlertClose
                 fillMode: Image.PreserveAspectFit
 
                 MouseArea {

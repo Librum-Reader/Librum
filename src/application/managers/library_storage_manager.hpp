@@ -9,6 +9,8 @@ namespace application::managers
 
 class LibraryStorageManager : public ILibraryStorageManager
 {
+    Q_OBJECT
+
 public:
     LibraryStorageManager(ILibraryStorageGateway* bookStorageGateway,
                           ILocalLibraryTracker* downloadedBooksTracker);

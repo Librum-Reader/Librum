@@ -19,6 +19,7 @@ public:
     void loginUser(const QString& email, const QString& password,
                    bool rememberUser) override;
     void tryAutomaticLogin() override;
+    void loginOffline() override;
     void logoutUser() override;
     void registerUser(const QString& name, const QString& email,
                       QString password, bool keepUpdated) override;

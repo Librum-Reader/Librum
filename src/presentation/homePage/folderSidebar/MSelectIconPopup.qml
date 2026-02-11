@@ -143,12 +143,11 @@ Popup {
                 border.color: Style.colorContainerBorder
                 color: "transparent"
 
-                IconImage {
+                Image {
                     id: iconImage
                     anchors.centerIn: parent
                     sourceSize.width: 26
                     fillMode: Image.PreserveAspectFit
-                    color: Style.colorFolderIconSelection
                     source: "qrc:/resources/images/folder_icons/" + iconRect.name + ".svg"
                 }
 

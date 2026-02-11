@@ -279,7 +279,7 @@ Item {
                                 }
                             }
 
-                            IconImage {
+                            Image {
                                 id: icon
                                 Layout.preferredWidth: implicitWidth
                                 Layout.leftMargin: treeNode.hasChildren ? indicator.width * 0.1 : indicator.width * 1.1 + depth * treeView.indent + 2
@@ -290,8 +290,7 @@ Item {
                                         + treeNode.icon + ".svg"
                                 sourceSize.width: 20
                                 fillMode: Image.PreserveAspectFit
-                                color: treeNode.color
-                                       === "default" ? Style.colorDefaultFolderIcon : treeNode.color
+
 
                                 MouseArea {
                                     id: iconArea

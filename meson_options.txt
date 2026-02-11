@@ -1,0 +1,3 @@
+option('build_tests', type: 'boolean', value: false, description: 'Build unit tests')
+option('enable_coverage', type: 'boolean', value: false, description: 'Enable code coverage instrumentation')
+option('use_sanitizers', type: 'boolean', value: false, description: 'Enable sanitizers (address, undefined, etc.)')

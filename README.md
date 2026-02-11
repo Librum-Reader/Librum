@@ -173,6 +173,8 @@ Want a new feature? Feel free to leave a feature request ticket!
 
 # Build Guide
 
+**Note**: Librum has migrated from CMake to Meson build system. The new build system uses system packages instead of git submodules. See [MIGRATION.md](MIGRATION.md) for details.
+
 Follow this guide to build Librum from source.
 <br>
 
@@ -180,11 +182,39 @@ Follow this guide to build Librum from source.
 ## For GNU/Linux
 
 ### Prerequisites
-- cmake                             (https://cmake.org/download)
-- make                              (http://ftp.gnu.org/gnu/make)
+- meson                             (https://mesonbuild.com)
+- ninja                             (https://ninja-build.org)
 - g++                               (https://gcc.gnu.org)
 - python3-venv                      (on ubuntu use `sudo apt install python3-venv`)
-- Qt 6.5                            (https://www.qt.io/download-open-source)
+- Qt 6.5 or later                   (https://www.qt.io/download-open-source)
+- System packages: mupdf, rapidfuzz-cpp, boost-di, googletest/gmock
+
+On Ubuntu/Debian, you can install most dependencies with:
+```sh
+sudo apt install meson ninja-build g++ python3-venv libmupdf-dev rapidfuzz-cpp-dev googletest libgmock-dev
+```
+Note: Some dependencies require manual installation:
+
+**Boost.DI** (header-only dependency injection framework):
+```sh
+# Create directory and download Boost.DI header
+sudo mkdir -p /usr/include/boost-di/boost
+sudo wget -O /usr/include/boost-di/boost/di.hpp https://raw.githubusercontent.com/boost-ext/di/develop/include/boost/di.hpp
+
+# Alternative: Install to local include path
+mkdir -p ~/.local/include/boost
+wget -O ~/.local/include/boost/di.hpp https://raw.githubusercontent.com/boost-ext/di/develop/include/boost/di.hpp
+export CPLUS_INCLUDE_PATH=~/.local/include:$CPLUS_INCLUDE_PATH
+```
+
+**gcovr** (for code coverage reports, optional):
+```sh
+pip install gcovr
+# Or on Ubuntu/Debian:
+sudo apt install python3-gcovr
+```
+
+The build system will work without gcovr, but coverage reports won't be generated.
 
 ### Installation
 The installation is straight forward, just follow the steps below:
@@ -193,31 +223,68 @@ The installation is straight forward, just follow the steps below:
 
 1. Clone the repository.
     ```sh
-    git clone https://github.com/Librum-Reader/Librum.git --recursive
+    git clone https://github.com/Librum-Reader/Librum.git
     ```
 2. Step into the cloned project folder.
     ```sh
     cd Librum
     ```
-3. Create the build folder and step into it.
+3. Configure the build with meson.
     ```sh
-    mkdir build-Release
-    cd build-Release
+    meson setup build --buildtype=release --prefix=/usr
     ```
-4. Run cmake.
+    If Qt is not in the default search path, specify the Qt prefix:
     ```sh
-    cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=Off -DCMAKE_PREFIX_PATH=<path/to/Qt> ..
+    meson setup build --buildtype=release --prefix=/usr -Dqt_prefix=<path/to/Qt>
     ```
-    Set `CMAKE_PREFIX_PATH` to your Qt installation path. Installing Qt via the online installer usually installs it to `/home/<name>/Qt/<version>/gcc_64`
-6. Build the project
+    Installing Qt via the online installer usually installs it to `/home/<name>/Qt/<version>/gcc_64`
+    
+    **Additional build options:**
+    - Build with unit tests: add `-Dbuild_tests=true`
+    - Enable code coverage: add `-Denable_coverage=true`
+    - Enable sanitizers: add `-Duse_sanitizers=true`
+4. Build the project
     ```sh
-    cmake --build . -j $(nproc)
+    cd build && ninja
     ```
-7. Install Librum
+5. Install Librum
     ```sh
-    cmake --install .
+    sudo ninja install
     ```
 <br>
+
+### Building with Tests and Coverage
+
+To build and run unit tests:
+```sh
+# Configure with tests enabled
+meson setup build --buildtype=debugoptimized -Dbuild_tests=true
+
+# Build and run tests
+cd build && ninja && ninja test
+
+# Run specific test executable
+./src/domain/domain_unit_tests
+./src/application/application_unit_tests
+./src/adapters/adapters_unit_tests
+```
+
+To generate code coverage reports:
+```sh
+# Configure with coverage enabled
+meson setup build --buildtype=debug -Denable_coverage=true
+
+# Build the project
+cd build && ninja
+
+# Generate HTML coverage report (requires gcovr)
+ninja coverage-report
+
+# Generate XML coverage report
+ninja coverage-xml
+```
+
+Note: Coverage reports require `gcovr` to be installed (`pip install gcovr` or `sudo apt install python3-gcovr`).
 
 ### Troubleshooting
 Here are solutions to some common errors. If your error is not listed here, please open an issue.
@@ -229,10 +296,15 @@ Here are solutions to some common errors. If your error is not listed here, plea
 - Error: `Could not load the qt platform plugin "xcb" even though it was found`
 - Solution: Install the libxcb-cursor-dev, on ubuntu its `sudo apt install libxcb-cursor-dev`
 
+- Error: `MuPDF library not found` or missing other dependencies
+- Solution: Ensure all system packages are installed (mupdf, rapidfuzz-cpp, boost-di, googletest/gmock)
+
 <br>
 
 
 ## For Windows
+**Note**: Librum has migrated from CMake to Meson build system. Windows support with Meson is still pending - see [MIGRATION.md](MIGRATION.md) for details and TODO list. The instructions below are for the legacy CMake build system.
+
 ### Prerequisites
 - cmake                             (https://cmake.org/download)
 - Visual Studio <b>19</b>           (https://visualstudio.microsoft.com/de/vs/older-downloads)
@@ -282,6 +354,7 @@ Here are some things to keep in mind during the build process.
 <br>
 
 ## For MacOS
+**Note**: Librum has migrated from CMake to Meson build system. macOS support with Meson is still pending - see [MIGRATION.md](MIGRATION.md) for details and TODO list. The instructions below are for the legacy CMake build system.
 
 ### Prerequisites
 - cmake                             (https://cmake.org/download)

@@ -11,6 +11,7 @@ import Librum.models
 import Librum.fonts
 
 MFlickWrapper {
+    opacity: 0
     id: root
     contentHeight: Window.height < layout.implicitHeight ? layout.implicitHeight : Window.height
 
@@ -20,11 +21,14 @@ MFlickWrapper {
                               emailInput.giveFocus()
 
     Component.onCompleted: {
+        console.log("LoginPage Component.onCompleted called")
+        console.log("baseRoot:", baseRoot, "externalBookMode:", baseRoot.externalBookMode)
         // Focus the emailInput when page has loaded.
         emailInput.giveFocus()
 
         // For some reason this prevents a SEGV. Directly calling the auto login
         // directly causes the application to crash on startup.
+        console.log("Starting autoLoginTimer...")
         autoLoginTimer.start()
 
         // Determine the index of the language used in the combobox
@@ -35,7 +39,10 @@ MFlickWrapper {
     Timer {
         id: autoLoginTimer
         interval: 0
-        onTriggered: AuthController.tryAutomaticLogin()
+        onTriggered: {
+            console.log("Auto-login timer triggered, calling loginOffline")
+            AuthController.loginOffline()
+        }
     }
 
     Shortcut {
@@ -47,6 +54,7 @@ MFlickWrapper {
         id: proccessLoginResult
         target: AuthController
         function onLoginFinished(errorCode, message) {
+            console.log("AuthController.loginFinished signal received, errorCode:", errorCode, "message:", message)
             internal.processLoginResult(errorCode, message)
         }
     }
@@ -55,12 +63,18 @@ MFlickWrapper {
         id: proccessLoadingUserResult
         target: UserController
         function onFinishedLoadingUser(success) {
+            console.log("UserController.finishedLoadingUser signal received, success:", success)
+            console.log("baseRoot.externalBookMode:", baseRoot.externalBookMode)
             if (success) {
+                console.log("User loaded successfully, loading home page...")
                 if (baseRoot.externalBookMode)
                     loadPage(externalReadingPage)
-                else
+                else {
+                    console.log("Calling loadPage for home page...")
                     loadPage(homePage, sidebar.homeItem, false)
+                }
             } else {
+                console.log("User loading failed, showing login failed popup")
                 loginFailedPopup.open()
             }
 
@@ -339,9 +353,12 @@ MFlickWrapper {
         }
 
         function processLoginResult(errorCode, message) {
-            if (errorCode === ErrorCode.NoError) {
-                UserController.loadUser(rememberMeCheckBox.checked)
-            } else if (errorCode !== ErrorCode.AutomaticLoginFailed) {
+            console.log("processLoginResult called with errorCode:", errorCode, "message:", message)
+            if (errorCode === -1) {
+                console.log("Login successful, loading user...")
+                UserController.loadUser(false)
+            } else if (errorCode !== 25) {
+                console.log("Login failed with error:", errorCode)
                 internal.setLoginError(errorCode, message)
                 loginButton.loading = false
             }

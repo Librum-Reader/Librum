@@ -1,5 +1,5 @@
 #pragma once
-#include "../libs/di/include/boost/di.hpp"
+#include <boost-di/di.hpp>
 #include "ai_explanation_access.hpp"
 #include "ai_explanation_controller.hpp"
 #include "ai_explanation_gateway.hpp"

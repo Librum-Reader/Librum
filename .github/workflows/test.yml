@@ -12,63 +12,62 @@ on:
       - dev/develop
       - main
 
-    
-    
-    
 jobs:
   test_linux:
     name: run on linux
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          submodules: recursive
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
-          version: '6.5.3'
-      
-      - name: Install tools
-        run: sudo apt-get update && sudo apt-get install -y cmake ninja-build clang-15 clang++-15
-          
-      - name: Install dependencies
-        run: sudo apt-get install -y python3-venv
-          
+          version: "6.5.3"
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build clang-15 clang++-15 python3-pip
+          sudo apt-get install -y libmupdf-dev rapidfuzz-cpp-dev googletest libgmock-dev
+          sudo apt-get install -y qt6-base-dev qt6-quick-dev qt6-quickcontrols2-dev qt6-tools-dev qt6-translations-l10n
+
+      - name: Install Boost.DI
+        run: |
+          sudo mkdir -p /usr/include/boost-di/boost
+          sudo wget -O /usr/include/boost-di/boost/di.hpp https://raw.githubusercontent.com/boost-ext/di/develop/include/boost/di.hpp
+
+      - name: Install Meson
+        run: pip3 install meson
+
       - name: Build
         run: |
-          mkdir build-Release
-          cd build-Release
-          cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang++-15 -DBUILD_TESTS=ON ..
-          cmake --build .
-          
+          meson setup build --buildtype=release -Dbuild_tests=true
+          cd build
+          ninja
+
       - name: Run tests
         run: |
-          cd build-Release
-          ctest
-
-
+          cd build
+          ninja test
 
   test_windows:
     name: run on windows
     runs-on: windows-2019
     steps:
       - uses: actions/checkout@v3
-        with:
-          submodules: recursive
-      
+
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
-          version: '6.5.3'
-          
+          version: "6.5.3"
+
       - name: Build
         run: |
           mkdir build
           cd build
           cmake -DBUILD_TESTS=On ..
           cmake --build . --config Release
-          
+
       - name: Run tests
         run: |
           cd build

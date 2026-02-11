@@ -113,14 +113,13 @@ Popup {
                 anchors.verticalCenter: parent.verticalCenter
                 spacing: 0
 
-                IconImage {
+                Image {
                     Layout.preferredWidth: implicitWidth
                     Layout.leftMargin: 22 * 1.1 + 2
                     Layout.alignment: Qt.AlignVCenter
                     opacity: headerArea.pressed ? 0.7 : 1
                     source: "qrc:/resources/images/folder_icons/folder.svg"
                     sourceSize.width: 20
-                    color: Style.colorDefaultFolderIcon
                     fillMode: Image.PreserveAspectFit
                 }
 
@@ -241,7 +240,7 @@ Popup {
                             rotation: treeNode.expanded ? 90 : 0
                         }
 
-                        IconImage {
+                        Image {
                             id: icon
                             Layout.preferredWidth: implicitWidth
                             Layout.leftMargin: treeNode.hasChildren ? indicator.width * 0.1 : indicator.width * 1.1 + depth * treeView.indent + 2
@@ -250,8 +249,6 @@ Popup {
                             source: "qrc:/resources/images/folder_icons/" + treeNode.icon + ".svg"
                             sourceSize.width: 20
                             fillMode: Image.PreserveAspectFit
-                            color: treeNode.color
-                                   === "default" ? Style.colorDefaultFolderIcon : treeNode.color
                         }
 
                         Label {

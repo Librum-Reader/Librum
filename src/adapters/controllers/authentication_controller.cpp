@@ -49,6 +49,11 @@ void AuthenticationController::tryAutomaticLogin()
     m_authenticationService->tryAutomaticLogin();
 }
 
+void AuthenticationController::loginOffline()
+{
+    m_authenticationService->loginOffline();
+}
+
 void AuthenticationController::logoutUser()
 {
     m_authenticationService->logoutUser();

@@ -165,13 +165,12 @@ Popup {
                             Layout.preferredHeight: 1
                         }
 
-                        IconImage {
+                        Image {
                             Layout.alignment: Qt.AlignVCenter
                             visible: optionButtonRoot.optionButtonIcon !== ""
                             source: optionButtonRoot.optionButtonIcon
                             sourceSize.width: optionButtonRoot.iconSize
                             fillMode: Image.PreserveAspectFit
-                            color: optionButtonRoot.iconColor
                         }
 
                         Image {

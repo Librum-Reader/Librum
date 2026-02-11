@@ -70,6 +70,24 @@ void UserService::loadUser(bool rememberUser)
     // When user was loaded from file, we know that 'rememberMe' is true
     m_rememberUser = success ? true : rememberUser;
 
+    // For offline mode, skip server call and create default user if needed
+    if (m_authenticationToken == "offline_token") {
+        if (!success) {
+            // Create default offline user
+            m_user.setName("Offline User");
+            m_user.setEmail("offline_user@local");
+            m_user.setRole("user");
+            m_user.setUsedBookStorage(0);
+            m_user.setBookStorageLimit(100 * 1024 * 1024); // 100 MB
+            m_user.setHasProfilePicture(false);
+            
+            emit bookStorageDataUpdated(m_user.getUsedBookStorage(),
+                                        m_user.getBookStorageLimit());
+        }
+        emit finishedLoadingUser(true);
+        return;
+    }
+
     m_userStorageGateway->getUser(m_authenticationToken);
 }
 
@@ -455,7 +473,10 @@ void UserService::setupUserData(const QString& token, const QString& email)
     Q_UNUSED(email);
     m_authenticationToken = token;
 
-    m_fetchChangesTimer.start();
+    // Don't start periodic fetching for offline mode
+    if (token != "offline_token") {
+        m_fetchChangesTimer.start();
+    }
 }
 
 void UserService::clearUserData()

@@ -17,6 +17,7 @@ public:
     void loginUser(
         const domain::value_objects::LoginModel& loginModel) override;
     void tryAutomaticLogin() override;
+    void loginOffline() override;
     void registerUser(
         const domain::value_objects::RegisterModel& registerModel) override;
     void checkIfEmailConfirmed(const QString& email) override;
