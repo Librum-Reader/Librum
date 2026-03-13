@@ -28,7 +28,8 @@ Popup {
         if (opened) {
             addTagBox.giveFocus()
             informationLabel.text = Qt.binding(function () {
-                return Globals.bookTags.length + " " + qsTr("TAGS") + "  -  " + Globals.selectedBook.title
+                return Globals.bookTags.length + " " + qsTr(
+                            "TAGS") + "  -  " + Globals.selectedBook.title
             })
         } else {
             addTagBox.close()

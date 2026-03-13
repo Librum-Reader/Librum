@@ -25,8 +25,14 @@ Page {
 
         function onFetchingFirstMetadataPageSuccessful(success) {
             if (!success) {
-                errorMessageLabel.text = qsTr(
-                            "Couldn't load free books. Please, check your network connection")
+                // errorMessageLabel.text = qsTr(
+                //             "Couldn't load free books. Please, check your network connection")
+                errorMessageLabel.text
+                        = "This feature was temporarily disabled due to financial constraints.<br>"
+                        + "To support us please consider" + ' <a href="update" style="color: '
+                        + Style.colorBasePurple.toString(
+                            ) + '; text-decoration: underline;">' + 'upgrading' + '</a>' + "."
+
                 errorMessageLabel.visible = true
             }
 
@@ -98,10 +104,24 @@ Page {
             Layout.alignment: Qt.AlignHCenter
             Layout.leftMargin: -sidebar.width
             Layout.topMargin: Math.round(root.height / 3) - implicitHeight
+            horizontalAlignment: Text.AlignHCenter
+            onLinkActivated: Qt.openUrlExternally(
+                                 AppInfoController.website + "/pricing")
+            textFormat: Text.RichText
+            width: parent.width
             color: Style.colorTitle
             font.pointSize: Fonts.size22
             font.weight: Font.Medium
             visible: false
+
+            // Switch to the proper cursor when hovering above the link
+            MouseArea {
+                id: mouseArea
+                acceptedButtons: Qt.NoButton // Don't eat the mouse clicks
+                anchors.fill: parent
+                cursorShape: errorMessageLabel.hoveredLink
+                             != "" ? Qt.PointingHandCursor : Qt.ArrowCursor
+            }
         }
 
         Pane {

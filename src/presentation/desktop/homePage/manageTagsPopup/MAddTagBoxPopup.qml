@@ -55,6 +55,7 @@ Popup {
                 fontSize: Fonts.size12
                 fontColor: Style.colorLightText
                 checkBoxStyle: false
+                propertyName: "name"
 
                 onClicked: (mouse, index) => internal.selectItem(index)
                 onRenamed: internal.renameTag(index, text)

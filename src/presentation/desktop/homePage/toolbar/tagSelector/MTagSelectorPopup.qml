@@ -73,6 +73,7 @@ Popup {
                     delegate: MBaseListItem {
                         width: listView.width
                         containingListview: listView
+                        propertyName: "name"
 
                         onClicked: internal.selectTag(index)
                         onRenamed: (index, text) => internal.renameTag(index,
