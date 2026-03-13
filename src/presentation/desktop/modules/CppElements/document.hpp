@@ -83,6 +83,7 @@ protected:
     QSGNode* updatePaintNode(QSGNode* oldNode, UpdatePaintNodeData*) override;
     void wheelEvent(QWheelEvent* event) override;
     void keyPressEvent(QKeyEvent* event) override;
+    bool event(QEvent* event) override;
 
 private:
     enum class ZoomMode
@@ -100,7 +101,7 @@ private:
     void moveX(int amount);
     void moveY(int amount);
     void applyZoom(double zoom, ZoomMode zoomMode);
-    double calculateNewZoom(int deltaY);
+    double calculateNewZoom(double deltaY, double zoomFactor);
     double contentYForCenterZoom(double scale);
     double contentYForMouseZoom(double scale);
     void ensureInBounds();

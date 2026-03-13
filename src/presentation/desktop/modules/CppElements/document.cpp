@@ -1,11 +1,12 @@
 #include "document.hpp"
+#include "document_access.hpp"
 #include <QApplication>
 #include <QDesktopServices>
 #include <QPair>
 #include <QRandomGenerator>
 #include <QSGImageNode>
 #include <QSGSimpleRectNode>
-#include "document_access.hpp"
+#include <cmath>
 
 namespace cpp_elements
 {
@@ -143,7 +144,7 @@ void Document::wheelEvent(QWheelEvent* event)
     int deltaY = event->angleDelta().y();
     int deltaX = event->angleDelta().x();
     if(event->modifiers() & Qt::ControlModifier)
-        applyZoom(calculateNewZoom(deltaY), ZoomMode::Mouse);
+        applyZoom(calculateNewZoom(deltaY, m_zoomFactor), ZoomMode::Mouse);
     else
         handleScroll(deltaY, deltaX);
 
@@ -165,7 +166,7 @@ void Document::keyPressEvent(QKeyEvent* event)
     {
         if(event->modifiers() & Qt::ControlModifier)
         {
-            applyZoom(calculateNewZoom(-15), ZoomMode::Keyboard);
+            applyZoom(calculateNewZoom(-15, m_zoomFactor), ZoomMode::Keyboard);
         }
     }
     else if(key == getShortcut("PageDown"))
@@ -175,10 +176,29 @@ void Document::keyPressEvent(QKeyEvent* event)
     // Need to handle CTRL + differently bc. it Key_Plus isn't recognized
     else if(event->key() == Qt::Key_Plus || event->nativeVirtualKey() == 187)
     {
-        applyZoom(calculateNewZoom(15), ZoomMode::Keyboard);
+        applyZoom(calculateNewZoom(15, m_zoomFactor), ZoomMode::Keyboard);
     }
 
     event->accept();
+}
+
+bool Document::event(QEvent *event)
+{
+    if (event->type() == QEvent::NativeGesture) {
+        auto *gestureEvent = static_cast<QNativeGestureEvent *>(event);
+
+        if (gestureEvent->gestureType() == Qt::ZoomNativeGesture) {
+            qreal zoomDelta = gestureEvent->value();
+
+            qreal newZoom = calculateNewZoom(zoomDelta, std::abs(zoomDelta));
+            applyZoom(newZoom, ZoomMode::Mouse);
+
+            gestureEvent->accept();
+            return true;
+        }
+    }
+
+    return QQuickItem::event(event);
 }
 
 void Document::redrawPages()
@@ -314,13 +334,19 @@ void Document::moveY(int amount)
     ensureInBounds();
 }
 
-double Document::calculateNewZoom(int deltaY)
+double Document::calculateNewZoom(double deltaY, double zoomFactor)
 {
-    return m_currentZoom * (deltaY > 0 ? 1 + m_zoomFactor : 1 - m_zoomFactor);
+    return m_currentZoom * (deltaY > 0 ? 1 + zoomFactor : 1 - zoomFactor);
 }
 
 void Document::applyZoom(double newZoom, ZoomMode zoomMode)
 {
+    // Avoid excessive zooms that could cause performance issues
+    if(newZoom > 10)
+        newZoom = 10;
+    else if(newZoom < 0.2)
+        newZoom = 0.2;
+
     double scale = newZoom / m_currentZoom;
     m_currentZoom = newZoom;
     emit currentZoomChanged();
@@ -330,8 +356,7 @@ void Document::applyZoom(double newZoom, ZoomMode zoomMode)
     else if(zoomMode == ZoomMode::Mouse)
         m_contentY = contentYForMouseZoom(scale);
 
-    if(m_contentY < 0)
-        m_contentY = 0;
+    m_contentY = m_contentY < 0 ? 0 : m_contentY; // Ensure not out of bounds
 
     m_contentItem->setHeight((m_pageHeight + m_spacing) *
                                  m_openedBookController->getPageCount() *
