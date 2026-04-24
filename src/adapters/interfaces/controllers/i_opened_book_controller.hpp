@@ -21,6 +21,8 @@ class ADAPTERS_EXPORT IOpenedBookController : public QObject
     Q_PROPERTY(int pageCount READ getPageCount NOTIFY pageCountChanged)
     Q_PROPERTY(int currentPage READ getCurrentPage WRITE setCurrentPage NOTIFY
                    currentPageChanged)
+    Q_PROPERTY(QString colorTheme READ getColorTheme WRITE setColorTheme NOTIFY
+                   colorThemeChanged)
     Q_PROPERTY(adapters::data_models::BookmarksProxyModel* bookmarksModel READ
                    getBookmarksModel NOTIFY bookmarksModelChanged)
 

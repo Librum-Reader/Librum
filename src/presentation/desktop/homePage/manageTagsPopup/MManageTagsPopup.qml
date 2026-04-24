@@ -79,7 +79,7 @@ Popup {
                 Layout.fillWidth: true
 
                 onAddTag: name => {
-                              // Cant use return value, bc. it is null if tag already exists
+                              // Can't use return value, bc. it is null if tag already exists
                               UserController.addTag(name)
 
                               let tagUuid = UserController.getTagUuidForName(

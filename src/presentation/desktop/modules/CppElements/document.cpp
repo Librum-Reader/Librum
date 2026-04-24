@@ -188,12 +188,7 @@ bool Document::event(QEvent *event)
         auto *gestureEvent = static_cast<QNativeGestureEvent *>(event);
 
         if (gestureEvent->gestureType() == Qt::ZoomNativeGesture) {
-            qreal zoomDelta = gestureEvent->value();
-
-            qreal newZoom = calculateNewZoom(zoomDelta, std::abs(zoomDelta));
-            applyZoom(newZoom, ZoomMode::Mouse);
-
-            gestureEvent->accept();
+            handleMousepadZoom(gestureEvent);
             return true;
         }
     }
@@ -217,6 +212,8 @@ void Document::redrawPages()
         if(page == nullptr)
         {
             page = createPage(i);
+            page->setIncludeNewLinesInCopiedText(m_includeNewLinesInCopiedText);
+            page->setColorInverted(m_colorInverted);
             m_activePages.emplace(i, page);
         }
 
@@ -431,6 +428,16 @@ void Document::setCurrentPageWithOffsetY(int currentPage, int offsetY)
     emit currentPageChanged();
 }
 
+void Document::handleMousepadZoom(QNativeGestureEvent* event)
+{
+    qreal zoomDelta = event->value();
+
+    qreal newZoom = calculateNewZoom(zoomDelta, std::abs(zoomDelta));
+    applyZoom(newZoom, ZoomMode::Mouse);
+
+    event->accept();
+}
+
 Qt::Key Document::getShortcut(const QString& value)
 {
     if(m_settingsController == nullptr)
@@ -614,6 +621,22 @@ void Document::setSettingsController(
     adapters::ISettingsController* newSettingsController)
 {
     m_settingsController = newSettingsController;
+}
+
+void Document::setColorInverted(bool newColorInverted)
+{
+    for(auto book : m_activePages.values())
+        book->setColorInverted(newColorInverted);
+
+    m_colorInverted = newColorInverted;
+}
+
+void Document::setIncludeNewLinesInCopiedText(bool newIncludeNewLinesInCopiedText)
+{
+    for(auto book : m_activePages.values())
+        book->setIncludeNewLinesInCopiedText(newIncludeNewLinesInCopiedText);
+
+    m_includeNewLinesInCopiedText = newIncludeNewLinesInCopiedText;
 }
 
 }  // namespace cpp_elements

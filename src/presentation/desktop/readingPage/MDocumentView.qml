@@ -46,6 +46,9 @@ Pane {
         anchors.centerIn: parent
         openedBookController: root.openedBookController
         settingsController: SettingsController
+        colorInverted: root.openedBookController.colorTheme === "Inverted"
+        includeNewLinesInCopiedText: SettingsController.behaviorSettings.IncludeNewLinesInCopiedText
+                                     === "ON"
         clip: true
 
         onCurrentZoomChanged: root.zoomChanged(document.currentZoom)

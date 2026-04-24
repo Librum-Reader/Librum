@@ -11,6 +11,7 @@ Item {
     id: root
     required property int index
     property bool selected: false
+    property bool currentlyRenaming: false
     readonly property alias renameable: container.renameable
     signal removeTag(int index)
     signal renamedTag(int index, string text)
@@ -111,6 +112,7 @@ Item {
     }
 
     function startRenaming() {
+        currentlyRenaming = true
         content.readOnly = false
         content.selectAll()
         content.forceActiveFocus()
@@ -120,6 +122,9 @@ Item {
     }
 
     function stopRenaming(saveText = true) {
+        if (!currentlyRenaming)
+            return
+
         content.readOnly = true
         content.select(0, 0)
         content.deselect()

@@ -38,6 +38,9 @@ class PRESENTATION_EXPORT Document : public QQuickItem
     Q_PROPERTY(int topPageYOffset READ getTopPageYOffset CONSTANT)
     Q_PROPERTY(adapters::IDocumentSearcher* documentSearcher READ
                    getDocumentSearcher CONSTANT)
+    Q_PROPERTY(bool colorInverted WRITE setColorInverted)
+    Q_PROPERTY(bool includeNewLinesInCopiedText WRITE setIncludeNewLinesInCopiedText)
+
 
 public:
     Document();
@@ -66,6 +69,9 @@ public:
     Q_INVOKABLE void removeSelectionFromPage(int pageNumber);
     Q_INVOKABLE void restoreCursor();
     Q_INVOKABLE void hideCursor();
+
+    void setColorInverted(bool newColorInverted);
+    void setIncludeNewLinesInCopiedText(bool newIncludeNewLinesInCopiedText);
 
 signals:
     void mouseMoved(double x, double y);
@@ -109,6 +115,7 @@ private:
     void updateCurrentPage();
     long getContentYForPage(int page) const;
     void setCurrentPageWithOffsetY(int currentPage, int offsetY);
+    void handleMousepadZoom(QNativeGestureEvent* event);
     Qt::Key getShortcut(const QString& value);
 
     adapters::IOpenedBookController* m_openedBookController = nullptr;
@@ -130,6 +137,8 @@ private:
     // Table of Contents
     std::unique_ptr<adapters::data_models::FilteredTOCModel> m_filteredTOCModel;
     std::unique_ptr<adapters::data_models::TOCModel> m_TOCModel;
+    bool m_colorInverted;
+    bool m_includeNewLinesInCopiedText;
 };
 
 }  // namespace cpp_elements
