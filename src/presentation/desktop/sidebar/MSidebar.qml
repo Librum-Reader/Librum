@@ -27,28 +27,28 @@ Item {
       */
     Shortcut {
         sequence: "Ctrl+1"
-        onActivated: loadPage(freeBooksPage, root.freeBooksItem)
         enabled: root.visible
+        onActivated: loadPage(freeBooksPage, root.freeBooksItem)
     }
     Shortcut {
         sequence: "Ctrl+2"
-        onActivated: loadPage(homePage, root.homeItem)
         enabled: root.visible
+        onActivated: loadPage(homePage, root.homeItem)
     }
     Shortcut {
         sequence: "Ctrl+3"
-        onActivated: loadPage(statisticsPage, root.statisticsItem)
         enabled: root.visible
+        onActivated: loadPage(statisticsPage, root.statisticsItem)
     }
     Shortcut {
         sequence: "Ctrl+4"
-        onActivated: loadPage(toolsPage, root.toolsItem)
         enabled: root.visible
+        onActivated: loadPage(toolsPage, root.toolsItem)
     }
     Shortcut {
         sequence: "Ctrl+5"
-        onActivated: loadPage(settings, root.settingsItem)
         enabled: root.visible
+        onActivated: loadPage(settings, root.settingsItem)
     }
 
     Pane {

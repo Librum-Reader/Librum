@@ -14,15 +14,15 @@ namespace infrastructure::persistence
 
 LibraryStorageAccess::LibraryStorageAccess()
 {
-    QSettings settings;
-    domain = settings.value("serverHost").toString();
+    QSettings appSettings;
+    m_serverHost = appSettings.value("serverHost").toString();
 }
 
 void LibraryStorageAccess::createBook(const QString& authToken,
                                       const QJsonObject& jsonBook)
 {
     auto request =
-        createRequest(domain + data::bookCreationEndpoint, authToken);
+        createRequest(m_serverHost + data::bookCreateEndpoint, authToken);
 
     QJsonDocument jsonDocument(jsonBook);
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
@@ -66,7 +66,7 @@ void LibraryStorageAccess::deleteBook(const QString& authToken,
                                       const QUuid& uuid)
 {
     auto request =
-        createRequest(domain + data::bookDeletionEndpoint, authToken);
+        createRequest(m_serverHost + data::bookDeleteEndpoint, authToken);
 
     QJsonArray bookArray;
     bookArray.append(QJsonValue::fromVariant(uuid));
@@ -94,7 +94,8 @@ void LibraryStorageAccess::deleteBook(const QString& authToken,
 void LibraryStorageAccess::updateBook(const QString& authToken,
                                       const QJsonObject& jsonBook)
 {
-    auto request = createRequest(domain + data::bookUpdateEndpoint, authToken);
+    auto request =
+        createRequest(m_serverHost + data::bookUpdateEndpoint, authToken);
 
     QJsonDocument jsonDocument(jsonBook);
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
@@ -146,7 +147,8 @@ void LibraryStorageAccess::uploadBookCover(const QString& authToken,
     bookCover->append(imagePart);
 
 
-    QUrl endpoint = domain + data::changeBookCoverEndpoint + "/" + stringUuid;
+    QUrl endpoint =
+        m_serverHost + data::bookCoverChangeEndpoint + "/" + stringUuid;
     auto request = createRequest(endpoint, authToken);
 
     // Reset the ContentTypeHeader since it will be set by the multipart
@@ -176,7 +178,7 @@ void LibraryStorageAccess::uploadBookCover(const QString& authToken,
 void LibraryStorageAccess::deleteBookCover(const QString& authToken,
                                            const QUuid& uuid)
 {
-    QUrl endpoint = domain + data::deleteBookCoverEndpoint + "/" +
+    QUrl endpoint = m_serverHost + data::bookCoverDeleteEndpoint + "/" +
                     uuid.toString(QUuid::WithoutBraces);
     auto request = createRequest(endpoint, authToken);
 
@@ -202,7 +204,7 @@ void LibraryStorageAccess::deleteBookCover(const QString& authToken,
 void LibraryStorageAccess::getBooksMetaData(const QString& authToken)
 {
     auto request =
-        createRequest(domain + data::booksMetadataGetEndpoint, authToken);
+        createRequest(m_serverHost + data::getBooksMetadataEndpoint, authToken);
     auto reply = m_networkAccessManager.get(request);
 
     connect(reply, &QNetworkReply::finished, this,
@@ -217,7 +219,8 @@ void LibraryStorageAccess::downloadCoverForBook(const QString& authToken,
                                                 const QUuid& uuid)
 {
     QString uuidString = uuid.toString(QUuid::WithoutBraces);
-    QString endpoint = domain + data::getBookCoverEndpoint + "/" + uuidString;
+    QString endpoint =
+        m_serverHost + data::bookCoverGetEndpoint + "/" + uuidString;
     auto request = createRequest(endpoint, authToken);
     auto reply = m_networkAccessManager.get(request);
 
@@ -243,7 +246,7 @@ void LibraryStorageAccess::downloadCoverForBook(const QString& authToken,
 void LibraryStorageAccess::downloadBookMedia(const QString& authToken,
                                              const QUuid& uuid)
 {
-    auto endpoint = domain + data::downloadBookDataEndpoint + "/" +
+    auto endpoint = m_serverHost + data::bookDataDownloadEndpoint + "/" +
                     uuid.toString(QUuid::WithoutBraces);
     auto request = createRequest(endpoint, authToken);
     auto reply = m_networkAccessManager.get(request);
@@ -324,7 +327,7 @@ void LibraryStorageAccess::uploadBookMedia(const QString& uuid,
     }
 
 
-    QUrl endpoint = domain + data::uploadBookDataEndpoint + "/" + uuid;
+    QUrl endpoint = m_serverHost + data::bookDataUploadEndpoint + "/" + uuid;
     auto request = createRequest(endpoint, authToken);
 
     // Reset the ContentTypeHeader since it will be set by the multipart

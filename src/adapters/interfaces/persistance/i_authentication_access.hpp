@@ -9,8 +9,7 @@ namespace adapters
 {
 
 /**
- * The IAuthenticationAccess class makes the API calls to the authentication
- * server.
+ * This class makes the API calls to the login server.
  */
 class ADAPTERS_EXPORT IAuthenticationAccess : public QObject
 {

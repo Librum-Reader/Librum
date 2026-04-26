@@ -43,7 +43,7 @@ private:
 
 
     QNetworkAccessManager m_networkAccessManager;
-    QString domain;
+    QString m_serverHost;
 };
 
 }  // namespace infrastructure::persistence

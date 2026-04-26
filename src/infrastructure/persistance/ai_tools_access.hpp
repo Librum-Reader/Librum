@@ -30,7 +30,7 @@ private:
     QDateTime m_lastRequestStartTime;
 
     QNetworkAccessManager m_networkAccessManager;
-    QString domain;
+    QString m_serverHost;
 };
 
 }  // namespace infrastructure::persistence

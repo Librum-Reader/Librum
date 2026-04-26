@@ -47,7 +47,7 @@ private:
     QNetworkRequest createRequest(const QUrl& url, const QString& authToken);
 
     QNetworkAccessManager m_networkAccessManager;
-    QString domain;
+    QString m_serverHost;
 };
 
 }  // namespace infrastructure::persistence

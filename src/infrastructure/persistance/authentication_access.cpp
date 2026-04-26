@@ -9,13 +9,13 @@ namespace infrastructure::persistence
 
 AuthenticationAccess::AuthenticationAccess()
 {
-    QSettings settings;
-    domain = settings.value("serverHost").toString();
+    QSettings appSettings;
+    m_serverHost = appSettings.value("serverHost").toString();
 }
 
 void AuthenticationAccess::authenticateUser(const LoginDto& loginDto)
 {
-    auto request = createRequest(domain + data::authenticationEndpoint);
+    auto request = createRequest(m_serverHost + data::loginEndpoint);
 
     QJsonObject jsonObject;
     jsonObject["email"] = loginDto.email;
@@ -24,54 +24,57 @@ void AuthenticationAccess::authenticateUser(const LoginDto& loginDto)
     QJsonDocument jsonDocument { jsonObject };
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
 
-    auto reply = m_networkAccessManager.post(request, data);
-
-    // handle ssl errors
-    connect(reply, &QNetworkReply::sslErrors, this,
-            [reply](const QList<QSslError>& errors)
-            {
-                qWarning() << "SSL Errors: " << reply->errorString();
-                for(int i = 0; i < errors.count(); ++i)
-                {
-                    qWarning() << errors[i].errorString();
-                }
-
-                QSettings settings;
-                if(settings.value("selfHosted").toString() == "true")
-                    reply->ignoreSslErrors();
-            });
-
-    connect(reply, &QNetworkReply::errorOccurred, this,
-            [reply](QNetworkReply::NetworkError)
-            {
-                qWarning() << "Error " << reply->errorString();
-            });
-
+    auto result = m_networkAccessManager.post(request, data);
 
     // Handle authentication result and release the reply's memory
-    connect(reply, &QNetworkReply::finished, this,
-            [this, reply]()
+    connect(result, &QNetworkReply::finished, this,
+            [this, result]()
             {
-                if(api_error_helper::apiRequestFailed(reply, 200))
+                if(api_error_helper::apiRequestFailed(result, 200))
                 {
                     auto errorCode = api_error_helper::logErrorMessage(
-                        reply, "Authentication");
+                        result, "Authentication");
 
                     emit authenticationFinished("", errorCode);
-                    reply->deleteLater();
+                    result->deleteLater();
                     return;
                 }
 
-                reply->setReadBufferSize(1000);
-                QString token = QString::fromUtf8(reply->readAll());
-                emit authenticationFinished(token);
-                reply->deleteLater();
+                result->setReadBufferSize(1000);
+                QString authenticationToken =
+                    QString::fromUtf8(result->readAll());
+                emit authenticationFinished(authenticationToken);
+                result->deleteLater();
+            });
+
+    // Process the case of ssl errors occuring
+    connect(result, &QNetworkReply::sslErrors, this,
+            [result](const QList<QSslError>& sslErrors)
+            {
+                qWarning() << "Last SSL Error: " << result->errorString();
+
+                for(const auto& error : sslErrors)
+                {
+                    qWarning() << error.errorString();
+                }
+
+                QSettings appSettings;
+
+                if(appSettings.value("selfHosted").toString() == "true")
+                    result->ignoreSslErrors();
+            });
+
+    // Process the case of network errors occuring
+    connect(result, &QNetworkReply::errorOccurred, this,
+            [result](QNetworkReply::NetworkError)
+            {
+                qWarning() << "Network Error " << result->errorString();
             });
 }
 
 void AuthenticationAccess::registerUser(const RegisterDto& registerDto)
 {
-    auto request = createRequest(domain + data::registrationEndpoint);
+    auto request = createRequest(m_serverHost + data::registerEndpoint);
 
     QJsonObject jsonObject;
     jsonObject["name"] = registerDto.name;
@@ -82,7 +85,6 @@ void AuthenticationAccess::registerUser(const RegisterDto& registerDto)
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
 
     auto reply = m_networkAccessManager.post(request, data);
-
 
     // Handle registration result and release the reply's memory
     connect(reply, &QNetworkReply::finished, this,
@@ -105,8 +107,8 @@ void AuthenticationAccess::registerUser(const RegisterDto& registerDto)
 
 void AuthenticationAccess::checkIfEmailConfirmed(const QString& email)
 {
-    auto request = createRequest(domain + data::checkIfEmailConfirmedEndpoint +
-                                 "/" + email);
+    auto request = createRequest(
+        m_serverHost + data::checkIfEmailConfirmedEndpoint + "/" + email);
 
     auto reply = m_networkAccessManager.get(request);
 

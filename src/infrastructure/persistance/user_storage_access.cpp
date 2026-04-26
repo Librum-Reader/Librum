@@ -16,13 +16,14 @@ namespace infrastructure::persistence
 
 UserStorageAccess::UserStorageAccess()
 {
-    QSettings settings;
-    domain = settings.value("serverHost").toString();
+    QSettings appSettings;
+    m_serverHost = appSettings.value("serverHost").toString();
 }
 
 void UserStorageAccess::getUser(const QString& authToken)
 {
-    auto request = createRequest(domain + data::userGetEndpoint, authToken);
+    auto request =
+        createRequest(m_serverHost + data::userGetEndpoint, authToken);
     auto reply = m_networkAccessManager.get(request);
 
     connect(
@@ -55,7 +56,8 @@ void UserStorageAccess::getUser(const QString& authToken)
 
 void UserStorageAccess::deleteUser(const QString& authToken)
 {
-    auto request = createRequest(domain + data::userDeleteEndpoint, authToken);
+    auto request =
+        createRequest(m_serverHost + data::userDeleteEndpoint, authToken);
     auto reply = m_networkAccessManager.sendCustomRequest(request, "DELETE");
 
     connect(reply, &QNetworkReply::finished, this,
@@ -75,14 +77,15 @@ void UserStorageAccess::deleteUser(const QString& authToken)
 
 void UserStorageAccess::forgotPassword(const QString& email)
 {
-    auto endpoint = domain + data::userForgotPasswordEndpoint + "/" + email;
+    auto endpoint =
+        m_serverHost + data::userPasswordForgotEndpoint + "/" + email;
     auto request = createRequest(endpoint, "");
     m_networkAccessManager.post(request, QByteArray());
 }
 
 void UserStorageAccess::getProfilePicture(const QString& authToken)
 {
-    QString endpoint = domain + data::userProfilePictureEndpoint;
+    QString endpoint = m_serverHost + data::userProfilePictureEndpoint;
     auto request = createRequest(endpoint, authToken);
     auto reply = m_networkAccessManager.get(request);
 
@@ -108,7 +111,8 @@ void UserStorageAccess::getProfilePicture(const QString& authToken)
 void UserStorageAccess::changeName(const QString& authToken,
                                    const QString& newName)
 {
-    auto request = createRequest(domain + data::userPatchEndpoint, authToken);
+    auto request =
+        createRequest(m_serverHost + data::userUpdateEndpoint, authToken);
 
     const QString quote = "\"";
     auto jsonData = R"([{ "op": "replace", "path": "name", "value": )" + quote +
@@ -142,8 +146,8 @@ void UserStorageAccess::changeEmail(const QString& authToken,
 void UserStorageAccess::changePassword(const QString& authToken,
                                        const QString& newPassword)
 {
-    auto request =
-        createRequest(domain + data::userChangePasswordEndpoint, authToken);
+    auto request = createRequest(
+        m_serverHost + data::userPasswordChangeEndpoint, authToken);
     QJsonObject jsonObject;
     jsonObject["Input"] = newPassword;
     auto data = QJsonDocument(jsonObject).toJson();
@@ -179,7 +183,7 @@ void UserStorageAccess::changeProfilePicture(const QString& authToken,
     addImagePartToMultiPart(profilePicture, path);
 
 
-    QUrl endpoint = domain + data::userProfilePictureEndpoint;
+    QUrl endpoint = m_serverHost + data::userProfilePictureEndpoint;
     auto request = createRequest(endpoint, authToken);
 
     // Reset the ContentTypeHeader since it will be set by the multipart
@@ -204,7 +208,7 @@ void UserStorageAccess::changeProfilePicture(const QString& authToken,
 
 void UserStorageAccess::deleteProfilePicture(const QString& authToken)
 {
-    QString endpoint = domain + data::userProfilePictureEndpoint;
+    QString endpoint = m_serverHost + data::userProfilePictureEndpoint;
     auto request = createRequest(endpoint, authToken);
     auto reply = m_networkAccessManager.sendCustomRequest(request, "DELETE");
 
@@ -227,7 +231,7 @@ void UserStorageAccess::deleteProfilePicture(const QString& authToken)
 void UserStorageAccess::changeProfilePictureLastUpdated(
     const QString& authToken, const QString& newDateTime)
 {
-    QString endPoint = domain + data::userPatchEndpoint;
+    QString endPoint = m_serverHost + data::userUpdateEndpoint;
     auto request = createRequest(endPoint, authToken);
 
     const QString quote = "\"";
@@ -254,7 +258,7 @@ void UserStorageAccess::changeProfilePictureLastUpdated(
 void UserStorageAccess::changeHasProfilePicture(const QString& authToken,
                                                 const QString& newValue)
 {
-    QString endPoint = domain + data::userPatchEndpoint;
+    QString endPoint = m_serverHost + data::userUpdateEndpoint;
     auto request = createRequest(endPoint, authToken);
 
     const QString quote = "\"";
@@ -280,7 +284,7 @@ void UserStorageAccess::changeHasProfilePicture(const QString& authToken,
 
 void UserStorageAccess::deleteTag(const QString& authToken, const QString& uuid)
 {
-    QString endPoint = domain + data::tagDeletionEndpoint + "/" + uuid;
+    QString endPoint = m_serverHost + data::tagDeletionEndpoint + "/" + uuid;
     auto request = createRequest(endPoint, authToken);
 
     auto reply = m_networkAccessManager.sendCustomRequest(request, "DELETE");
@@ -302,7 +306,7 @@ void UserStorageAccess::deleteTag(const QString& authToken, const QString& uuid)
 void UserStorageAccess::renameTag(const QString& authToken,
                                   const QJsonObject& bookForUpdate)
 {
-    QString endPoint = domain + data::tagUpdateEndpoint;
+    QString endPoint = m_serverHost + data::tagUpdateEndpoint;
     auto request = createRequest(endPoint, authToken);
 
     QJsonDocument jsonDoc(bookForUpdate);
