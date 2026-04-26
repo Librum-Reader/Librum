@@ -52,6 +52,7 @@ Popup {
                 containingListview: listView
                 fontSize: Fonts.size12
                 fontColor: Style.colorLightText
+                propertyName: "title"
 
                 checkBoxStyle: root.checkBoxStyle
                 checkBoxImageSize: 10
@@ -83,11 +84,6 @@ Popup {
 
                                root.itemsChanged()
                            }
-
-                // Overwrite the way the model's text is queried
-                function getContent() {
-                    return model["title"]
-                }
             }
         }
     }
