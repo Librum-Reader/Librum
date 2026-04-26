@@ -21,7 +21,8 @@ public:
     void downloadBooks() override;
     BookOperationStatus addBook(const QString& filePath,
                                 bool allowDuplicates = false,
-                                int projectGutenbergId = 0) override;
+                                int projectGutenbergId = 0,
+                                QString parentFolder = "") override;
     BookOperationStatus deleteBook(const QUuid& uuid) override;
     BookOperationStatus deleteAllBooks() override;
     BookOperationStatus uninstallBook(const QUuid& uuid) override;

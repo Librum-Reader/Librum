@@ -111,7 +111,8 @@ void LibraryService::downloadBooks()
 
 BookOperationStatus LibraryService::addBook(const QString& filePath,
                                             bool allowDuplicates,
-                                            int projectGutenbergId)
+                                            int projectGutenbergId,
+                                            QString parentFolder)
 {
     auto success = m_bookMetadataHelper->setup(filePath);
     if(!success)
@@ -147,6 +148,7 @@ BookOperationStatus LibraryService::addBook(const QString& filePath,
     book.setHasCover(true);
     book.setCoverPath(coverPath);
     book.setProjectGutenbergId(projectGutenbergId);
+    book.setParentFolderId(QUuid(parentFolder));
 
     addBookToLibrary(book);
 

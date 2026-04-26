@@ -20,7 +20,7 @@ public:
     LibraryController(application::ILibraryService* bookService);
 
     int addBook(const QString& path, bool allowDuplicates = false,
-                int projectGutenbergId = 0) override;
+                int projectGutenbergId = 0, QString parentFolder = "") override;
     int deleteBook(const QString& uuid) override;
     int deleteAllBooks() override;
     int uninstallBook(const QString& uuid) override;

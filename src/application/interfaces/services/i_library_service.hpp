@@ -24,7 +24,8 @@ public:
     virtual void downloadBooks() = 0;
     virtual BookOperationStatus addBook(const QString& filePath,
                                         bool allowDuplicates,
-                                        int projectGutenbergId) = 0;
+                                        int projectGutenbergId,
+                                        QString parentFolder = "") = 0;
     virtual BookOperationStatus deleteBook(const QUuid& uuid) = 0;
     virtual BookOperationStatus deleteAllBooks() = 0;
     virtual BookOperationStatus uninstallBook(const QUuid& uuid) = 0;
