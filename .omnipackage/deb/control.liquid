@@ -1,0 +1,15 @@
+Source: {{ package_name }}
+Section: text
+Priority: optional
+Maintainer: {{ maintainer }}
+Build-Depends: debhelper (>= 13), {{ build_dependencies | join: ', ' }}
+Standards-Version: 4.6.2
+Homepage: {{ homepage }}
+
+Package: {{ package_name }}
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, {{ runtime_dependencies | join: ', ' }}
+Description: {{ description }}
+ Librum is a modern e-book reader and personal library manager.
+ It supports common formats (pdf, epub and more), themes, and a built-in
+ online library synced across devices.

@@ -1,0 +1,30 @@
+#!/usr/bin/make -f
+# debian.rules — CMake build rules for Librum. Indents are TABS, not spaces!
+# -*- makefile -*-
+
+export DESTROOT=$(CURDIR)/debian/{{ package_name }}
+# export DH_VERBOSE=1
+
+%:
+	dh $@ --parallel --buildsystem=cmake
+
+override_dh_auto_configure:
+	# Packaging-only QML fix (see .omnipackage/patch-qml.sh) — required for Qt 6.11+.
+	sh .omnipackage/patch-qml.sh
+	dh_auto_configure -- \
+	  -DCMAKE_BUILD_TYPE=Release \
+	  -DBUILD_TESTS=OFF
+
+# Tests are off; nothing to run.
+override_dh_auto_test:
+
+override_dh_auto_install:
+	dh_auto_install
+	install -Dm644 com.librumreader.librum.metainfo.xml \
+	  $(DESTROOT)/usr/share/metainfo/com.librumreader.librum.metainfo.xml
+	rm -rf $(DESTROOT)/usr/include $(DESTROOT)/usr/lib/cmake
+
+# The internal libs and bundled libmupdfcpp.so have no shlibs entries (unversioned/private);
+# resolve them within the package tree and tolerate the missing dependency info.
+override_dh_shlibdeps:
+	dh_shlibdeps -l$(DESTROOT)/usr/lib -- --ignore-missing-info

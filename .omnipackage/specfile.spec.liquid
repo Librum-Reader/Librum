@@ -1,0 +1,71 @@
+%define debug_package %{nil}
+%define _build_id_links none
+
+Name:           {{ package_name }}
+Version:        {{ version }}
+Release:        1%{?dist}
+Summary:        {{ description }}
+License:        GPL-3.0-only
+URL:            {{ homepage }}
+Source0:        {{ source_folder_name }}.tar.gz
+Vendor:         OmniPackage
+
+BuildRequires:  {{ build_dependencies | join: ' ' }}
+{% for dep in runtime_dependencies %}Requires: {{ dep }}
+{% endfor %}
+
+%description
+{{ description }}
+
+
+%prep
+%setup -q -n {{ source_folder_name }}
+# Packaging-only QML fix (see .omnipackage/patch-qml.sh) — required for Qt 6.11+.
+sh .omnipackage/patch-qml.sh
+
+
+%build
+# mupdf is built from libs/mupdf via scripts/mupdfwrap.py during the CMake build; its Python
+# venv pip-installs libclang/swig over the network (available in the build container).
+cmake -S . -B _build \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_INSTALL_PREFIX=/usr \
+  -DBUILD_TESTS=OFF
+cmake --build _build %{?_smp_mflags}
+
+
+%install
+DESTDIR=%{buildroot} cmake --install _build
+# Upstream hardcodes DESTINATION lib; relocate to %{_libdir} so the loader finds the private
+# libs on lib64 distros (no rpath needed — all DT_NEEDED entries are basenames).
+if [ "%{_libdir}" != "/usr/lib" ] && [ -d %{buildroot}/usr/lib ]; then
+  mkdir -p %{buildroot}%{_libdir}
+  mv %{buildroot}/usr/lib/* %{buildroot}%{_libdir}/
+  rmdir %{buildroot}/usr/lib || :
+fi
+# AppStream metainfo (upstream CMake does not install it).
+install -Dm644 com.librumreader.librum.metainfo.xml \
+  %{buildroot}%{_datadir}/metainfo/com.librumreader.librum.metainfo.xml
+# Defensive: rapidfuzz installs nothing today, but guard against upstream churn.
+rm -rf %{buildroot}/usr/include %{buildroot}%{_libdir}/cmake
+
+
+%files
+%license LICENSE.md
+%{_bindir}/librum
+%{_libdir}/libdomain.so
+%{_libdir}/libapplication.so
+%{_libdir}/libinfrastructure.so
+%{_libdir}/libadapters.so
+%{_libdir}/libpresentation.so
+%{_libdir}/libmupdf.so
+%{_libdir}/libmupdfcpp.so
+%{_libdir}/mutool
+%{_datadir}/applications/librum.desktop
+%{_datadir}/pixmaps/librum.svg
+%{_datadir}/metainfo/com.librumreader.librum.metainfo.xml
+
+
+%changelog
+* Mon Jun 08 2026 {{ maintainer }} - {{ version }}
+- Automated build
