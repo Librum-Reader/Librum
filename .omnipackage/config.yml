@@ -1,0 +1,212 @@
+# omnipackage config: native DEB/RPM packages for Librum (Qt6/QML e-book reader).
+# Docs: https://docs.omnipackage.org
+#
+# Build notes:
+#  - Heavy dep mupdf (libs/mupdf) builds via scripts/mupdfwrap.py with a Python venv that
+#    pip-installs libclang/swig — the build container needs network (omnipackage has it).
+#  - Internal libs install to a hardcoded `lib`; the spec relocates them to %{_libdir} on lib64.
+#  - Matrix is limited to distros shipping Qt >= 6.5.
+#
+# To publish later: generate a signing key (omnipackage gpg generate ... --format base64),
+# set GPG_KEY, and add a `repositories:` block (see the init scaffold / mpz config).
+
+# Real version lives in app_info.json (project(Librum VERSION 0.1) in CMakeLists is stale).
+version_extractors:
+  - name: stable
+    provider: "file"
+    file:
+      file: "app_info.json"
+      regex: '"currentVersion":\s*"([0-9.]+)"'
+  - name: git
+    provider: "shell"
+    shell:
+      command: printf '0.99~next.%s.%s' $(git log -1 --format='%cd %h' --date=format:'%Y%m%d%H%M%S')
+
+common: &common
+  package_name: "librum"
+  maintainer: "Oleg Antonyan <oleg.b.antonyan@gmail.com>"
+  homepage: "https://librumreader.com"
+  description: "Modern e-book reader and library manager (Qt6/QML)"
+
+repositories:
+  - name: R2 test repo
+    provider: s3
+    gpg_private_key_base64: "${GPG_PRIVATE_KEY_BASE64}"
+    <<: *common
+    s3:
+      bucket: repositories-test
+      path_in_bucket: "librum"
+      bucket_public_url: "https://repositories-test.omnipackage.org"
+      endpoint: "${CLOUDFLARE_R2_ENDPOINT}"
+      access_key_id: "${CLOUDFLARE_R2_ACCESS_KEY_ID}"
+      secret_access_key: "${CLOUDFLARE_R2_SECRET_ACCESS_KEY}"
+      region: auto
+      force_path_style: true
+      cloudflare_zone_id: "${CLOUDFLARE_ZONE_ID}"
+      cloudflare_api_token: "${CLOUDFLARE_API_TOKEN}"
+
+  - name: Local test
+    gpg_private_key_base64: "${GPG_PRIVATE_KEY_BASE64}"
+    provider: localfs
+    <<: *common
+    localfs:
+      path: "${HOME}/librum-repositories"
+
+
+# Files/dirs skipped when staging the source tree (gitignore-style; applies to rpm and deb).
+ignore_source_files:
+  - .git
+  - .env
+  - .DS_Store
+  - "*.log"
+  - /build
+  - /libs/mupdf/build      # stale host artifacts; the container rebuilds mupdf in-tree
+  - "venv-mupdfwrap-*"
+
+# Fedora / RHEL family naming.
+fedora_rpm: &fedora_rpm
+  <<: *common
+  build_dependencies:
+    - gcc-c++
+    - cmake
+    - make
+    - git
+    - unzip                 # mupdf docx_template_build.py shells out to unzip
+    - qt6-qtbase-devel
+    - qt6-qtdeclarative-devel
+    - qt6-qttools-devel
+    - libjpeg-turbo-devel
+    - mesa-libGL-devel
+    - python3
+    - python3-pip
+    - pkgconf-pkg-config
+  runtime_dependencies:
+    - qt6-qtsvg              # dlopened SVG imageformat plugin (app icons are SVG)
+  rpm:
+    spec_template: ".omnipackage/specfile.spec.liquid"
+
+# openSUSE (package names differ from Fedora).
+opensuse_rpm: &opensuse_rpm
+  <<: *common
+  build_dependencies:
+    - gcc-c++
+    - cmake
+    - make
+    - git
+    - unzip                 # mupdf docx_template_build.py shells out to unzip
+    - qt6-base-devel
+    - qt6-declarative-devel
+    - qt6-linguist-devel
+    - qt6-tools-devel
+    - libjpeg8-devel
+    - Mesa-libGL-devel
+    - python3
+    - python3-pip
+    - pkg-config
+  runtime_dependencies:
+    - qt6-declarative-imports   # QML import trees are a separate pkg, NOT auto-pulled here
+    - libQt6Svg6                # bundles the SVG imageformat plugin on openSUSE
+  rpm:
+    spec_template: ".omnipackage/specfile.spec.liquid"
+
+# Enterprise Linux 10 (Alma/Rocky): Qt6 lives in CRB(+EPEL), enabled after the base image,
+# so it can't go in build_dependencies (installed before before_build_script).
+el_rpm: &el_rpm
+  <<: *common
+  build_dependencies:
+    - gcc-c++
+    - cmake
+    - make
+    - git
+    - unzip                 # mupdf docx_template_build.py shells out to unzip
+  before_build_script: >-
+    dnf install -y epel-release &&
+    dnf install -y --nobest --enablerepo=crb
+    qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qttools-devel
+    libjpeg-turbo-devel mesa-libGL-devel python3 python3-pip pkgconf-pkg-config
+  runtime_dependencies:
+    - qt6-qtsvg
+  rpm:
+    spec_template: ".omnipackage/specfile.spec.liquid"
+
+# Mageia (Mandriva naming) — DISABLED, not in `builds:` below. Two blockers:
+#   1. cauldron repo metadata currently 404s on all mirrors (rolling-dev resync flakiness).
+#   2. Mageia uses lib64-style names (qtbase6-common-devel, lib64qt6core-devel, lib64qt6quick-devel,
+#      lib64qt6qml-devel, lib64qt6tools-devel, ...) — the Fedora-style names below are placeholders.
+# To re-enable: wait for the repo to recover, fix names via `omnipackage portal mageia_cauldron`,
+# then add `- { distro: "mageia_cauldron", <<: *mageia_rpm }` to builds.
+mageia_rpm: &mageia_rpm
+  <<: *common
+  build_dependencies:
+    - gcc-c++
+    - cmake
+    - make
+    - git
+    - unzip
+    - qtbase6-common-devel
+    - lib64qt6core-devel
+    - lib64qt6gui-devel
+    - lib64qt6widgets-devel
+    - lib64qt6network-devel
+    - lib64qt6qml-devel
+    - lib64qt6quick-devel
+    - lib64qt6tools-devel
+    - lib64jpeg-devel
+    - python3
+    - python3-pip
+    - pkgconf
+  runtime_dependencies:
+    - lib64qt6svg-devel
+  rpm:
+    spec_template: ".omnipackage/specfile.spec.liquid"
+
+# Debian / Ubuntu (Qt6).
+deb: &deb
+  <<: *common
+  build_dependencies:
+    - build-essential
+    - cmake
+    - git
+    - unzip                 # mupdf docx_template_build.py shells out to unzip
+    - qt6-base-dev
+    - qt6-declarative-dev
+    - qt6-tools-dev
+    - qt6-l10n-tools
+    - libjpeg-dev
+    - libgl-dev
+    - python3
+    - python3-venv
+    - python3-pip
+    - pkg-config
+  runtime_dependencies:
+    - qml6-module-qtquick
+    - qml6-module-qtquick-controls
+    - qml6-module-qtquick-dialogs
+    - qml6-module-qtquick-layouts
+    - qml6-module-qtquick-shapes
+    - qml6-module-qtcore
+    - qml6-module-qt-labs-platform
+    - qml6-module-qt-labs-qmlmodels
+    - qml6-module-qtqml-models
+    - qml6-module-qtqml-workerscript
+    - qt6-svg-plugins        # ships the SVG imageformat plugin (libqsvg.so)
+  deb:
+    debian_templates: ".omnipackage/deb"
+
+# Only distros shipping Qt >= 6.5 (excludes Debian 12, Ubuntu 24.04, EL <=9, Leap 15.x, Fedora <=41).
+builds:
+  - { distro: "fedora_42",           <<: *fedora_rpm }
+  - { distro: "fedora_43",           <<: *fedora_rpm }
+  - { distro: "fedora_44",           <<: *fedora_rpm }
+  - { distro: "fedora_rawhide",      <<: *fedora_rpm }
+  - { distro: "opensuse_tumbleweed", <<: *opensuse_rpm }
+  - { distro: "opensuse_16.0",       <<: *opensuse_rpm }
+  - { distro: "almalinux_10",        <<: *el_rpm }
+  - { distro: "rockylinux_10",       <<: *el_rpm }
+  # mageia_cauldron disabled — see the mageia_rpm anchor note above (broken repo + unverified names)
+  - { distro: "debian_13",           <<: *deb }
+  - { distro: "debian_testing",      <<: *deb }
+  - { distro: "debian_unstable",     <<: *deb }
+  - { distro: "ubuntu_25.04",        <<: *deb }
+  - { distro: "ubuntu_25.10",        <<: *deb }
+  - { distro: "ubuntu_26.04",        <<: *deb }
