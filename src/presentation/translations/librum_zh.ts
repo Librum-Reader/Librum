@@ -33,7 +33,7 @@
     <message>
         <location filename="../settings/MAboutPage.qml" line="105"/>
         <source>Feedback?</source>
-        <translation type="unfinished"></translation>
+        <translation>需要反馈？</translation>
     </message>
     <message>
         <source>Up-to date</source>
@@ -65,7 +65,8 @@
         <location filename="../settings/MAboutPage.qml" line="203"/>
         <source>DISCORD</source>
         <extracomment>Keep it capitalized</extracomment>
-        <translation type="unfinished"></translation>
+        <translatorcomment>保持大写</translatorcomment>
+        <translation>DISCORD</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="228"/>
@@ -736,7 +737,7 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../modules/CustomComponents/bookSelector/MBookSelector.qml" line="14"/>
         <source>Search Books...</source>
-        <translation type="unfinished"></translation>
+        <translation>搜索图书...</translation>
     </message>
 </context>
 <context>
@@ -994,12 +995,12 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="52"/>
         <source>Upgrade</source>
-        <translation type="unfinished"></translation>
+        <translation>更新</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="53"/>
         <source>to continue.</source>
-        <translation type="unfinished"></translation>
+        <translation>以继续.</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="58"/>
@@ -1099,37 +1100,42 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../toolsPage/MExtractPagesPopup.qml" line="40"/>
         <source>Extraction succeeded</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>暂译“提取”，可能是“导出”</translatorcomment>
+        <translation>已成功提取</translation>
     </message>
     <message>
         <location filename="../toolsPage/MExtractPagesPopup.qml" line="41"/>
         <source>The new book was added to your library.</source>
-        <translation type="unfinished"></translation>
+        <translation>新书已加入您的书库。</translation>
     </message>
     <message>
         <location filename="../toolsPage/MExtractPagesPopup.qml" line="43"/>
         <source>Extraction failed</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>暂译“提取”，可能是“导出”</translatorcomment>
+        <translation>提取失败</translation>
     </message>
     <message>
         <location filename="../toolsPage/MExtractPagesPopup.qml" line="44"/>
         <source>The extraction failed. Please try again.</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>暂译“提取”，可能是“导出”</translatorcomment>
+        <translation>提取失败，请重试。</translation>
     </message>
     <message>
         <location filename="../toolsPage/MExtractPagesPopup.qml" line="63"/>
         <source>Extract Page(s)</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>暂译“提取”，可能是“导出”</translatorcomment>
+        <translation>提取页面</translation>
     </message>
     <message>
         <location filename="../toolsPage/MExtractPagesPopup.qml" line="133"/>
         <source>Add a comma separated list of page numbers or ranges to extract.</source>
-        <translation type="unfinished"></translation>
+        <translation>请提供一个用逗号分隔的页码或页码范围列表，以便进行提取操作。</translation>
     </message>
     <message>
         <location filename="../toolsPage/MExtractPagesPopup.qml" line="157"/>
         <source>Extract</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>暂译“提取”，可能是“导出”</translatorcomment>
+        <translation>提取</translation>
     </message>
 </context>
 <context>
@@ -1137,22 +1143,22 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../modules/CustomComponents/MFeedbackPopup.qml" line="40"/>
         <source>Got some feedback?</source>
-        <translation type="unfinished"></translation>
+        <translation>需要反馈？</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MFeedbackPopup.qml" line="55"/>
         <source>Your feedback is crucial for improving Librum. Would you mind sharing your experience by taking a quick survey?</source>
-        <translation type="unfinished"></translation>
+        <translation>您的反馈对改进Librum至关重要。您介意花点时间填写一份简短的问卷，分享一下您的使用体验吗？</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MFeedbackPopup.qml" line="74"/>
         <source>No, Thanks</source>
-        <translation type="unfinished"></translation>
+        <translation>不，谢谢了</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MFeedbackPopup.qml" line="88"/>
         <source>Let&apos;s do this!</source>
-        <translation type="unfinished"></translation>
+        <translation>没问题，走你!</translation>
     </message>
 </context>
 <context>
@@ -1376,12 +1382,12 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../homePage/MHomePage.qml" line="200"/>
         <source>In Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>在文件夹中</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="202"/>
         <source>Unsorted</source>
-        <translation type="unfinished">未排序</translation>
+        <translation>未排序</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="222"/>
@@ -1415,43 +1421,43 @@ Either you are offline, or your storage is full.</source>
         <location filename="../homePage/MHomePage.qml" line="530"/>
         <location filename="../homePage/MHomePage.qml" line="541"/>
         <source>Uninstalling failed</source>
-        <translation type="unfinished"></translation>
+        <translation>卸载失败</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="530"/>
         <source>Can&apos;t uninstall book since it is not downloaded.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法卸载该书，因为它尚未下载。</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="538"/>
         <source>Uninstalling succeeded</source>
-        <translation type="unfinished"></translation>
+        <translation>卸载成功</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="539"/>
         <source>The book was deleted from your device.</source>
-        <translation type="unfinished"></translation>
+        <translation>书已经从您的设备删除</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="542"/>
         <location filename="../homePage/MHomePage.qml" line="556"/>
         <source>Something went wrong.</source>
-        <translation type="unfinished"></translation>
+        <translation>哪里出错了。</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="552"/>
         <source>Deleting succeeded</source>
-        <translation type="unfinished"></translation>
+        <translation>删除成功</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="553"/>
         <source>The book was successfully deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>书已经被成功删除</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="555"/>
         <source>Deleting failed</source>
-        <translation type="unfinished"></translation>
+        <translation>删除失败</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="575"/>
@@ -1579,28 +1585,28 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../toolsPage/MImageToPdfPopup.qml" line="39"/>
         <source>Convertion succeeded</source>
-        <translation type="unfinished"></translation>
+        <translation>转换成功</translation>
     </message>
     <message>
         <location filename="../toolsPage/MImageToPdfPopup.qml" line="40"/>
         <source>The new book was added to your library.</source>
-        <translation type="unfinished"></translation>
+        <translation>新书已加入您的书库。</translation>
     </message>
     <message>
         <location filename="../toolsPage/MImageToPdfPopup.qml" line="42"/>
         <source>Convertion failed</source>
-        <translation type="unfinished"></translation>
+        <translation>转换失败</translation>
     </message>
     <message>
         <location filename="../toolsPage/MImageToPdfPopup.qml" line="43"/>
         <source>The conversion failed. Please try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>转换失败，请重试。</translation>
     </message>
     <message>
         <location filename="../toolsPage/MImageToPdfPopup.qml" line="62"/>
         <location filename="../toolsPage/MImageToPdfPopup.qml" line="148"/>
         <source>Convert</source>
-        <translation type="unfinished"></translation>
+        <translation>转换</translation>
     </message>
 </context>
 <context>
@@ -1689,33 +1695,33 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../toolsPage/MMergePopup.qml" line="41"/>
         <source>Merge succeeded</source>
-        <translation type="unfinished"></translation>
+        <translation>合并成功</translation>
     </message>
     <message>
         <location filename="../toolsPage/MMergePopup.qml" line="42"/>
         <source>The merged book was added to your library.</source>
-        <translation type="unfinished"></translation>
+        <translation>合并的书籍已加入您的书库</translation>
     </message>
     <message>
         <location filename="../toolsPage/MMergePopup.qml" line="44"/>
         <source>Merge failed</source>
-        <translation type="unfinished"></translation>
+        <translation>合并失败</translation>
     </message>
     <message>
         <location filename="../toolsPage/MMergePopup.qml" line="45"/>
         <source>The merged failed. Please try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>合并失败，请重试</translation>
     </message>
     <message>
         <location filename="../toolsPage/MMergePopup.qml" line="67"/>
         <location filename="../toolsPage/MMergePopup.qml" line="223"/>
         <source>Merge</source>
-        <translation type="unfinished"></translation>
+        <translation>合并</translation>
     </message>
     <message>
         <location filename="../toolsPage/MMergePopup.qml" line="242"/>
         <source>Select two or more books to merge.</source>
-        <translation type="unfinished"></translation>
+        <translation>选择两本或以上的书来合并</translation>
     </message>
 </context>
 <context>
@@ -1767,32 +1773,32 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../toolsPage/MPdfToImagePopup.qml" line="39"/>
         <source>Convertion succeeded</source>
-        <translation type="unfinished"></translation>
+        <translation>转换成功</translation>
     </message>
     <message>
         <location filename="../toolsPage/MPdfToImagePopup.qml" line="40"/>
         <source>The new book was added to your library.</source>
-        <translation type="unfinished"></translation>
+        <translation>新书已加入您的书库。</translation>
     </message>
     <message>
         <location filename="../toolsPage/MPdfToImagePopup.qml" line="42"/>
         <source>Convertion failed</source>
-        <translation type="unfinished"></translation>
+        <translation>转换失败</translation>
     </message>
     <message>
         <location filename="../toolsPage/MPdfToImagePopup.qml" line="43"/>
         <source>The conversion failed. Please try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>转换失败，请重试。</translation>
     </message>
     <message>
         <location filename="../toolsPage/MPdfToImagePopup.qml" line="62"/>
         <source>Pdf to Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Pdf转换为图片</translation>
     </message>
     <message>
         <location filename="../toolsPage/MPdfToImagePopup.qml" line="148"/>
         <source>Convert</source>
-        <translation type="unfinished"></translation>
+        <translation>转换</translation>
     </message>
 </context>
 <context>
@@ -2034,7 +2040,7 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../readingPage/MSelectionOptionsPopup.qml" line="207"/>
         <source>Ai Explain</source>
-        <translation type="unfinished"></translation>
+        <translation>AI解释</translation>
     </message>
     <message>
         <source>Highlight</source>
@@ -2178,7 +2184,7 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../sidebar/MSidebar.qml" line="169"/>
         <source>Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>工具</translation>
     </message>
     <message>
         <source>Add-ons</source>
@@ -2436,42 +2442,42 @@ working on fun projects, supporting our community and trying to make the world a
     <message>
         <location filename="../toolsPage/MToolsPage.qml" line="25"/>
         <source>PDF Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>PDF工具</translation>
     </message>
     <message>
         <location filename="../toolsPage/MToolsPage.qml" line="26"/>
         <source>Powerful tools to modify your PDF files</source>
-        <translation type="unfinished"></translation>
+        <translation>强大的工具，用于修改您的PDF文件</translation>
     </message>
     <message>
         <location filename="../toolsPage/MToolsPage.qml" line="101"/>
         <source>Merge</source>
-        <translation type="unfinished"></translation>
+        <translation>合并</translation>
     </message>
     <message>
         <location filename="../toolsPage/MToolsPage.qml" line="102"/>
         <source>Merge multiple books into one</source>
-        <translation type="unfinished"></translation>
+        <translation>合并多本书</translation>
     </message>
     <message>
         <location filename="../toolsPage/MToolsPage.qml" line="107"/>
         <source>Extract Page(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>提取页面</translation>
     </message>
     <message>
         <location filename="../toolsPage/MToolsPage.qml" line="108"/>
         <source>Extract selected pages from a book</source>
-        <translation type="unfinished"></translation>
+        <translation>从一本书中提取选定的页面</translation>
     </message>
     <message>
         <location filename="../toolsPage/MToolsPage.qml" line="113"/>
         <source>Image to PDF</source>
-        <translation type="unfinished"></translation>
+        <translation>图片转换为PDF</translation>
     </message>
     <message>
         <location filename="../toolsPage/MToolsPage.qml" line="114"/>
         <source>Convert an image (PNG, JPEG, SVG, GIF) to PDF</source>
-        <translation type="unfinished"></translation>
+        <translation>转换一张图片(PNG,JPEG,SVG,GIF)到PDF</translation>
     </message>
 </context>
 <context>
