@@ -73,7 +73,7 @@ QNetworkRequest AppInfoAccess::createRequest(QUrl url)
 
     QSslConfiguration sslConfiguration = result.sslConfiguration();
     sslConfiguration.setProtocol(QSsl::AnyProtocol);
-    sslConfiguration.setPeerVerifyMode(QSslSocket::QueryPeer);
+    sslConfiguration.setPeerVerifyMode(QSslSocket::VerifyPeer);
     result.setSslConfiguration(sslConfiguration);
 
     return result;
